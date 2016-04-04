@@ -14,6 +14,9 @@ public class MapMatrix implements Serializable {
 	//1D arrays
 	public int[] worldMapSingle;
 	public int[] house1Single;
+	
+	//2D arrays
+	public int[][] worldMap;
 	public int[][] house1;
 	
 	//A group of maps to display
