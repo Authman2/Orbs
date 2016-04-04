@@ -7,7 +7,6 @@ import java.io.Serializable;
 import myproject.gos.main.TransitionManager.Transition;
 import myproject.gos.main.Vector2D;
 import INVENTORY.Inventory;
-import INVENTORY.InventorySlot;
 import MANAGERS.GameStateManager;
 import MISC.OptionBox;
 import MISC.TextBox;

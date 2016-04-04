@@ -25,6 +25,11 @@ public class Tile implements IUD {
 	private String tileInfo;
 	public World tilesWorld;
 	
+	
+	public Tile(boolean isSolid, World w) {
+		this.solid = isSolid;
+		this.tilesWorld = w;
+	}
 	public Tile(TileType t, boolean isSolid, World w) {
 		this.type = t;
 		this.solid = isSolid;

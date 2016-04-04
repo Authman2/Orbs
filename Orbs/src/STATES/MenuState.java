@@ -6,7 +6,6 @@ import java.awt.Graphics2D;
 
 import myproject.gos.main.TransitionManager.Transition;
 import MANAGERS.GameStateManager;
-import MANAGERS.InputManager;
 
 public class MenuState extends GameState  {
 	

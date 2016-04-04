@@ -6,22 +6,19 @@ import java.util.ArrayList;
 import myproject.gos.main.ArrayConversion;
 import myproject.gos.main.ReadFile;
 
+/** Solely responsible for setting up the maps. Loads data into the 2D arrays that are used for the maps on the screen. */
 public class MapMatrix implements Serializable {
 	private static final long serialVersionUID = 6191318611659876760L;
 	
 	
-	//The world map as a 1D array
+	//1D arrays
 	public int[] worldMapSingle;
-	//The world map as a 2D array
-	public int[][] worldMap;
-	
-	//A house as a 1D and 2D array
 	public int[] house1Single;
 	public int[][] house1;
 	
 	//A group of maps to display
-	public ArrayList<int[]> maps1D;
-	public ArrayList<int[][]> maps2D;
+	public ArrayList<int[]> maps1D = new ArrayList<int[]>();
+	public ArrayList<int[][]> maps2D = new ArrayList<int[][]>();
 	
 	//The current map being displayed.
 	public int[][] currentMap;
@@ -34,6 +31,10 @@ public class MapMatrix implements Serializable {
 		
 		//Read the world map text file
 		getWorldFiles();
+		
+		maps2D.add(worldMap);
+		maps2D.add(house1);
+		
 		currentMap = maps2D.get(i);
 	}
 	
@@ -46,7 +47,7 @@ public class MapMatrix implements Serializable {
 				ReadFile reader = new ReadFile();
 				String s = null;
 				try {
-					s = reader.Read("/Users/adeouthman/Documents/AdeolasCodingStuff/Images/2DTileGame/MapsInTiled/WorldMap.txt");
+					s = reader.Read("WorldMap.txt");
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
@@ -63,7 +64,7 @@ public class MapMatrix implements Serializable {
 				ReadFile reader = new ReadFile();
 				String s = null;
 				try {
-					s = reader.Read("/Users/adeouthman/Documents/AdeolasCodingStuff/Images/2DTileGame/MapsInTiled/WorldMap.txt");
+					s = reader.Read("House1.txt");
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
@@ -71,7 +72,7 @@ public class MapMatrix implements Serializable {
 				house1Single = reader.CreateArrayINT(s, ",");
 				
 				//Convert it to a two dimensional array. REMEMBER, WORLD MAP MUST HAVE DIMENSIONS NxN TO WORK.
-				house1 = ArrayConversion.OneToTwo(worldMapSingle, 96);
+				house1 = ArrayConversion.OneToTwo(house1Single, 15);
 			}
 		}
 	}

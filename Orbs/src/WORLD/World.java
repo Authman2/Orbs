@@ -41,6 +41,7 @@ public class World implements IUD  {
 	
 	//Moving the Map
 	public boolean up, down, left, right, moving, canMoveUp, canMoveDown, canMoveLeft, canMoveRight;
+	public boolean hasMoved;
 	
 	//Distance to move in each direction.
 	public float dist = 1;
@@ -51,7 +52,7 @@ public class World implements IUD  {
 	
 	//CONSTRUCTORS
 	public World(int w, int h, int mapnum, WorldState ws) {
-		position = new Vector2D(-10,-10);
+		position = new Vector2D(0,0);
 		Width = w;
 		Height = h;
 		tiles = new Tile[Width][Height];
@@ -132,7 +133,8 @@ public class World implements IUD  {
 						tiles[x][y] = new Tile(TileType.Water_Right, true, this);
 					}
 					if(map.currentMap[y][x] == 20) {
-						tiles[x][y] = new Tile(TileType.Wood_Door, false, this);
+						//tiles[x][y] = new Tile(TileType.Wood_Door, false, this);
+						tiles[x][y] = new Door(TileType.Wood_Door, false, this);
 					}
 					if(map.currentMap[y][x] == 21) {
 						tiles[x][y] = new Tile(TileType.Wood_Top, true, this);
@@ -259,24 +261,26 @@ public class World implements IUD  {
 			//Check for world position movements.
 			checkCollisions();
 			
-			if(up) { moveUp(); }
-			if(down) { moveDown(); }
-			if(left) { moveLeft(); }
-			if(right) { moveRight(); }
+			//System.out.println(worldstate.player.position.toString());
+			
+			if(up) { moveUp(); hasMoved = true; }
+			if(down) { moveDown(); hasMoved = true; }
+			if(left) { moveLeft(); hasMoved = true; }
+			if(right) { moveRight(); hasMoved = true; }
 			
 			
 			//Update the position of each tile.
 			for(int i = 0; i < tiles.length; i++) {
 				for(int j = 0; j < tiles[0].length; j++) {
 					tiles[i][j].setPosition(new Vector2D(i+position.X, j+position.Y));
+					tiles[i][j].update(time);
 				}
 			}
-			
 			npcManager.update(time);
 		}
 	}
 	
-	
+	/** Returns the player from the world state. */
 	public Player getPlayer() { return worldstate.player; }
 	
 	/** Returns the tile that is at the position, "pos." */
@@ -289,6 +293,12 @@ public class World implements IUD  {
 			}
 		}
 		return null;
+	}
+	
+	/** Sets the initial position of the world, starting from the top left corner of the screen. */
+	public World setStartPosition(Vector2D pos) {
+		position = pos;		
+		return this;
 	}
 	
 	
