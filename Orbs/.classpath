@@ -7,5 +7,10 @@
 			<attribute name="javadoc_location" value="file:/Users/adeouthman/Documents/AdeolasCodingStuff/JavaPrograms/GameOperatingSystem/doc/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/Users/adeouthman/Documents/AdeolasCodingStuff/JavaPrograms/JExtras.jar" sourcepath="/JExtras">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/Users/adeouthman/Documents/AdeolasCodingStuff/JavaPrograms/JExtrasDoc/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

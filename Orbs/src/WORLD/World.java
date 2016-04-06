@@ -41,6 +41,8 @@ public class World implements IUD  {
 	
 	//Moving the Map
 	public boolean up, down, left, right, moving, canMoveUp, canMoveDown, canMoveLeft, canMoveRight;
+	
+	//Boolean for whether or not the player has moved at least one space in this world
 	public boolean hasMoved;
 	
 	//Distance to move in each direction.

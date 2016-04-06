@@ -114,7 +114,7 @@ public class WorldState extends GameState implements Serializable {
 	
 	/** Create all of the worlds. */
 	private void setupWorlds() {
-		worlds[0] = new World(95,95,0,this).setStartPosition(new Vector2D(-10,-10));
+		worlds[0] = new World(322,174,0,this).setStartPosition(new Vector2D(-10,-50));
 		worlds[1] = new World(15,15,1,this).setStartPosition(new Vector2D(3,-7));
 		
 		world = worlds[0];

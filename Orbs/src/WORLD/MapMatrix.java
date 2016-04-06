@@ -3,8 +3,8 @@ package WORLD;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import myproject.gos.main.ArrayConversion;
 import myproject.gos.main.ReadFile;
+import contents.ArrayConversion;
 
 /** Solely responsible for setting up the maps. Loads data into the 2D arrays that are used for the maps on the screen. */
 public class MapMatrix implements Serializable {
@@ -50,7 +50,7 @@ public class MapMatrix implements Serializable {
 				ReadFile reader = new ReadFile();
 				String s = null;
 				try {
-					s = reader.Read("WorldMap.txt");
+					s = reader.Read("HalfMapTest.txt");
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
@@ -58,7 +58,7 @@ public class MapMatrix implements Serializable {
 				worldMapSingle = reader.CreateArrayINT(s, ",");
 				
 				//Convert it to a two dimensional array. REMEMBER, WORLD MAP MUST HAVE DIMENSIONS NxN TO WORK.
-				worldMap = ArrayConversion.OneToTwo(worldMapSingle, 96);
+				worldMap = ArrayConversion.OneToTwo(worldMapSingle, 322);
 			}
 			
 			

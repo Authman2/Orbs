@@ -26,7 +26,6 @@ public class Door extends Tile {
 	public boolean onDoor() {
 		if(position.equals(tilesWorld.worldstate.player.position)) {
 			System.out.println("Player is standing on a door.");
-			System.out.println(position.toString());
 			return true;
 		}
 		return false;
