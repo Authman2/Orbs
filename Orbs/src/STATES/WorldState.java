@@ -115,6 +115,8 @@ public class WorldState extends GameState implements Serializable {
 		
 		/* Houses */
 		worlds[1] = new World(15,15,1,this).setStartPosition(new Vector2D(3,-7));
+		worlds[2] = new World(20,15,2,this).setStartPosition(new Vector2D(0,-7));
+		worlds[3] = new World(35,35,3,this).setStartPosition(new Vector2D(-8,-20));
 		
 		world = worlds[0];
 	}
@@ -130,7 +132,7 @@ public class WorldState extends GameState implements Serializable {
 					//System.out.println(door.position.toString());
 					
 					if(door.position.equals(10, 6)) {
-						((Door) door).setGoTo(worlds[1]);
+						((Door) door).setGoTo(worlds[2]);
 					}
 					
 					if(door.position.equals(10, 14)) {
@@ -142,7 +144,7 @@ public class WorldState extends GameState implements Serializable {
 					}
 					
 					if(door.position.equals(24, 20)) {
-						
+						((Door) door).setGoTo(worlds[3]);
 					}
 					
 					if(door.position.equals(26, 6)) {
