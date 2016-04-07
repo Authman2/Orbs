@@ -114,7 +114,7 @@ public class WorldState extends GameState implements Serializable {
 	
 	/** Create all of the worlds. */
 	private void setupWorlds() {
-		worlds[0] = new World(322,174,0,this).setStartPosition(new Vector2D(-10,-50));
+		worlds[0] = new World(581,205,0,this).setStartPosition(new Vector2D(-7,-51));
 		worlds[1] = new World(15,15,1,this).setStartPosition(new Vector2D(3,-7));
 		
 		world = worlds[0];
@@ -128,6 +128,7 @@ public class WorldState extends GameState implements Serializable {
 		for(Tile[] tls : world.tiles) {
 			for(Tile door : tls) {
 				if(door instanceof Door) {
+					System.out.println(door.position.toString());
 					
 					if(door.position.X == 2 && door.position.Y == 3) {
 						((Door) door).setGoTo(worlds[1]);

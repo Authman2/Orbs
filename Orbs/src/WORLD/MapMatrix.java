@@ -50,15 +50,15 @@ public class MapMatrix implements Serializable {
 				ReadFile reader = new ReadFile();
 				String s = null;
 				try {
-					s = reader.Read("HalfMapTest.txt");
+					s = reader.Read("WorldMap.txt");
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
 				//Create a single dimensional array for it.
 				worldMapSingle = reader.CreateArrayINT(s, ",");
 				
-				//Convert it to a two dimensional array. REMEMBER, WORLD MAP MUST HAVE DIMENSIONS NxN TO WORK.
-				worldMap = ArrayConversion.OneToTwo(worldMapSingle, 322);
+				//Convert it to a two dimensional array.
+				worldMap = ArrayConversion.OneToTwo(worldMapSingle, 581);
 			}
 			
 			
@@ -74,7 +74,7 @@ public class MapMatrix implements Serializable {
 				//Create a single dimensional array for it.
 				house1Single = reader.CreateArrayINT(s, ",");
 				
-				//Convert it to a two dimensional array. REMEMBER, WORLD MAP MUST HAVE DIMENSIONS NxN TO WORK.
+				//Convert it to a two dimensional array.
 				house1 = ArrayConversion.OneToTwo(house1Single, 15);
 			}
 		}
