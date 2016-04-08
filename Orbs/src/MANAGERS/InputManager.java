@@ -256,6 +256,7 @@ public class InputManager implements KeyListener, Serializable {
 						//worldState.world.right = true;
 						((WorldState)myGsm.currentState).world.right = true;
 						player.facing = 1;
+						player.animationState = 1;
 				}
 			}
 			//Move left
@@ -265,6 +266,7 @@ public class InputManager implements KeyListener, Serializable {
 						//worldState.world.left = true;
 						((WorldState)myGsm.currentState).world.left = true;
 						player.facing = 3;
+						player.animationState = 3;
 				}
 			}
 			//Move down
@@ -274,6 +276,7 @@ public class InputManager implements KeyListener, Serializable {
 						//worldState.world.down = true;
 						((WorldState)myGsm.currentState).world.down = true;
 						player.facing = 0;
+						player.animationState = 0;
 				}
 			}
 			//Move up
@@ -283,6 +286,7 @@ public class InputManager implements KeyListener, Serializable {
 						//worldState.world.up = true;
 						((WorldState)myGsm.currentState).world.up = true;
 						player.facing = 2;
+						player.animationState = 2;
 				}
 			}
 	

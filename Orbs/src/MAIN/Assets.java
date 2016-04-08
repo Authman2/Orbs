@@ -14,8 +14,8 @@ public class Assets {
 	
 	/* PLAYER */
 	public static BufferedImage playerIdleUp, playerIdleDown, playerIdleLeft, playerIdleRight;
-	public static BufferedImage playerAttackUp1, playerAttackDown1, playerAttackLeft1, playerAttackRight1;
-	public static BufferedImage playerAttackUp2, playerAttackDown2, playerAttackLeft2, playerAttackRight2;
+	public static BufferedImage playerWalkDown1, playerWalkDown2, playerWalkRight1, playerWalkRight2;
+	public static BufferedImage playerWalkLeft1, playerWalkLeft2, playerWalkUp1, playerWalkUp2;
 	
 	/* ENVIRONMENT */
 	public static BufferedImage Grass_1, Grass_2, Cave_Entry, Rock_On_Grass, Flower, Bush, Sand, Water_TopLeft, Water_Top,
@@ -45,14 +45,18 @@ public class Assets {
 		playerIdleDown = playerss.getTile(0, 0, 32, 32);
 		playerIdleLeft = playerss.getTile(64, 0, 32, 32);
 		playerIdleRight = playerss.getTile(96, 0, 32, 32);
-		playerAttackUp1 = playerss.getTile(96, 32, 32, 32);
-		playerAttackDown1 = playerss.getTile(96, 0, 32, 32);
-		playerAttackLeft1 = playerss.getTile(96, 64, 32, 32);
-		playerAttackRight1 = playerss.getTile(96, 96, 32, 32);
-		playerAttackUp2 = playerss.getTile(128, 32, 32, 32);
-		playerAttackDown2 = playerss.getTile(128, 0, 32, 32);
-		playerAttackLeft2 = playerss.getTile(128, 64, 32, 32);
-		playerAttackRight2 = playerss.getTile(128, 96, 32, 32);
+		
+		playerWalkDown1 = playerss.getTile(0, 64, 32, 32);
+		playerWalkDown2 = playerss.getTile(0, 32, 32, 32);
+		
+		playerWalkRight1 = playerss.getTile(96, 64, 32, 32);
+		playerWalkRight2 = playerss.getTile(96, 32, 32, 32);
+		
+		playerWalkLeft1 = playerss.getTile(64, 64, 32, 32);
+		playerWalkLeft2 = playerss.getTile(64, 32, 32, 32);
+		
+		playerWalkUp1 = playerss.getTile(32, 64, 32, 32);
+		playerWalkUp2 = playerss.getTile(32, 32, 32, 32);
 		
 		
 		/* ENVIRONMENT */
@@ -126,52 +130,4 @@ public class Assets {
 		optionBox = loadImageFrom.LoadImageFrom(Orbs.class, "/IMAGES/OptionBox.png");
 		textBox = loadImageFrom.LoadImageFrom(Orbs.class, "/IMAGES/TextBox.png");
 	}
-	
-	public static BufferedImage getPlayerIdle_Up() { return playerIdleUp; }
-	
-	public static BufferedImage getPlayerIdle_Down() { return playerIdleDown; }
-	
-	public static BufferedImage getPlayerIdle_Left() { return playerIdleLeft; }
-	
-	public static BufferedImage getPlayerIdle_Right() { return playerIdleRight; }
-	
-	public static BufferedImage getPlayerAttackUp_1() { return playerAttackUp1; }
-	
-	public static BufferedImage getPlayerAttackUp_2() { return playerAttackUp2; }
-	
-	public static BufferedImage getPlayerAttackDown_1() { return playerAttackDown1; }
-	
-	public static BufferedImage getPlayerAttackDown_2() { return playerAttackDown2; }
-	
-	public static BufferedImage getPlayerAttackLeft_1() { return playerAttackLeft1; }
-	
-	public static BufferedImage getPlayerAttackLeft_2() { return playerAttackLeft2; }
-	
-	public static BufferedImage getPlayerAttackRight_1() { return playerAttackRight1; }
-	
-	public static BufferedImage getPlayerAttackRight_2() { return playerAttackRight2; }
-
-	public static BufferedImage getApple() { return apple; }
-
-	public static BufferedImage getOrange() { return orange; }
-
-	public static BufferedImage getMoney_2() { return money_2; }
-
-	public static BufferedImage getFish() { return fish; }
-
-	public static BufferedImage getHatchet() { return hatchet; }
-
-	public static BufferedImage getWoodLog() { return wood_log; }
-
-	public static BufferedImage getBoat() { return boat; }
-	
-	public static BufferedImage getPickaxe() { return pickaxe; }
-
-	public static BufferedImage getMap(String path) { return loadImageFrom.LoadImageFrom(Orbs.class, "/IMAGES/"+path); 	}
-	
-	public static BufferedImage getInventorBG() { return inventorySlotBG; }
-	
-	public static BufferedImage getTextBoxClick() { return textBoxClick; }
-	
-	public static BufferedImage getOptionBoxImage() { return optionBox; }
 }
