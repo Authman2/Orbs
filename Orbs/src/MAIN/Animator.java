@@ -1,10 +1,13 @@
 package MAIN;
 
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Animator {
-
+public class Animator implements Serializable {
+	private static final long serialVersionUID = -3069230951931550301L;
+	
+	
 	private ArrayList<BufferedImage> frames;
 	private volatile boolean running = false;
 	public BufferedImage sprite;

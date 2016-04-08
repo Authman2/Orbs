@@ -3,7 +3,6 @@ package MAIN;
 import java.io.IOException;
 
 import myproject.gos.main.GameWindow;
-import MANAGERS.InputManager;
 
 public class Orbs {
 

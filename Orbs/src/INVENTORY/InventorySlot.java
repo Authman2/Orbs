@@ -1,12 +1,11 @@
 package INVENTORY;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
-import MAIN.Assets;
 import myproject.gos.main.IUD;
 import myproject.gos.main.Vector2D;
+import MAIN.Assets;
 
 /* One inventory slot can contain an item. The inventory itself will be made up of a
  * collection of inventory slots. */

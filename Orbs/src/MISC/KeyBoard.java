@@ -6,7 +6,6 @@ import java.awt.Rectangle;
 import myproject.gos.main.ArrayConversion;
 import myproject.gos.main.IUD;
 import myproject.gos.main.Vector2D;
-import MANAGERS.GameStateManager;
 import STATES.CreatePlayerState;
 
 public class KeyBoard extends Rectangle implements IUD {

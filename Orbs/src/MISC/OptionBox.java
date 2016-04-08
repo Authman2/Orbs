@@ -8,7 +8,6 @@ import java.awt.Rectangle;
 import myproject.gos.main.IUD;
 import myproject.gos.main.Vector2D;
 import MAIN.Assets;
-import STATES.InventoryState;
 
 /** This class represents an in-game box that can be used to display choices for the player. */
 public class OptionBox extends Rectangle implements IUD {

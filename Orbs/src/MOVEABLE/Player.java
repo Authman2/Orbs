@@ -32,15 +32,15 @@ public class Player extends Entity implements IUD, Serializable {
 	
 	//Animators
 	public int animationState = 0;
-	private ArrayList<BufferedImage> walkUp, walkDown, walkLeft, walkRight;
-	Animator anim_up, anim_down, anim_left, anim_right;
+	private transient ArrayList<BufferedImage> walkUp, walkDown, walkLeft, walkRight;
+	transient Animator anim_up, anim_down, anim_left, anim_right;
 	
 	
 	//Stats (health, level, etc.) for the player.
 	PlayerStats stats = new PlayerStats();
 	
 	//Interaction
-	public static boolean interacting;
+	public transient boolean interacting;
 
 	
 	public Player(WorldState  w) {
@@ -65,7 +65,7 @@ public class Player extends Entity implements IUD, Serializable {
 		
 		AffineTransform t = new AffineTransform();
 		t.translate(position.X*32, position.Y*32);
-		t.scale(1.15, 1.15);
+		t.scale(1, 1);
 
 		//Set the animation state to the idle state if not moving
 		if(!worldstate.world.up && !worldstate.world.down && !worldstate.world.right && !worldstate.world.left) {

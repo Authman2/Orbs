@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 
 import myproject.gos.main.IUD;
 import myproject.gos.main.Vector2D;
-import INVENTORY.Item.ItemType;
 import MOVEABLE.Player;
 import STATES.InventoryState;
 

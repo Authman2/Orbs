@@ -3,7 +3,6 @@ package MANAGERS;
 import java.awt.Graphics2D;
 
 import myproject.gos.main.IUD;
-import myproject.gos.main.TransitionManager.Transition;
 import myproject.gos.main.Vector2D;
 import MISC.Option;
 import MISC.Option.OptionType;
@@ -19,7 +18,7 @@ public class HUDManager implements IUD {
 	private static final long serialVersionUID = -4243192530967794496L;
 
 	//Menu
-	public static OptionBox menu = new OptionBox(new Vector2D(400,20), 170,155);
+	public transient OptionBox menu = new OptionBox(new Vector2D(400,20), 170,155);
 	
 	//World state
 	public WorldState worldState;

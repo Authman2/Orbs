@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import myproject.gos.main.IUD;
 import myproject.gos.main.Vector2D;
 import MOVEABLE.NPC;
-import STATES.WorldState;
 import WORLD.World;
 
 /** Just used for creating all the different NPCs. */

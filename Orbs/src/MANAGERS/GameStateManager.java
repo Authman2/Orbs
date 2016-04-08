@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 
 import myproject.gos.main.IUD;
 import INVENTORY.Inventory;
-import INVENTORY.InventorySlot;
 import STATES.CreatePlayerState;
 import STATES.GameState;
 import STATES.InventoryState;
@@ -57,6 +56,7 @@ public class GameStateManager implements IUD {
 		initialize();
 	}
 	
+	@SuppressWarnings("static-access")
 	private void defineInput() {
 		//Define the different states so that the input manager knows what they are.
 		input.menuState = (MenuState)states[0];

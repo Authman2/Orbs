@@ -48,6 +48,7 @@ public class SaveState extends GameState {
 		
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
 	public void update(double time) {
 		if(SaveSuccessful()) {
@@ -58,6 +59,7 @@ public class SaveState extends GameState {
 		}
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
 	public void draw(Graphics2D g) {
 		if(SaveSuccessful()) {

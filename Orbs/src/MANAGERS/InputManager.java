@@ -102,6 +102,7 @@ public class InputManager implements KeyListener, Serializable {
 	}
 
 
+	@SuppressWarnings("static-access")
 	private void MenuStateActions(KeyEvent e) {
 		//Options up
 		if(e.getKeyCode() == KeyEvent.VK_UP) {

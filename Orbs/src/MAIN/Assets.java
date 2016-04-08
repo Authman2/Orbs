@@ -7,7 +7,7 @@ import myproject.gos.main.loadImageFrom;
 
 public class Assets {
 	
-	public static SpriteSheet playerss = new SpriteSheet();
+	SpriteSheet playerss = new SpriteSheet();
 	SpriteSheet environment = new SpriteSheet();
 	SpriteSheet gameobjects = new SpriteSheet();
 	SpriteSheet misc = new SpriteSheet();
