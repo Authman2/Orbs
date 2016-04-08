@@ -41,10 +41,10 @@ public class Assets {
 		misc.setSpriteSheet(loadImageFrom.LoadImageFrom(Orbs.class, "/IMAGES/miscSpriteSheet.png"));
 		
 		/* PLAYER */
-		playerIdleUp = playerss.getTile(0, 32, 32, 32);
+		playerIdleUp = playerss.getTile(32, 0, 32, 32);
 		playerIdleDown = playerss.getTile(0, 0, 32, 32);
-		playerIdleLeft = playerss.getTile(0, 64, 32, 32);
-		playerIdleRight = playerss.getTile(0, 96, 32, 32);
+		playerIdleLeft = playerss.getTile(64, 0, 32, 32);
+		playerIdleRight = playerss.getTile(96, 0, 32, 32);
 		playerAttackUp1 = playerss.getTile(96, 32, 32, 32);
 		playerAttackDown1 = playerss.getTile(96, 0, 32, 32);
 		playerAttackLeft1 = playerss.getTile(96, 64, 32, 32);
