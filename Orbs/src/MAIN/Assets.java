@@ -24,7 +24,13 @@ public class Assets {
 								Tree_Bottom, Water_BottomLeft, Water_Bottom, Water_BottomRight, Wood_Floor, Wood_Base,
 								Rock, CaveEntry_OnDirt, Bridge_Left, Bridge_Top, Bridge_Base, Rock_On_Dirt, Bridge_Bottom,
 								Bridge_BaseSide, Bridge_Right, Dirt_TopLeft, Dirt_Top, Dirt_TopRight, Dirt_Left, Dirt_Base,
-								Dirt_Right, Dirt_BottomLeft, Dirt_Bottom, Dirt_BottomRight;
+								Dirt_Right, Dirt_BottomLeft, Dirt_Bottom, Dirt_BottomRight, Steel_Top, SteelRoof_Top,
+								SteelRoof_Bottom, SteelRoof_TopRight, SteelRoof_TopLeft, SteelRoof_BottomRight,
+								SteelRoof_BottomLeft, SteelRoof_Left, SteelRoof_Right, SteelRoof_Base, WoodRoof_Top1,
+								WoodRoof_Bottom1, WoodRoof_TopRight1, WoodRoof_TopLeft1, WoodRoof_BottomRight1,
+								WoodRoof_BottomLeft1, WoodRoof_Left1, WoodRoof_Right1, WoodRoof_Base1, WoodRoof_Top2,
+								WoodRoof_Bottom2, WoodRoof_TopRight2, WoodRoof_TopLeft2, WoodRoof_BottomRight2,
+								WoodRoof_BottomLeft2, WoodRoof_Left2, WoodRoof_Right2, WoodRoof_Base2, WoodRoof_Base;
 	
 	/* GAME OBJECTS */
 	public static BufferedImage apple, orange, money_1, money_2, money_3, fish, hatchet, wood_log, boat, pickaxe;
@@ -82,6 +88,7 @@ public class Assets {
 		Water_Right = environment.getTile(288, 32, 32, 32);
 		Wood_Door = environment.getTile(0, 64, 32, 32);
 		Wood_Top = environment.getTile(32, 64, 32, 32);
+		Steel_Top = environment.getTile(0, 128, 32, 32);
 		Rock_On_CaveFloor = environment.getTile(64, 64, 32, 32);
 		Tree_Bottom = environment.getTile(96, 64, 32, 32);
 		Water_BottomLeft = environment.getTile(224, 64, 32, 32);
@@ -106,8 +113,36 @@ public class Assets {
 		Dirt_Right = environment.getTile(288, 192, 32, 32);
 		Dirt_BottomLeft = environment.getTile(224, 224, 32, 32);
 		Dirt_Bottom = environment.getTile(256, 224, 32, 32);
-		Dirt_BottomRight = environment.getTile(288, 224, 32, 32);;
-		
+		Dirt_BottomRight = environment.getTile(288, 224, 32, 32);
+		SteelRoof_Top = environment.getTile(64, 224, 32, 32);
+		SteelRoof_Bottom = environment.getTile(64, 288, 32, 32);
+		SteelRoof_TopRight = environment.getTile(96, 224, 32, 32);
+		SteelRoof_TopLeft = environment.getTile(32, 224, 32, 32);
+		SteelRoof_BottomRight = environment.getTile(96, 288, 32, 32);
+		SteelRoof_BottomLeft = environment.getTile(32, 288, 32, 32);
+		SteelRoof_Left = environment.getTile(32, 256, 32, 32);
+		SteelRoof_Right = environment.getTile(96, 256, 32, 32);
+		SteelRoof_Base = environment.getTile(64, 256, 32, 32);
+		WoodRoof_Top1 = environment.getTile(160, 128, 32, 32);
+		WoodRoof_Bottom1 = environment.getTile(160, 192, 32, 32);
+		WoodRoof_TopRight1 = environment.getTile(192, 128, 32, 32);
+		WoodRoof_TopLeft1 = environment.getTile(128, 128, 32, 32);
+		WoodRoof_BottomRight1 = environment.getTile(192, 192, 32, 32);
+		WoodRoof_BottomLeft1 = environment.getTile(128, 192, 32, 32);
+		WoodRoof_Left1 = environment.getTile(128, 160, 32, 32);
+		WoodRoof_Right1 = environment.getTile(192, 160, 32, 32);
+		WoodRoof_Base1 = environment.getTile(160, 160, 32, 32);
+		WoodRoof_Top2 = environment.getTile(160, 224, 32, 32);
+		WoodRoof_Bottom2 = environment.getTile(160, 288, 32, 32);
+		WoodRoof_TopRight2 = environment.getTile(192, 224, 32, 32);
+		WoodRoof_TopLeft2 = environment.getTile(128, 224, 32, 32);
+		WoodRoof_BottomRight2 = environment.getTile(192, 288, 32, 32);
+		WoodRoof_BottomLeft2 = environment.getTile(128, 288, 32, 32);
+		WoodRoof_Left2 = environment.getTile(128, 256, 32, 32);
+		WoodRoof_Right2 = environment.getTile(192, 256, 32, 32);
+		WoodRoof_Base2 = environment.getTile(160, 256, 32, 32);
+		WoodRoof_Base = environment.getTile(160, 256, 32, 32);
+	
 		
 		/* GAME OBJECTS */
 		apple = gameobjects.getTile(0, 0, 32, 32);

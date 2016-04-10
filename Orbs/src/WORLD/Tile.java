@@ -145,6 +145,36 @@ public class Tile implements IUD {
 		if(type == TileType.Dirt_BottomLeft) {g.drawImage(Assets.Dirt_BottomLeft, t, null);  }
 		if(type == TileType.Dirt_Bottom) {g.drawImage(Assets.Dirt_Bottom, t, null);  }
 		if(type == TileType.Dirt_BottomRight) {g.drawImage(Assets.Dirt_BottomRight, t, null);  }
+		/////
+		if(type == TileType.Steel_Top) {g.drawImage(Assets.Steel_Top, t, null); }
+		if(type == TileType.SteelRoof_Top) {g.drawImage(Assets.SteelRoof_Top, t, null);}
+		if(type == TileType.SteelRoof_Bottom) {g.drawImage(Assets.SteelRoof_Bottom, t, null); } 
+		if(type == TileType.SteelRoof_TopRight) { g.drawImage(Assets.SteelRoof_TopRight, t, null);}
+		if(type == TileType.SteelRoof_TopLeft) {g.drawImage(Assets.SteelRoof_TopLeft, t, null); } 
+		if(type == TileType.SteelRoof_BottomRight) {g.drawImage(Assets.SteelRoof_BottomRight, t, null); }
+		if(type == TileType.SteelRoof_BottomLeft) {g.drawImage(Assets.SteelRoof_BottomLeft, t, null);} 
+		if(type == TileType.SteelRoof_Left) {g.drawImage(Assets.SteelRoof_Left, t, null); } 
+		if(type == TileType.SteelRoof_Right) {g.drawImage(Assets.SteelRoof_Right, t, null); } 
+		if(type == TileType.SteelRoof_Base) {g.drawImage(Assets.SteelRoof_Base, t, null); } 
+		if(type == TileType.WoodRoof_Top1) {g.drawImage(Assets.WoodRoof_Top1, t, null); }
+		if(type == TileType.WoodRoof_Bottom1) {g.drawImage(Assets.WoodRoof_Bottom1, t, null); } 
+		if(type == TileType.WoodRoof_TopRight1) { g.drawImage(Assets.WoodRoof_TopRight1, t, null);} 
+		if(type == TileType.WoodRoof_TopLeft1) {g.drawImage(Assets.WoodRoof_TopLeft1, t, null); } 
+		if(type == TileType.WoodRoof_BottomRight1) {g.drawImage(Assets.WoodRoof_BottomRight1, t, null); }
+		if(type == TileType.WoodRoof_BottomLeft1) {g.drawImage(Assets.WoodRoof_BottomLeft1, t, null); }
+		if(type == TileType.WoodRoof_Left1) {g.drawImage(Assets.WoodRoof_Left1, t, null); }
+		if(type == TileType.WoodRoof_Right1) {g.drawImage(Assets.WoodRoof_Right1, t, null); } 
+		if(type == TileType.WoodRoof_Base1) {g.drawImage(Assets.WoodRoof_Base1, t, null); } 
+		if(type == TileType.WoodRoof_Top2) {g.drawImage(Assets.WoodRoof_Top2, t, null); }
+		if(type == TileType.WoodRoof_Bottom2) {g.drawImage(Assets.WoodRoof_Bottom2, t, null); }
+		if(type == TileType.WoodRoof_TopRight2) { g.drawImage(Assets.WoodRoof_TopRight2, t, null);}
+		if(type == TileType.WoodRoof_TopLeft2) {g.drawImage(Assets.WoodRoof_TopLeft2, t, null); }
+		if(type == TileType.WoodRoof_BottomRight2) {g.drawImage(Assets.WoodRoof_BottomRight2, t, null); }
+		if(type == TileType.WoodRoof_BottomLeft2) {g.drawImage(Assets.WoodRoof_BottomLeft2, t, null); }
+		if(type == TileType.WoodRoof_Left2) { g.drawImage(Assets.WoodRoof_Left2, t, null);} 
+		if(type == TileType.WoodRoof_Right2) {g.drawImage(Assets.WoodRoof_Right2, t, null); } 
+		if(type == TileType.WoodRoof_Base2) {g.drawImage(Assets.WoodRoof_Base2, t, null); }
+		if(type == TileType.WoodRoof_Base) {g.drawImage(Assets.WoodRoof_Base, t, null); }
 	}
 	
 	@Override

@@ -56,6 +56,7 @@ public class MapMatrix implements Serializable {
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
+				
 				//Create a single dimensional array for it.
 				worldMapSingle = reader.CreateArrayINT(s, ",");
 				

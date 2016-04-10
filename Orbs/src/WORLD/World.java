@@ -216,6 +216,93 @@ public class World implements IUD  {
 					if(map.currentMap[y][x] == 79) {
 						tiles[x][y] = new Tile(TileType.Dirt_BottomRight, false, this);
 					}
+					//Wood roof 1
+					if(map.currentMap[y][x] == 44) {
+						tiles[x][y] = new Tile(TileType.WoodRoof_TopLeft1, true, this);
+					}
+					if(map.currentMap[y][x] == 45) {
+						tiles[x][y] = new Tile(TileType.WoodRoof_Top1, true, this);
+					}
+					if(map.currentMap[y][x] == 46) {
+						tiles[x][y] = new Tile(TileType.WoodRoof_TopRight1, true, this);
+					}
+					if(map.currentMap[y][x] == 54) {
+						tiles[x][y] = new Tile(TileType.WoodRoof_Left1, true, this);
+					}
+					if(map.currentMap[y][x] == 55) {
+						tiles[x][y] = new Tile(TileType.WoodRoof_Base1, true, this);
+					}
+					if(map.currentMap[y][x] == 56) {
+						tiles[x][y] = new Tile(TileType.WoodRoof_Right1, true, this);
+					}
+					if(map.currentMap[y][x] == 64) {
+						tiles[x][y] = new Tile(TileType.WoodRoof_BottomLeft1, true, this);
+					}
+					if(map.currentMap[y][x] == 65) {
+						tiles[x][y] = new Tile(TileType.WoodRoof_Bottom1, true, this);
+					}
+					if(map.currentMap[y][x] == 66) {
+						tiles[x][y] = new Tile(TileType.WoodRoof_BottomRight1, true, this);
+					}
+					//Wood roof 2
+					if(map.currentMap[y][x] == 74) {
+						tiles[x][y] = new Tile(TileType.WoodRoof_TopLeft2, true, this);
+					}
+					if(map.currentMap[y][x] == 75) {
+						tiles[x][y] = new Tile(TileType.WoodRoof_Top2, true, this);
+					}
+					if(map.currentMap[y][x] == 76) {
+						tiles[x][y] = new Tile(TileType.WoodRoof_TopRight2, true, this);
+					}
+					if(map.currentMap[y][x] == 84) {
+						tiles[x][y] = new Tile(TileType.WoodRoof_Left2, true, this);
+					}
+					if(map.currentMap[y][x] == 85) {
+						tiles[x][y] = new Tile(TileType.WoodRoof_Base2, true, this);
+					}
+					if(map.currentMap[y][x] == 86) {
+						tiles[x][y] = new Tile(TileType.WoodRoof_Right2, true, this);
+					}
+					if(map.currentMap[y][x] == 94) {
+						tiles[x][y] = new Tile(TileType.WoodRoof_BottomLeft2, true, this);
+					}
+					if(map.currentMap[y][x] == 95) {
+						tiles[x][y] = new Tile(TileType.WoodRoof_Bottom2, true, this);
+					}
+					if(map.currentMap[y][x] == 96) {
+						tiles[x][y] = new Tile(TileType.WoodRoof_BottomRight2, true, this);
+					}
+					//Steel roof
+					if(map.currentMap[y][x] == 71) {
+						tiles[x][y] = new Tile(TileType.SteelRoof_TopLeft, true, this);
+					}
+					if(map.currentMap[y][x] == 72) {
+						tiles[x][y] = new Tile(TileType.SteelRoof_Top, true, this);
+					}
+					if(map.currentMap[y][x] == 73) {
+						tiles[x][y] = new Tile(TileType.SteelRoof_TopRight, true, this);
+					}
+					if(map.currentMap[y][x] == 81) {
+						tiles[x][y] = new Tile(TileType.SteelRoof_Left, true, this);
+					}
+					if(map.currentMap[y][x] == 82) {
+						tiles[x][y] = new Tile(TileType.SteelRoof_Base, true, this);
+					}
+					if(map.currentMap[y][x] == 83) {
+						tiles[x][y] = new Tile(TileType.SteelRoof_Right, true, this);
+					}
+					if(map.currentMap[y][x] == 91) {
+						tiles[x][y] = new Tile(TileType.SteelRoof_BottomLeft, true, this);
+					}
+					if(map.currentMap[y][x] == 92) {
+						tiles[x][y] = new Tile(TileType.SteelRoof_Bottom, true, this);
+					}
+					if(map.currentMap[y][x] == 93) {
+						tiles[x][y] = new Tile(TileType.SteelRoof_BottomRight, true, this);
+					}
+					if(map.currentMap[y][x] == 40) {
+						tiles[x][y] = new Tile(TileType.Steel_Top, true, this);
+					}
 				}
 			}
 		
