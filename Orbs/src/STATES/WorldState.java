@@ -34,10 +34,10 @@ public class WorldState extends GameState implements Serializable {
 		
 		player = new Player(this);
 		hud = new HUDManager(this);
-		
 		hud.worldState = this;
 		
 		setupWorlds();
+		
 		initialize();
 	}
 	
@@ -48,7 +48,7 @@ public class WorldState extends GameState implements Serializable {
 		}
 		if(world != null) {
 			world.initialize();
-			player.initialize();
+			player.initialize();			
 			
 			//Set the desitinations of the doors
 			configureDoors();
@@ -82,6 +82,7 @@ public class WorldState extends GameState implements Serializable {
 					if(door instanceof Door) {
 						if(((Door) door).onDoor()) {
 							world = ((Door) door).getGoTo();
+							world.initialize();
 						}
 					}
 				}

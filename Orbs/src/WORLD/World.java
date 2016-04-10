@@ -24,7 +24,7 @@ public class World implements IUD  {
 	//The world state
 	public WorldState worldstate;
 	
-	//All of the NPCs in the world.
+	//Handles all of the NPCs
 	public NPCManager npcManager;
 	
 	//All the entities in the world.
@@ -227,6 +227,7 @@ public class World implements IUD  {
 			}
 		}
 		
+		//NPCs
 		npcManager.initialize();
 		for(NPC c : npcManager.npcs) {
 			if(!entities.contains(c)) {
@@ -252,7 +253,12 @@ public class World implements IUD  {
 				}
 			}
 			
-			npcManager.draw(g);
+			//NPCs
+			for(NPC c : npcManager.npcs) {
+				if(c.inWorld() == this) {
+					c.draw(g);
+				}
+			}
 		}
 	}
 	
@@ -270,6 +276,12 @@ public class World implements IUD  {
 			if(left) { moveLeft(); hasMoved = true; }
 			if(right) { moveRight(); hasMoved = true; }
 			
+			//NPCs
+			for(NPC c : npcManager.npcs) {
+				if(c.inWorld() == this) {
+					c.update(time);
+				}
+			}
 			
 			//Update the position of each tile.
 			for(int i = 0; i < tiles.length; i++) {
@@ -278,7 +290,6 @@ public class World implements IUD  {
 					tiles[i][j].update(time);
 				}
 			}
-			npcManager.update(time);
 		}
 	}
 	

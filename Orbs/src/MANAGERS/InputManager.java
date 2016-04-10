@@ -51,6 +51,11 @@ public class InputManager implements KeyListener, Serializable {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		
+		if(e.getKeyCode() == KeyEvent.VK_U) {
+			worldState.world = worldState.worlds[0];
+			worldState.world.position.Y -= 1;
+		}
+		
 		/* MAIN MENU */
 		if(myGsm.currentState == myGsm.states[0]) {
 			MenuStateActions(e);

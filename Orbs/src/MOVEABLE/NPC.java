@@ -29,6 +29,7 @@ public class NPC extends Entity implements IUD {
 	public NPC(String name, World w) { npcName = name; world = w; }
 	
 	public String Name() { return npcName; }
+	public World inWorld() { return world; }
 	public void setPosition(Vector2D pos) { position = pos ; }
 	
 	/** Determines if the player is above, below, or next to this NPC. */
