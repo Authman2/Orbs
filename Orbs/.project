@@ -14,41 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/IMAGES/OptionBox.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Images/2DTileGame/OptionBox.png</locationURI>
-		</link>
-		<link>
-			<name>src/IMAGES/TextBox.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Images/2DTileGame/TextBox.png</locationURI>
-		</link>
-		<link>
-			<name>src/IMAGES/enemiesSpriteSheet.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Images/2DTileGame/enemiesSpriteSheet.png</locationURI>
-		</link>
-		<link>
-			<name>src/IMAGES/environmentSpriteSheet.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Images/2DTileGame/environmentSpriteSheet.png</locationURI>
-		</link>
-		<link>
-			<name>src/IMAGES/gameObjectsSpriteSheet.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Images/2DTileGame/gameObjectsSpriteSheet.png</locationURI>
-		</link>
-		<link>
-			<name>src/IMAGES/miscSpriteSheet.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Images/2DTileGame/miscSpriteSheet.png</locationURI>
-		</link>
-		<link>
-			<name>src/IMAGES/playerSpriteSheet.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Images/2DTileGame/playerSpriteSheet.png</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>
