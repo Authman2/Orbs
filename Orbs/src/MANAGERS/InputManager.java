@@ -61,35 +61,19 @@ public class InputManager implements KeyListener {
 		/* MOVING THE GAME MAP */
 		
 		if(e.getKeyCode() == KeyEvent.VK_UP) {
-			for(int i = 0; i < worldState.getWorld().getTileMap().length; i++) {
-				for(int j = 0; j < worldState.getWorld().getTileMap()[0].length; j++) {
-					worldState.getWorld().getTileMap()[i][j].position.Y++;
-				}
-			}
+			if(worldState.getWorld().canMoveUp()) worldState.getWorld().position.Y++;
 		}
 		
 		if(e.getKeyCode() == KeyEvent.VK_DOWN) {
-			for(int i = 0; i < worldState.getWorld().getTileMap().length; i++) {
-				for(int j = 0; j < worldState.getWorld().getTileMap()[0].length; j++) {
-					worldState.getWorld().getTileMap()[i][j].position.Y--;
-				}
-			}
+			if(worldState.getWorld().canMoveDown()) worldState.getWorld().position.Y--;
 		}
 		
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			for(int i = 0; i < worldState.getWorld().getTileMap().length; i++) {
-				for(int j = 0; j < worldState.getWorld().getTileMap()[0].length; j++) {
-					worldState.getWorld().getTileMap()[i][j].position.X--;
-				}
-			}
+			if(worldState.getWorld().canMoveRight()) worldState.getWorld().position.X--;
 		}
 		
 		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-			for(int i = 0; i < worldState.getWorld().getTileMap().length; i++) {
-				for(int j = 0; j < worldState.getWorld().getTileMap()[0].length; j++) {
-					worldState.getWorld().getTileMap()[i][j].position.X++;
-				}
-			}
+			if(worldState.getWorld().canMoveLeft()) worldState.getWorld().position.X++;
 		}
 		
 	}

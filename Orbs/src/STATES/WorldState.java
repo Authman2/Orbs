@@ -19,13 +19,16 @@ public class WorldState extends GameState {
 	public WorldState(GameStateManager gsm) {
 		super(gsm);
 		
-		world = new World(40,40);
+		world = new World(40,40, this);
 		player = new Player();
 	}
 	
 	
 	/** Returns the world that is being displayed in this world state. */
 	public World getWorld() { return world; }
+	
+	/** Returns the player. */
+	public Player getPlayer() { return player; }
 	
 
 	@Override

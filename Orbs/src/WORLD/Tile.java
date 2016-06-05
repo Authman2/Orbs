@@ -1,7 +1,7 @@
 package WORLD;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 
 import MAIN.Assets;
 import visualje.Vector2D;
@@ -36,18 +36,19 @@ public class Tile {
 	}
 	
 	public void draw(Graphics2D g) {
+		AffineTransform t = new AffineTransform();
+		t.translate(position.X*32, position.Y*32);
+		t.scale(1, 1);
+		
+		
 		if(type == TileType.Grass_1) {
-			g.drawImage(Assets.grass_1, (int)position.X*size, (int)position.Y*size, size, size, null);
+			g.drawImage(Assets.grass_1, t, null);
 		}
 		if(type == TileType.Tree_1) {
-			g.drawImage(Assets.tree_1, (int)position.X*size, (int)position.Y*size, size, size, null);
-			g.setColor(Color.red);
-			g.drawRect((int)position.X*size, (int)position.Y*size, size, size);
+			g.drawImage(Assets.tree_1, t, null);
 		}
 		if(type == TileType.Tree_2) {
-			g.drawImage(Assets.tree_2, (int)position.X*size, (int)position.Y*size, size, size, null);
-			g.setColor(Color.red);
-			g.drawRect((int)position.X*size, (int)position.Y*size, size, size);
+			g.drawImage(Assets.tree_2, t, null);
 		}
 	}
 	
