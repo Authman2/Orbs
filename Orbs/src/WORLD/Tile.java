@@ -1,5 +1,6 @@
 package WORLD;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 import MAIN.Assets;
@@ -40,9 +41,13 @@ public class Tile {
 		}
 		if(type == TileType.Tree_1) {
 			g.drawImage(Assets.tree_1, (int)position.X*size, (int)position.Y*size, size, size, null);
+			g.setColor(Color.red);
+			g.drawRect((int)position.X*size, (int)position.Y*size, size, size);
 		}
 		if(type == TileType.Tree_2) {
 			g.drawImage(Assets.tree_2, (int)position.X*size, (int)position.Y*size, size, size, null);
+			g.setColor(Color.red);
+			g.drawRect((int)position.X*size, (int)position.Y*size, size, size);
 		}
 	}
 	

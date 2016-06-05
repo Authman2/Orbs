@@ -40,7 +40,7 @@ public class World {
 			for(int y = 0; y < height; y++) {
 				
 				if(map.currentMap[y][x] == 0) {
-					tiles[x][y] = new Tile(TileType.Grass_1, true);
+					tiles[x][y] = new Tile(TileType.Grass_1, false);
 				}
 				if(map.currentMap[y][x] == 3) {
 					tiles[x][y] = new Tile(TileType.Tree_1, true);
