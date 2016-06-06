@@ -61,19 +61,23 @@ public class InputManager implements KeyListener {
 		/* MOVING THE GAME MAP */
 		
 		if(e.getKeyCode() == KeyEvent.VK_UP) {
-			if(worldState.getWorld().canMoveUp()) worldState.getWorld().position.Y++;
+			worldState.getPlayer().setDirection(2);
+			if(worldState.getWorld().canMoveUp()) worldState.getWorld().position.Y++; worldState.getWorld().up = true;
 		}
 		
 		if(e.getKeyCode() == KeyEvent.VK_DOWN) {
-			if(worldState.getWorld().canMoveDown()) worldState.getWorld().position.Y--;
+			worldState.getPlayer().setDirection(0);
+			if(worldState.getWorld().canMoveDown()) worldState.getWorld().position.Y--; worldState.getWorld().down = true;
 		}
 		
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			if(worldState.getWorld().canMoveRight()) worldState.getWorld().position.X--;
+			worldState.getPlayer().setDirection(1);
+			if(worldState.getWorld().canMoveRight()) worldState.getWorld().position.X--; worldState.getWorld().right = true;
 		}
 		
 		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-			if(worldState.getWorld().canMoveLeft()) worldState.getWorld().position.X++;
+			worldState.getPlayer().setDirection(3);
+			if(worldState.getWorld().canMoveLeft()) worldState.getWorld().position.X++; worldState.getWorld().left = true;
 		}
 		
 	}
@@ -86,5 +90,13 @@ public class InputManager implements KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {}
 	@Override
-	public void keyReleased(KeyEvent e) {}
+	public void keyReleased(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_UP) worldState.getWorld().up = false;
+		
+		if(e.getKeyCode() == KeyEvent.VK_DOWN) worldState.getWorld().down = false;
+		
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT) worldState.getWorld().right = false;
+		
+		if(e.getKeyCode() == KeyEvent.VK_LEFT) worldState.getWorld().left = false;
+	}
 }

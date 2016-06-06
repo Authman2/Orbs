@@ -20,7 +20,7 @@ public class WorldState extends GameState {
 		super(gsm);
 		
 		world = new World(40,40, this);
-		player = new Player();
+		player = new Player(this);
 	}
 	
 	
@@ -31,6 +31,8 @@ public class WorldState extends GameState {
 	public Player getPlayer() { return player; }
 	
 
+	////////////// Abstract Methods /////////////
+	 
 	@Override
 	public void initialize() {
 		if(world != null)

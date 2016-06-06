@@ -13,6 +13,14 @@ public abstract class Entity {
 	//The size of the entity
 	int size = 32;
 	
+	/*
+	 * The direction that the entity is facing.
+	 * 0 = down
+	 * 1 = right
+	 * 2 = up
+	 * 3 = left
+	 */
+	int facing = 0;
 	
 	
 	/////////// Constructors ////////////
@@ -24,4 +32,13 @@ public abstract class Entity {
 	public abstract void initialize();
 	public abstract void update(double time);
 	public abstract void draw(Graphics2D g);
+	
+	
+	/////////// Other Methods ////////////
+	/** Sets the direction of the entity to "i".
+	 * 0 = down
+	 * 1 = right
+	 * 2 = up
+	 * 3 = left*/
+	public void setDirection(int i) { facing = i; }
 }
