@@ -34,7 +34,7 @@ public abstract class Entity {
 	public abstract void draw(Graphics2D g);
 	
 	
-	/////////// Other Methods ////////////
+	/////////// Setters ////////////
 	/** Sets the direction of the entity to "i".
 	 * 0 = down
 	 * 1 = right

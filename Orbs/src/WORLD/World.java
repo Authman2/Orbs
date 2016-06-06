@@ -1,7 +1,9 @@
 package WORLD;
 
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
+import ENTITIES.Entity;
 import STATES.WorldState;
 import visualje.Vector2D;
 
@@ -25,6 +27,10 @@ public class World {
 	//Booleans for movement
 	public boolean up, down, left, right;
 	
+	//All of the entities in the world, excluding the player
+	ArrayList<Entity> entities;
+	
+	
 	
 	
 	public World(int w, int h, WorldState ws) {
@@ -33,9 +39,17 @@ public class World {
 		height = h;
 		tiles = new Tile[width][height];
 		map = new GameMap();
+		entities = new ArrayList<Entity>();
 		worldState = ws;
 		initialize();
 	}
+	
+	
+	////////////// SETTERS ///////////////
+	
+	/** Adds an entity to the list in the World class, and subsequently to the game world itself. */
+	public void addEntity(Entity ent) { entities.add(ent); }
+	
 	
 	
 	////////////// GETTERS ///////////////
@@ -46,6 +60,10 @@ public class World {
 	
 	/** Returns the tiles that are on the screen. */
 	public Tile[][] getTileMap() { return tiles; }
+	
+	
+	/** Returns a list of all of the entities in the game world. */
+	public ArrayList<Entity> getEntities() { return entities; }
 	
 	
 	/** Finds out if the next tile above the one the player is currently on is solid or not. */
@@ -143,7 +161,7 @@ public class World {
 	
 	public void initialize() {
 		
-		//Set the tiles based on the numbers in the 2D array
+		//Set the tiles based on the numbers in the game map
 		for(int x = 0; x < width; x++) {
 			for(int y = 0; y < height; y++) {
 				
@@ -165,6 +183,10 @@ public class World {
 				tiles[x][y].setPosition(new Vector2D(position.X+x, position.Y+y));
 			}	
 		}
+		
+		//Initialize each entity
+		for(Entity e : entities) 
+			e.initialize();
 	}
 	
 	
@@ -179,6 +201,10 @@ public class World {
 					tiles[x][y].setPosition(new Vector2D(position.X+x, position.Y+y));
 				}	
 			}
+			
+			//Update all of the entities
+			for(Entity e : entities) 
+				e.update(time);
 		}
 		
 	}
@@ -187,11 +213,16 @@ public class World {
 	public void draw(Graphics2D g) {
 		
 		if(tiles != null) {
+			//Draw all of the tiles
 			for(Tile[] ts : tiles) {
 				for(Tile t : ts) {
 					t.draw(g);
 				}
 			}
+			
+			//Draw all of the entities
+			for(Entity e : entities) 
+				e.draw(g);
 		}
 		
 	}
