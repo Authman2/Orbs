@@ -2,6 +2,8 @@ package STATES;
 
 import java.awt.Graphics2D;
 
+import ENTITIES.Entity;
+import ENTITIES.NPC;
 import ENTITIES.Player;
 import MANAGERS.GameStateManager;
 import MANAGERS.NPCManager;
@@ -38,6 +40,8 @@ public class WorldState extends GameState {
 	/** Returns the player. */
 	public Player getPlayer() { return player; }
 	
+	/** Returns whether or not a text box is open by an NPC. */
+	public boolean textBoxesOpen() { for(Entity ent : world.getEntities()) { if( ((NPC)ent).getTextBox().isOpen()) return true; } return false; }
 	
 	
 

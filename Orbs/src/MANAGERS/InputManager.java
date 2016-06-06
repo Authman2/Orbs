@@ -65,40 +65,45 @@ public class InputManager implements KeyListener {
 		
 		/* MOVING THE GAME MAP */
 		
-		if(e.getKeyCode() == KeyEvent.VK_UP) {
-			worldState.getPlayer().setDirection(2);
-			if(worldState.getWorld().canMoveUp()) {
-				worldState.getWorld().position.Y++;
-				for(Entity ent : worldState.getWorld().getEntities()) ent.position.Y++;
-				worldState.getWorld().up = true;
+		//Check if there is a text box open. The player cannot move if they are already interacting with someone/something.
+		if(!worldState.textBoxesOpen()) {
+			
+			if(e.getKeyCode() == KeyEvent.VK_UP) {
+				worldState.getPlayer().setDirection(2);
+				if(worldState.getWorld().canMoveUp()) {
+					worldState.getWorld().position.Y++;
+					for(Entity ent : worldState.getWorld().getEntities()) ent.position.Y++;
+					worldState.getWorld().up = true;
+				}
 			}
-		}
-		
-		if(e.getKeyCode() == KeyEvent.VK_DOWN) {
-			worldState.getPlayer().setDirection(0);
-			if(worldState.getWorld().canMoveDown()) {
-				worldState.getWorld().position.Y--; 
-				for(Entity ent : worldState.getWorld().getEntities()) ent.position.Y--;
-				worldState.getWorld().down = true;
+			
+			if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+				worldState.getPlayer().setDirection(0);
+				if(worldState.getWorld().canMoveDown()) {
+					worldState.getWorld().position.Y--; 
+					for(Entity ent : worldState.getWorld().getEntities()) ent.position.Y--;
+					worldState.getWorld().down = true;
+				}
 			}
-		}
-		
-		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			worldState.getPlayer().setDirection(1);
-			if(worldState.getWorld().canMoveRight()) {
-				worldState.getWorld().position.X--; 
-				for(Entity ent : worldState.getWorld().getEntities()) ent.position.X--;
-				worldState.getWorld().right = true;
+			
+			if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+				worldState.getPlayer().setDirection(1);
+				if(worldState.getWorld().canMoveRight()) {
+					worldState.getWorld().position.X--; 
+					for(Entity ent : worldState.getWorld().getEntities()) ent.position.X--;
+					worldState.getWorld().right = true;
+				}
 			}
-		}
-		
-		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-			worldState.getPlayer().setDirection(3);
-			if(worldState.getWorld().canMoveLeft()) {
-				worldState.getWorld().position.X++; 
-				for(Entity ent : worldState.getWorld().getEntities()) ent.position.X++;
-				worldState.getWorld().left = true;
+			
+			if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+				worldState.getPlayer().setDirection(3);
+				if(worldState.getWorld().canMoveLeft()) {
+					worldState.getWorld().position.X++; 
+					for(Entity ent : worldState.getWorld().getEntities()) ent.position.X++;
+					worldState.getWorld().left = true;
+				}
 			}
+			
 		}
 		
 		

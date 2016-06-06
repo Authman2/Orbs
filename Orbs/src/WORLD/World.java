@@ -84,6 +84,13 @@ public class World {
 				}
 			}	
 		}
+		
+		for(Entity ent : entities) {
+			if(ent.position.X == worldState.getPlayer().position.X && ent.position.Y == worldState.getPlayer().position.Y - 1) {
+				canMoveUp = false;
+			}
+		}
+		
 		return canMoveUp;
 	}
 	
@@ -106,6 +113,13 @@ public class World {
 				}
 			}	
 		}
+		
+		for(Entity ent : entities) {
+			if(ent.position.X == worldState.getPlayer().position.X && ent.position.Y == worldState.getPlayer().position.Y + 1) {
+				canMoveDown = false;
+			}
+		}
+		
 		return canMoveDown;
 	}
 	
@@ -129,6 +143,12 @@ public class World {
 			}	
 		}
 		
+		for(Entity ent : entities) {
+			if(ent.position.X == worldState.getPlayer().position.X + 1 && ent.position.Y == worldState.getPlayer().position.Y) {
+				canMoveRight = false;
+			}
+		}
+		
 		return canMoveRight;
 	}
 	
@@ -150,6 +170,12 @@ public class World {
 					
 				}
 			}	
+		}
+		
+		for(Entity ent : entities) {
+			if(ent.position.X == worldState.getPlayer().position.X - 1 && ent.position.Y == worldState.getPlayer().position.Y) {
+				canMoveLeft = false;
+			}
 		}
 		
 		return canMoveLeft;
