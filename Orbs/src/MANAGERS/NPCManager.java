@@ -49,21 +49,20 @@ public class NPCManager {
 		scientist.getTextBox().addText("Huh? What's that?");
 		scientist.getTextBox().addText("Oh, I'm sorry, I didn't hear you. I was too busy worrying about my experiement...");
 		scientist.getTextBox().addText("Would you like to hear about it?");
-		scientist.getTextBox().addText("You would? Great! It's very simple, but will have some very large effects.");
+		scientist.getTextBox().addText("You would? Great! It's very simple, but will have some very amazing effects in the long run.");
 		scientist.getTextBox().addText("To put it simply, I have created 20 multi-colored orbs.");
 		scientist.getTextBox().addText("Each orb holds great power, and is capable of bending reality at will!");
-		scientist.getTextBox().addText("I planned on using them to cure diseases, end world hunger...");
-		scientist.getTextBox().addText("Anything you could think of, these orbs could do it!");
+		scientist.getTextBox().addText("I planned on using them to cure diseases, end world hunger, etc... Anything you could think of, these orbs could do it!");
 		scientist.getTextBox().addText("The only problem is that someone has stolen them out of my laboratory!");
 		scientist.getTextBox().addText("I can't imagine what kind of person would do this...");
-		scientist.getTextBox().addText("I would go look for them myself, but I am afraid they might try to steal");
-		scientist.getTextBox().addText("more of my inventions.");
+		scientist.getTextBox().addText("I would go look for them myself, but I am afraid they might try to steal more inventions out of my lab.");
 		scientist.getTextBox().addText("Wait a minute!");
-		scientist.getTextBox().addText("You can go look for the criminal, right? It would surely help a lot.");
+		scientist.getTextBox().addText("You could go look for the criminal, couldn't you? It would surely help a lot.");
+		scientist.getTextBox().addText("What do you say?");
 		scientist.getTextBox().addText("You'll do it? Oh thank you very much! I really appreciate this!");
 		scientist.getTextBox().addText("Now, what you must do is look for all 20 of the orbs.");
-		scientist.getTextBox().addText("I have no idea where they might be, so make sure you look under every rock");
-		scientist.getTextBox().addText("and every crevice. You never know where one of the orbs may be!");
+		scientist.getTextBox().addText("I have no idea where they might be, so make sure you look under every rock and behind every tree. Also ask around! Other people might know where they are, too!");
+		scientist.getTextBox().addText("The point is to look everywhere. You never know where one of the orbs may be!");
 		scientist.getTextBox().addText("Now go! Please bring back my most powerful inventions!");
 		scientist.getTextBox().addText("I will be waiting here when you return!");
 		

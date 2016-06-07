@@ -10,10 +10,11 @@ import STATES.WorldState;
 
 public class InputManager implements KeyListener {
 
+	//The game states
 	public MenuState menuState;
 	public WorldState worldState;
 	
-	
+	//The game state manager
 	public GameStateManager gsm;
 	
 

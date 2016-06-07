@@ -6,7 +6,7 @@ import visualje.JEImage;
 
 public class Assets {
 	
-	//The environment sprite sheet
+	//The sprite sheet
 	JEImage spriteSheet;
 	
 	//The individual parts of the environment

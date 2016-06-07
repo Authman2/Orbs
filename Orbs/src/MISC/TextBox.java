@@ -15,8 +15,11 @@ public class TextBox {
 	//The current text slide that is being looked at.
 	int currentSlide;
 	
-	//Whether or not the text box is open
+	//Whether or not the text box is open.
 	boolean open;
+	
+	//The maximum number of characters that can fit on one line in the text box.
+	final int MAX_LINE_LENGTH = 70;
 	
 	
 	
@@ -71,10 +74,46 @@ public class TextBox {
 			g.setColor(Color.white);
 			g.fillRect(0, Orbs.HEIGHT - 100, Orbs.WIDTH, 100);
 		
-			//Draw the text
+			//Set the text attributes
 			g.setColor(Color.black);
 			g.setFont(new Font("Arial", 1, 15));
-			g.drawString(text.get(currentSlide), 5, Orbs.HEIGHT - 80);
+			
+			
+			//If the text is longer than one line
+			if(text.get(currentSlide).length() > MAX_LINE_LENGTH) {
+				
+				int y = Orbs.HEIGHT - 80;
+				String slideText = text.get(currentSlide);
+				
+				//Loop through each letter in the text slide
+				for(int letter = 0; letter < slideText.length(); letter++) {
+					
+					//If the length of the entire text is longer than the amount allowed on one line...
+					if(slideText.length() >= MAX_LINE_LENGTH) {
+						
+						//Draw the string up to the end of the line
+						g.drawString(slideText.substring(0, MAX_LINE_LENGTH), 5, y);
+						
+						//Then shorten the amount of text that still needs to be written, and go to the next line.
+						slideText = slideText.substring(MAX_LINE_LENGTH);
+						y += 15;
+					
+					} else {
+						
+						//If the rest of the string is shorter than the maximum allowed on one line, then just draw up through the end.
+						g.drawString(slideText.substring(0, slideText.length()), 5, y);
+						
+					}
+					
+				}
+				
+			} else {
+				
+				//If the entire slide of text is less than the maximum allowed, then just draw it on one line
+				g.drawString(text.get(currentSlide), 5, Orbs.HEIGHT - 80);
+				
+			}
+			
 		}
 	}
 	
