@@ -4,6 +4,7 @@ import ENTITIES.Person;
 import STATES.WorldState;
 import visualje.Vector2D;
 
+/** Handles adding all of the NPCs to the game world. */
 public class NPCManager {
 
 	//The world state, used to access many different elements in the game world.

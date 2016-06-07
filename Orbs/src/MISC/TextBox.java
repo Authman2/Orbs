@@ -57,6 +57,8 @@ public class TextBox {
 	public boolean isOpen() { return open; }
 	
 	
+	/** Returns a list of all of the text slides that the text box is set to display. */
+	public ArrayList<String> getTextSlides() { return text; }
 	
 	
 	/////////// Abstract Methods /////////////
@@ -69,7 +71,7 @@ public class TextBox {
 	
 	public void draw(Graphics2D g) {
 		//If the text box is open...
-		if(open == true) {
+		if(open == true && !text.isEmpty()) {
 			//Draw the background of the text box
 			g.setColor(Color.white);
 			g.fillRect(0, Orbs.HEIGHT - 100, Orbs.WIDTH, 100);

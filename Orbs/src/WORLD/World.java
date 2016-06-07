@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import ENTITIES.Entity;
+import MISC.Item;
 import STATES.WorldState;
 import visualje.Vector2D;
 
@@ -30,7 +31,8 @@ public class World {
 	//All of the entities in the world, excluding the player
 	ArrayList<Entity> entities;
 	
-	
+	//All of the items that are on the floor of the game world that the player can just pick up
+	ArrayList<Item> droppedItems;
 	
 	
 	public World(int w, int h, WorldState ws) {
@@ -40,6 +42,7 @@ public class World {
 		tiles = new Tile[width][height];
 		map = new GameMap();
 		entities = new ArrayList<Entity>();
+		droppedItems = new ArrayList<Item>();
 		worldState = ws;
 		initialize();
 	}
@@ -64,6 +67,10 @@ public class World {
 	
 	/** Returns a list of all of the entities in the game world. */
 	public ArrayList<Entity> getEntities() { return entities; }
+	
+	
+	/** Returns a list of all of the items that are on the floor of the game world. */
+	public ArrayList<Item> getDroppedItem() { return droppedItems; }
 	
 	
 	/** Finds out if the next tile above the one the player is currently on is solid or not. */
@@ -213,6 +220,10 @@ public class World {
 		//Initialize each entity
 		for(Entity e : entities) 
 			e.initialize();
+		
+		//Initialize each item
+		for(Item itm : droppedItems) 
+			itm.initialize();
 	}
 	
 	
@@ -231,6 +242,10 @@ public class World {
 			//Update all of the entities
 			for(Entity e : entities) 
 				e.update(time);
+			
+			//Update each item
+			for(Item itm : droppedItems) 
+				itm.update(time);
 		}
 		
 	}
@@ -245,6 +260,10 @@ public class World {
 					t.draw(g);
 				}
 			}
+			
+			//Draw each item
+			for(Item itm : droppedItems) 
+				itm.draw(g);
 			
 			//Draw all of the entities
 			for(Entity e : entities) 

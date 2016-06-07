@@ -2,27 +2,38 @@ package ENTITIES;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import MAIN.Animator;
 import MAIN.Assets;
+import MISC.Item;
 import STATES.WorldState;
 import visualje.Vector2D;
 
 public class Player extends Entity {
 	
-	//Animator for the player
+	//Animators for the player
 	Animator walk_down, walk_up, walk_right, walk_left;
 	
 	//The world state that this player is in
 	WorldState worldState;
 	
+	//A list of the items that the player currently has
+	ArrayList<Item> items;
+	
 	
 	public Player(WorldState ws) {
 		position = new Vector2D(8,6);
+		items = new ArrayList<Item>();
 		worldState = ws;
 		initialize();
 	}
 	
+	
+	///////// Getters //////////
+	
+	/** Returns a list of the items that the player has acquired. */
+	public ArrayList<Item> getItems() { return items; }
 	
 
 	//////////// Abstract Methods ///////////////

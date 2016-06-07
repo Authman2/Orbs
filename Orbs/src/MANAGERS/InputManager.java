@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 
 import ENTITIES.Entity;
 import ENTITIES.NPC;
+import MISC.Item;
 import STATES.MenuState;
 import STATES.WorldState;
 
@@ -64,45 +65,63 @@ public class InputManager implements KeyListener {
 	/** Moving about the game world. */
 	private void WorldStateActions(KeyEvent e) {
 		
-		/* MOVING THE GAME MAP */
+		
 		
 		//Check if there is a text box open. The player cannot move if they are already interacting with someone/something.
-		if(!worldState.textBoxesOpen()) {
+		if(!worldState.textBoxesOpen()) {			
+			
+			/* MOVING THE GAME MAP */
 			
 			if(e.getKeyCode() == KeyEvent.VK_UP) {
 				worldState.getPlayer().setDirection(2);
+				
 				if(worldState.getWorld().canMoveUp()) {
+					
 					worldState.getWorld().position.Y++;
 					for(Entity ent : worldState.getWorld().getEntities()) ent.position.Y++;
+					for(Item itm : worldState.getWorld().getDroppedItem()) itm.position.Y++;
 					worldState.getWorld().up = true;
+					
 				}
 			}
 			
 			if(e.getKeyCode() == KeyEvent.VK_DOWN) {
 				worldState.getPlayer().setDirection(0);
+				
 				if(worldState.getWorld().canMoveDown()) {
+					
 					worldState.getWorld().position.Y--; 
 					for(Entity ent : worldState.getWorld().getEntities()) ent.position.Y--;
+					for(Item itm : worldState.getWorld().getDroppedItem()) itm.position.Y--;
 					worldState.getWorld().down = true;
+					
 				}
 			}
 			
 			if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
 				worldState.getPlayer().setDirection(1);
+				
 				if(worldState.getWorld().canMoveRight()) {
+					
 					worldState.getWorld().position.X--; 
 					for(Entity ent : worldState.getWorld().getEntities()) ent.position.X--;
+					for(Item itm : worldState.getWorld().getDroppedItem()) itm.position.X--;
 					worldState.getWorld().right = true;
+					
 				}
 			}
 			
 			if(e.getKeyCode() == KeyEvent.VK_LEFT) {
 				worldState.getPlayer().setDirection(3);
+				
 				if(worldState.getWorld().canMoveLeft()) {
+					
 					worldState.getWorld().position.X++; 
 					for(Entity ent : worldState.getWorld().getEntities()) ent.position.X++;
+					for(Item itm : worldState.getWorld().getDroppedItem()) itm.position.X++;
 					worldState.getWorld().left = true;
 				}
+				
 			}
 			
 		}
@@ -112,10 +131,17 @@ public class InputManager implements KeyListener {
 		if(e.getKeyCode() == KeyEvent.VK_ENTER || e.getKeyCode() == KeyEvent.VK_C) {
 			PlayerInteractions(e);
 		}
+		
+		
+		/* LOOKING THROUGH ITEMS */
+		if(e.getKeyCode() == KeyEvent.VK_I) {
+			Inventory(e);
+		}
+		
 	}
 	
 	
-	/** Interacting with entities in the game world. */
+	/** Interacting with entities and items in the game world. */
 	private void PlayerInteractions(KeyEvent e) {
 		
 		//First check if there is already a text box open
@@ -138,7 +164,45 @@ public class InputManager implements KeyListener {
 			}
 		}
 		
+		
+		//Check if the player is trying to interact with an item on the ground
+		for(Item itm : worldState.getWorld().getDroppedItem()) {
+			
+			//If an item's text box is not already open
+			if(!itm.getTextBox().isOpen()) {
+				
+				//If you are next to a dropped item and try to interact with it, pick it up and display the acquired message.
+				if(itm.isNextTo(worldState.getPlayer())) {
+					
+					itm.getTextBox().toggle();						//Open a text box to tell the user what he/she got
+					worldState.getPlayer().getItems().add(itm);		//Add that item to the user's list of items
+					worldState.updatePlayersItems();				//Update which items the player has
+					
+				}
+			//If there is an item's text box open, then just close it and remove the item from the game world's floor
+			} else {
+				
+				itm.getTextBox().toggle();
+				worldState.getWorld().getDroppedItem().remove(itm);
+				break;
+				
+			}
+		}
+			
+		
 	}
+	
+	
+	/** Handling all of the inventory stuff. */
+	private void Inventory(KeyEvent e) {
+		
+		if(!worldState.textBoxesOpen())
+			worldState.getInventoryTextBox().toggle();
+		else 
+			if(worldState.getInventoryTextBox().isOpen()) 
+				worldState.getInventoryTextBox().nextSlide();
+	}
+	
 	
 	
 
