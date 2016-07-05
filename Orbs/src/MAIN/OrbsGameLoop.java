@@ -3,15 +3,15 @@ package MAIN;
 import java.awt.Graphics2D;
 
 import MANAGERS.GameStateManager;
-import myproject.gos.main.GOSGameLoop;
+import gamedevje.GameLoop;
 
-public class GameLoop extends GOSGameLoop {
+public class OrbsGameLoop extends GameLoop {
 	private static final long serialVersionUID = 4869900297997334871L;
 	
 	public GameStateManager gsm;
 	public static Assets assets = new Assets();
 	
-	public GameLoop(int w, int h) {
+	public OrbsGameLoop(int w, int h) {
 		super(w,h);
 		initialize();
 	}

@@ -29,7 +29,7 @@ public class GameMap {
 		ReadFile reader = new ReadFile();
 		String s = null;
 		try {
-			s = reader.Read("/Users/adeola.uthman/Documents/ComputerScienceAP/Java/Orbs/src/WorldMapText.txt");
+			s = reader.Read("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/WorldMapText.txt");
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
