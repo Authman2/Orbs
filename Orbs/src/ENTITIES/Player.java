@@ -32,8 +32,48 @@ public class Player extends Entity {
 	
 	///////// Getters //////////
 	
+	/** Returns the list of items that the player has (the inventory). */
+	public ArrayList<Item> getInventory() { return items; }
+	
+	
+	/** Returns the number of orbs that the player currently has. */
+	public int getOrbCount() { 
+		for(Item itm : items) {
+			if(itm.getName().equals("Orb")) {
+				return itm.getQuantity();
+			}
+		}
+		return 0;
+	}
+	
+	
+	///////// Setters //////////
+	
 	/** Returns a list of the items that the player has acquired. */
-	public ArrayList<Item> getItems() { return items; }
+	public void addItemToInventory(Item itm) { 
+		
+		//The counter
+		int i = 0;
+		
+		//Loop through and check if there is already an item with the same name in the player's inventory.
+		for(Item it : items) {
+			
+			//If there is, update the quantity of that item.
+			if(it.getName().equals(itm.getName())) {
+				it.setQuantity(it.getQuantity() + 1);
+				break;
+			}
+			
+			//Increment the counter
+			i++;
+		}
+		
+		/* If you reach the end of the item list (the counter is >= to the size), you know that the item was not already
+		 * in the player's inventory, so it should add it onto the end. */
+		if(i >= items.size()) {
+			items.add(itm);
+		}
+	}
 	
 
 	//////////// Abstract Methods ///////////////

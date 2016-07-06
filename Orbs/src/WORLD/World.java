@@ -70,7 +70,7 @@ public class World {
 	
 	
 	/** Returns a list of all of the items that are on the floor of the game world. */
-	public ArrayList<Item> getDroppedItem() { return droppedItems; }
+	public ArrayList<Item> getDroppedItems() { return droppedItems; }
 	
 	
 	/** Finds out if the next tile above the one the player is currently on is solid or not. */

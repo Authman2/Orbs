@@ -50,6 +50,11 @@ public class TextBox {
 	public void toggle() { open = !open; }
 	
 	
+	/** Removes all of the text slides from this text box. */
+	public void clear() {
+		text.removeAll(text);
+		currentSlide = 0;
+	}
 
 	/////////// Getters /////////////
 	
