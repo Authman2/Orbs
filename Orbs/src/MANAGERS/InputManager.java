@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 
 import ENTITIES.Entity;
 import ENTITIES.NPC;
+import ENTITIES.Tree;
 import MISC.Item;
 import MISC.Orb;
 import STATES.MenuState;
@@ -81,6 +82,7 @@ public class InputManager implements KeyListener {
 					worldState.getWorld().position.Y++;
 					for(Entity ent : worldState.getWorld().getEntities()) ent.position.Y++;
 					for(Item itm : worldState.getWorld().getDroppedItems()) itm.position.Y++;
+					for(Tree tree : worldState.getWorld().getTrees()) tree.position.Y++;
 					worldState.getWorld().up = true;
 					
 				}
@@ -94,6 +96,7 @@ public class InputManager implements KeyListener {
 					worldState.getWorld().position.Y--; 
 					for(Entity ent : worldState.getWorld().getEntities()) ent.position.Y--;
 					for(Item itm : worldState.getWorld().getDroppedItems()) itm.position.Y--;
+					for(Tree tree : worldState.getWorld().getTrees()) tree.position.Y--;
 					worldState.getWorld().down = true;
 					
 				}
@@ -107,6 +110,7 @@ public class InputManager implements KeyListener {
 					worldState.getWorld().position.X--; 
 					for(Entity ent : worldState.getWorld().getEntities()) ent.position.X--;
 					for(Item itm : worldState.getWorld().getDroppedItems()) itm.position.X--;
+					for(Tree tree : worldState.getWorld().getTrees()) tree.position.X--;
 					worldState.getWorld().right = true;
 					
 				}
@@ -120,6 +124,7 @@ public class InputManager implements KeyListener {
 					worldState.getWorld().position.X++; 
 					for(Entity ent : worldState.getWorld().getEntities()) ent.position.X++;
 					for(Item itm : worldState.getWorld().getDroppedItems()) itm.position.X++;
+					for(Tree tree : worldState.getWorld().getTrees()) tree.position.X++;
 					worldState.getWorld().left = true;
 				}
 				
@@ -146,26 +151,31 @@ public class InputManager implements KeyListener {
 	/** Interacting with entities and items in the game world. */
 	private void PlayerInteractions(KeyEvent e) {
 		
+		/* ENTITIES */
+		
 		//First check if there is already a text box open
 		for(Entity ent : worldState.getWorld().getEntities()) {
 			
-			//If a text box IS open, then just go through each slide as you normally would.
-			if( ((NPC) ent).getTextBox().isOpen() ) {
-				
-				((NPC) ent).getTextBox().nextSlide();
-				
-			} else {
-				
-				//If a text box was not already open, then open one up.
-				if(((NPC) ent).isNextTo(worldState.getPlayer())) {
+			if(ent instanceof NPC && !(ent instanceof Tree)) {
+				//If a text box IS open, then just go through each slide as you normally would.
+				if( ((NPC) ent).getTextBox().isOpen() ) {
 					
-					((NPC) ent).getTextBox().toggle();
+					((NPC) ent).getTextBox().nextSlide();
 					
+				} else {
+					
+					//If a text box was not already open, then open one up.
+					if(((NPC) ent).isNextTo(worldState.getPlayer())) {
+						
+						((NPC) ent).getTextBox().toggle();
+						
+					}
 				}
-				
 			}
 		}
 		
+
+		/* ITEMS */
 		
 		//Check if the player is trying to interact with an item on the ground
 		for(Item itm : worldState.getWorld().getDroppedItems()) {
@@ -196,8 +206,55 @@ public class InputManager implements KeyListener {
 				
 			}
 		}
-			
 		
+		
+		/* TREES */
+		
+		//Loop through all of the trees in the game world.
+		for(Tree tree : worldState.getWorld().getTrees()) {
+			
+			//If a tree is next to the player
+			if(tree.isNextTo(worldState.getPlayer())) {
+				
+				//If no other text boxes are opened, then open one up.
+				if(!worldState.textBoxesOpen()) {
+					
+					//Change the text of the tree interaction based on whether or not it has an item in it.
+					if(tree.getContainedItem() == null) {
+						tree.getTextBox().clear();
+						tree.getTextBox().addText("There are no items in this tree.");
+					} else {
+						tree.getTextBox().clear();
+						tree.getTextBox().addText("You received a(n) " + tree.getContainedItem().getName() + "!");
+					}
+					
+					//Toggle the text box
+					tree.getTextBox().toggle();
+					
+				} else {
+					
+					//Close the text box
+					tree.getTextBox().nextSlide();
+					
+					//If there was an item in the tree, add it to the player's inventory.
+					if(tree.getContainedItem() != null) {
+						worldState.getPlayer().addItemToInventory(tree.getContainedItem());
+						worldState.updatePlayersItems();
+						
+						//If the item was an orb and a first orb has not been collected already...
+						if(tree.getContainedItem() instanceof Orb) {
+							editScientistSpeech(tree.getContainedItem());
+						}
+						
+						tree.removeContainedItem();
+						
+					}
+					
+				}
+				
+			}
+			
+		}
 	}
 	
 	

@@ -55,14 +55,17 @@ public class NPC extends Entity {
 	@Override
 	public void draw(Graphics2D g) {
 		
-		//Drawing the NPC
-		if(sprite == null) {
-			g.setColor(Color.black);
-			g.fillRect((int)position.X*size, (int)position.Y*size, size, size);
-		} else {
-			g.drawImage(sprite, (int)position.X*size, (int)position.Y*size, size, size, null);
+		//Only draw anything if the NPC should render a sprite of some sort
+		if(renderSprite) {
+			//Drawing the NPC
+			if(sprite == null) {
+				g.setColor(Color.black);
+				g.fillRect((int)position.X*size, (int)position.Y*size, size, size);
+			} else {
+				g.drawImage(sprite, (int)position.X*size, (int)position.Y*size, size, size, null);
+			}
 		}
-		
+			
 		//Drawing the NPC's text box
 		if(textBox.isOpen()) textBox.draw(g);
 		

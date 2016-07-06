@@ -21,7 +21,7 @@ public class NPCManager {
 		//Create the NPCs
 		randomGuy_1 = new Person(new Vector2D(10,6));
 		randomGuy_2 = new Person(new Vector2D(13,12));
-		scientist = new Person(new Vector2D(30, 6));
+		scientist = new Person(new Vector2D(30, 7));
 		
 		
 		initialize();

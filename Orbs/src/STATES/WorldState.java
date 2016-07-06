@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import ENTITIES.Entity;
 import ENTITIES.NPC;
 import ENTITIES.Player;
+import ENTITIES.Tree;
 import MANAGERS.GameStateManager;
 import MANAGERS.ItemManager;
 import MANAGERS.NPCManager;
@@ -65,6 +66,14 @@ public class WorldState extends GameState {
 		//Go through each item on the ground
 		for(Item itm : world.getDroppedItems()) {
 			if(itm.getTextBox().isOpen()) {
+				open = true;
+			}
+		}
+		
+		
+		//Go through each item on the ground
+		for(Tree tree : world.getTrees()) {
+			if(tree.getTextBox().isOpen()) {
 				open = true;
 			}
 		}

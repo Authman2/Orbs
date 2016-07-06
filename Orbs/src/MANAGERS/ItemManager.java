@@ -15,6 +15,7 @@ public class ItemManager {
 	Item orb_1, orb_2, orb_3, orb_4, orb_5;
 	
 	
+	
 	public ItemManager(WorldState ws) {
 		worldState = ws;
 		orb_1 = new Orb(new Vector2D(10,9));

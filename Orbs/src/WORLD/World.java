@@ -4,7 +4,9 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import ENTITIES.Entity;
+import ENTITIES.Tree;
 import MISC.Item;
+import MISC.Orb;
 import STATES.WorldState;
 import visualje.Vector2D;
 
@@ -34,6 +36,9 @@ public class World {
 	//All of the items that are on the floor of the game world that the player can just pick up
 	ArrayList<Item> droppedItems;
 	
+	//All of the trees in the game world that may or may not contain items
+	ArrayList<Tree> trees;
+	
 	
 	public World(int w, int h, WorldState ws) {
 		position = new Vector2D();
@@ -43,6 +48,7 @@ public class World {
 		map = new GameMap();
 		entities = new ArrayList<Entity>();
 		droppedItems = new ArrayList<Item>();
+		trees = new ArrayList<Tree>();
 		worldState = ws;
 		initialize();
 	}
@@ -53,6 +59,21 @@ public class World {
 	/** Adds an entity to the list in the World class, and subsequently to the game world itself. */
 	public void addEntity(Entity ent) { entities.add(ent); }
 	
+	
+	/** Adds items to a bunch of the trees in the game world based on their location. */
+	public void addTreeItems(Tree tree) {
+		if(tree.position.X == 7 && tree.position.Y == 5) {
+			tree.setContainedItem(new Orb());
+		}
+		
+		if(tree.position.X == 8 && tree.position.Y == 18) {
+			tree.setContainedItem(new Orb());
+		}
+		
+		if(tree.position.X == 13 && tree.position.Y == 10) {
+			tree.setContainedItem(new Orb());
+		}
+	}
 	
 	
 	////////////// GETTERS ///////////////
@@ -71,6 +92,10 @@ public class World {
 	
 	/** Returns a list of all of the items that are on the floor of the game world. */
 	public ArrayList<Item> getDroppedItems() { return droppedItems; }
+	
+	
+	/** Returns a list of all of the trees in the game world that may or may not have items in them. */
+	public ArrayList<Tree> getTrees() { return trees; }
 	
 	
 	/** Finds out if the next tile above the one the player is currently on is solid or not. */
@@ -94,6 +119,12 @@ public class World {
 		
 		for(Entity ent : entities) {
 			if(ent.position.X == worldState.getPlayer().position.X && ent.position.Y == worldState.getPlayer().position.Y - 1) {
+				canMoveUp = false;
+			}
+		}
+		
+		for(Item itm : droppedItems) {
+			if(itm.position.X == worldState.getPlayer().position.X && itm.position.Y == worldState.getPlayer().position.Y - 1) {
 				canMoveUp = false;
 			}
 		}
@@ -127,6 +158,12 @@ public class World {
 			}
 		}
 		
+		for(Item itm : droppedItems) {
+			if(itm.position.X == worldState.getPlayer().position.X && itm.position.Y == worldState.getPlayer().position.Y + 1) {
+				canMoveDown = false;
+			}
+		}
+		
 		return canMoveDown;
 	}
 	
@@ -152,6 +189,12 @@ public class World {
 		
 		for(Entity ent : entities) {
 			if(ent.position.X == worldState.getPlayer().position.X + 1 && ent.position.Y == worldState.getPlayer().position.Y) {
+				canMoveRight = false;
+			}
+		}
+		
+		for(Item itm : droppedItems) {
+			if(itm.position.X == worldState.getPlayer().position.X + 1 && itm.position.Y == worldState.getPlayer().position.Y) {
 				canMoveRight = false;
 			}
 		}
@@ -185,12 +228,18 @@ public class World {
 			}
 		}
 		
+		for(Item itm : droppedItems) {
+			if(itm.position.X == worldState.getPlayer().position.X - 1 && itm.position.Y == worldState.getPlayer().position.Y) {
+				canMoveLeft = false;
+			}
+		}
+		
 		return canMoveLeft;
 	}
 		
 	
 	
-	////////////// Initialize, Update, Draw ///////////////
+	////////////// Abstract Methods ///////////////
 	
 	public void initialize() {
 		
@@ -203,6 +252,7 @@ public class World {
 				}
 				if(map.currentMap[y][x] == 3) {
 					tiles[x][y] = new Tile(TileType.Tree_1, true);
+					trees.add(new Tree(new Vector2D(x, y)));
 				}
 				if(map.currentMap[y][x] == 4) {
 					tiles[x][y] = new Tile(TileType.Tree_2, true);
@@ -224,6 +274,13 @@ public class World {
 		//Initialize each item
 		for(Item itm : droppedItems) 
 			itm.initialize();
+		
+		//Initialize each item
+		for(Tree tree : trees) {
+			addTreeItems(tree);
+			tree.initialize();
+			System.out.println(tree.position.toString());
+		}
 	}
 	
 	
@@ -246,6 +303,11 @@ public class World {
 			//Update each item
 			for(Item itm : droppedItems) 
 				itm.update(time);
+			
+			//Initialize each item
+			for(Tree tree : trees) {
+				tree.update(time);
+			}
 		}
 		
 	}
@@ -268,6 +330,11 @@ public class World {
 			//Draw all of the entities
 			for(Entity e : entities) 
 				e.draw(g);
+			
+			//Initialize each item
+			for(Tree tree : trees) {
+				tree.draw(g);
+			}
 		}
 		
 	}

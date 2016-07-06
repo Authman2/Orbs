@@ -17,6 +17,10 @@ public abstract class Entity {
 	//The sprite for the entity
 	protected BufferedImage sprite;
 	
+	//Whether or not the sprite should be rendered
+	protected boolean renderSprite = true;
+	
+	
 	/*
 	 * The direction that the entity is facing.
 	 * 0 = down
