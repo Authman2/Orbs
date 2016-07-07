@@ -35,7 +35,7 @@ public class WorldState extends GameState {
 	public WorldState(GameStateManager gsm) {
 		super(gsm);
 		
-		world = new World(40,40, this);
+		world = new World(100,100, this);
 		player = new Player(this);
 		npcManager = new NPCManager(this);
 		itemManager = new ItemManager(this);

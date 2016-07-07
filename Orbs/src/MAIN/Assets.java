@@ -9,11 +9,23 @@ public class Assets {
 	//The sprite sheet
 	JEImage spriteSheet;
 	
-	//The individual parts of the environment
+	/* The individual parts of the environment */
+	
+	//The ground
 	public static BufferedImage grass_1, tree_1, tree_2;
 	
-	//The player sprites
+	//A house
+	public static BufferedImage house_topLeft, house_topMiddle, house_topRight,
+								house_bottomLeft, house_bottomMiddle, house_bottomRight,
+								house_door;
+	
+	
+	/* The player sprites */
+	
+	//Stills
 	public static BufferedImage player_down, player_up, player_left, player_right;
+	
+	//Walking
 	public static BufferedImage player_down_walk1, player_down_walk2,
 								player_up_walk1, player_up_walk2,
 								player_left_walk1, player_left_walk2,
@@ -44,6 +56,13 @@ public class Assets {
 		grass_1 = spriteSheet.getPart(0, 0, 32, 32);
 		tree_1 = spriteSheet.getPart(96, 0, 32, 32);
 		tree_2 = spriteSheet.getPart(128, 0, 32, 32);
+		house_topLeft = spriteSheet.getPart(160, 0, 32, 32);
+		house_topMiddle = spriteSheet.getPart(192, 0, 32, 32);
+		house_topRight = spriteSheet.getPart(224, 0, 32, 32);
+		house_bottomLeft = spriteSheet.getPart(160, 32, 32, 32);
+		house_bottomMiddle = spriteSheet.getPart(192, 32, 32, 32);
+		house_bottomRight = spriteSheet.getPart(224, 32, 32, 32);
+		house_door = spriteSheet.getPart(192, 64, 32, 32);
 	}
 	
 }

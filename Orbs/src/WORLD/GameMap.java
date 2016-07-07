@@ -37,7 +37,7 @@ public class GameMap {
 		worldMapSingle = reader.CreateArrayINT(s, ",");
 		
 		//Convert it to a two dimensional array. REMEMBER, WORLD MAP MUST HAVE DIMENSIONS NxN TO WORK.
-		worldMap = ArrayConversion.OneToTwo(worldMapSingle, 40);
+		worldMap = ArrayConversion.OneToTwo(worldMapSingle, 100);
 	}
 	
 }

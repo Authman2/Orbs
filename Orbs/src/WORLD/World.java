@@ -257,6 +257,28 @@ public class World {
 				if(map.currentMap[y][x] == 4) {
 					tiles[x][y] = new Tile(TileType.Tree_2, true);
 				}
+				if(map.currentMap[y][x] == 5) {
+					tiles[x][y] = new Tile(TileType.House_TopLeft, true);
+				}
+				if(map.currentMap[y][x] == 6) {
+					tiles[x][y] = new Tile(TileType.House_TopMiddle, true);
+				}
+				if(map.currentMap[y][x] == 7) {
+					tiles[x][y] = new Tile(TileType.House_TopRight, true);
+				}
+				if(map.currentMap[y][x] == 20) {
+					tiles[x][y] = new Tile(TileType.House_BottomLeft, true);
+				}
+				if(map.currentMap[y][x] == 21) {
+					tiles[x][y] = new Tile(TileType.House_BottomMiddle, true);
+				}
+				if(map.currentMap[y][x] == 22) {
+					tiles[x][y] = new Tile(TileType.House_BottomRight, true);
+				}
+				if(map.currentMap[y][x] == 36) {
+					tiles[x][y] = new Tile(TileType.House_Door, false);
+					//Add door object so that the player can go to a different location.
+				}
 			}	
 		}
 		

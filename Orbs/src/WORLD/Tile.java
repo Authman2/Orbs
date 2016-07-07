@@ -50,6 +50,27 @@ public class Tile {
 		if(type == TileType.Tree_2) {
 			g.drawImage(Assets.tree_2, t, null);
 		}
+		if(type == TileType.House_TopLeft) {
+			g.drawImage(Assets.house_topLeft, t, null);
+		}
+		if(type == TileType.House_TopMiddle) {
+			g.drawImage(Assets.house_topMiddle, t, null);
+		}
+		if(type == TileType.House_TopRight) {
+			g.drawImage(Assets.house_topRight, t, null);
+		}
+		if(type == TileType.House_BottomLeft) {
+			g.drawImage(Assets.house_bottomLeft, t, null);
+		}
+		if(type == TileType.House_BottomMiddle) {
+			g.drawImage(Assets.house_bottomMiddle, t, null);
+		}
+		if(type == TileType.House_BottomRight) {
+			g.drawImage(Assets.house_bottomRight, t, null);
+		}
+		if(type == TileType.House_Door) {
+			g.drawImage(Assets.house_door, t, null);
+		}
 	}
 	
 	
