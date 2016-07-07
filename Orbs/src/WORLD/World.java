@@ -333,7 +333,9 @@ public class World {
 			
 			//Initialize each item
 			for(Tree tree : trees) {
-				tree.draw(g);
+				if(tree.getTextBox().isOpen()) {
+					tree.draw(g);
+				}
 			}
 		}
 		

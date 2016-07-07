@@ -225,7 +225,7 @@ public class InputManager implements KeyListener {
 						tree.getTextBox().addText("There are no items in this tree.");
 					} else {
 						tree.getTextBox().clear();
-						tree.getTextBox().addText("You received a(n) " + tree.getContainedItem().getName() + "!");
+						tree.getTextBox().addText("You search the tree and find a(n) " + tree.getContainedItem().getName() + "!");
 					}
 					
 					//Toggle the text box
@@ -276,9 +276,9 @@ public class InputManager implements KeyListener {
 		}
 
 		worldState.getNPCManager().scientist.getTextBox().clear();
-		worldState.getNPCManager().scientist.getTextBox().addText("Oh, hello! So you've already found some of my orbs?");
+		worldState.getNPCManager().scientist.getTextBox().addText("Oh, hello! So you've found some of my orbs?");
 		worldState.getNPCManager().scientist.getTextBox().addText("That's wonderful!");
-		worldState.getNPCManager().scientist.getTextBox().addText("Let's see how many you've found.");
+		worldState.getNPCManager().scientist.getTextBox().addText("Let's see how many you've found...");
 		worldState.getNPCManager().scientist.getTextBox().addText("Hmm... Well it looks like you have found " + worldState.getPlayer().getOrbCount() + " out of 20 orbs.");
 		worldState.getNPCManager().scientist.getTextBox().addText("That's good! But there are still more to find.");
 		worldState.getNPCManager().scientist.getTextBox().addText("Please keep on looking and return to me when you have more orbs! Good luck!");
