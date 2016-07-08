@@ -1,4 +1,4 @@
-package MISC;
+package ITEMS;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -38,12 +38,12 @@ public class Orb extends Item {
 	public void initialize() {
 		setName("Orb");
 		setAcquiredMessage("You received a(n) " + getName() + "!");
-		if(acquiredTextBox.open) acquiredTextBox.initialize();
+		if(acquiredTextBox.isOpen()) acquiredTextBox.initialize();
 	}
 
 	@Override
 	public void update(double time) {
-		if(acquiredTextBox.open) acquiredTextBox.update(time);;
+		if(acquiredTextBox.isOpen()) acquiredTextBox.update(time);
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class Orb extends Item {
 		g.setColor(Color.red);
 		g.fillRect((int)position.X*size, (int)position.Y*size, size, size);
 		
-		if(acquiredTextBox.open) acquiredTextBox.draw(g);
+		if(acquiredTextBox.isOpen()) acquiredTextBox.draw(g);
 	}
 
 }

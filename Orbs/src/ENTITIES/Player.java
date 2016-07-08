@@ -4,9 +4,11 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import ITEMS.Hatchet;
+import ITEMS.Item;
+import ITEMS.Pickaxe;
 import MAIN.Animator;
 import MAIN.Assets;
-import MISC.Item;
 import STATES.WorldState;
 import visualje.Vector2D;
 
@@ -44,6 +46,17 @@ public class Player extends Entity {
 			}
 		}
 		return 0;
+	}
+	
+	
+	/** Returns whether or not the player has an item with the specified name in the inventory. */
+	public boolean inventoryContains(String name) {
+		for(Item itm : items) {
+			if(itm.getName().equals(name)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	
@@ -99,6 +112,9 @@ public class Player extends Entity {
 		walk_left = new Animator(walkLeft);
 		walk_left.setSpeed(180);
 		walk_left.play();
+		
+		 addItemToInventory(new Hatchet());
+		 addItemToInventory(new Pickaxe());
 	}
 
 	@Override

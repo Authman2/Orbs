@@ -12,7 +12,7 @@ public class Assets {
 	/* The individual parts of the environment */
 	
 	//The ground
-	public static BufferedImage grass_1, tree_1, tree_2;
+	public static BufferedImage grass_1, tree_1, tree_2, tree_3, rock;
 	
 	//A house
 	public static BufferedImage house_topLeft, house_topMiddle, house_topRight,
@@ -63,6 +63,8 @@ public class Assets {
 		house_bottomMiddle = spriteSheet.getPart(192, 32, 32, 32);
 		house_bottomRight = spriteSheet.getPart(224, 32, 32, 32);
 		house_door = spriteSheet.getPart(192, 64, 32, 32);
+		tree_3 = spriteSheet.getPart(96, 32, 32, 32);
+		rock = spriteSheet.getPart(128, 32, 32, 32);
 	}
 	
 }

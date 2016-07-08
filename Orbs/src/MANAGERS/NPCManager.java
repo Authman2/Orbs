@@ -1,6 +1,7 @@
 package MANAGERS;
 
 import ENTITIES.Person;
+import ITEMS.Orb;
 import STATES.WorldState;
 import visualje.Vector2D;
 
@@ -11,7 +12,8 @@ public class NPCManager {
 	WorldState worldState;
 	
 	//The NPCs
-	Person randomGuy_1, randomGuy_2, scientist;
+	Person randomGuy_1, randomGuy_2, randomGuy_3, randomGuy_4, randomGuy_5;
+	Person scientist;
 	
 	
 	////////////// Constructor ///////////////	
@@ -19,9 +21,13 @@ public class NPCManager {
 		worldState = ws;
 		
 		//Create the NPCs
-		randomGuy_1 = new Person(new Vector2D(10,6));
-		randomGuy_2 = new Person(new Vector2D(13,12));
-		scientist = new Person(new Vector2D(30, 7));
+		randomGuy_1 = new Person(new Vector2D(24,19));
+		randomGuy_2 = new Person(new Vector2D(18,12));
+		randomGuy_3 = new Person(new Vector2D(12,17));
+		randomGuy_4 = new Person(new Vector2D(15,25));
+			randomGuy_4.setItemToGive(new Orb());
+		randomGuy_5 = new Person(new Vector2D(25,26));
+		scientist = new Person(new Vector2D(24, 11));
 		
 		
 		initialize();
@@ -36,8 +42,26 @@ public class NPCManager {
 		
 		//Random guy 2
 		randomGuy_2.getTextBox().addText("Have you talked to that wierd scientist guy?");
-		randomGuy_2.getTextBox().addText("He was blabbing about some multi-colored orbs or something...");
+		randomGuy_2.getTextBox().addText("He was blabbing about some orbs or something...");
 		randomGuy_2.getTextBox().addText("I couldn't really understand him though. He was talking so fast!");
+		
+		//Random guy 3
+		randomGuy_3.getTextBox().addText("Have you heard about the burglary that happened last night?");
+		randomGuy_3.getTextBox().addText("That's why I'm standing guard here. No criminal is going to break into my house!");
+		
+		//Random guy 4
+		randomGuy_4.getTextBox().addText("Oh, you're going out of town?");
+		randomGuy_4.getTextBox().addText("Well you should be careful, with that thief on the loose you never know what might happen to you.");
+		randomGuy_4.getTextBox().addText("You know what, I admire your bravery. I'm way too scared to leave town knowing that I might run into the criminal!");
+		randomGuy_4.getTextBox().addText("Here, take this. It may not be much, but I just feel like you should be rewarded for having the courage to find the thief.");
+		randomGuy_4.getTextBox().addText("Good luck, and I hope you can get to the bottom of this case!");
+		if(randomGuy_4.getItemToGive() != null)
+			randomGuy_4.getTextBox().addText("You were given a(n) " + randomGuy_4.getItemToGive().getName() + "!");
+				
+		//Random guy 5
+		randomGuy_5.getTextBox().addText("Everybody in town is worried about being robbed after what happened to that scientist last night.");
+		randomGuy_5.getTextBox().addText("I'm not worried though, I set up a bunch of alarms in my house that will detect any kind of movement!");
+		randomGuy_5.getTextBox().addText("Unfortunately that means that I can't actually go inside my house...");
 		
 		//Scientist
 		scientist.getTextBox().addText("Ahh!");
@@ -72,6 +96,9 @@ public class NPCManager {
 		//Once you are done setting them up, add them to the list of entities.
 		worldState.getWorld().addEntity(randomGuy_1);
 		worldState.getWorld().addEntity(randomGuy_2);
+		worldState.getWorld().addEntity(randomGuy_3);
+		worldState.getWorld().addEntity(randomGuy_4);
+		worldState.getWorld().addEntity(randomGuy_5);
 		worldState.getWorld().addEntity(scientist);
 	}
 	

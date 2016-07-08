@@ -5,11 +5,11 @@ import java.awt.Graphics2D;
 import ENTITIES.Entity;
 import ENTITIES.NPC;
 import ENTITIES.Player;
-import ENTITIES.Tree;
+import ENTITIES.SearchableEntity;
+import ITEMS.Item;
 import MANAGERS.GameStateManager;
 import MANAGERS.ItemManager;
 import MANAGERS.NPCManager;
-import MISC.Item;
 import MISC.TextBox;
 import WORLD.World;
 
@@ -72,8 +72,8 @@ public class WorldState extends GameState {
 		
 		
 		//Go through each item on the ground
-		for(Tree tree : world.getTrees()) {
-			if(tree.getTextBox().isOpen()) {
+		for(SearchableEntity se : world.getSearchables()) {
+			if(se.getTextBox().isOpen()) {
 				open = true;
 			}
 		}

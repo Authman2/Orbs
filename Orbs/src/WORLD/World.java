@@ -4,9 +4,8 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import ENTITIES.Entity;
-import ENTITIES.Tree;
-import MISC.Item;
-import MISC.Orb;
+import ENTITIES.SearchableEntity;
+import ITEMS.Item;
 import STATES.WorldState;
 import visualje.Vector2D;
 
@@ -37,21 +36,22 @@ public class World {
 	ArrayList<Item> droppedItems;
 	
 	//All of the trees in the game world that may or may not contain items
-	ArrayList<Tree> trees;
+	ArrayList<SearchableEntity> searchables;
 	
 	
 	public World(int w, int h, WorldState ws) {
-		position = new Vector2D();
+		position = new Vector2D(0,0);
 		width = w;
 		height = h;
 		tiles = new Tile[width][height];
 		map = new GameMap();
 		entities = new ArrayList<Entity>();
 		droppedItems = new ArrayList<Item>();
-		trees = new ArrayList<Tree>();
+		searchables = new ArrayList<SearchableEntity>();
 		worldState = ws;
 		initialize();
 	}
+	
 	
 	
 	////////////// SETTERS ///////////////
@@ -61,19 +61,10 @@ public class World {
 	
 	
 	/** Adds items to a bunch of the trees in the game world based on their location. */
-	public void addTreeItems(Tree tree) {
-		if(tree.position.X == 7 && tree.position.Y == 5) {
-			tree.setContainedItem(new Orb());
-		}
+	public void addSearchableItems(SearchableEntity se) {
 		
-		if(tree.position.X == 8 && tree.position.Y == 18) {
-			tree.setContainedItem(new Orb());
-		}
-		
-		if(tree.position.X == 13 && tree.position.Y == 10) {
-			tree.setContainedItem(new Orb());
-		}
 	}
+	
 	
 	
 	////////////// GETTERS ///////////////
@@ -94,8 +85,8 @@ public class World {
 	public ArrayList<Item> getDroppedItems() { return droppedItems; }
 	
 	
-	/** Returns a list of all of the trees in the game world that may or may not have items in them. */
-	public ArrayList<Tree> getTrees() { return trees; }
+	/** Returns a list of all of the searchable items in the game world that may or may not have items in them. */
+	public ArrayList<SearchableEntity> getSearchables() { return searchables; }
 	
 	
 	/** Finds out if the next tile above the one the player is currently on is solid or not. */
@@ -252,7 +243,9 @@ public class World {
 				}
 				if(map.currentMap[y][x] == 3) {
 					tiles[x][y] = new Tile(TileType.Tree_1, true);
-					trees.add(new Tree(new Vector2D(x, y)));
+					SearchableEntity se = new SearchableEntity(new Vector2D(x, y));
+					se.setName("tree");
+					searchables.add(se);
 				}
 				if(map.currentMap[y][x] == 4) {
 					tiles[x][y] = new Tile(TileType.Tree_2, true);
@@ -279,6 +272,18 @@ public class World {
 					tiles[x][y] = new Tile(TileType.House_Door, false);
 					//Add door object so that the player can go to a different location.
 				}
+				if(map.currentMap[y][x] == 18) {
+					tiles[x][y] = new Tile(TileType.Tree_3, true);
+					SearchableEntity se = new SearchableEntity(new Vector2D(x, y));
+					se.setName("dead tree");
+					searchables.add(se);
+				}
+				if(map.currentMap[y][x] == 19) {
+					tiles[x][y] = new Tile(TileType.Rock, true);
+					SearchableEntity se = new SearchableEntity(new Vector2D(x, y));
+					se.setName("rock");
+					searchables.add(se);
+				}
 			}	
 		}
 		
@@ -298,10 +303,10 @@ public class World {
 			itm.initialize();
 		
 		//Initialize each item
-		for(Tree tree : trees) {
-			addTreeItems(tree);
-			tree.initialize();
-			System.out.println(tree.position.toString());
+		for(SearchableEntity se : searchables) {
+			addSearchableItems(se);
+			se.initialize();
+			System.out.println(se.position.toString());
 		}
 	}
 	
@@ -327,7 +332,7 @@ public class World {
 				itm.update(time);
 			
 			//Initialize each item
-			for(Tree tree : trees) {
+			for(SearchableEntity tree : searchables) {
 				tree.update(time);
 			}
 		}
@@ -354,7 +359,7 @@ public class World {
 				e.draw(g);
 			
 			//Initialize each item
-			for(Tree tree : trees) {
+			for(SearchableEntity tree : searchables) {
 				if(tree.getTextBox().isOpen()) {
 					tree.draw(g);
 				}

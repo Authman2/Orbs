@@ -1,8 +1,9 @@
-package MISC;
+package ITEMS;
 
 import java.awt.image.BufferedImage;
 
 import ENTITIES.Entity;
+import MISC.TextBox;
 import visualje.Vector2D;
 
 public abstract class Item extends Entity {
