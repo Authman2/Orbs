@@ -2,6 +2,7 @@ package STATES;
 
 import java.awt.Graphics2D;
 
+import ENTITIES.ActionEntity;
 import ENTITIES.Entity;
 import ENTITIES.NPC;
 import ENTITIES.Player;
@@ -70,13 +71,20 @@ public class WorldState extends GameState {
 			}
 		}
 		
-		
-		//Go through each item on the ground
+		//Go through each searchable entity
 		for(SearchableEntity se : world.getSearchables()) {
 			if(se.getTextBox().isOpen()) {
 				open = true;
 			}
 		}
+		
+		//Go through each action entity
+		for(ActionEntity ae : world.getActionEntities()) {
+			if(ae.getTextBox().isOpen()) {
+				open = true;
+			}
+		}
+
 		
 		if(inventoryTextBox.isOpen()) {
 			open = true;

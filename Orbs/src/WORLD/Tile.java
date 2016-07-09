@@ -71,12 +71,6 @@ public class Tile {
 		if(type == TileType.House_Door) {
 			g.drawImage(Assets.house_door, t, null);
 		}
-		if(type == TileType.Tree_3) {
-			g.drawImage(Assets.tree_3, t, null);
-		}
-		if(type == TileType.Rock) {
-			g.drawImage(Assets.rock, t, null);
-		}
 	}
 	
 	

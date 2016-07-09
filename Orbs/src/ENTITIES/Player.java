@@ -4,9 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import ITEMS.Hatchet;
 import ITEMS.Item;
-import ITEMS.Pickaxe;
 import MAIN.Animator;
 import MAIN.Assets;
 import STATES.WorldState;
@@ -112,9 +110,6 @@ public class Player extends Entity {
 		walk_left = new Animator(walkLeft);
 		walk_left.setSpeed(180);
 		walk_left.play();
-		
-		 addItemToInventory(new Hatchet());
-		 addItemToInventory(new Pickaxe());
 	}
 
 	@Override

@@ -3,9 +3,11 @@ package WORLD;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+import ENTITIES.ActionEntity;
 import ENTITIES.Entity;
 import ENTITIES.SearchableEntity;
 import ITEMS.Item;
+import MAIN.Assets;
 import STATES.WorldState;
 import visualje.Vector2D;
 
@@ -38,6 +40,12 @@ public class World {
 	//All of the trees in the game world that may or may not contain items
 	ArrayList<SearchableEntity> searchables;
 	
+	//All of the entities that require the player to choose an action before continuing
+	ArrayList<ActionEntity> actionEnts;
+	
+	
+	
+	/////////// Constructor ////////////
 	
 	public World(int w, int h, WorldState ws) {
 		position = new Vector2D(0,0);
@@ -48,6 +56,7 @@ public class World {
 		entities = new ArrayList<Entity>();
 		droppedItems = new ArrayList<Item>();
 		searchables = new ArrayList<SearchableEntity>();
+		actionEnts = new ArrayList<ActionEntity>();
 		worldState = ws;
 		initialize();
 	}
@@ -65,6 +74,140 @@ public class World {
 		
 	}
 	
+	
+	/** Adds barrier action entities (trees and rocks) to the game world. The position that they are added to are 
+	 * the coordinates "x" and "y". */
+	public void addActionEntities() {
+		for(int x = 0; x < width; x++) {
+			for(int y = 0; y < height; y++) {
+				
+				//Add an action entity at a particular coordinate point
+				
+				/* TREES */
+				if(x == 21 && y == 80) {
+					ActionEntity ae = new ActionEntity(new Vector2D(x,y));
+					ae.setSprite(Assets.tree_3);
+					ae.setName("tree_3");
+					ae.setActionQuestion("This tree could be cut down using a hatchet. Would you like to cut    down the tree?");
+					actionEnts.add(ae);
+				}
+				
+				if(x == 22 && y == 80) {
+					ActionEntity ae = new ActionEntity(new Vector2D(x,y));
+					ae.setSprite(Assets.tree_3);
+					ae.setName("tree_3");
+					ae.setActionQuestion("This tree could be cut down using a hatchet. Would you like to cut    down the tree?");
+					actionEnts.add(ae);
+				}
+				
+				if(x == 51 && y == 54) {
+					ActionEntity ae = new ActionEntity(new Vector2D(x,y));
+					ae.setSprite(Assets.tree_3);
+					ae.setName("tree_3");
+					ae.setActionQuestion("This tree could be cut down using a hatchet. Would you like to cut    down the tree?");
+					actionEnts.add(ae);
+				}
+				
+				if(x == 52 && y == 53) {
+					ActionEntity ae = new ActionEntity(new Vector2D(x,y));
+					ae.setSprite(Assets.tree_3);
+					ae.setName("tree_3");
+					ae.setActionQuestion("This tree could be cut down using a hatchet. Would you like to cut    down the tree?");
+					actionEnts.add(ae);
+				}
+				
+				if(x == 51 && y == 53) {
+					ActionEntity ae = new ActionEntity(new Vector2D(x,y));
+					ae.setSprite(Assets.tree_3);
+					ae.setName("tree_3");
+					ae.setActionQuestion("This tree could be cut down using a hatchet. Would you like to cut    down the tree?");
+					actionEnts.add(ae);
+				}
+				
+				if(x == 52 && y == 52) {
+					ActionEntity ae = new ActionEntity(new Vector2D(x,y));
+					ae.setSprite(Assets.tree_3);
+					ae.setName("tree_3");
+					ae.setActionQuestion("This tree could be cut down using a hatchet. Would you like to cut    down the tree?");
+					actionEnts.add(ae);
+				}
+				
+				if(x == 53 && y == 52) {
+					ActionEntity ae = new ActionEntity(new Vector2D(x,y));
+					ae.setSprite(Assets.tree_3);
+					ae.setName("tree_3");
+					ae.setActionQuestion("This tree could be cut down using a hatchet. Would you like to cut    down the tree?");
+					actionEnts.add(ae);
+				}
+				
+				
+				/* ROCKS */
+				if(x == 74 && y == 30) {
+					ActionEntity ae = new ActionEntity(new Vector2D(x,y));
+					ae.setSprite(Assets.rock);
+					ae.setName("rock");
+					ae.setActionQuestion("This rock can be broken using a pickaxe. Would you like to break the  rock?");
+					actionEnts.add(ae);
+				}
+				
+				if(x == 73 && y == 30) {
+					ActionEntity ae = new ActionEntity(new Vector2D(x,y));
+					ae.setSprite(Assets.rock);
+					ae.setName("rock");
+					ae.setActionQuestion("This rock can be broken using a pickaxe. Would you like to break the  rock?");
+					actionEnts.add(ae);
+				}
+				
+				if(x == 73 && y == 31) {
+					ActionEntity ae = new ActionEntity(new Vector2D(x,y));
+					ae.setSprite(Assets.rock);
+					ae.setName("rock");
+					ae.setActionQuestion("This rock can be broken using a pickaxe. Would you like to break the  rock?");
+					actionEnts.add(ae);
+				}
+				
+				if(x == 73 && y == 32) {
+					ActionEntity ae = new ActionEntity(new Vector2D(x,y));
+					ae.setSprite(Assets.rock);
+					ae.setName("rock");
+					ae.setActionQuestion("This rock can be broken using a pickaxe. Would you like to break the  rock?");
+					actionEnts.add(ae);
+				}
+				
+				if(x == 73 && y == 32) {
+					ActionEntity ae = new ActionEntity(new Vector2D(x,y));
+					ae.setSprite(Assets.rock);
+					ae.setName("rock");
+					ae.setActionQuestion("This rock can be broken using a pickaxe. Would you like to break the  rock?");
+					actionEnts.add(ae);
+				}
+				
+				if(x == 73 && y == 33) {
+					ActionEntity ae = new ActionEntity(new Vector2D(x,y));
+					ae.setSprite(Assets.rock);
+					ae.setName("rock");
+					ae.setActionQuestion("This rock can be broken using a pickaxe. Would you like to break the  rock?");
+					actionEnts.add(ae);
+				}
+				
+				if(x == 73 && y == 34) {
+					ActionEntity ae = new ActionEntity(new Vector2D(x,y));
+					ae.setSprite(Assets.rock);
+					ae.setName("rock");
+					ae.setActionQuestion("This rock can be broken using a pickaxe. Would you like to break the  rock?");
+					actionEnts.add(ae);
+				}
+				
+				if(x == 74 && y == 34) {
+					ActionEntity ae = new ActionEntity(new Vector2D(x,y));
+					ae.setSprite(Assets.rock);
+					ae.setName("rock");
+					ae.setActionQuestion("This rock can be broken using a pickaxe. Would you like to break the  rock?");
+					actionEnts.add(ae);
+				}
+			}
+		}
+	}
 	
 	
 	////////////// GETTERS ///////////////
@@ -87,6 +230,10 @@ public class World {
 	
 	/** Returns a list of all of the searchable items in the game world that may or may not have items in them. */
 	public ArrayList<SearchableEntity> getSearchables() { return searchables; }
+	
+	
+	/** Returns a list of all of the action entities in the game world. */
+	public ArrayList<ActionEntity> getActionEntities() { return actionEnts; }
 	
 	
 	/** Finds out if the next tile above the one the player is currently on is solid or not. */
@@ -116,6 +263,12 @@ public class World {
 		
 		for(Item itm : droppedItems) {
 			if(itm.position.X == worldState.getPlayer().position.X && itm.position.Y == worldState.getPlayer().position.Y - 1) {
+				canMoveUp = false;
+			}
+		}
+		
+		for(ActionEntity ae : actionEnts) {
+			if(ae.position.X == worldState.getPlayer().position.X && ae.position.Y == worldState.getPlayer().position.Y - 1) {
 				canMoveUp = false;
 			}
 		}
@@ -155,6 +308,12 @@ public class World {
 			}
 		}
 		
+		for(ActionEntity ae : actionEnts) {
+			if(ae.position.X == worldState.getPlayer().position.X && ae.position.Y == worldState.getPlayer().position.Y + 1) {
+				canMoveDown = false;
+			}
+		}
+		
 		return canMoveDown;
 	}
 	
@@ -186,6 +345,12 @@ public class World {
 		
 		for(Item itm : droppedItems) {
 			if(itm.position.X == worldState.getPlayer().position.X + 1 && itm.position.Y == worldState.getPlayer().position.Y) {
+				canMoveRight = false;
+			}
+		}
+
+		for(ActionEntity ae : actionEnts) {
+			if(ae.position.X == worldState.getPlayer().position.X + 1 && ae.position.Y == worldState.getPlayer().position.Y) {
 				canMoveRight = false;
 			}
 		}
@@ -225,6 +390,12 @@ public class World {
 			}
 		}
 		
+		for(ActionEntity ae : actionEnts) {
+			if(ae.position.X == worldState.getPlayer().position.X - 1 && ae.position.Y == worldState.getPlayer().position.Y) {
+				canMoveLeft = false;
+			}
+		}
+		
 		return canMoveLeft;
 	}
 		
@@ -233,6 +404,9 @@ public class World {
 	////////////// Abstract Methods ///////////////
 	
 	public void initialize() {
+		//Add the action entities to the game
+		addActionEntities();
+		
 		
 		//Set the tiles based on the numbers in the game map
 		for(int x = 0; x < width; x++) {
@@ -272,18 +446,6 @@ public class World {
 					tiles[x][y] = new Tile(TileType.House_Door, false);
 					//Add door object so that the player can go to a different location.
 				}
-				if(map.currentMap[y][x] == 18) {
-					tiles[x][y] = new Tile(TileType.Tree_3, true);
-					SearchableEntity se = new SearchableEntity(new Vector2D(x, y));
-					se.setName("dead tree");
-					searchables.add(se);
-				}
-				if(map.currentMap[y][x] == 19) {
-					tiles[x][y] = new Tile(TileType.Rock, true);
-					SearchableEntity se = new SearchableEntity(new Vector2D(x, y));
-					se.setName("rock");
-					searchables.add(se);
-				}
 			}	
 		}
 		
@@ -294,6 +456,7 @@ public class World {
 			}	
 		}
 		
+		
 		//Initialize each entity
 		for(Entity e : entities) 
 			e.initialize();
@@ -302,11 +465,16 @@ public class World {
 		for(Item itm : droppedItems) 
 			itm.initialize();
 		
-		//Initialize each item
+		//Initialize each searchable entity
 		for(SearchableEntity se : searchables) {
 			addSearchableItems(se);
 			se.initialize();
 			System.out.println(se.position.toString());
+		}
+		
+		//Initialize each action entity
+		for(ActionEntity ae : actionEnts) {
+			ae.initialize();
 		}
 	}
 	
@@ -334,6 +502,11 @@ public class World {
 			//Initialize each item
 			for(SearchableEntity tree : searchables) {
 				tree.update(time);
+			}
+			
+			//Initialize each action entity
+			for(ActionEntity ae : actionEnts) {
+				ae.update(time);
 			}
 		}
 		
@@ -363,6 +536,11 @@ public class World {
 				if(tree.getTextBox().isOpen()) {
 					tree.draw(g);
 				}
+			}
+			
+			//Initialize each action entity
+			for(ActionEntity ae : actionEnts) {
+				ae.draw(g);
 			}
 		}
 		

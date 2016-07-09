@@ -11,8 +11,6 @@ public enum TileType {
 	House_BottomLeft,
 	House_BottomMiddle,
 	House_BottomRight,
-	House_Door,
-	Tree_3,
-	Rock;
+	House_Door;
 	
 }
