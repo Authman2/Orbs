@@ -308,53 +308,77 @@ public class InputManager implements KeyListener {
 				//There are no text boxes open already
 				if(!worldState.textBoxesOpen()) {
 					
+					//Open a text and action box
 					ae.getTextBox().toggle();
 					ae.getActionBox().toggle();
 					
 				} else {
 					
-					//The "Yes" option
-					if(ae.getActionBox().getCurrentOption() == 0) {
+					//The player is not currently being told that he/she does not have the appropraite item
+					if(ae.getTextBox().getTextSlides().size() <= 1) {
 						
-						//If the player has the required item...
-						if(worldState.getPlayer().inventoryContains("Hatchet") && ae.getName().equals("tree_3")) {
-							worldState.getWorld().getActionEntities().remove(ae);
-						} else {
-							//If not, add an extra slide to the text box
-							if(ae.getTextBox().getTextSlides().size() <= 1) {
-								ae.getActionBox().setOpen(false);
-								ae.getTextBox().addText("You do not have the proper item to perform this task.");
-								ae.getTextBox().nextSlide();
+						//The tree
+						if(ae.getName().equals("tree_3")) {
+							
+							//The "Yes" option
+							if(ae.getActionBox().getCurrentOption() == 0) {
+								
+								//If the player has the item, then get rid of the A.E.
+								if(worldState.getPlayer().inventoryContains("Hatchet")) {
+									worldState.getWorld().getActionEntities().remove(ae);
+									break;
+								} else {
+									ae.getActionBox().setOpen(false);
+									ae.getTextBox().addText("You do not have the right item to perform this task.");
+									ae.getTextBox().nextSlide();
+								}
+								
+							//The "No" option	
 							} else {
+								
 								ae.getActionBox().setOpen(false);
-								ae.getTextBox().toggle();
+								ae.getActionBox().setCurrentOption(0);
+								ae.getTextBox().setOpen(false);
+								
 							}
-							break;
 						}
 						
-						if(worldState.getPlayer().inventoryContains("Pickaxe") && ae.getName().equals("rock")) {
-							worldState.getWorld().getActionEntities().remove(ae);
-						} else {
-							//If not, add an extra slide to the text box
-							if(ae.getTextBox().getTextSlides().size() <= 1) {
-								ae.getActionBox().setOpen(false);
-								ae.getTextBox().addText("You do not have the proper item to perform this task.");
-								ae.getTextBox().nextSlide();
+						//The rock
+						if(ae.getName().equals("rock")) {
+							
+							//The "Yes" option
+							if(ae.getActionBox().getCurrentOption() == 0) {
+							
+								//If the player has the item, then get rid of the A.E.
+								if(worldState.getPlayer().inventoryContains("Pickaxe")) {
+									worldState.getWorld().getActionEntities().remove(ae);
+									break;
+								} else {
+									ae.getActionBox().setOpen(false);
+									ae.getTextBox().addText("You do not have the right item to perform this task.");
+									ae.getTextBox().nextSlide();
+								}
+								
+							//The "No" option	
 							} else {
+								
 								ae.getActionBox().setOpen(false);
-								ae.getTextBox().toggle();
+								ae.getActionBox().setCurrentOption(0);
+								ae.getTextBox().setOpen(false);
+								
 							}
-							break;
+							
 						}
+						
+					//The player IS currently being told that he/she does not have the appropriate item.
+					} else {
+						
+						ae.getTextBox().setOpen(false);
+						ae.getTextBox().setCurrentSlide(0);
+						ae.getTextBox().removeLast();
+						
 					}
 					
-					//The "No" option
-					if(ae.getActionBox().getCurrentOption() == 1) {
-						ae.getActionBox().toggle();
-						ae.getTextBox().toggle();
-					}
-					
-					break;
 				}
 				
 			}

@@ -55,6 +55,20 @@ public class TextBox {
 		text.removeAll(text);
 		currentSlide = 0;
 	}
+	
+	
+	/** Set the current slide of the text box. */
+	public void setCurrentSlide(int i) { currentSlide = i; }
+	
+	
+	/** Removes the last slide from the text box. */
+	public void removeLast() { text.remove(text.size() - 1); }
+	
+	
+	/** Sets whether or not the text box is open. */
+	public void setOpen(boolean b) { open = b; }
+	
+	
 
 	/////////// Getters /////////////
 	
@@ -64,6 +78,7 @@ public class TextBox {
 	
 	/** Returns a list of all of the text slides that the text box is set to display. */
 	public ArrayList<String> getTextSlides() { return text; }
+	
 	
 	
 	/////////// Abstract Methods /////////////

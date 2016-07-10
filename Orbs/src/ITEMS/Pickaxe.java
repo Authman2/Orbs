@@ -30,7 +30,7 @@ public class Pickaxe extends Item {
 	@Override
 	public void initialize() {
 		setName("Pickaxe");
-		setAcquiredMessage("You received a(n) " + getName() + "!");
+		setAcquiredMessage("You received a " + getName() + "!");
 		if(acquiredTextBox.isOpen()) acquiredTextBox.initialize();
 	}
 

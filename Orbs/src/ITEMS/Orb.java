@@ -37,7 +37,7 @@ public class Orb extends Item {
 	@Override
 	public void initialize() {
 		setName("Orb");
-		setAcquiredMessage("You received a(n) " + getName() + "!");
+		setAcquiredMessage("You received an " + getName() + "!");
 		if(acquiredTextBox.isOpen()) acquiredTextBox.initialize();
 	}
 

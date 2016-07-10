@@ -33,6 +33,7 @@ public class ActionBox {
 	public int getCurrentOption() { return currentOption; }
 	
 	
+	
 	/////////// Setters ////////////
 	
 	/** Toggles the action box. */
