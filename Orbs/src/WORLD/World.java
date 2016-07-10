@@ -449,6 +449,18 @@ public class World {
 					tiles[x][y] = new Tile(TileType.House_Door, false);
 					//Add door object so that the player can go to a different location.
 				}
+				if(map.currentMap[y][x] == 33) {
+					tiles[x][y] = new Tile(TileType.Wood_Floor, false);
+				}
+				if(map.currentMap[y][x] == 34) {
+					tiles[x][y] = new Tile(TileType.Rug_Left, false);
+				}
+				if(map.currentMap[y][x] == 35) {
+					tiles[x][y] = new Tile(TileType.Rug_Right, false);
+				}
+				if(map.currentMap[y][x] == 48) {
+					tiles[x][y] = new Tile(TileType.BLACK_SPACE, false);
+				}
 			}	
 		}
 		

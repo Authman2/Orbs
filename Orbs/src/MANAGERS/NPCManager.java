@@ -15,6 +15,7 @@ public class NPCManager {
 	Person randomGuy_1, randomGuy_2, randomGuy_3, randomGuy_4, randomGuy_5;
 	Person scientist;
 	Person chemicalController_1, chemicalController_2, chemicalController_3;
+	Person barrierToLastPart;
 	
 	
 	////////////// Constructor ///////////////	
@@ -33,6 +34,7 @@ public class NPCManager {
 		chemicalController_1 = new Person(new Vector2D(62,55));
 		chemicalController_2 = new Person(new Vector2D(62,56));
 		chemicalController_3 = new Person(new Vector2D(62,57));
+		barrierToLastPart = new Person(new Vector2D(46,29));
 		
 		
 		initialize();
@@ -52,6 +54,7 @@ public class NPCManager {
 		chemicalController_1.getTextBox().clear();
 		chemicalController_2.getTextBox().clear();
 		chemicalController_3.getTextBox().clear();
+		barrierToLastPart.getTextBox().clear();
 	}
 	
 	
@@ -164,7 +167,8 @@ public class NPCManager {
 		}
 		
 		
-		
+		//The person who blocks the way to the last part of the game
+		barrierToLastPart.getTextBox().addText("...");
 		
 		
 		
