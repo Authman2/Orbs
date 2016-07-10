@@ -14,6 +14,7 @@ public class NPCManager {
 	//The NPCs
 	Person randomGuy_1, randomGuy_2, randomGuy_3, randomGuy_4, randomGuy_5;
 	Person scientist;
+	Person chemicalController_1, chemicalController_2, chemicalController_3;
 	
 	
 	////////////// Constructor ///////////////	
@@ -25,9 +26,13 @@ public class NPCManager {
 		randomGuy_2 = new Person(new Vector2D(18,12));
 		randomGuy_3 = new Person(new Vector2D(12,17));
 		randomGuy_4 = new Person(new Vector2D(15,25));
+			randomGuy_4.willGiveItem(true);
 			randomGuy_4.setItemToGive(new Orb());
 		randomGuy_5 = new Person(new Vector2D(25,26));
 		scientist = new Person(new Vector2D(24, 11));
+		chemicalController_1 = new Person(new Vector2D(62,55));
+		chemicalController_2 = new Person(new Vector2D(62,56));
+		chemicalController_3 = new Person(new Vector2D(62,57));
 		
 		
 		initialize();
@@ -44,6 +49,9 @@ public class NPCManager {
 		randomGuy_4.getTextBox().clear();
 		randomGuy_5.getTextBox().clear();
 		scientist.getTextBox().clear();
+		chemicalController_1.getTextBox().clear();
+		chemicalController_2.getTextBox().clear();
+		chemicalController_3.getTextBox().clear();
 	}
 	
 	
@@ -117,14 +125,50 @@ public class NPCManager {
 			scientist.getTextBox().addText("Now go! Please bring back my most powerful inventions!");
 			scientist.getTextBox().addText("I will be waiting here when you return!");
 		} else {
-			worldState.getNPCManager().scientist.getTextBox().clear();
-			worldState.getNPCManager().scientist.getTextBox().addText("Oh, hello! So you've found some of my orbs?");
-			worldState.getNPCManager().scientist.getTextBox().addText("That's wonderful!");
-			worldState.getNPCManager().scientist.getTextBox().addText("Let's see how many you've found...");
-			worldState.getNPCManager().scientist.getTextBox().addText("Hmm... Well it looks like you have found " + worldState.getPlayer().getOrbCount() + " out of 20 orbs.");
-			worldState.getNPCManager().scientist.getTextBox().addText("That's good! But there are still more to find.");
-			worldState.getNPCManager().scientist.getTextBox().addText("Please keep on looking and return to me when you have more orbs! Good luck!");
+			scientist.getTextBox().clear();
+			scientist.getTextBox().addText("Oh, hello! So you've found some of my orbs?");
+			scientist.getTextBox().addText("That's wonderful!");
+			scientist.getTextBox().addText("Let's see how many you've found...");
+			scientist.getTextBox().addText("Hmm... Well it looks like you have found " + worldState.getPlayer().getOrbCount() + " out of 20 orbs.");
+			scientist.getTextBox().addText("That's good! But there are still more to find.");
+			scientist.getTextBox().addText("Please keep on looking and return to me when you have more orbs! Good luck!");
 		}
+		
+		
+		//Chemical Controllers
+		if(worldState.getPlayer().inventoryContains("Hazmat Suit")) {
+			chemicalController_2.position.add(new Vector2D(-1,-1));		//Change the position of the NPCs
+			chemicalController_3.position.add(new Vector2D(1,-2));
+			
+			chemicalController_1.getTextBox().addText("You look very well prepared for this job! Please help save the town!");
+			chemicalController_2.getTextBox().addText("You look very well prepared for this job! Please help save the town!");
+			chemicalController_3.getTextBox().addText("You look very well prepared for this job! Please help save the town!");
+		} else {
+			chemicalController_1.getTextBox().addText("Stop right there!");
+			chemicalController_1.getTextBox().addText("I cannot allow you to enter this town without proper equipment.");
+			chemicalController_1.getTextBox().addText("You see, there is some sort of strange object that is emitting what we think is radioactive material in the middle of town.");
+			chemicalController_1.getTextBox().addText("While we await more professional help, residents are being advised to stay inside of their homes and close all windows and doors.");
+			chemicalController_1.getTextBox().addText("I cannot let you through without a hazmat suit. I apologize for any inconvenience this may cause.");
+			
+			chemicalController_2.getTextBox().addText("Stop right there!");
+			chemicalController_2.getTextBox().addText("I cannot allow you to enter this town without proper equipment.");
+			chemicalController_2.getTextBox().addText("You see, there is some sort of strange object that is emitting what we think is radioactive material in the middle of town.");
+			chemicalController_2.getTextBox().addText("While we await more professional help, residents are being advised to stay inside of their homes and close all windows and doors.");
+			chemicalController_2.getTextBox().addText("I cannot let you through without a hazmat suit. I apologize for any inconvenience this may cause.");
+		
+			chemicalController_3.getTextBox().addText("Stop right there!");
+			chemicalController_3.getTextBox().addText("I cannot allow you to enter this town without proper equipment.");
+			chemicalController_3.getTextBox().addText("You see, there is some sort of strange object that is emitting what we think is radioactive material in the middle of town.");
+			chemicalController_3.getTextBox().addText("While we await more professional help, residents are being advised to stay inside of their homes and close all windows and doors.");
+			chemicalController_3.getTextBox().addText("I cannot let you through without a hazmat suit. I apologize for any inconvenience this may cause.");
+		}
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		//Once you are done setting them up, add them to the list of entities.
@@ -134,6 +178,9 @@ public class NPCManager {
 		worldState.getWorld().addEntity(randomGuy_4);
 		worldState.getWorld().addEntity(randomGuy_5);
 		worldState.getWorld().addEntity(scientist);
+		worldState.getWorld().addEntity(chemicalController_1);
+		worldState.getWorld().addEntity(chemicalController_2);
+		worldState.getWorld().addEntity(chemicalController_3);
 	}
 	
 	
