@@ -66,7 +66,10 @@ public class World {
 	////////////// SETTERS ///////////////
 	
 	/** Adds an entity to the list in the World class, and subsequently to the game world itself. */
-	public void addEntity(Entity ent) { entities.add(ent); }
+	public void addEntity(Entity ent) { 
+		if(!entities.contains(ent))
+			entities.add(ent);
+	}
 	
 	
 	/** Adds items to a bunch of the trees in the game world based on their location. */

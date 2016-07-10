@@ -227,11 +227,21 @@ public class InputManager implements KeyListener {
 					
 					((NPC) ent).getTextBox().nextSlide();
 					
-					//If  it is a person and they have an item, give it to the player.
+					//If it is a person and they have an item, give it to the player.
 					if(((Person)ent).getItemToGive() != null) {
-						worldState.getPlayer().addItemToInventory(((Person)ent).getItemToGive());
-						worldState.updatePlayersItems();
-						((Person)ent).removeItemToGive();
+						
+						//Only add the item if you are on the last text slide.s
+						if(((Person)ent).getTextBox().onLast()) {
+							worldState.getPlayer().addItemToInventory(((Person)ent).getItemToGive());
+							worldState.updatePlayersItems();
+							((Person)ent).removeItemToGive();
+						}
+						
+					} else {
+						
+						//Re-assign the text boxes of each NPC
+						worldState.getNPCManager().clearTextBoxes();
+						worldState.getNPCManager().initialize();
 					}
 					
 				} else {
@@ -329,7 +339,7 @@ public class InputManager implements KeyListener {
 									break;
 								} else {
 									ae.getActionBox().setOpen(false);
-									ae.getTextBox().addText("You do not have the right item to perform this task.");
+									ae.getTextBox().addText("You do not have the proper item to perform this task.");
 									ae.getTextBox().nextSlide();
 								}
 								
@@ -355,7 +365,7 @@ public class InputManager implements KeyListener {
 									break;
 								} else {
 									ae.getActionBox().setOpen(false);
-									ae.getTextBox().addText("You do not have the right item to perform this task.");
+									ae.getTextBox().addText("You do not have the proper item to perform this task.");
 									ae.getTextBox().nextSlide();
 								}
 								

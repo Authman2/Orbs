@@ -9,7 +9,7 @@ import MANAGERS.GameStateManager;
 
 public class MenuState extends GameState  {
 	
-	public int selectedOption = 1;
+	public int selectedOption = 0;
 	String[] options = {"Play","Quit"};
 	
 	public MenuState(GameStateManager gsm) {

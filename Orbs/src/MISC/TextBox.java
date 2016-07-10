@@ -80,6 +80,13 @@ public class TextBox {
 	public ArrayList<String> getTextSlides() { return text; }
 	
 	
+	/** Checks if the text box is currently on its last text slide. */
+	public boolean onLast() {
+		if(currentSlide == text.size() - 1) return true;
+		return false;
+	}
+	
+	
 	
 	/////////// Abstract Methods /////////////
 

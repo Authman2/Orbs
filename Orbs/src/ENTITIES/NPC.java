@@ -31,12 +31,10 @@ public class NPC extends Entity {
 	
 	
 	
-	
 	/////////// Getters ///////////
 	
 	/** Returns the text box for this NPC. */
 	public TextBox getTextBox() { return textBox; }
-	
 	
 	
 	
