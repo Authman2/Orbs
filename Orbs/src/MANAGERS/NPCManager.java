@@ -22,19 +22,19 @@ public class NPCManager {
 	public NPCManager(WorldState ws) { 
 		worldState = ws;
 		
-		//Create the NPCs
-		randomGuy_1 = new Person(new Vector2D(24,19));
-		randomGuy_2 = new Person(new Vector2D(18,12));
-		randomGuy_3 = new Person(new Vector2D(12,17));
-		randomGuy_4 = new Person(new Vector2D(15,25));
+		//Create the NPCs. The positions have to be added to the world's position to arrange them properly.
+		randomGuy_1 = new Person(new Vector2D(24,19).add(worldState.getCurrentWorld().position));
+		randomGuy_2 = new Person(new Vector2D(18,12).add(worldState.getCurrentWorld().position));
+		randomGuy_3 = new Person(new Vector2D(12,17).add(worldState.getCurrentWorld().position));
+		randomGuy_4 = new Person(new Vector2D(15,25).add(worldState.getCurrentWorld().position));
 			randomGuy_4.willGiveItem(true);
 			randomGuy_4.setItemToGive(new Orb());
-		randomGuy_5 = new Person(new Vector2D(25,26));
-		scientist = new Person(new Vector2D(24, 11));
-		chemicalController_1 = new Person(new Vector2D(62,55));
-		chemicalController_2 = new Person(new Vector2D(62,56));
-		chemicalController_3 = new Person(new Vector2D(62,57));
-		barrierToLastPart = new Person(new Vector2D(46,29));
+		randomGuy_5 = new Person(new Vector2D(24,25).add(worldState.getCurrentWorld().position));
+		scientist = new Person(new Vector2D(24, 11).add(worldState.getCurrentWorld().position));
+		chemicalController_1 = new Person(new Vector2D(62,55).add(worldState.getCurrentWorld().position));
+		chemicalController_2 = new Person(new Vector2D(62,56).add(worldState.getCurrentWorld().position));
+		chemicalController_3 = new Person(new Vector2D(62,57).add(worldState.getCurrentWorld().position));
+		barrierToLastPart = new Person(new Vector2D(46,29).add(worldState.getCurrentWorld().position));
 		
 		
 		initialize();
@@ -62,7 +62,6 @@ public class NPCManager {
 	////////////// Abstract Methods ///////////////
 	
 	public void initialize() {
-		
 		//Random guy 1
 		randomGuy_1.getTextBox().addText("Nice weather we're having, right?");
 		randomGuy_1.getTextBox().addText("Not like last week when it was 95 degrees!");
@@ -176,15 +175,15 @@ public class NPCManager {
 		
 		
 		//Once you are done setting them up, add them to the list of entities.
-		worldState.getWorld().addEntity(randomGuy_1);
-		worldState.getWorld().addEntity(randomGuy_2);
-		worldState.getWorld().addEntity(randomGuy_3);
-		worldState.getWorld().addEntity(randomGuy_4);
-		worldState.getWorld().addEntity(randomGuy_5);
-		worldState.getWorld().addEntity(scientist);
-		worldState.getWorld().addEntity(chemicalController_1);
-		worldState.getWorld().addEntity(chemicalController_2);
-		worldState.getWorld().addEntity(chemicalController_3);
+		worldState.getCurrentWorld().addEntity(randomGuy_1);
+		worldState.getCurrentWorld().addEntity(randomGuy_2);
+		worldState.getCurrentWorld().addEntity(randomGuy_3);
+		worldState.getCurrentWorld().addEntity(randomGuy_4);
+		worldState.getCurrentWorld().addEntity(randomGuy_5);
+		worldState.getCurrentWorld().addEntity(scientist);
+		worldState.getCurrentWorld().addEntity(chemicalController_1);
+		worldState.getCurrentWorld().addEntity(chemicalController_2);
+		worldState.getCurrentWorld().addEntity(chemicalController_3);
 	}
 	
 	
