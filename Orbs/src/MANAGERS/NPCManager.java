@@ -15,7 +15,6 @@ public class NPCManager {
 	Person randomGuy_1, randomGuy_2, randomGuy_3, randomGuy_4, randomGuy_5;
 	Person scientist;
 	Person chemicalController_1, chemicalController_2, chemicalController_3;
-	Person barrierToLastPart;
 	
 	
 	////////////// Constructor ///////////////	
@@ -29,12 +28,20 @@ public class NPCManager {
 		randomGuy_4 = new Person(new Vector2D(15,25).add(worldState.getCurrentWorld().position));
 			randomGuy_4.willGiveItem(true);
 			randomGuy_4.setItemToGive(new Orb());
+<<<<<<< HEAD
 		randomGuy_5 = new Person(new Vector2D(24,25).add(worldState.getCurrentWorld().position));
 		scientist = new Person(new Vector2D(24, 11).add(worldState.getCurrentWorld().position));
 		chemicalController_1 = new Person(new Vector2D(62,55).add(worldState.getCurrentWorld().position));
 		chemicalController_2 = new Person(new Vector2D(62,56).add(worldState.getCurrentWorld().position));
 		chemicalController_3 = new Person(new Vector2D(62,57).add(worldState.getCurrentWorld().position));
 		barrierToLastPart = new Person(new Vector2D(46,29).add(worldState.getCurrentWorld().position));
+=======
+		randomGuy_5 = new Person(new Vector2D(25,26));
+		scientist = new Person(new Vector2D(24, 11));
+		chemicalController_1 = new Person(new Vector2D(62,55));
+		chemicalController_2 = new Person(new Vector2D(62,56));
+		chemicalController_3 = new Person(new Vector2D(62,57));
+>>>>>>> parent of 46805e2... More sprites + started working on doors
 		
 		
 		initialize();
@@ -54,7 +61,6 @@ public class NPCManager {
 		chemicalController_1.getTextBox().clear();
 		chemicalController_2.getTextBox().clear();
 		chemicalController_3.getTextBox().clear();
-		barrierToLastPart.getTextBox().clear();
 	}
 	
 	
@@ -166,8 +172,7 @@ public class NPCManager {
 		}
 		
 		
-		//The person who blocks the way to the last part of the game
-		barrierToLastPart.getTextBox().addText("...");
+		
 		
 		
 		
