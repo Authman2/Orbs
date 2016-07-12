@@ -16,9 +16,6 @@ public class World {
 	//Position of the world
 	public Vector2D position;
 	
-	//The name of the world. Mostly for keeping track of different worlds.
-	String name;
-	
 	//Size of the world
 	int width, height;
 	
@@ -27,9 +24,6 @@ public class World {
 	
 	//The game map as integers
 	GameMap map;
-	
-	//Whether or not this world is currently open (visible to the player)
-	boolean open;
 	
 	//The world state that holds this world
 	WorldState worldState;
@@ -53,14 +47,12 @@ public class World {
 	
 	/////////// Constructor ////////////
 	
-	public World(String name, int w, int h, int currentMap, WorldState ws) {
+	public World(int w, int h, WorldState ws) {
 		position = new Vector2D(0,0);
-		this.name = name;
 		width = w;
 		height = h;
 		tiles = new Tile[width][height];
 		map = new GameMap();
-		map.currentMap = map.maps[currentMap];
 		entities = new ArrayList<Entity>();
 		droppedItems = new ArrayList<Item>();
 		searchables = new ArrayList<SearchableEntity>();
@@ -221,59 +213,10 @@ public class World {
 	}
 	
 	
-	/** Sets whether or not this world is open. */
-	public void setOpen(boolean b) { open = b; }
-	
-	
-	/** Sets the name of the world. */
-	public void setName(String n) { name = n; }
-	
-	
-	/** Set the position of the world and all of the world entitites. */
-	public void setPosition(Vector2D pos) {
-		position = pos;
-		
-		//Initialize each entity
-		for(Entity e : entities) {
-			e.position.add(pos);
-		}
-		
-		//Initialize each item
-		for(Item itm : droppedItems)  {
-			itm.position.add(pos);
-		}
-		
-		//Initialize each searchable entity
-		for(SearchableEntity se : searchables) {
-			se.position.add(pos);
-		}
-		
-		//Initialize each action entity
-		for(ActionEntity ae : actionEnts) {
-			ae.position.add(pos);
-		}
-		
-		
-	}
-	
-	
-	
 	////////////// GETTERS ///////////////
 	
 	/** Returns the world state that holds this world. */
 	public WorldState getWorldState() { return worldState; }
-	
-	
-	/** Returns the width of the world. */
-	public int getWidth() { return width; }
-	
-
-	/** Returns the height of the world. */
-	public int getHeight() { return height; }
-	
-	
-	/** Returns the name of this world. */
-	public String getName() { return name; }
 	
 	
 	/** Returns the tiles that are on the screen. */
@@ -460,10 +403,6 @@ public class World {
 	}
 		
 	
-	/** Whether or not this world is open. */
-	public boolean isOpen() { return open; }
-	
-	
 	
 	////////////// Abstract Methods ///////////////
 	
@@ -508,6 +447,7 @@ public class World {
 				}
 				if(map.currentMap[y][x] == 36) {
 					tiles[x][y] = new Tile(TileType.House_Door, false);
+					//Add door object so that the player can go to a different location.
 				}
 <<<<<<< HEAD
 				if(map.currentMap[y][x] == 33) {
@@ -520,7 +460,7 @@ public class World {
 					tiles[x][y] = new Tile(TileType.Rug_Right, false);
 				}
 				if(map.currentMap[y][x] == 48) {
-					tiles[x][y] = new Tile(TileType.BLACK_SPACE, true);
+					tiles[x][y] = new Tile(TileType.BLACK_SPACE, false);
 				}
 =======
 >>>>>>> parent of 46805e2... More sprites + started working on doors
@@ -547,7 +487,7 @@ public class World {
 		for(SearchableEntity se : searchables) {
 			addSearchableItems(se);
 			se.initialize();
-			//System.out.println(se.position.toString());
+			System.out.println(se.position.toString());
 		}
 		
 		//Initialize each action entity
@@ -577,12 +517,12 @@ public class World {
 			for(Item itm : droppedItems) 
 				itm.update(time);
 			
-			//Update each item
+			//Initialize each item
 			for(SearchableEntity tree : searchables) {
 				tree.update(time);
 			}
 			
-			//Update each action entity
+			//Initialize each action entity
 			for(ActionEntity ae : actionEnts) {
 				ae.update(time);
 			}
@@ -609,14 +549,14 @@ public class World {
 			for(Entity e : entities) 
 				e.draw(g);
 			
-			//Draw each item
+			//Initialize each item
 			for(SearchableEntity tree : searchables) {
 				if(tree.getTextBox().isOpen()) {
 					tree.draw(g);
 				}
 			}
 			
-			//Draw each action entity
+			//Initialize each action entity
 			for(ActionEntity ae : actionEnts) {
 				ae.draw(g);
 			}

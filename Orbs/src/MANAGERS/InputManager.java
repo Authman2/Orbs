@@ -10,7 +10,6 @@ import ENTITIES.Person;
 import ENTITIES.SearchableEntity;
 import ITEMS.Item;
 import ITEMS.Orb;
-import MISC.Door;
 import STATES.MenuState;
 import STATES.WorldState;
 
@@ -73,17 +72,70 @@ public class InputManager implements KeyListener {
 		
 		
 		//Check if there is a text box open. The player cannot move if they are already interacting with someone/something.
-		if(!worldState.textBoxesOpen()) {
-			/* MOVING THE MAP*/
-			mapMovement(e);
-		}
-		
-		
-		/* TESTING THE DOOR MECHANICS*/
-		if(e.getKeyCode() == KeyEvent.VK_R) {
-			for(Door d : worldState.getDoors()) {
-				d.transport();
+		if(!worldState.textBoxesOpen()) {			
+			
+			/* MOVING THE GAME MAP */
+			
+			if(e.getKeyCode() == KeyEvent.VK_UP) {
+				worldState.getPlayer().setDirection(2);
+				
+				if(worldState.getWorld().canMoveUp()) {
+					
+					worldState.getWorld().position.Y++;
+					for(Entity ent : worldState.getWorld().getEntities()) ent.position.Y++;
+					for(Item itm : worldState.getWorld().getDroppedItems()) itm.position.Y++;
+					for(SearchableEntity tree : worldState.getWorld().getSearchables()) tree.position.Y++;
+					for(ActionEntity ae : worldState.getWorld().getActionEntities()) ae.position.Y++;
+					worldState.getWorld().up = true;
+					
+				}
 			}
+			
+			if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+				worldState.getPlayer().setDirection(0);
+				
+				if(worldState.getWorld().canMoveDown()) {
+					
+					worldState.getWorld().position.Y--; 
+					for(Entity ent : worldState.getWorld().getEntities()) ent.position.Y--;
+					for(Item itm : worldState.getWorld().getDroppedItems()) itm.position.Y--;
+					for(SearchableEntity tree : worldState.getWorld().getSearchables()) tree.position.Y--;
+					for(ActionEntity ae : worldState.getWorld().getActionEntities()) ae.position.Y--;
+					worldState.getWorld().down = true;
+					
+				}
+			}
+			
+			if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+				worldState.getPlayer().setDirection(1);
+				
+				if(worldState.getWorld().canMoveRight()) {
+					
+					worldState.getWorld().position.X--; 
+					for(Entity ent : worldState.getWorld().getEntities()) ent.position.X--;
+					for(Item itm : worldState.getWorld().getDroppedItems()) itm.position.X--;
+					for(SearchableEntity tree : worldState.getWorld().getSearchables()) tree.position.X--;
+					for(ActionEntity ae : worldState.getWorld().getActionEntities()) ae.position.X--;
+					worldState.getWorld().right = true;
+					
+				}
+			}
+			
+			if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+				worldState.getPlayer().setDirection(3);
+				
+				if(worldState.getWorld().canMoveLeft()) {
+					
+					worldState.getWorld().position.X++; 
+					for(Entity ent : worldState.getWorld().getEntities()) ent.position.X++;
+					for(Item itm : worldState.getWorld().getDroppedItems()) itm.position.X++;
+					for(SearchableEntity tree : worldState.getWorld().getSearchables()) tree.position.X++;
+					for(ActionEntity ae : worldState.getWorld().getActionEntities()) ae.position.X++;
+					worldState.getWorld().left = true;
+				}
+				
+			}
+			
 		}
 		
 		
@@ -96,7 +148,7 @@ public class InputManager implements KeyListener {
 			PlayerInteractions(e);
 		
 		//Action box options
-		for(ActionEntity ae : worldState.getCurrentWorld().getActionEntities()) {
+		for(ActionEntity ae : worldState.getWorld().getActionEntities()) {
 			
 			if(ae.getActionBox().isOpen() && e.getKeyCode() == KeyEvent.VK_DOWN) {
 				ae.getActionBox().setCurrentOption(1);
@@ -113,152 +165,6 @@ public class InputManager implements KeyListener {
 		if(e.getKeyCode() == KeyEvent.VK_I)
 			Inventory(e);
 		
-	}
-	
-	
-	/** Handles all of the movement of the map based on arrow key clicks. */
-	public void mapMovement(KeyEvent e) {
-		/* MOVING THE GAME MAP */
-		
-		if(e.getKeyCode() == KeyEvent.VK_UP) {
-			worldState.getPlayer().setDirection(2);
-			
-			
-			
-			//Outside in the game world
-			if(!worldState.insideHouse()) {
-				
-				determineDoorUp();
-				
-				if(worldState.getCurrentWorld().canMoveUp()) {
-					
-					worldState.getCurrentWorld().position.Y++;
-					for(Entity ent : worldState.getCurrentWorld().getEntities()) ent.position.Y++;
-					for(Item itm : worldState.getCurrentWorld().getDroppedItems()) itm.position.Y++;
-					for(SearchableEntity tree : worldState.getCurrentWorld().getSearchables()) tree.position.Y++;
-					for(ActionEntity ae : worldState.getCurrentWorld().getActionEntities()) ae.position.Y++;
-					for(Door door : worldState.getDoors()) door.position.Y++;
-					for(Door door : worldState.getHouseDoors()) door.position.Y++;
-					worldState.getCurrentWorld().up = true;
-				}
-			}
-			//Inside of a house
-			if(worldState.insideHouse()) {
-				if(worldState.getHouse().canMoveUp()) {
-					
-					worldState.getHouse().position.Y++;
-					for(Entity ent : worldState.getHouse().getEntities()) ent.position.Y++;
-					for(Item itm : worldState.getHouse().getDroppedItems()) itm.position.Y++;
-					for(SearchableEntity tree : worldState.getHouse().getSearchables()) tree.position.Y++;
-					for(ActionEntity ae : worldState.getHouse().getActionEntities()) ae.position.Y++;
-					for(Door door : worldState.getDoors()) door.position.Y++;
-					for(Door door : worldState.getHouseDoors()) door.position.Y++;
-					worldState.getHouse().up = true;
-				}
-			}
-		}
-		
-		if(e.getKeyCode() == KeyEvent.VK_DOWN) {
-			worldState.getPlayer().setDirection(0);
-			
-			//Outside in the game world
-			if(!worldState.insideHouse()) {
-				if(worldState.getCurrentWorld().canMoveDown()) {
-					worldState.getCurrentWorld().position.Y--; 
-					for(Entity ent : worldState.getCurrentWorld().getEntities()) ent.position.Y--;
-					for(Item itm : worldState.getCurrentWorld().getDroppedItems()) itm.position.Y--;
-					for(SearchableEntity tree : worldState.getCurrentWorld().getSearchables()) tree.position.Y--;
-					for(ActionEntity ae : worldState.getCurrentWorld().getActionEntities()) ae.position.Y--;
-					for(Door door : worldState.getDoors()) door.position.Y--;
-					for(Door door : worldState.getHouseDoors()) door.position.Y--;
-					worldState.getCurrentWorld().down = true;
-				}
-			}
-			
-			//Inside of a house
-			if(worldState.insideHouse()) {
-				
-				determineDoorDown();
-				
-				if(worldState.getHouse().canMoveDown()) {
-					
-					worldState.getHouse().position.Y--;
-					for(Entity ent : worldState.getHouse().getEntities()) ent.position.Y--;
-					for(Item itm : worldState.getHouse().getDroppedItems()) itm.position.Y--;
-					for(SearchableEntity tree : worldState.getHouse().getSearchables()) tree.position.Y--;
-					for(ActionEntity ae : worldState.getHouse().getActionEntities()) ae.position.Y--;
-					for(Door door : worldState.getDoors()) door.position.Y--;
-					for(Door door : worldState.getHouseDoors()) door.position.Y--;
-					worldState.getHouse().down = true;
-				}
-			}
-		}
-		
-		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			worldState.getPlayer().setDirection(1);
-			
-			//Outside in the game world
-			if(!worldState.insideHouse()) {
-				if(worldState.getCurrentWorld().canMoveRight()) {
-					worldState.getCurrentWorld().position.X--; 
-					for(Entity ent : worldState.getCurrentWorld().getEntities()) ent.position.X--;
-					for(Item itm : worldState.getCurrentWorld().getDroppedItems()) itm.position.X--;
-					for(SearchableEntity tree : worldState.getCurrentWorld().getSearchables()) tree.position.X--;
-					for(ActionEntity ae : worldState.getCurrentWorld().getActionEntities()) ae.position.X--;
-					for(Door door : worldState.getDoors()) door.position.X--;
-					for(Door door : worldState.getHouseDoors()) door.position.X--;
-					worldState.getCurrentWorld().right = true;
-				}
-			}
-			//Inside of a house
-			if(worldState.insideHouse()) {
-				if(worldState.getHouse().canMoveRight()) {
-					
-					worldState.getHouse().position.X--;
-					for(Entity ent : worldState.getHouse().getEntities()) ent.position.X--;
-					for(Item itm : worldState.getHouse().getDroppedItems()) itm.position.X--;
-					for(SearchableEntity tree : worldState.getHouse().getSearchables()) tree.position.X--;
-					for(ActionEntity ae : worldState.getHouse().getActionEntities()) ae.position.X--;
-					for(Door door : worldState.getDoors()) door.position.X--;
-					for(Door door : worldState.getHouseDoors()) door.position.X--;
-					worldState.getHouse().right = true;
-				}
-			}
-		}
-		
-		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-			worldState.getPlayer().setDirection(3);
-			
-			//Outside in the game world
-			if(!worldState.insideHouse()) {
-				if(worldState.getCurrentWorld().canMoveLeft()) {						
-					worldState.getCurrentWorld().position.X++; 
-					for(Entity ent : worldState.getCurrentWorld().getEntities()) ent.position.X++;
-					for(Item itm : worldState.getCurrentWorld().getDroppedItems()) itm.position.X++;
-					for(SearchableEntity tree : worldState.getCurrentWorld().getSearchables()) tree.position.X++;
-					for(ActionEntity ae : worldState.getCurrentWorld().getActionEntities()) ae.position.X++;
-					for(Door door : worldState.getDoors()) door.position.X++;
-					for(Door door : worldState.getHouseDoors()) door.position.X++;
-					worldState.getCurrentWorld().left = true;
-				}
-			}
-			//Inside of a house
-			if(worldState.insideHouse()) {
-				if(worldState.getHouse().canMoveLeft()) {
-					
-					worldState.getHouse().position.X++;
-					for(Entity ent : worldState.getHouse().getEntities()) ent.position.X++;
-					for(Item itm : worldState.getHouse().getDroppedItems()) itm.position.X++;
-					for(SearchableEntity tree : worldState.getHouse().getSearchables()) tree.position.X++;
-					for(ActionEntity ae : worldState.getHouse().getActionEntities()) ae.position.X++;
-					for(Door door : worldState.getDoors()) door.position.X++;
-					for(Door door : worldState.getHouseDoors()) door.position.X++;
-					worldState.getHouse().left = true;
-				}
-			}
-		}
-		
-	
 	}
 	
 	
@@ -280,26 +186,6 @@ public class InputManager implements KeyListener {
 		/* ACTION ENTITIES */
 		actionEntities();
 		
-	}
-	
-	/** Determines what to do if there is a door in front of the player. */
-	public void determineDoorUp() {
-		//Transport the player
-		for(Door d : worldState.getDoors()) {
-			if(d.isActive() && d.position.Y == worldState.getPlayer().position.Y - 1) {
-				d.transport();
-			}
-		}
-	}
-	
-	/** Determines what to do if there is a door in front of the player. */
-	public void determineDoorDown() {
-		//Transport the player
-		for(Door d : worldState.getHouseDoors()) {
-			if(d.isActive() && d.position.Y == worldState.getPlayer().position.Y + 1) {
-				d.transport();
-			}
-		}
 	}
 	
 	
@@ -333,7 +219,7 @@ public class InputManager implements KeyListener {
 	/** Deals with interacting with entities. */
 	public void entities() {
 		//First check if there is already a text box open
-		for(Entity ent : worldState.getCurrentWorld().getEntities()) {
+		for(Entity ent : worldState.getWorld().getEntities()) {
 			
 			if(ent instanceof NPC && !(ent instanceof SearchableEntity)) {
 				//If a text box IS open, then just go through each slide as you normally would.
@@ -375,7 +261,7 @@ public class InputManager implements KeyListener {
 	/** Deals with interacting with searchable entities like certain tries and paintings. */
 	public void searchableEntities() {
 		//Loop through all of the searchable entities in the game world.
-		for(SearchableEntity se : worldState.getCurrentWorld().getSearchables()) {
+		for(SearchableEntity se : worldState.getWorld().getSearchables()) {
 			
 			//If an S.E is next to the player
 			if(se.isNextTo(worldState.getPlayer())) {
@@ -424,7 +310,7 @@ public class InputManager implements KeyListener {
 	/** Deals with interacting with action entities. */
 	public void actionEntities() {
 		//Loop through all of the action entities
-		for(ActionEntity ae : worldState.getCurrentWorld().getActionEntities()) {
+		for(ActionEntity ae : worldState.getWorld().getActionEntities()) {
 			
 			//The action entity is next to the player
 			if(ae.isNextTo(worldState.getPlayer())) {
@@ -449,7 +335,7 @@ public class InputManager implements KeyListener {
 								
 								//If the player has the item, then get rid of the A.E.
 								if(worldState.getPlayer().inventoryContains("Hatchet")) {
-									worldState.getCurrentWorld().getActionEntities().remove(ae);
+									worldState.getWorld().getActionEntities().remove(ae);
 									break;
 								} else {
 									ae.getActionBox().setOpen(false);
@@ -475,7 +361,7 @@ public class InputManager implements KeyListener {
 							
 								//If the player has the item, then get rid of the A.E.
 								if(worldState.getPlayer().inventoryContains("Pickaxe")) {
-									worldState.getCurrentWorld().getActionEntities().remove(ae);
+									worldState.getWorld().getActionEntities().remove(ae);
 									break;
 								} else {
 									ae.getActionBox().setOpen(false);
@@ -514,7 +400,7 @@ public class InputManager implements KeyListener {
 	/** Deals with interacting with items that are just on the ground. */
 	public void items() {
 		//Check if the player is trying to interact with an item on the ground
-		for(Item itm : worldState.getCurrentWorld().getDroppedItems()) {
+		for(Item itm : worldState.getWorld().getDroppedItems()) {
 			
 			//If an item's text box is not already open
 			if(!itm.getTextBox().isOpen()) {
@@ -537,7 +423,7 @@ public class InputManager implements KeyListener {
 			} else {
 				
 				itm.getTextBox().toggle();
-				worldState.getCurrentWorld().getDroppedItems().remove(itm);
+				worldState.getWorld().getDroppedItems().remove(itm);
 				break;
 				
 			}
@@ -553,14 +439,12 @@ public class InputManager implements KeyListener {
 	public void keyReleased(KeyEvent e) {
 		//Stop moving in all directions if the keys are not being held down.
 		
-		if(worldState.getCurrentWorld() != null) {
-			if(e.getKeyCode() == KeyEvent.VK_UP) worldState.getCurrentWorld().up = false;
-			
-			if(e.getKeyCode() == KeyEvent.VK_DOWN) worldState.getCurrentWorld().down = false;
-			
-			if(e.getKeyCode() == KeyEvent.VK_RIGHT) worldState.getCurrentWorld().right = false;
-			
-			if(e.getKeyCode() == KeyEvent.VK_LEFT) worldState.getCurrentWorld().left = false;
-		}
+		if(e.getKeyCode() == KeyEvent.VK_UP) worldState.getWorld().up = false;
+		
+		if(e.getKeyCode() == KeyEvent.VK_DOWN) worldState.getWorld().down = false;
+		
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT) worldState.getWorld().right = false;
+		
+		if(e.getKeyCode() == KeyEvent.VK_LEFT) worldState.getWorld().left = false;
 	}
 }
