@@ -4,6 +4,10 @@ import STATES.WorldState;
 import WORLD.World;
 import visualje.Vector2D;
 
+/** Doors are these sort of "trigger tiles" that perform a certain task upon stepping on them. As of right now, there is no
+ * actual class called TriggerTile or TriggerEntity; it is just a way to describe them. TriggerTiles, such as this, are
+ * invisible, as in they are not drawn on screen. However, for this door, when the player steps on it, the game will change 
+ * the current world that the player is in to the destination world. */
 public class Door {
 	
 	//The position of the door

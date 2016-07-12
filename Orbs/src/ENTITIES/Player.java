@@ -87,6 +87,17 @@ public class Player extends Entity {
 	}
 	
 
+	/** Removes an item from the player's inventory. */
+	public void removeFromInventory(String name) {
+		for(Item itm : items) {
+			if(itm.getName().equals(name)) {
+				items.remove(itm);
+				break;
+			}
+		}
+	}
+	
+	
 	//////////// Abstract Methods ///////////////
 	
 	@Override
@@ -114,7 +125,13 @@ public class Player extends Entity {
 
 	@Override
 	public void update(double time) {
-		
+		//You cannot have water and a hatchet in the inventory at the same time since you have to give it to an NPC.
+		if(inventoryContains("Hatchet")) {
+			if(inventoryContains("Water")) {
+				removeFromInventory("Water");
+				worldState.updatePlayersItems();
+			}
+		}
 	}
 
 	@Override

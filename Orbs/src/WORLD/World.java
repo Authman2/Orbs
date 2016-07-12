@@ -7,6 +7,7 @@ import ENTITIES.ActionEntity;
 import ENTITIES.Entity;
 import ENTITIES.SearchableEntity;
 import ITEMS.Item;
+import ITEMS.Orb;
 import MAIN.Assets;
 import MANAGERS.NPCManager;
 import MISC.Door;
@@ -91,7 +92,21 @@ public class World {
 	
 	/** Adds items to a bunch of the trees in the game world based on their location. */
 	public void addSearchableItems(SearchableEntity se) {
+		if(se.position.equals(75 + position.X, 32 + position.Y)) {
+			se.setContainedItem(new Orb());
+		}
 		
+		if(se.position.equals(90 + position.X, 13 + position.Y)) {
+			se.setContainedItem(new Orb());
+		}
+		
+		if(se.position.equals(11 + position.X, 73 + position.Y)) {
+			se.setContainedItem(new Orb());
+		}
+		
+		if(se.position.equals(86 + position.X, 90 + position.Y)) {
+			se.setContainedItem(new Orb());
+		}
 	}
 	
 	
@@ -243,14 +258,14 @@ public class World {
 				if(name.equals("Main")) {
 					if(x == 13 && y == 9) {
 						Door door = new Door(worldState, new Vector2D(x + worldX, y + worldY));
-						door.setDestination(worldState.getHouseWorld());
+						door.setDestination(worldState.getHouseWorld_1());
 						
 						doors.add(door);
 					}
 				}
 				
 				// The House
-				if(name.equals("House")) {
+				if(name.equals("House_1")) {
 					if(x == 7 && y == 9) {
 						Door door = new Door(worldState, new Vector2D(x + worldX, y + worldY));
 						door.setDestination(worldState.getMainWorld());

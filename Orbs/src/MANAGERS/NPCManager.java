@@ -1,6 +1,7 @@
 package MANAGERS;
 
 import ENTITIES.Person;
+import ITEMS.Hatchet;
 import ITEMS.Orb;
 import WORLD.World;
 import visualje.Vector2D;
@@ -11,11 +12,16 @@ public class NPCManager {
 	//The world, used to access many different elements in the game world.
 	World world;
 	
-	//The NPCs
+	//The NPCs in the main world
 	Person randomGuy_1, randomGuy_2, randomGuy_3, randomGuy_4, randomGuy_5;
 	Person scientist;
 	Person chemicalController_1, chemicalController_2, chemicalController_3;
 	Person barrierToLastPart;
+	Person treeCutter;
+	
+	//The NPCs in house_1
+	Person player_Relative;
+	
 	
 	
 	////////////// Constructor ///////////////	
@@ -33,16 +39,20 @@ public class NPCManager {
 		randomGuy_3.getTextBox().clear();
 		randomGuy_4.getTextBox().clear();
 		randomGuy_5.getTextBox().clear();
+		treeCutter.getTextBox().clear();
 		scientist.getTextBox().clear();
 		chemicalController_1.getTextBox().clear();
 		chemicalController_2.getTextBox().clear();
 		chemicalController_3.getTextBox().clear();
 		barrierToLastPart.getTextBox().clear();
+		player_Relative.getTextBox().clear();
 	}
 	
 	/** Creates all of the NPC objects. */
 	public void createNPCs() {
 		//Create the NPCs. The positions have to be added to the world's position to arrange them properly.
+		
+		/* NPCs in Main World*/
 		randomGuy_1 = new Person(new Vector2D(24,19).add(world.position));
 		randomGuy_2 = new Person(new Vector2D(18,12).add(world.position));
 		randomGuy_3 = new Person(new Vector2D(12,17).add(world.position));
@@ -55,20 +65,31 @@ public class NPCManager {
 		chemicalController_2 = new Person(new Vector2D(62,56).add(world.position));
 		chemicalController_3 = new Person(new Vector2D(62,57).add(world.position));
 		barrierToLastPart = new Person(new Vector2D(46,29).add(world.position));
+		treeCutter = new Person(new Vector2D(18,38).add(world.position));
+		
+		/* House 1 NPCs */
+		player_Relative = new Person(new Vector2D(9,5).add(world.position));
 	}
 	
 	/** Adds to the list of entities in world. */
 	public void addToGame() {
-		//Once you are done setting them up, add them to the list of entities.
-		world.addEntity(randomGuy_1);
-		world.addEntity(randomGuy_2);
-		world.addEntity(randomGuy_3);
-		world.addEntity(randomGuy_4);
-		world.addEntity(randomGuy_5);
-		world.addEntity(scientist);
-		world.addEntity(chemicalController_1);
-		world.addEntity(chemicalController_2);
-		world.addEntity(chemicalController_3);
+		if(world.getName().equals("Main")) {
+			//Once you are done setting them up, add them to the list of entities.
+			world.addEntity(randomGuy_1);
+			world.addEntity(randomGuy_2);
+			world.addEntity(randomGuy_3);
+			world.addEntity(randomGuy_4);
+			world.addEntity(randomGuy_5);
+			world.addEntity(scientist);
+			world.addEntity(chemicalController_1);
+			world.addEntity(chemicalController_2);
+			world.addEntity(chemicalController_3);
+			world.addEntity(treeCutter);
+		}
+		
+		if(world.getName().equals("House_1")) {
+			world.addEntity(player_Relative);
+		}
 	}
 	
 	
@@ -113,7 +134,7 @@ public class NPCManager {
 		
 		
 		//Scientist
-		if(!Orb.pickedUpFirstOrb) {
+		if(!world.getWorldState().getPlayer().inventoryContains("Orb")) {
 			scientist.getTextBox().addText("Ahh!");
 			scientist.getTextBox().addText("I cannot believe this!");
 			scientist.getTextBox().addText("All of my orbs! They've been stolen!");
@@ -184,7 +205,34 @@ public class NPCManager {
 		//The person who blocks the way to the last part of the game
 		barrierToLastPart.getTextBox().addText("...");
 		
-		//addToGame();
+		
+		//The player's relative
+		player_Relative.getTextBox().addText("Aren't you worried about the robbery that happened last night?");
+		player_Relative.getTextBox().addText("I don't even want to leave the house!");
+		player_Relative.getTextBox().addText("In fact, I can probably do a better job of protecting our stuff if I'm inside!");
+		player_Relative.getTextBox().addText("That settles it! I'll just stay in here until they catch the criminal!");
+		
+		
+		//Tree cutter
+		if(!world.getWorldState().getPlayer().inventoryContains("Water") && !world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
+			treeCutter.getTextBox().addText("Whew! I've been out here all day chopping wood for the winter.");
+			treeCutter.getTextBox().addText("I could really go for a nice, cold drink right about now!");
+		} else if(world.getWorldState().getPlayer().inventoryContains("Water") && !world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
+			treeCutter.willGiveItem(true);
+			treeCutter.setItemToGive(new Hatchet());
+			
+			treeCutter.getTextBox().addText("What? A glass of water? For me?");
+			treeCutter.getTextBox().addText("Wow! Thanks so much!");
+			treeCutter.getTextBox().addText("*Gulp* *Gulp* *Gulp*");
+			treeCutter.getTextBox().addText("Ah! That's refreshing!");
+			treeCutter.getTextBox().addText("Here, let me repay you for this.");
+			treeCutter.getTextBox().addText("I'm done chopping wood for today so you can have this.");
+			treeCutter.getTextBox().addText("You were given a(n) " + treeCutter.getItemToGive().getName() + "!");
+			
+		} else if(world.getWorldState().getPlayer().inventoryContains("Hatchet") && !world.getWorldState().getPlayer().inventoryContains("Water")) {
+			//Talk about the hatchet
+			treeCutter.getTextBox().addText("That hatchet can be used to cut down certain kinds of trees.");
+		}
 	}
 	
 	

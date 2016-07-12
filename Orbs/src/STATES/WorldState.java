@@ -25,7 +25,7 @@ public class WorldState extends GameState {
 	World mainWorld;
 	
 	//The world that the player will be in after stepping on a door
-	World houseWorld;	
+	World houseWorld_1;	
 	
 	//The player
 	Player player;
@@ -43,8 +43,8 @@ public class WorldState extends GameState {
 		//Create the main game world
 		mainWorld = new World("Main", 100, 100, 0, this);
 			mainWorld.setPosition(new Vector2D(-5,-4));
-		houseWorld = new World("House", 14, 11, 1, this);
-			houseWorld.setPosition(new Vector2D(1,-3));
+		houseWorld_1 = new World("House_1", 14, 11, 1, this);
+			houseWorld_1.setPosition(new Vector2D(1,-3));
 		
 		//Set the current world
 		currentWorld = mainWorld;
@@ -70,7 +70,7 @@ public class WorldState extends GameState {
 
 	
 	/** Returns the house that the player is in. */
-	public World getHouseWorld() { return houseWorld; }
+	public World getHouseWorld_1() { return houseWorld_1; }
 
 	
 	/** Returns the player. */
@@ -132,7 +132,7 @@ public class WorldState extends GameState {
 		
 		if(getPlayer().getInventory().size() > 0) {
 			//Add an introductory line of text
-			inventoryTextBox.addText("The player currently qhas these items: ");
+			inventoryTextBox.addText("The player currently has these items: ");
 			
 			//Add descriptions for each item that the player has.
 			for(Item itm : getPlayer().getInventory()) {
@@ -153,13 +153,13 @@ public class WorldState extends GameState {
 		for(Door door : currentWorld.getDoors()) {
 			if(currentWorld == mainWorld) {
 				if(door.position.equals(player.position)) {
-					setCurrentWorld(houseWorld);
+					setCurrentWorld(houseWorld_1);
 					getCurrentWorld().setPosition(getCurrentWorld().position.add(new Vector2D(0,1)));
 					getCurrentWorld().initialize();
 				}
 				break;
 			}
-			if(currentWorld == houseWorld) {
+			if(currentWorld == houseWorld_1) {
 				if(door.position.equals(player.position)) {
 					setCurrentWorld(mainWorld);
 					getCurrentWorld().setPosition(getCurrentWorld().position.add(new Vector2D(0,-1)));

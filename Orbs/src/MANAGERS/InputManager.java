@@ -10,6 +10,7 @@ import ENTITIES.Person;
 import ENTITIES.SearchableEntity;
 import ITEMS.Item;
 import ITEMS.Orb;
+import ITEMS.Water;
 import MISC.Door;
 import STATES.MenuState;
 import STATES.WorldState;
@@ -77,22 +78,15 @@ public class InputManager implements KeyListener {
 			/* MOVING THE MAP*/
 			mapMovement(e);
 		}
+				
 		
-		
-		
-		//TESTING CHANGING WORLDS
-		if(e.getKeyCode() == KeyEvent.VK_R) {
-			worldState.setCurrentWorld(worldState.getHouseWorld());
-			worldState.getCurrentWorld().initialize();
-			worldState.getCurrentWorld().getNPCManager().initialize();
-		}
-		if(e.getKeyCode() == KeyEvent.VK_T) {
-			worldState.setCurrentWorld(worldState.getMainWorld());
-			worldState.getCurrentWorld().initialize();
-			worldState.getCurrentWorld().getNPCManager().initialize();
-		}
-		
-		
+//		//Testing the add water to inventory feature for teh story element with the lumberjack. 
+//		if(e.getKeyCode() == KeyEvent.VK_R) {
+//			worldState.getPlayer().addItemToInventory(new Water());
+//			worldState.updatePlayersItems();
+//			worldState.getCurrentWorld().getNPCManager().initialize();
+//		}
+//		
 		
 		/* INTERACTION */
 		
@@ -221,7 +215,7 @@ public class InputManager implements KeyListener {
 	
 	/** Edits the speech of the scientist based on whether or not the player has already collected an orb. */
 	private void editScientistSpeech(Item itm) {
-		if(!Orb.pickedUpFirstOrb) {
+		if(worldState.getPlayer().inventoryContains("Orb")) {
 			Orb.setFirstCollected();
 		}
 
@@ -311,11 +305,6 @@ public class InputManager implements KeyListener {
 					if(se.getContainedItem() != null) {
 						worldState.getPlayer().addItemToInventory(se.getContainedItem());
 						worldState.updatePlayersItems();
-						
-						//If the item was an orb and a first orb has not been collected already...
-						if(se.getContainedItem() instanceof Orb) {
-							editScientistSpeech(se.getContainedItem());
-						}
 						
 						se.removeContainedItem();
 						
