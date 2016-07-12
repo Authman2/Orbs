@@ -25,7 +25,7 @@ public class WorldState extends GameState {
 	World mainWorld;
 	
 	//The world that the player will be in after stepping on a door
-	World houseWorld_1;	
+	World houseWorld_1, houseWorld_2;
 	
 	//The player
 	Player player;
@@ -41,10 +41,7 @@ public class WorldState extends GameState {
 		super(gsm);
 		
 		//Create the main game world
-		mainWorld = new World("Main", 100, 100, 0, this);
-			mainWorld.setPosition(new Vector2D(-5,-4));
-		houseWorld_1 = new World("House_1", 14, 11, 1, this);
-			houseWorld_1.setPosition(new Vector2D(1,-3));
+		createWorlds();
 		
 		//Set the current world
 		currentWorld = mainWorld;
@@ -69,9 +66,13 @@ public class WorldState extends GameState {
 	public World getMainWorld() { return mainWorld; }
 
 	
-	/** Returns the house that the player is in. */
+	/** Returns house 1. */
 	public World getHouseWorld_1() { return houseWorld_1; }
-
+	
+	
+	/** Returns house 2. */
+	public World getHouseWorld_2() { return houseWorld_2; }
+	
 	
 	/** Returns the player. */
 	public Player getPlayer() { return player; }
@@ -125,6 +126,17 @@ public class WorldState extends GameState {
 	
 	////////////// Setters /////////////
 	
+	/** Create the different worlds for the game*/
+	public void createWorlds() {
+		mainWorld = new World("Main", 100, 100, 0, this);
+			mainWorld.setPosition(new Vector2D(-5,-4));
+		houseWorld_1 = new World("House_1", 14, 11, 1, this);
+			houseWorld_1.setPosition(new Vector2D(1,-3));
+		houseWorld_2 = new World("House_2", 14, 11, 1, this);
+			houseWorld_2.setPosition(new Vector2D(1,-3));
+	}
+	
+	
 	/** Updates what the text box that shows the items that the player has should display. */
 	public void updatePlayersItems() {
 		//Remove whatever is already there so there are no duplicates
@@ -151,15 +163,13 @@ public class WorldState extends GameState {
 	/** Determines what to do based on whether or not the player is standing on a door. */
 	public void enteringDoors() {
 		for(Door door : currentWorld.getDoors()) {
+			System.out.println(door.getDestination().getName());
 			if(currentWorld == mainWorld) {
 				if(door.position.equals(player.position)) {
-					setCurrentWorld(houseWorld_1);
-					getCurrentWorld().setPosition(getCurrentWorld().position.add(new Vector2D(0,1)));
-					getCurrentWorld().initialize();
+					door.transport();
 				}
 				break;
-			}
-			if(currentWorld == houseWorld_1) {
+			} else {
 				if(door.position.equals(player.position)) {
 					setCurrentWorld(mainWorld);
 					getCurrentWorld().setPosition(getCurrentWorld().position.add(new Vector2D(0,-1)));

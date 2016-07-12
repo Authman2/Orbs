@@ -1,6 +1,7 @@
 package MANAGERS;
 
 import ENTITIES.Person;
+import ITEMS.Coupon;
 import ITEMS.Hatchet;
 import ITEMS.Orb;
 import WORLD.World;
@@ -13,11 +14,13 @@ public class NPCManager {
 	World world;
 	
 	//The NPCs in the main world
-	Person randomGuy_1, randomGuy_2, randomGuy_3, randomGuy_4, randomGuy_5;
+	Person randomPerson_1, randomPerson_2, randomPerson_3, randomPerson_4, randomPerson_5, randomPerson_6, randomPerson_7,
+			randomPerson_8, randomPerson_9, randomPerson_10, randomPerson_11, randomPerson_12, randomPerson_13, randomPerson_14,
+			randomPerson_15, randomPerson_16, randomPerson_17, randomPerson_18, randomPerson_19, randomPerson_20;
 	Person scientist;
 	Person chemicalController_1, chemicalController_2, chemicalController_3;
 	Person barrierToLastPart;
-	Person treeCutter;
+	Person treeCutter, treeCutterFriend;
 	
 	//The NPCs in house_1
 	Person player_Relative;
@@ -34,12 +37,28 @@ public class NPCManager {
 	
 	/** Clears the text boxes for each NPC. */
 	public void clearTextBoxes() {
-		randomGuy_1.getTextBox().clear();
-		randomGuy_2.getTextBox().clear();
-		randomGuy_3.getTextBox().clear();
-		randomGuy_4.getTextBox().clear();
-		randomGuy_5.getTextBox().clear();
+		randomPerson_1.getTextBox().clear();
+		randomPerson_2.getTextBox().clear();
+		randomPerson_3.getTextBox().clear();
+		randomPerson_4.getTextBox().clear();
+		randomPerson_5.getTextBox().clear();
+		randomPerson_6.getTextBox().clear();
+		randomPerson_7.getTextBox().clear();
+		randomPerson_8.getTextBox().clear();
+		randomPerson_9.getTextBox().clear();
+		randomPerson_10.getTextBox().clear();
+		randomPerson_11.getTextBox().clear();
+		randomPerson_12.getTextBox().clear();
+		randomPerson_13.getTextBox().clear();
+		randomPerson_14.getTextBox().clear();
+		randomPerson_15.getTextBox().clear();
+		randomPerson_16.getTextBox().clear();
+		randomPerson_17.getTextBox().clear();
+		randomPerson_18.getTextBox().clear();
+		randomPerson_19.getTextBox().clear();
+		randomPerson_20.getTextBox().clear();
 		treeCutter.getTextBox().clear();
+		treeCutterFriend.getTextBox().clear();
 		scientist.getTextBox().clear();
 		chemicalController_1.getTextBox().clear();
 		chemicalController_2.getTextBox().clear();
@@ -53,19 +72,39 @@ public class NPCManager {
 		//Create the NPCs. The positions have to be added to the world's position to arrange them properly.
 		
 		/* NPCs in Main World*/
-		randomGuy_1 = new Person(new Vector2D(24,19).add(world.position));
-		randomGuy_2 = new Person(new Vector2D(18,12).add(world.position));
-		randomGuy_3 = new Person(new Vector2D(12,17).add(world.position));
-		randomGuy_4 = new Person(new Vector2D(15,25).add(world.position));
-			randomGuy_4.willGiveItem(true);
-			randomGuy_4.setItemToGive(new Orb());
-		randomGuy_5 = new Person(new Vector2D(24,25).add(world.position));
+		randomPerson_1 = new Person(new Vector2D(24,19).add(world.position));
+		randomPerson_2 = new Person(new Vector2D(18,12).add(world.position));
+		randomPerson_3 = new Person(new Vector2D(12,17).add(world.position));
+		randomPerson_4 = new Person(new Vector2D(15,25).add(world.position));
+			randomPerson_4.willGiveItem(true);
+			randomPerson_4.setItemToGive(new Orb());
+		randomPerson_5 = new Person(new Vector2D(24,25).add(world.position));
+		randomPerson_6 = new Person(new Vector2D(22,61).add(world.position));
+		randomPerson_7 = new Person(new Vector2D(18,67).add(world.position));
+			randomPerson_7.willGiveItem(true);
+			randomPerson_7.setItemToGive(new Coupon());
+		randomPerson_8 = new Person(new Vector2D(32, 67).add(world.position));
+		randomPerson_9 = new Person(new Vector2D(9,58).add(world.position));
+		randomPerson_10 = new Person(new Vector2D(32,75).add(world.position));
+		randomPerson_11 = new Person(new Vector2D(35,76).add(world.position));
+		randomPerson_12 = new Person(new Vector2D(34,78).add(world.position));
+		randomPerson_13 = new Person(new Vector2D(31,77).add(world.position));
+		randomPerson_14 = new Person(new Vector2D(57,82).add(world.position));
+		randomPerson_15 = new Person(new Vector2D(84,86).add(world.position));
+		randomPerson_16 = new Person(new Vector2D(79,77).add(world.position));
+		randomPerson_17 = new Person(new Vector2D(88,75).add(world.position));
+			randomPerson_17.willGiveItem(true);
+			randomPerson_17.setItemToGive(new Orb());
+		randomPerson_18 = new Person(new Vector2D(89,75).add(world.position));
+		randomPerson_19 = new Person(new Vector2D(60,9).add(world.position));
+		randomPerson_20 = new Person(new Vector2D(57,23).add(world.position));
 		scientist = new Person(new Vector2D(24, 11).add(world.position));
 		chemicalController_1 = new Person(new Vector2D(62,55).add(world.position));
 		chemicalController_2 = new Person(new Vector2D(62,56).add(world.position));
 		chemicalController_3 = new Person(new Vector2D(62,57).add(world.position));
 		barrierToLastPart = new Person(new Vector2D(46,29).add(world.position));
 		treeCutter = new Person(new Vector2D(18,38).add(world.position));
+		treeCutterFriend = new Person(new Vector2D(10, 46).add(world.position));
 		
 		/* House 1 NPCs */
 		player_Relative = new Person(new Vector2D(9,5).add(world.position));
@@ -75,16 +114,33 @@ public class NPCManager {
 	public void addToGame() {
 		if(world.getName().equals("Main")) {
 			//Once you are done setting them up, add them to the list of entities.
-			world.addEntity(randomGuy_1);
-			world.addEntity(randomGuy_2);
-			world.addEntity(randomGuy_3);
-			world.addEntity(randomGuy_4);
-			world.addEntity(randomGuy_5);
+			world.addEntity(randomPerson_1);
+			world.addEntity(randomPerson_2);
+			world.addEntity(randomPerson_3);
+			world.addEntity(randomPerson_4);
+			world.addEntity(randomPerson_5);
+			world.addEntity(randomPerson_6);
+			world.addEntity(randomPerson_7);
+			world.addEntity(randomPerson_8);
+			world.addEntity(randomPerson_9);
+			world.addEntity(randomPerson_10);
+			world.addEntity(randomPerson_11);
+			world.addEntity(randomPerson_12);
+			world.addEntity(randomPerson_13);
+			world.addEntity(randomPerson_14);
+			world.addEntity(randomPerson_15);
+			world.addEntity(randomPerson_16);
+			world.addEntity(randomPerson_17);
+			world.addEntity(randomPerson_18);
+			world.addEntity(randomPerson_19);
+			world.addEntity(randomPerson_20);
 			world.addEntity(scientist);
 			world.addEntity(chemicalController_1);
 			world.addEntity(chemicalController_2);
 			world.addEntity(chemicalController_3);
+			world.addEntity(barrierToLastPart);
 			world.addEntity(treeCutter);
+			world.addEntity(treeCutterFriend);
 		}
 		
 		if(world.getName().equals("House_1")) {
@@ -95,42 +151,136 @@ public class NPCManager {
 	
 	////////////// Abstract Methods ///////////////
 	
+	/** This initialize method is responsible for determining the text for each NPC. */
 	public void initialize() {
 		clearTextBoxes();
 		
-		//Random guy 1
-		randomGuy_1.getTextBox().addText("Nice weather we're having, right?");
-		randomGuy_1.getTextBox().addText("Not like last week when it was 95 degrees!");
+		//Random person 1
+		randomPerson_1.getTextBox().addText("Nice weather we're having, right?");
+		randomPerson_1.getTextBox().addText("Not like last week when it was 95 degrees!");
 		
 		
-		//Random guy 2
-		randomGuy_2.getTextBox().addText("Have you talked to that wierd scientist guy?");
-		randomGuy_2.getTextBox().addText("He was blabbing about some orbs or something...");
-		randomGuy_2.getTextBox().addText("I couldn't really understand him though. He was talking so fast!");
+		//Random person 2
+		randomPerson_2.getTextBox().addText("Have you talked to that wierd scientist guy?");
+		randomPerson_2.getTextBox().addText("He was blabbing about some orbs or something...");
+		randomPerson_2.getTextBox().addText("I couldn't really understand him though. He was talking so fast!");
 		
 		
-		//Random guy 3
-		randomGuy_3.getTextBox().addText("Have you heard about the burglary that happened last night?");
-		randomGuy_3.getTextBox().addText("That's why I'm standing guard here. No criminal is going to break into my house!");
+		//Random person 3
+		randomPerson_3.getTextBox().addText("Have you heard about the burglary that happened last night?");
+		randomPerson_3.getTextBox().addText("That's why I'm standing guard here. No criminal is going to break into my house!");
 		
 		
-		//Random guy 4
-		if(randomGuy_4.getItemToGive() != null) {
-			randomGuy_4.getTextBox().addText("Oh, you're going out of town?");
-			randomGuy_4.getTextBox().addText("Well you should be careful, with that thief on the loose you never know what might happen to you.");
-			randomGuy_4.getTextBox().addText("You know what, I admire your bravery. I'm way too scared to leave town knowing that I might run into the criminal!");
-			randomGuy_4.getTextBox().addText("Here, take this. It may not be much, but I just feel like you should be rewarded for having the courage to find the thief.");
-			randomGuy_4.getTextBox().addText("Good luck, and I hope you can get to the bottom of this case!");
-			randomGuy_4.getTextBox().addText("You were given a(n) " + randomGuy_4.getItemToGive().getName() + "!");
+		//Random person 4
+		if(randomPerson_4.getItemToGive() != null) {
+			randomPerson_4.getTextBox().addText("Oh, you're going out of town?");
+			randomPerson_4.getTextBox().addText("Well you should be careful, with that thief on the loose you never know what might happen to you.");
+			randomPerson_4.getTextBox().addText("You know what, I admire your bravery. I'm way too scared to leave town knowing that I might run into the criminal!");
+			randomPerson_4.getTextBox().addText("Here, take this. It may not be much, but I just feel like you should be rewarded for having the courage to find the thief.");
+			randomPerson_4.getTextBox().addText("Good luck, and I hope you can get to the bottom of this case!");
+			randomPerson_4.getTextBox().addText("You were given a(n) " + randomPerson_4.getItemToGive().getName() + "!");
 		} else {
-			randomGuy_4.getTextBox().addText("Good luck out there!");
+			randomPerson_4.getTextBox().addText("Good luck out there!");
 		}
 		
 			
-		//Random guy 5
-		randomGuy_5.getTextBox().addText("Everybody in town is worried about being robbed after what happened to that scientist last night.");
-		randomGuy_5.getTextBox().addText("I'm not worried though, I set up a bunch of alarms in my house that will detect any kind of movement!");
-		randomGuy_5.getTextBox().addText("Unfortunately that means that I can't actually go inside my house...");
+		//Random person 5
+		randomPerson_5.getTextBox().addText("Everybody in town is worried about being robbed after what happened to that scientist last night.");
+		randomPerson_5.getTextBox().addText("I'm not worried though, I set up a bunch of alarms in my house that will detect any kind of movement!");
+		randomPerson_5.getTextBox().addText("Unfortunately that means that I can't actually go inside my house...");
+		
+		
+		//Random person 6
+		randomPerson_6.getTextBox().addText("I heard there is something hidden in one of these trees.");
+		randomPerson_6.getTextBox().addText("I hope I can find it before anyone else does!");
+		
+		
+		//Random person 7
+		if(randomPerson_7.getItemToGive() != null) {
+			randomPerson_7.getTextBox().addText("You should check out my daughter's store on the east side of town.");
+			randomPerson_7.getTextBox().addText("It's a coffee shop, and she sells all different kinds of snacks and   beverages.");
+			randomPerson_7.getTextBox().addText("It's really quite good! Here, I'll give you a coupon!");
+			randomPerson_7.getTextBox().addText("You were given a(n) " + randomPerson_7.getItemToGive().getName() + "!");
+		} else {
+			randomPerson_7.getTextBox().addText("Please write her a good review. She will definitely appreciate it!");
+		}
+		
+		
+		//Random person 8
+		randomPerson_8.getTextBox().addText("I love living in this town! It's so big and spacious!");
+		randomPerson_8.getTextBox().addText("I have a friend who lives in a town to the north-east, which is much  smaller than this one.");
+		randomPerson_8.getTextBox().addText("*Sigh* I'll never understand why he enjoys living in such a small town, but I guess that's just his style!");
+		
+		
+		//Random person 9
+		randomPerson_9.getTextBox().addText("I'm trying to stay in shape by running 4 miles every day.");
+		randomPerson_9.getTextBox().addText("1 mile down, 3 to go!");
+		
+		
+		//Random person 10
+		randomPerson_10.getTextBox().addText("Have you tried the coffee cake? It's delicious!");
+		
+		//Random person 11
+		randomPerson_11.getTextBox().addText("My favorite drink is the strawberry smoothie.");
+		randomPerson_11.getTextBox().addText("It's just so refreshing!");
+		
+		//Random person 12
+		randomPerson_12.getTextBox().addText("I've never actually tried any of the food here.");
+		randomPerson_12.getTextBox().addText("Is it any good?");
+
+		//Random person 13
+		randomPerson_13.getTextBox().addText("I always have a hard time deciding what to get off the menu...");
+		
+		
+		//Random person 14
+		randomPerson_14.getTextBox().addText("My house is just outside of town.");
+		randomPerson_14.getTextBox().addText("It didn't cost very much either; I guess most people don't like the   idea of living so far away from everything.");
+		randomPerson_14.getTextBox().addText("I love it, though! It's so nice and quiet, I never have to worry about distractions when I'm working.");
+		
+		
+		//Random person 15
+		randomPerson_15.getTextBox().addText("Did you hear what happened in the town just north of here?");
+		randomPerson_15.getTextBox().addText("Apparently there is some sort of orb spilling radio active material   into the air.");
+		randomPerson_15.getTextBox().addText("It's making me very worried! My cousin lives there and he texts me    everyday that he is still stuck inside of his house!");
+		randomPerson_15.getTextBox().addText("I wish someone would go help them...");
+		
+		
+		//Random person 16
+		randomPerson_16.getTextBox().addText("Do you know any place that's hiring right now?");
+		randomPerson_16.getTextBox().addText("I really need a job...");
+		
+		
+		//Random person 17
+		if(randomPerson_17.getItemToGive() != null) {
+			randomPerson_17.getTextBox().addText("Hey, do you want this weird looking basketball?");
+			randomPerson_17.getTextBox().addText("We found it in the bushes earlier, but it looks kind of strange and   doesn't bounce very well..");
+			randomPerson_17.getTextBox().addText("We tried dribbling it a few times and it started glowing bright red!");
+			randomPerson_17.getTextBox().addText("You can have it if you want.");
+			randomPerson_17.getTextBox().addText("You'll take it? Cool! Here you go!");
+			randomPerson_17.getTextBox().addText("You received a(n) " + randomPerson_17.getItemToGive().getName() + "!");
+		} else {
+			randomPerson_17.getTextBox().addText("Good luck trying to get that thing to bounce...");
+		}
+		
+		
+		//Random person 18
+		if(randomPerson_17.getItemToGive() != null) {
+			randomPerson_18.getTextBox().addText("Did my friend tell you about the strange basketball we found?");
+		} else {
+			randomPerson_18.getTextBox().addText("Good luck trying to get that thing to bounce...");
+		}
+		
+		
+		//Random person 19
+		randomPerson_19.getTextBox().addText("It's so cold here up north!");
+		
+		
+		//Random person 20
+		randomPerson_20.getTextBox().addText("Oh, you're planning a vacation to the bahamas?");
+		randomPerson_20.getTextBox().addText("That's so cool! Have fun and bring me back a suvineur!");
+		randomPerson_20.getTextBox().addText("What? Oh, sorry, I was talking to one of my friends over the phone.");
+		randomPerson_20.getTextBox().addText("He's a retired mine worker and lives in the next town over.");
+		randomPerson_20.getTextBox().addText("If you ever need mining equipment you should talk to him. He said he's looking to get rid of some of his old stuff.");
 		
 		
 		//Scientist
@@ -233,6 +383,15 @@ public class NPCManager {
 			//Talk about the hatchet
 			treeCutter.getTextBox().addText("That hatchet can be used to cut down certain kinds of trees.");
 		}
+		
+		
+		//Tree cutter's friend
+		treeCutterFriend.getTextBox().addText("Hi there! I'm Jim.");
+		treeCutterFriend.getTextBox().addText("Why am I standing in front of this house, you ask?");
+		treeCutterFriend.getTextBox().addText("Well, it's actually not my house. It belongs to a friend.");
+		treeCutterFriend.getTextBox().addText("He asked me to watch it for him while he's out chopping fire-wood.");
+		treeCutterFriend.getTextBox().addText("Can't let that thief steal any of the logs, can we?");
+		
 	}
 	
 	

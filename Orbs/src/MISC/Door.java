@@ -41,9 +41,9 @@ public class Door {
 	
 	/** Sends the player to the destination world. */
 	public void transport() {
-		worldState.setCurrentWorld(destination);
+		worldState.setCurrentWorld(getDestination());
+		worldState.getCurrentWorld().setPosition(worldState.getCurrentWorld().position.add(new Vector2D(0,1)));
 		worldState.getCurrentWorld().initialize();
-		worldState.getCurrentWorld().getNPCManager().initialize();
 	}
 	
 }

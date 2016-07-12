@@ -10,7 +10,6 @@ import ENTITIES.Person;
 import ENTITIES.SearchableEntity;
 import ITEMS.Item;
 import ITEMS.Orb;
-import ITEMS.Water;
 import MISC.Door;
 import STATES.MenuState;
 import STATES.WorldState;
