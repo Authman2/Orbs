@@ -11,6 +11,7 @@ import ITEMS.Item;
 import MANAGERS.GameStateManager;
 import MANAGERS.ItemManager;
 import MANAGERS.NPCManager;
+import MISC.Door;
 import MISC.TextBox;
 import WORLD.World;
 import visualje.Vector2D;
@@ -20,6 +21,12 @@ public class WorldState extends GameState {
 	
 	//The current world that is currently being displayed
 	World currentWorld;
+	
+	//The main world map world
+	World mainWorld;
+	
+	//The world that the player will be in after stepping on a door
+	World houseWorld;	
 	
 	//The player
 	Player player;
@@ -38,10 +45,15 @@ public class WorldState extends GameState {
 		super(gsm);
 		
 		//Create the main game world
-		currentWorld = new World("Main", 100, 100, 0, this);
-			currentWorld.setOpen(true);
-			currentWorld.setPosition(new Vector2D(-5,-4));
+		mainWorld = new World("Main", 100, 100, 0, this);
+			mainWorld.setPosition(new Vector2D(-5,-4));
+		houseWorld = new World("House", 14, 11, 1, this);
+			houseWorld.setPosition(new Vector2D(1,-3));
 		
+		//Set the current world
+		currentWorld = mainWorld;
+			currentWorld.setOpen(true);
+			
 		player = new Player(this);
 		npcManager = new NPCManager(this);
 		itemManager = new ItemManager(this);
@@ -56,6 +68,14 @@ public class WorldState extends GameState {
 	
 	/** Returns the world that is being displayed in this world state. */
 	public World getCurrentWorld() { return currentWorld; }
+	
+	
+	/** Returns the main game world. */
+	public World getMainWorld() { return mainWorld; }
+
+	
+	/** Returns the house that the player is in. */
+	public World getHouseWorld() { return houseWorld; }
 
 	
 	/** Returns the player. */
@@ -132,10 +152,35 @@ public class WorldState extends GameState {
 		}
 	}
 
-	
-	/** Sets what the current game world should be. */
-	public void setCurrentWorld(World world) { currentWorld = world; }
 
+	/** Sets what the current world should be. */
+	public void setCurrentWorld(World w) { currentWorld = w; }
+	
+	
+	/** Determines what to do based on whether or not the player is standing on a door. */
+	public void enteringDoors() {
+		for(Door door : currentWorld.getDoors()) {
+			if(currentWorld == mainWorld) {
+				if(door.position.equals(player.position)) {
+					setCurrentWorld(houseWorld);
+					getCurrentWorld().setPosition(getCurrentWorld().position.add(new Vector2D(0,1)));
+					getCurrentWorld().initialize();
+					getNPCManager().initialize();
+				}
+				break;
+			}
+			if(currentWorld == houseWorld) {
+				if(door.position.equals(player.position)) {
+					setCurrentWorld(mainWorld);
+					getCurrentWorld().setPosition(getCurrentWorld().position.add(new Vector2D(0,-1)));
+					getCurrentWorld().initialize();
+					getNPCManager().initialize();
+				}
+				break;
+			}
+		}
+	}
+	
 	
 	
 	////////////// Abstract Methods /////////////
@@ -156,8 +201,10 @@ public class WorldState extends GameState {
 		if(currentWorld != null) {
 			
 			//Only update the one that is open
-			if(currentWorld.isOpen()) { currentWorld.update(time); }
+			currentWorld.update(time);
 			
+			//Check for doors
+			enteringDoors();
 			
 			player.update(time);
 		}
@@ -168,7 +215,7 @@ public class WorldState extends GameState {
 		if(currentWorld != null) {
 			
 			//Only draw the one that is open
-			if(currentWorld.isOpen()) { currentWorld.draw(g); }
+			currentWorld.draw(g);
 			
 			player.draw(g);
 			if(inventoryTextBox.isOpen()) inventoryTextBox.draw(g);

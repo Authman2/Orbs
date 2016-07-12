@@ -60,6 +60,8 @@ public class NPCManager {
 	////////////// Abstract Methods ///////////////
 	
 	public void initialize() {
+		clearTextBoxes();
+		
 		//Random guy 1
 		randomGuy_1.getTextBox().addText("Nice weather we're having, right?");
 		randomGuy_1.getTextBox().addText("Not like last week when it was 95 degrees!");

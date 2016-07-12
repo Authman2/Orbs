@@ -66,7 +66,7 @@ public class GameMap {
 		houseMapSingle = reader.CreateArrayINT(s, ",");
 		
 		//Convert it to a two dimensional array. REMEMBER, WORLD MAP MUST HAVE DIMENSIONS NxN TO WORK.
-		houseMap = ArrayConversion.OneToTwo(houseMapSingle, 12);
+		houseMap = ArrayConversion.OneToTwo(houseMapSingle, 14);
 	}
 	
 }

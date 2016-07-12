@@ -8,6 +8,7 @@ import ENTITIES.Entity;
 import ENTITIES.SearchableEntity;
 import ITEMS.Item;
 import MAIN.Assets;
+import MISC.Door;
 import STATES.WorldState;
 import visualje.Vector2D;
 
@@ -49,6 +50,10 @@ public class World {
 	//All of the entities that require the player to choose an action before continuing
 	ArrayList<ActionEntity> actionEnts;
 
+	//All of the doors in THIS world
+	ArrayList<Door> doors;
+	
+	
 	
 	/////////// Constructor ////////////
 	
@@ -64,6 +69,7 @@ public class World {
 		droppedItems = new ArrayList<Item>();
 		searchables = new ArrayList<SearchableEntity>();
 		actionEnts = new ArrayList<ActionEntity>();
+		doors = new ArrayList<Door>();
 		worldState = ws;
 	}
 	
@@ -221,6 +227,37 @@ public class World {
 	}
 	
 	
+	/** Adds door destinations. */
+	public void addDoorDestinations() {
+		for(int x = 0; x < width; x++) {
+			for(int y = 0; y < height; y++) {
+				int worldX = (int)position.X;
+				int worldY = (int)position.Y;
+				
+				// Main World
+				if(name.equals("Main")) {
+					if(x == 13 && y == 9) {
+						Door door = new Door(worldState, new Vector2D(x + worldX, y + worldY));
+						door.setDestination(worldState.getHouseWorld());
+						
+						doors.add(door);
+					}
+				}
+				
+				// The House
+				if(name.equals("House")) {
+					if(x == 7 && y == 9) {
+						Door door = new Door(worldState, new Vector2D(x + worldX, y + worldY));
+						door.setDestination(worldState.getMainWorld());
+						
+						doors.add(door);
+					}
+				}
+			}
+		}
+	}
+	
+	
 	/** Sets whether or not this world is open. */
 	public void setOpen(boolean b) { open = b; }
 	
@@ -294,6 +331,10 @@ public class World {
 	
 	/** Returns a list of all of the action entities in the game world. */
 	public ArrayList<ActionEntity> getActionEntities() { return actionEnts; }
+	
+	
+	/** Returns a list of all of the doors in THIS world only. */
+	public ArrayList<Door> getDoors() { return doors; }
 	
 	
 	/** Finds out if the next tile above the one the player is currently on is solid or not. */
@@ -468,8 +509,18 @@ public class World {
 	////////////// Abstract Methods ///////////////
 	
 	public void initialize() {
+		entities.clear();
+		droppedItems.clear();
+		searchables.clear();
+		actionEnts.clear();
+		doors.clear();
+		
 		//Add the action entities to the game
 		addActionEntities();
+		
+		//Add all of the door destinations
+		addDoorDestinations();
+		
 		
 		//Set the tiles based on the numbers in the game map
 		for(int x = 0; x < width; x++) {

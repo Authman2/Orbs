@@ -10,6 +10,7 @@ import ENTITIES.Person;
 import ENTITIES.SearchableEntity;
 import ITEMS.Item;
 import ITEMS.Orb;
+import MISC.Door;
 import STATES.MenuState;
 import STATES.WorldState;
 
@@ -79,6 +80,20 @@ public class InputManager implements KeyListener {
 		
 		
 		
+		//TESTING CHANGING WORLDS
+		if(e.getKeyCode() == KeyEvent.VK_R) {
+			worldState.setCurrentWorld(worldState.getHouseWorld());
+			worldState.getCurrentWorld().initialize();
+			worldState.getNPCManager().initialize();
+		}
+		if(e.getKeyCode() == KeyEvent.VK_T) {
+			worldState.setCurrentWorld(worldState.getMainWorld());
+			worldState.getCurrentWorld().initialize();
+			worldState.getNPCManager().initialize();
+		}
+		
+		
+		
 		/* INTERACTION */
 		
 		if(e.getKeyCode() == KeyEvent.VK_ENTER || e.getKeyCode() == KeyEvent.VK_C)
@@ -121,6 +136,7 @@ public class InputManager implements KeyListener {
 				for(Item itm : worldState.getCurrentWorld().getDroppedItems()) itm.position.Y++;
 				for(SearchableEntity tree : worldState.getCurrentWorld().getSearchables()) tree.position.Y++;
 				for(ActionEntity ae : worldState.getCurrentWorld().getActionEntities()) ae.position.Y++;
+				for(Door door : worldState.getCurrentWorld().getDoors()) door.position.Y++;
 				worldState.getCurrentWorld().up = true;
 			}
 		}
@@ -134,6 +150,7 @@ public class InputManager implements KeyListener {
 				for(Item itm : worldState.getCurrentWorld().getDroppedItems()) itm.position.Y--;
 				for(SearchableEntity tree : worldState.getCurrentWorld().getSearchables()) tree.position.Y--;
 				for(ActionEntity ae : worldState.getCurrentWorld().getActionEntities()) ae.position.Y--;
+				for(Door door : worldState.getCurrentWorld().getDoors()) door.position.Y--;
 				worldState.getCurrentWorld().down = true;
 			}
 		}
@@ -147,6 +164,7 @@ public class InputManager implements KeyListener {
 				for(Item itm : worldState.getCurrentWorld().getDroppedItems()) itm.position.X--;
 				for(SearchableEntity tree : worldState.getCurrentWorld().getSearchables()) tree.position.X--;
 				for(ActionEntity ae : worldState.getCurrentWorld().getActionEntities()) ae.position.X--;
+				for(Door door : worldState.getCurrentWorld().getDoors()) door.position.X--;
 				worldState.getCurrentWorld().right = true;
 			}
 		}
@@ -160,6 +178,7 @@ public class InputManager implements KeyListener {
 				for(Item itm : worldState.getCurrentWorld().getDroppedItems()) itm.position.X++;
 				for(SearchableEntity tree : worldState.getCurrentWorld().getSearchables()) tree.position.X++;
 				for(ActionEntity ae : worldState.getCurrentWorld().getActionEntities()) ae.position.X++;
+				for(Door door : worldState.getCurrentWorld().getDoors()) door.position.X++;
 				worldState.getCurrentWorld().left = true;
 			}
 		}
