@@ -108,6 +108,7 @@ public class InputManager implements KeyListener {
 			
 		}
 		
+		
 		/* LOOKING THROUGH ITEMS */
 		if(e.getKeyCode() == KeyEvent.VK_I)
 			Inventory(e);
@@ -352,11 +353,9 @@ public class InputManager implements KeyListener {
 						
 					} else {
 						
-						if(((Person)ent).willGiveItem()) {
-							//Re-assign the text boxes of each NPC
-							worldState.getNPCManager().clearTextBoxes();
-							worldState.getNPCManager().initialize();
-						}
+						//Re-assign the text boxes of each NPC
+						worldState.getNPCManager().clearTextBoxes();
+						worldState.getNPCManager().initialize();
 					}
 					
 				} else {

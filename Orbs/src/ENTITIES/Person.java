@@ -10,9 +10,6 @@ public class Person extends NPC {
 	//The item that this person will give the player.
 	Item itemToGive;
 	
-	//Whether or not this person will give the player an item
-	boolean willGiveItem;
-	
 	
 	
 	/////////// Constructors ////////////
@@ -34,17 +31,11 @@ public class Person extends NPC {
 	public void removeItemToGive() { itemToGive = null; }
 	
 	
-	/** Sets whether or not this person will give the player an item. */
-	public void willGiveItem(boolean b) { this.willGiveItem = b; }
-	
 	
 	/////////// Getters ////////////
 	
 	/** Returns the item that this person will give the player. */
 	public Item getItemToGive() { return itemToGive; }
 	
-	
-	/** Whether or not the person will give the player an item. */
-	public boolean willGiveItem() { return this.willGiveItem; }
 	
 }
