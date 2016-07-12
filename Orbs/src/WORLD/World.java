@@ -8,6 +8,7 @@ import ENTITIES.Entity;
 import ENTITIES.SearchableEntity;
 import ITEMS.Item;
 import MAIN.Assets;
+import MANAGERS.NPCManager;
 import MISC.Door;
 import STATES.WorldState;
 import visualje.Vector2D;
@@ -37,6 +38,9 @@ public class World {
 	
 	//Booleans for movement
 	public boolean up, down, left, right;
+	
+	//Handles all of the NPCs for this world
+	NPCManager npcManager;
 	
 	//All of the entities in the world, excluding the player
 	ArrayList<Entity> entities;
@@ -71,6 +75,7 @@ public class World {
 		actionEnts = new ArrayList<ActionEntity>();
 		doors = new ArrayList<Door>();
 		worldState = ws;
+		npcManager = new NPCManager(this);
 	}
 	
 	
@@ -315,6 +320,10 @@ public class World {
 	
 	/** Returns the tiles that are on the screen. */
 	public Tile[][] getTileMap() { return tiles; }
+	
+	
+	/** Returns the NPCManager. */
+	public NPCManager getNPCManager() { return npcManager; }
 	
 	
 	/** Returns a list of all of the entities in the game world. */
@@ -600,6 +609,11 @@ public class World {
 		for(ActionEntity ae : actionEnts) {
 			ae.initialize();
 		}
+		
+		//Initialize the npc manager
+		npcManager.createNPCs();
+		npcManager.initialize();
+		npcManager.addToGame();
 	}
 	
 	

@@ -39,7 +39,7 @@ public class Door {
 	public void transport() {
 		worldState.setCurrentWorld(destination);
 		worldState.getCurrentWorld().initialize();
-		worldState.getNPCManager().initialize();
+		worldState.getCurrentWorld().getNPCManager().initialize();
 	}
 	
 }

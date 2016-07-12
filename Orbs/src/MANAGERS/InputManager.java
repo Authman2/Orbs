@@ -84,12 +84,12 @@ public class InputManager implements KeyListener {
 		if(e.getKeyCode() == KeyEvent.VK_R) {
 			worldState.setCurrentWorld(worldState.getHouseWorld());
 			worldState.getCurrentWorld().initialize();
-			worldState.getNPCManager().initialize();
+			worldState.getCurrentWorld().getNPCManager().initialize();
 		}
 		if(e.getKeyCode() == KeyEvent.VK_T) {
 			worldState.setCurrentWorld(worldState.getMainWorld());
 			worldState.getCurrentWorld().initialize();
-			worldState.getNPCManager().initialize();
+			worldState.getCurrentWorld().getNPCManager().initialize();
 		}
 		
 		
@@ -225,13 +225,13 @@ public class InputManager implements KeyListener {
 			Orb.setFirstCollected();
 		}
 
-		worldState.getNPCManager().scientist.getTextBox().clear();
-		worldState.getNPCManager().scientist.getTextBox().addText("Oh, hello! So you've found some of my orbs?");
-		worldState.getNPCManager().scientist.getTextBox().addText("That's wonderful!");
-		worldState.getNPCManager().scientist.getTextBox().addText("Let's see how many you've found...");
-		worldState.getNPCManager().scientist.getTextBox().addText("Hmm... Well it looks like you have found " + worldState.getPlayer().getOrbCount() + " out of 20 orbs.");
-		worldState.getNPCManager().scientist.getTextBox().addText("That's good! But there are still more to find.");
-		worldState.getNPCManager().scientist.getTextBox().addText("Please keep on looking and return to me when you have more orbs! Good luck!");
+		worldState.getCurrentWorld().getNPCManager().scientist.getTextBox().clear();
+		worldState.getCurrentWorld().getNPCManager().scientist.getTextBox().addText("Oh, hello! So you've found some of my orbs?");
+		worldState.getCurrentWorld().getNPCManager().scientist.getTextBox().addText("That's wonderful!");
+		worldState.getCurrentWorld().getNPCManager().scientist.getTextBox().addText("Let's see how many you've found...");
+		worldState.getCurrentWorld().getNPCManager().scientist.getTextBox().addText("Hmm... Well it looks like you have found " + worldState.getPlayer().getOrbCount() + " out of 20 orbs.");
+		worldState.getCurrentWorld().getNPCManager().scientist.getTextBox().addText("That's good! But there are still more to find.");
+		worldState.getCurrentWorld().getNPCManager().scientist.getTextBox().addText("Please keep on looking and return to me when you have more orbs! Good luck!");
 	}
 	
 	
@@ -260,8 +260,8 @@ public class InputManager implements KeyListener {
 						
 						if(((Person)ent).willGiveItem()) {
 							//Re-assign the text boxes of each NPC
-							worldState.getNPCManager().clearTextBoxes();
-							worldState.getNPCManager().initialize();
+							worldState.getCurrentWorld().getNPCManager().clearTextBoxes();
+							worldState.getCurrentWorld().getNPCManager().initialize();
 						}
 					}
 					

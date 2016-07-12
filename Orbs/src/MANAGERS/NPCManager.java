@@ -2,14 +2,14 @@ package MANAGERS;
 
 import ENTITIES.Person;
 import ITEMS.Orb;
-import STATES.WorldState;
+import WORLD.World;
 import visualje.Vector2D;
 
 /** Handles adding all of the NPCs to the game world. */
 public class NPCManager {
 
-	//The world state, used to access many different elements in the game world.
-	WorldState worldState;
+	//The world, used to access many different elements in the game world.
+	World world;
 	
 	//The NPCs
 	Person randomGuy_1, randomGuy_2, randomGuy_3, randomGuy_4, randomGuy_5;
@@ -19,23 +19,8 @@ public class NPCManager {
 	
 	
 	////////////// Constructor ///////////////	
-	public NPCManager(WorldState ws) { 
-		worldState = ws;
-		
-		//Create the NPCs. The positions have to be added to the world's position to arrange them properly.
-		randomGuy_1 = new Person(new Vector2D(24,19).add(worldState.getCurrentWorld().position));
-		randomGuy_2 = new Person(new Vector2D(18,12).add(worldState.getCurrentWorld().position));
-		randomGuy_3 = new Person(new Vector2D(12,17).add(worldState.getCurrentWorld().position));
-		randomGuy_4 = new Person(new Vector2D(15,25).add(worldState.getCurrentWorld().position));
-			randomGuy_4.willGiveItem(true);
-			randomGuy_4.setItemToGive(new Orb());
-		randomGuy_5 = new Person(new Vector2D(24,25).add(worldState.getCurrentWorld().position));
-		scientist = new Person(new Vector2D(24, 11).add(worldState.getCurrentWorld().position));
-		chemicalController_1 = new Person(new Vector2D(62,55).add(worldState.getCurrentWorld().position));
-		chemicalController_2 = new Person(new Vector2D(62,56).add(worldState.getCurrentWorld().position));
-		chemicalController_3 = new Person(new Vector2D(62,57).add(worldState.getCurrentWorld().position));
-		barrierToLastPart = new Person(new Vector2D(46,29).add(worldState.getCurrentWorld().position));
-		
+	public NPCManager(World w) { 
+		world = w;
 	}
 	
 	
@@ -55,6 +40,36 @@ public class NPCManager {
 		barrierToLastPart.getTextBox().clear();
 	}
 	
+	/** Creates all of the NPC objects. */
+	public void createNPCs() {
+		//Create the NPCs. The positions have to be added to the world's position to arrange them properly.
+		randomGuy_1 = new Person(new Vector2D(24,19).add(world.position));
+		randomGuy_2 = new Person(new Vector2D(18,12).add(world.position));
+		randomGuy_3 = new Person(new Vector2D(12,17).add(world.position));
+		randomGuy_4 = new Person(new Vector2D(15,25).add(world.position));
+			randomGuy_4.willGiveItem(true);
+			randomGuy_4.setItemToGive(new Orb());
+		randomGuy_5 = new Person(new Vector2D(24,25).add(world.position));
+		scientist = new Person(new Vector2D(24, 11).add(world.position));
+		chemicalController_1 = new Person(new Vector2D(62,55).add(world.position));
+		chemicalController_2 = new Person(new Vector2D(62,56).add(world.position));
+		chemicalController_3 = new Person(new Vector2D(62,57).add(world.position));
+		barrierToLastPart = new Person(new Vector2D(46,29).add(world.position));
+	}
+	
+	/** Adds to the list of entities in world. */
+	public void addToGame() {
+		//Once you are done setting them up, add them to the list of entities.
+		world.addEntity(randomGuy_1);
+		world.addEntity(randomGuy_2);
+		world.addEntity(randomGuy_3);
+		world.addEntity(randomGuy_4);
+		world.addEntity(randomGuy_5);
+		world.addEntity(scientist);
+		world.addEntity(chemicalController_1);
+		world.addEntity(chemicalController_2);
+		world.addEntity(chemicalController_3);
+	}
 	
 	
 	////////////// Abstract Methods ///////////////
@@ -131,14 +146,14 @@ public class NPCManager {
 			scientist.getTextBox().addText("Oh, hello! So you've found some of my orbs?");
 			scientist.getTextBox().addText("That's wonderful!");
 			scientist.getTextBox().addText("Let's see how many you've found...");
-			scientist.getTextBox().addText("Hmm... Well it looks like you have found " + worldState.getPlayer().getOrbCount() + " out of 20 orbs.");
+			scientist.getTextBox().addText("Hmm... Well it looks like you have found " + world.getWorldState().getPlayer().getOrbCount() + " out of 20 orbs.");
 			scientist.getTextBox().addText("That's good! But there are still more to find.");
 			scientist.getTextBox().addText("Please keep on looking and return to me when you have more orbs! Good luck!");
 		}
 		
 		
 		//Chemical Controllers
-		if(worldState.getPlayer().inventoryContains("Hazmat Suit")) {
+		if(world.getWorldState().getPlayer().inventoryContains("Hazmat Suit")) {
 			chemicalController_2.position.add(new Vector2D(-1,-1));		//Change the position of the NPCs
 			chemicalController_3.position.add(new Vector2D(1,-2));
 			
@@ -169,21 +184,7 @@ public class NPCManager {
 		//The person who blocks the way to the last part of the game
 		barrierToLastPart.getTextBox().addText("...");
 		
-		
-		
-		
-		
-		
-		//Once you are done setting them up, add them to the list of entities.
-		worldState.getCurrentWorld().addEntity(randomGuy_1);
-		worldState.getCurrentWorld().addEntity(randomGuy_2);
-		worldState.getCurrentWorld().addEntity(randomGuy_3);
-		worldState.getCurrentWorld().addEntity(randomGuy_4);
-		worldState.getCurrentWorld().addEntity(randomGuy_5);
-		worldState.getCurrentWorld().addEntity(scientist);
-		worldState.getCurrentWorld().addEntity(chemicalController_1);
-		worldState.getCurrentWorld().addEntity(chemicalController_2);
-		worldState.getCurrentWorld().addEntity(chemicalController_3);
+		//addToGame();
 	}
 	
 	

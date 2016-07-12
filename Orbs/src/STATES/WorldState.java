@@ -10,7 +10,6 @@ import ENTITIES.SearchableEntity;
 import ITEMS.Item;
 import MANAGERS.GameStateManager;
 import MANAGERS.ItemManager;
-import MANAGERS.NPCManager;
 import MISC.Door;
 import MISC.TextBox;
 import WORLD.World;
@@ -30,9 +29,6 @@ public class WorldState extends GameState {
 	
 	//The player
 	Player player;
-	
-	//The NPC manager
-	NPCManager npcManager;
 	
 	//The Item Manager
 	ItemManager itemManager;
@@ -55,7 +51,6 @@ public class WorldState extends GameState {
 			currentWorld.setOpen(true);
 			
 		player = new Player(this);
-		npcManager = new NPCManager(this);
 		itemManager = new ItemManager(this);
 		inventoryTextBox = new TextBox();
 		updatePlayersItems();
@@ -127,10 +122,6 @@ public class WorldState extends GameState {
 	public TextBox getInventoryTextBox() { return inventoryTextBox; }
 	
 	
-	/** Returns the npc manager, which can then be used for performing actions on NPCs. */
-	public NPCManager getNPCManager() { return npcManager; }
-	
-	
 	
 	////////////// Setters /////////////
 	
@@ -165,7 +156,6 @@ public class WorldState extends GameState {
 					setCurrentWorld(houseWorld);
 					getCurrentWorld().setPosition(getCurrentWorld().position.add(new Vector2D(0,1)));
 					getCurrentWorld().initialize();
-					getNPCManager().initialize();
 				}
 				break;
 			}
@@ -174,7 +164,6 @@ public class WorldState extends GameState {
 					setCurrentWorld(mainWorld);
 					getCurrentWorld().setPosition(getCurrentWorld().position.add(new Vector2D(0,-1)));
 					getCurrentWorld().initialize();
-					getNPCManager().initialize();
 				}
 				break;
 			}
@@ -191,7 +180,6 @@ public class WorldState extends GameState {
 			currentWorld.initialize();
 			
 			player.initialize();
-			npcManager.initialize();
 			itemManager.initialize();
 		}
 	}
