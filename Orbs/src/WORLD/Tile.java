@@ -71,6 +71,18 @@ public class Tile {
 		if(type == TileType.House_Door) {
 			g.drawImage(Assets.house_door, t, null);
 		}
+		if(type == TileType.Wood_Floor) {
+			g.drawImage(Assets.wood_floor, t, null);
+		}
+		if(type == TileType.Rug_Left) {
+			g.drawImage(Assets.rug_left, t, null);
+		}
+		if(type == TileType.Rug_Right) {
+			g.drawImage(Assets.rug_right, t, null);
+		}
+		if(type == TileType.BLACK_SPACE) {
+			g.drawImage(Assets.black_space, t, null);
+		}
 	}
 	
 	
