@@ -14,6 +14,10 @@ public class NPCManager {
 	//The NPCs
 	Person randomGuy_1, randomGuy_2, randomGuy_3, randomGuy_4, randomGuy_5;
 	Person scientist;
+<<<<<<< HEAD
+=======
+	Person chemicalController_1, chemicalController_2, chemicalController_3;
+>>>>>>> parent of 46805e2... More sprites + started working on doors
 	
 	
 	////////////// Constructor ///////////////	
@@ -49,9 +53,12 @@ public class NPCManager {
 		chemicalController_1 = new Person(new Vector2D(62,55));
 		chemicalController_2 = new Person(new Vector2D(62,56));
 		chemicalController_3 = new Person(new Vector2D(62,57));
+<<<<<<< HEAD
 >>>>>>> parent of 46805e2... More sprites + started working on doors
 =======
 >>>>>>> parent of 622f2f3... New story element: Barrier NPCs
+=======
+>>>>>>> parent of 46805e2... More sprites + started working on doors
 		
 		
 		initialize();
@@ -68,6 +75,12 @@ public class NPCManager {
 		randomGuy_4.getTextBox().clear();
 		randomGuy_5.getTextBox().clear();
 		scientist.getTextBox().clear();
+<<<<<<< HEAD
+=======
+		chemicalController_1.getTextBox().clear();
+		chemicalController_2.getTextBox().clear();
+		chemicalController_3.getTextBox().clear();
+>>>>>>> parent of 46805e2... More sprites + started working on doors
 	}
 	
 	
@@ -150,6 +163,16 @@ public class NPCManager {
 		}
 		
 		
+<<<<<<< HEAD
+=======
+		
+		
+		
+		
+		
+		
+		
+>>>>>>> parent of 46805e2... More sprites + started working on doors
 		//Once you are done setting them up, add them to the list of entities.
 <<<<<<< HEAD
 		worldState.getCurrentWorld().addEntity(randomGuy_1);

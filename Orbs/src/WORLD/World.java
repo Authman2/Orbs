@@ -510,6 +510,7 @@ public class World {
 					tiles[x][y] = new Tile(TileType.House_Door, false);
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if(map.currentMap[y][x] == 33) {
 					tiles[x][y] = new Tile(TileType.Wood_Floor, false);
 				}
@@ -522,6 +523,8 @@ public class World {
 				if(map.currentMap[y][x] == 48) {
 					tiles[x][y] = new Tile(TileType.BLACK_SPACE, true);
 				}
+=======
+>>>>>>> parent of 46805e2... More sprites + started working on doors
 =======
 >>>>>>> parent of 46805e2... More sprites + started working on doors
 			}	

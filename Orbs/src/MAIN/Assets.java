@@ -17,10 +17,8 @@ public class Assets {
 	//A house
 	public static BufferedImage house_topLeft, house_topMiddle, house_topRight,
 								house_bottomLeft, house_bottomMiddle, house_bottomRight,
-								house_door, wood_floor, rug_left, rug_right;
+								house_door;
 	
-	//Black space
-	public static BufferedImage black_space;
 	
 	/* The player sprites */
 	
@@ -67,10 +65,6 @@ public class Assets {
 		house_door = spriteSheet.getPart(192, 64, 32, 32);
 		tree_3 = spriteSheet.getPart(96, 32, 32, 32);
 		rock = spriteSheet.getPart(128, 32, 32, 32);
-		wood_floor = spriteSheet.getPart(96, 64, 32, 32);
-		rug_left = spriteSheet.getPart(128, 64, 32, 32);
-		rug_right = spriteSheet.getPart(160, 96, 32, 32);
-		black_space = spriteSheet.getPart(96, 96, 32, 32);
 	}
 	
 }
