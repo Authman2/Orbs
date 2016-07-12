@@ -13,12 +13,13 @@ import MANAGERS.ItemManager;
 import MANAGERS.NPCManager;
 import MISC.TextBox;
 import WORLD.World;
+import visualje.Vector2D;
 
 public class WorldState extends GameState {
 
 	
-	//The world that is currently being displayed
-	World world;
+	//The current world that is currently being displayed
+	World currentWorld;
 	
 	//The player
 	Player player;
@@ -36,50 +37,58 @@ public class WorldState extends GameState {
 	public WorldState(GameStateManager gsm) {
 		super(gsm);
 		
-		world = new World(100,100, this);
+		//Create the main game world
+		currentWorld = new World("Main", 100, 100, 0, this);
+			currentWorld.setOpen(true);
+			currentWorld.setPosition(new Vector2D(-5,-4));
+		
 		player = new Player(this);
 		npcManager = new NPCManager(this);
 		itemManager = new ItemManager(this);
 		inventoryTextBox = new TextBox();
 		updatePlayersItems();
+		
+		initialize();
 	}
 	
 	
 	////////////// Getters /////////////
 	
 	/** Returns the world that is being displayed in this world state. */
-	public World getWorld() { return world; }
+	public World getCurrentWorld() { return currentWorld; }
+
 	
 	/** Returns the player. */
 	public Player getPlayer() { return player; }
+	
 	
 	/** Returns whether or not a text box is open by an NPC. */
 	public boolean textBoxesOpen() { 
 		boolean open = false;
 		
 		//Go through each entity
-		for(Entity ent : world.getEntities()) { 
+		for(Entity ent : currentWorld.getEntities()) { 
 			if( ((NPC)ent).getTextBox().isOpen()) {
 				open = true; 
 			}
 		}
 
 		//Go through each item on the ground
-		for(Item itm : world.getDroppedItems()) {
+		for(Item itm : currentWorld.getDroppedItems()) {
 			if(itm.getTextBox().isOpen()) {
 				open = true;
 			}
 		}
 		
 		//Go through each searchable entity
-		for(SearchableEntity se : world.getSearchables()) {
+		for(SearchableEntity se : currentWorld.getSearchables()) {
 			if(se.getTextBox().isOpen()) {
 				open = true;
 			}
 		}
 		
 		//Go through each action entity
-		for(ActionEntity ae : world.getActionEntities()) {
+		for(ActionEntity ae : currentWorld.getActionEntities()) {
 			if(ae.getTextBox().isOpen()) {
 				open = true;
 			}
@@ -102,6 +111,7 @@ public class WorldState extends GameState {
 	public NPCManager getNPCManager() { return npcManager; }
 	
 	
+	
 	////////////// Setters /////////////
 	
 	/** Updates what the text box that shows the items that the player has should display. */
@@ -111,7 +121,7 @@ public class WorldState extends GameState {
 		
 		if(getPlayer().getInventory().size() > 0) {
 			//Add an introductory line of text
-			inventoryTextBox.addText("The player currently has these items: ");
+			inventoryTextBox.addText("The player currently qhas these items: ");
 			
 			//Add descriptions for each item that the player has.
 			for(Item itm : getPlayer().getInventory()) {
@@ -121,16 +131,20 @@ public class WorldState extends GameState {
 			inventoryTextBox.addText("The player has no items.");
 		}
 	}
-	
-	
-	
 
+	
+	/** Sets what the current game world should be. */
+	public void setCurrentWorld(World world) { currentWorld = world; }
+
+	
+	
 	////////////// Abstract Methods /////////////
 	 
 	@Override
 	public void initialize() {
-		if(world != null) {
-			world.initialize();
+		if(currentWorld != null) {
+			currentWorld.initialize();
+			
 			player.initialize();
 			npcManager.initialize();
 			itemManager.initialize();
@@ -139,16 +153,23 @@ public class WorldState extends GameState {
 
 	@Override
 	public void update(double time) {
-		if(world != null) {
-			world.update(time);
+		if(currentWorld != null) {
+			
+			//Only update the one that is open
+			if(currentWorld.isOpen()) { currentWorld.update(time); }
+			
+			
 			player.update(time);
 		}
 	}
 
 	@Override
 	public void draw(Graphics2D g) {
-		if(world != null) {
-			world.draw(g);
+		if(currentWorld != null) {
+			
+			//Only draw the one that is open
+			if(currentWorld.isOpen()) { currentWorld.draw(g); }
+			
 			player.draw(g);
 			if(inventoryTextBox.isOpen()) inventoryTextBox.draw(g);
 		}
