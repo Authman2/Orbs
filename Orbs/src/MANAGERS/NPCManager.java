@@ -1,10 +1,13 @@
 package MANAGERS;
 
 import ENTITIES.Person;
+import ITEMS.Coin;
+import ITEMS.Container;
 import ITEMS.Coupon;
 import ITEMS.Hatchet;
 import ITEMS.HazmatSuit;
 import ITEMS.Orb;
+import ITEMS.Pickaxe;
 import ITEMS.SewingKit;
 import ITEMS.Water;
 import WORLD.World;
@@ -37,6 +40,13 @@ public class NPCManager {
 	
 	//The NPCs in house_13
 	Person hazmatSuitGiver;
+	Person hazmatSuitGiverWife;
+	
+	//The NPCs in house_24
+	Person containerSeller;
+	
+	//The NPCs in house_28
+	Person retiredMineWorker;
 	
 	
 	////////////// Constructor ///////////////	
@@ -81,6 +91,9 @@ public class NPCManager {
 		giveWaterPerson.getTextBox().clear();
 		sewingShopOwner.getTextBox().clear();
 		hazmatSuitGiver.getTextBox().clear();
+		hazmatSuitGiverWife.getTextBox().clear();
+		retiredMineWorker.getTextBox().clear();
+		containerSeller.getTextBox().clear();
 	}
 	
 	/** Creates all of the NPC objects. */
@@ -93,7 +106,8 @@ public class NPCManager {
 		randomPerson_3 = new Person(new Vector2D(12,17).add(world.position));
 		randomPerson_4 = new Person(new Vector2D(15,25).add(world.position));
 			randomPerson_4.willGiveItem(true);
-			randomPerson_4.setItemToGive(new Orb());
+			Coin coin = new Coin(); coin.setQuantity(5);
+			randomPerson_4.setItemToGive(coin);
 		randomPerson_5 = new Person(new Vector2D(24,25).add(world.position));
 		randomPerson_6 = new Person(new Vector2D(22,61).add(world.position));
 		randomPerson_7 = new Person(new Vector2D(18,67).add(world.position));
@@ -134,6 +148,13 @@ public class NPCManager {
 		
 		/* House 13 NPCs */
 		hazmatSuitGiver = new Person(new Vector2D(4,5).add(world.position));
+		hazmatSuitGiverWife = new Person(new Vector2D(9,3).add(world.position));
+		
+		/* House 24 NPCs */
+		containerSeller = new Person(new Vector2D(7,2).add(world.position));
+		
+		/* House 28 NPCs */
+		retiredMineWorker = new Person(new Vector2D(11,2).add(world.position));
 	}
 	
 	/** Adds to the list of entities in world. */
@@ -184,6 +205,15 @@ public class NPCManager {
 		
 		if(world.getName().equals("House_13")) {
 			world.addEntity(hazmatSuitGiver);
+			world.addEntity(hazmatSuitGiverWife);
+		}
+		
+		if(world.getName().equals("House_24")) {
+			world.addEntity(containerSeller);
+		}
+		
+		if(world.getName().equals("House_28")) {
+			world.addEntity(retiredMineWorker);
 		}
 	}
 	
@@ -213,10 +243,10 @@ public class NPCManager {
 		//Random person 4
 		if(randomPerson_4.getItemToGive() != null) {
 			randomPerson_4.getTextBox().addText("Oh, you're going out of town?");
-			randomPerson_4.getTextBox().addText("Well you should be careful, with that thief on the loose you never know what might happen to you.");
-			randomPerson_4.getTextBox().addText("You know what, I admire your bravery. I'm way too scared to leave town knowing that I might run into the criminal!");
-			randomPerson_4.getTextBox().addText("Here, take this. It may not be much, but I just feel like you should be rewarded for having the courage to find the thief.");
-			randomPerson_4.getTextBox().addText("Good luck, and I hope you can get to the bottom of this case!");
+			randomPerson_4.getTextBox().addText("Well you should be careful, with that thief on the loose you should   always stay alert in case a dangerous situation comes up.");
+			randomPerson_4.getTextBox().addText("Also, you always carry some change with you in case you need to make  a quick purchase.");
+			randomPerson_4.getTextBox().addText("Here, I'll give you some in case you don't have any.");
+			
 			randomPerson_4.getTextBox().addText("You were given a(n) " + randomPerson_4.getItemToGive().getName() + "!");
 		} else {
 			randomPerson_4.getTextBox().addText("Good luck out there!");
@@ -224,8 +254,8 @@ public class NPCManager {
 		
 			
 		//Random person 5
-		randomPerson_5.getTextBox().addText("Everybody in town is worried about being robbed after what happened to that scientist last night.");
-		randomPerson_5.getTextBox().addText("I'm not worried though, I set up a bunch of alarms in my house that will detect any kind of movement!");
+		randomPerson_5.getTextBox().addText("Everybody in town is worried about being robbed after what happened   to that scientist last night.");
+		randomPerson_5.getTextBox().addText("I'm not worried though, I set up a bunch of alarms in my house that   will detect any kind of movement!");
 		randomPerson_5.getTextBox().addText("Unfortunately that means that I can't actually go inside my house...");
 		
 		
@@ -331,9 +361,9 @@ public class NPCManager {
 			scientist.getTextBox().addText("I could lose all of my funding for this!");
 			scientist.getTextBox().addText("I could even go to jail if they end up in the wrong hands!");
 			scientist.getTextBox().addText("Huh? What's that?");
-			scientist.getTextBox().addText("Oh, I'm sorry, I didn't hear you. I was too busy worrying about my experiement...");
+			scientist.getTextBox().addText("Oh, I'm sorry, I didn't hear you. I was too busy worrying about my    experiement...");
 			scientist.getTextBox().addText("Would you like to hear about it?");
-			scientist.getTextBox().addText("You would? Great! It's very simple, but very powerful at the same time.");
+			scientist.getTextBox().addText("You would? Great! It's very interesting, if I do say so myself!");
 			scientist.getTextBox().addText("To put it simply, I have created 20 multi-colored orbs.");
 			scientist.getTextBox().addText("Each orb holds great power, and is capable of bending reality at will!");
 			scientist.getTextBox().addText("I planned on using them to cure diseases, end world hunger, etc...");
@@ -346,7 +376,7 @@ public class NPCManager {
 			scientist.getTextBox().addText("What do you say?");
 			scientist.getTextBox().addText("You'll do it? Oh thank you very much! I really appreciate this!");
 			scientist.getTextBox().addText("Now, what you must do is look for all 20 of the orbs.");
-			scientist.getTextBox().addText("I have no idea where they might be, so make sure you look beneath every rock, behind every tree, and right under your nose!");
+			scientist.getTextBox().addText("I have no idea where they might be, so make sure you look beneath     every rock, behind every tree, and right under your nose!");
 			scientist.getTextBox().addText("Also ask around! Other people might know where they are, too!");
 			scientist.getTextBox().addText("The point is to look everywhere. It is anyone's guess where these orbs may be!");
 			scientist.getTextBox().addText("Now go! Please bring back my most powerful inventions!");
@@ -358,7 +388,7 @@ public class NPCManager {
 			scientist.getTextBox().addText("Let's see how many you've found...");
 			scientist.getTextBox().addText("Hmm... Well it looks like you have found " + world.getWorldState().getPlayer().getOrbCount() + " out of 20 orbs.");
 			scientist.getTextBox().addText("That's good! But there are still more to find.");
-			scientist.getTextBox().addText("Please keep on looking and return to me when you have more orbs! Good luck!");
+			scientist.getTextBox().addText("Please keep on looking and return to me when you have more orbs!      Good luck!");
 		}
 		
 		
@@ -431,7 +461,7 @@ public class NPCManager {
 		treeCutterFriend.getTextBox().addText("Why am I standing in front of this house, you ask?");
 		treeCutterFriend.getTextBox().addText("Well, it's actually not my house. It belongs to a friend.");
 		treeCutterFriend.getTextBox().addText("He asked me to watch it for him while he's out chopping fire-wood.");
-		treeCutterFriend.getTextBox().addText("Can't let that thief steal any of the logs, can we?");
+		treeCutterFriend.getTextBox().addText("Can't let that thief steal any of our logs, now can we?");
 		
 		
 		//Water giving person
@@ -466,8 +496,8 @@ public class NPCManager {
 		
 		//Sewing shop owner
 		if(!world.getWorldState().getPlayer().inventoryContains("Coin") && !world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
-			sewingShopOwner.getTextBox().addText("Hello there! I'm Gina and I sell sewing kits.");
-			sewingShopOwner.getTextBox().addText("If you would like to buy one you will have to pay $12.");
+			sewingShopOwner.getTextBox().addText("Hello there! I'm Gina and this is my sewing shop.");
+			sewingShopOwner.getTextBox().addText("If you would like to buy a sewing kit you will have to pay $12.");
 			sewingShopOwner.getTextBox().addText("I'm sorry, it looks like you don't have enough money to buy one.");
 			sewingShopOwner.getTextBox().addText("Please come back when you have enough.");
 		} 
@@ -475,11 +505,12 @@ public class NPCManager {
 			sewingShopOwner.willGiveItem(true);
 			sewingShopOwner.setItemToGive(new SewingKit());
 			
-			sewingShopOwner.getTextBox().addText("Hello there! I'm Gina and I sell sewing kits.");
-			sewingShopOwner.getTextBox().addText("If you would like to buy one you will have to pay $12.");
+			sewingShopOwner.getTextBox().addText("Hello there! I'm Gina and this is my sewing shop.");
+			sewingShopOwner.getTextBox().addText("If you would like to buy a sewing kit you will have to pay $12.");
 			sewingShopOwner.getTextBox().addText("Looks like you have just enough!");
 			sewingShopOwner.getTextBox().addText("Here is your sewing kit!");
-			sewingShopOwner.getTextBox().addText("You received a(n) " + sewingShopOwner.getItemToGive().getName() + "!");
+			sewingShopOwner.getTextBox().addText("You pay $12 and receive a(n) " + sewingShopOwner.getItemToGive().getName() + "!");
+			world.getWorldState().getPlayer().getInventoryItem("Coin").setQuantity(world.getWorldState().getPlayer().getInventoryItem("Coin").getQuantity() - 12);
 		}
 		if(sewingShopOwner.getItemToGive() == null && world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
 			sewingShopOwner.getTextBox().addText("Have fun sewing!");	
@@ -504,13 +535,63 @@ public class NPCManager {
 			hazmatSuitGiver.getTextBox().addText("...");
 			hazmatSuitGiver.getTextBox().addText("...");
 			hazmatSuitGiver.getTextBox().addText("Almost done...");
-			hazmatSuitGiver.getTextBox().addText("Finished! Here you go! Good luck taking care of the radio active      material!");
+			hazmatSuitGiver.getTextBox().addText("Finished! Here you go!");
 			hazmatSuitGiver.getTextBox().addText("You received a(n) " + hazmatSuitGiver.getItemToGive().getName() + "!");
+			hazmatSuitGiver.getTextBox().addText("Good luck taking care of the radio active      material!");
 		}
 		if(world.getWorldState().getPlayer().inventoryContains("Sewing Kit") && world.getWorldState().getPlayer().inventoryContains("Hazmat Suit")) {
 			hazmatSuitGiver.getTextBox().addText("Good luck!");
 		}
 		
+		
+		//Hazmat suit giver's wife
+		hazmatSuitGiverWife.getTextBox().addText("My husband works at a company that makes hazmat suits, so he always   has some lying around the house.");
+		hazmatSuitGiverWife.getTextBox().addText("You should talk to him if you need one.");
+		
+		
+		//Container seller
+		if(!world.getWorldState().getPlayer().inventoryContains("Container") && (world.getWorldState().getPlayer().inventoryContains("Coin") && world.getWorldState().getPlayer().getQuantity("Coin") >= 40)) {
+			containerSeller.willGiveItem(true);
+			containerSeller.setItemToGive(new Container());
+			
+			containerSeller.getTextBox().addText("Hi there! I sell all sorts of jars and containers.");
+			containerSeller.getTextBox().addText("Would you like to hear about our item of the day? It is a small, square box used to store potentially dangerous materials.");
+			containerSeller.getTextBox().addText("Nothing will slip out of this container! It can handle anything you put into it, and it's perfect for any type of storage!");
+			containerSeller.getTextBox().addText("If you're interested, I can sell it to you for $40.");
+			containerSeller.getTextBox().addText("You'll take it? Great! Here you go!");
+			containerSeller.getTextBox().addText("You pay $40 receive a(n) " + containerSeller.getItemToGive().getName() + "!");
+			containerSeller.getTextBox().addText("Thank you for shopping with us!");
+			world.getWorldState().getPlayer().getInventoryItem("Coin").setQuantity(world.getWorldState().getPlayer().getInventoryItem("Coin").getQuantity() - 40);
+		} 
+		if(!world.getWorldState().getPlayer().inventoryContains("Container") && (!world.getWorldState().getPlayer().inventoryContains("Coin") || world.getWorldState().getPlayer().getQuantity("Coin") < 40)) {
+			containerSeller.getTextBox().addText("Hi there! I sell all sorts of jars and containers.");
+			containerSeller.getTextBox().addText("Would you like to hear about our item of the day? It's a small, square container used to store potentially dangerous materials.");
+			containerSeller.getTextBox().addText("Nothing will slip out of this container! It can handle anything you   put into it, and it's perfect for any type of storage!");
+			containerSeller.getTextBox().addText("If you're interested, I can sell it to you for $40.");
+			containerSeller.getTextBox().addText("I'm sorry, it looks like you don't have enough money to purchase this product.");
+			containerSeller.getTextBox().addText("Come back when you have enough! I'll hold it for you until you return!");
+		}
+		if(world.getWorldState().getPlayer().inventoryContains("Container")) {
+			containerSeller.getTextBox().addText("Thank you for shopping with us!");
+		}
+		
+		
+		//Retired Mine Worker
+		if(!world.getWorldState().getPlayer().inventoryContains("Pickaxe")) {
+			retiredMineWorker.willGiveItem(true);
+			retiredMineWorker.setItemToGive(new Pickaxe());
+			
+			retiredMineWorker.getTextBox().addText("Hello there!");
+			retiredMineWorker.getTextBox().addText("What's that? You're looking for some mining equipment?");
+			retiredMineWorker.getTextBox().addText("Perfect! I was hoping to get rid of some of this old junk anyway.");
+			retiredMineWorker.getTextBox().addText("Hmm... Let's see...");
+			retiredMineWorker.getTextBox().addText("Ah! How about this pickaxe? It's perfect for chipping away at rocks.");
+			retiredMineWorker.getTextBox().addText("How much does it cost? Don't even worry about that. You can have it for free.");
+			retiredMineWorker.getTextBox().addText("But be careful, that pickaxe is very old. Wouldn't want it to break now would we?");
+			retiredMineWorker.getTextBox().addText("You received a(n) " + retiredMineWorker.getItemToGive().getName() + "!");
+		} else {
+			retiredMineWorker.getTextBox().addText("Take good care of the pickaxe!");
+		}
 	}
 	
 	

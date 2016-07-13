@@ -119,6 +119,18 @@ public class World {
 			coin.setQuantity(12);
 			se.setContainedItem(coin);
 		}
+		
+		if(se.position.equals(47 + position.X, 20 + position.Y)) {
+			Coin coin = new Coin();
+			coin.setQuantity(26);
+			se.setContainedItem(coin);
+		}
+		
+		if(se.position.equals(46 + position.X, 46 + position.Y)) {
+			Coin coin = new Coin();
+			coin.setQuantity(14);
+			se.setContainedItem(coin);
+		}
 	}
 	
 	
@@ -745,7 +757,11 @@ public class World {
 			//Draw all of the tiles
 			for(Tile[] ts : tiles) {
 				for(Tile t : ts) {
-					t.draw(g);
+					if(t.position.X >= 0 && t.position.X <= 15) {
+						if(t.position.Y >= 0 && t.position.Y <= 11) {
+							t.draw(g);
+						}
+					}
 				}
 			}
 			

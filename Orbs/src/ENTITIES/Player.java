@@ -4,6 +4,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import ITEMS.Coin;
+import ITEMS.Hatchet;
 import ITEMS.Item;
 import MAIN.Animator;
 import MAIN.Assets;
@@ -26,6 +28,8 @@ public class Player extends Entity {
 		position = new Vector2D(8,6);
 		items = new ArrayList<Item>();
 		worldState = ws;
+		addItemToInventory(new Hatchet());
+		addItemToInventory(new Coin(40));
 		initialize();
 	}
 	
@@ -58,6 +62,28 @@ public class Player extends Entity {
 	}
 	
 	
+	/** Returns the quantity of a particular item in the player's inventory. */
+	public int getQuantity(String name) {
+		for(Item itm : items) {
+			if(itm.getName().equals(name)) {
+				return itm.getQuantity();
+			}
+		}
+		return 0;
+	}
+	
+	
+	/** Returns a particular item from the player's inventory. */
+	public Item getInventoryItem(String name) {
+		for(Item itm : items) {
+			if(itm.getName().equals(name)) {
+				return itm;
+			}
+		}
+		return null;
+	}
+	
+	
 	///////// Setters //////////
 	
 	/** Returns a list of the items that the player has acquired. */
@@ -71,7 +97,7 @@ public class Player extends Entity {
 			
 			//If there is, update the quantity of that item.
 			if(it.getName().equals(itm.getName())) {
-				it.setQuantity(it.getQuantity() + 1);
+				it.setQuantity(it.getQuantity() + itm.getQuantity());
 				break;
 			}
 			
@@ -139,11 +165,10 @@ public class Player extends Entity {
 				worldState.updatePlayersItems();
 			}
 		}
-		//You cannot have the coins and a sewing kit in your inventory at the same time
-		if(inventoryContains("Sewing Kit")) { 
-			if(inventoryContains("Coin")) {
+		//Get rid of any coins that you have if the quantity is <= 0.
+		if(inventoryContains("Coin")) {
+			if(getQuantity("Coin") <= 0) {
 				removeFromInventory("Coin");
-				worldState.updatePlayersItems();
 			}
 		}
 	}
