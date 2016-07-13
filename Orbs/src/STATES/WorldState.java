@@ -9,7 +9,6 @@ import ENTITIES.Player;
 import ENTITIES.SearchableEntity;
 import ITEMS.Item;
 import MANAGERS.GameStateManager;
-import MANAGERS.ItemManager;
 import MISC.Door;
 import MISC.TextBox;
 import WORLD.World;
@@ -30,9 +29,6 @@ public class WorldState extends GameState {
 	//The player
 	Player player;
 	
-	//The Item Manager
-	ItemManager itemManager;
-	
 	//A text box for displaying all of the items that the player has
 	TextBox inventoryTextBox;
 	
@@ -44,7 +40,6 @@ public class WorldState extends GameState {
 		createWorlds();
 			
 		player = new Player(this);
-		itemManager = new ItemManager(this);
 		inventoryTextBox = new TextBox();
 		updatePlayersItems();
 		
@@ -182,7 +177,6 @@ public class WorldState extends GameState {
 			currentWorld.initialize();
 			
 			player.initialize();
-			itemManager.initialize();
 		}
 	}
 

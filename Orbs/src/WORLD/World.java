@@ -10,6 +10,7 @@ import ITEMS.Coin;
 import ITEMS.Item;
 import ITEMS.Orb;
 import MAIN.Assets;
+import MANAGERS.ItemManager;
 import MANAGERS.NPCManager;
 import MISC.Door;
 import STATES.WorldState;
@@ -43,6 +44,9 @@ public class World {
 	
 	//Handles all of the NPCs for this world
 	NPCManager npcManager;
+	
+	//Handles all of the items for this world
+	ItemManager itemManager;
 	
 	//All of the entities in the world, excluding the player
 	ArrayList<Entity> entities;
@@ -78,6 +82,7 @@ public class World {
 		doors = new ArrayList<Door>();
 		worldState = ws;
 		npcManager = new NPCManager(this);
+		itemManager = new ItemManager(this);
 	}
 	
 	
@@ -693,6 +698,10 @@ public class World {
 		npcManager.createNPCs();
 		npcManager.initialize();
 		npcManager.addToGame();
+		
+		//Initialize the item manager
+		itemManager.initialize();
+		itemManager.addToGame();
 	}
 	
 	

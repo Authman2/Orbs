@@ -414,10 +414,16 @@ public class InputManager implements KeyListener {
 				//If you are next to a dropped item and try to interact with it, pick it up and display the acquired message.
 				if(itm.isNextTo(worldState.getPlayer())) {
 					
-					itm.getTextBox().toggle();						//Open a text box to tell the user what he/she got
-					worldState.getPlayer().addItemToInventory(itm);		//Add that item to the user's list of items
-					worldState.updatePlayersItems();				//Update which items the player has
-					
+					if(!itm.isSpecial() || (itm.isSpecial() && worldState.getPlayer().inventoryContains(itm.getRequiredItem())) ) {
+						itm.getTextBox().toggle();						//Open a text box to tell the user what he/she got
+						worldState.getPlayer().addItemToInventory(itm);		//Add that item to the user's list of items
+						worldState.updatePlayersItems();				//Update which items the player has
+					}
+					if(itm.isSpecial() && !worldState.getPlayer().inventoryContains(itm.getRequiredItem()) ){
+						itm.getTextBox().clear();
+						itm.getTextBox().addText("You need a " + itm.getRequiredItem() + " to acquire this item.");
+						itm.getTextBox().toggle();
+					}
 					
 					//If the item was an orb and a first orb has not been collected already...
 					if(itm instanceof Orb) {
@@ -427,9 +433,13 @@ public class InputManager implements KeyListener {
 				}
 			//If there is an item's text box open, then just close it and remove the item from the game world's floor
 			} else {
+				if(!itm.isSpecial() || (itm.isSpecial() && worldState.getPlayer().inventoryContains(itm.getRequiredItem())) ) {
+					itm.getTextBox().toggle();
+					worldState.getCurrentWorld().getDroppedItems().remove(itm);
+				} else {
+					itm.getTextBox().nextSlide();
+				}
 				
-				itm.getTextBox().toggle();
-				worldState.getCurrentWorld().getDroppedItems().remove(itm);
 				break;
 				
 			}

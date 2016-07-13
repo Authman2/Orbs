@@ -14,7 +14,8 @@ public class Orb extends Item {
 	/* This static boolean value determines whether or not the player has picked up at least ONE orb in the game. The scientist 
 	 * will say something different to the player depending on whether or not he/she has collected an orb already and how many
 	 * orbs have been collected. */
-	public static boolean pickedUpFirstOrb = false;
+	public static boolean pickedUpFirstOrb = false;	
+	
 	
 	
 	//////////// Constructors //////////////
@@ -30,6 +31,7 @@ public class Orb extends Item {
 	
 	/** Tells the game that the player has picked up an orb for the first time. */
 	public static void setFirstCollected() { pickedUpFirstOrb = true; }
+
 	
 	
 	////////////Abstract Methods //////////////

@@ -20,6 +20,13 @@ public abstract class Item extends Entity {
 	//The text to display when the player acquires the item.
 	String acquiredMessage;
 	
+	//Whether or not the player requires a special item to acquire this orb
+	boolean special;
+	
+	//The item required to get this orb (optional)
+	String requiredItm;
+	
+	
 
 	//////////// Constructors //////////////
 	
@@ -45,6 +52,12 @@ public abstract class Item extends Entity {
 	public void setAcquiredMessage(String message) { acquiredMessage = message; acquiredTextBox.addText(acquiredMessage); }
 	
 	
+	/** Sets whether or not this item is special and what item the player is required to have in order to get this item. */
+	public void setSpecial(boolean b, String required) {
+		special = b;
+		requiredItm = required;
+	}
+	
 	
 	///////////// Getters //////////////
 	
@@ -58,4 +71,12 @@ public abstract class Item extends Entity {
 	
 	/** Returns the text box that tells the player that he/she has acquired a new item. */
 	public TextBox getTextBox() { return acquiredTextBox; }
+	
+	
+	/** Returns the name of the required item to acquire this item. */
+	public String getRequiredItem() { return requiredItm; }
+	
+	
+	/** Returns whether or not this item requires the player to have another item to acquire it. */
+	public boolean isSpecial() { return special; }
 }
