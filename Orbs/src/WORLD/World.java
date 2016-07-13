@@ -248,54 +248,22 @@ public class World {
 	
 	
 	/** Adds door destinations. */
-	// Main World
-//	if(name.equals("Main")) {
-//		if(x == 13 && y == 9) {
-//			Door door = new Door(worldState, new Vector2D(x + worldX, y + worldY));
-//			door.setDestination(worldState.getHouseWorld_1());
-//			
-//			doors.add(door);
-//		}
-//		
-//		if(x == 33 && y == 74) {
-//			Door door = new Door(worldState, new Vector2D(x + worldX, y + worldY));
-//			door.setDestination(worldState.getHouseWorld_2());
-//			
-//			doors.add(door);
-//		}
-//		
-//		continue;
-//	//The house
-//	} else {
-//		if(x == 7 && y == 9) {
-//			Door door = new Door(worldState, new Vector2D(x + worldX, y + worldY));
-//			door.setDestination(worldState.getMainWorld());
-//			
-//			doors.add(door);
-//		}
-//	}
 	public void addDoorDestinations() {
 		if(name.equals("Main")) {
-			for(int x = 0; x < width; x++) {
-				for(int y = 0; y < height; y++) {
-					int worldX = (int)position.X;
-					int worldY = (int)position.Y;
-					
-					if(x == 13 && y == 9) {
-						Door door = new Door(worldState, new Vector2D(x + worldX, y + worldY));
-						door.setDestination(worldState.getHouseWorld_1());
-						
-						doors.add(door);
-					}
-					
-					if(x == 33 && y == 74) {
-						Door door = new Door(worldState, new Vector2D(x + worldX, y + worldY));
-						door.setDestination(worldState.getHouseWorld_2());
-						
-						doors.add(door);
-					}
-				}
-			}
+			Door d1 = new Door(1, worldState, new Vector2D(13 + position.X, 9 + position.Y));
+				d1.setDestination(worldState.getHouse(0));
+			Door d2 = new Door(1, worldState, new Vector2D(33 + position.X, 74 + position.Y));
+				d2.setDestination(worldState.getHouse(1));
+				
+			
+			doors.add(d1);
+			doors.add(d2);
+			
+		} else {
+			Door door = new Door(-1, worldState, new Vector2D(7 + position.X, 9 + position.Y));
+			door.setDestination(worldState.getMainWorld());
+			
+			doors.add(door);
 		}
 	}
 	

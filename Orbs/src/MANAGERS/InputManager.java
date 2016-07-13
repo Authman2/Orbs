@@ -25,10 +25,15 @@ public class InputManager implements KeyListener {
 	
 
 	
+	///////////// Constructor //////////////
+	
 	public InputManager(GameStateManager gsm) {
 		this.gsm = gsm;
 	}
 
+	
+	
+	////////////// Key Functions ///////////////
 
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -77,15 +82,7 @@ public class InputManager implements KeyListener {
 			/* MOVING THE MAP*/
 			mapMovement(e);
 		}
-				
 		
-//		//Testing the add water to inventory feature for teh story element with the lumberjack. 
-//		if(e.getKeyCode() == KeyEvent.VK_R) {
-//			worldState.getPlayer().addItemToInventory(new Water());
-//			worldState.updatePlayersItems();
-//			worldState.getCurrentWorld().getNPCManager().initialize();
-//		}
-//		
 		
 		/* INTERACTION */
 		

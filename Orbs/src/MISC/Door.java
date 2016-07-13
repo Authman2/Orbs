@@ -19,11 +19,13 @@ public class Door {
 	//The world state for grabbing information
 	WorldState worldState;
 	
+	//The map offset for moving between worlds
+	int offset;
 	
 	
 	//////////// Constructors ////////////
 	
-	public Door(WorldState ws, Vector2D pos) { worldState = ws; position = pos; }
+	public Door(int offset, WorldState ws, Vector2D pos) { this.offset = offset; worldState = ws; position = pos; }
 
 	
 	
@@ -42,7 +44,7 @@ public class Door {
 	/** Sends the player to the destination world. */
 	public void transport() {
 		worldState.setCurrentWorld(getDestination());
-		worldState.getCurrentWorld().setPosition(worldState.getCurrentWorld().position.add(new Vector2D(0,1)));
+		worldState.getCurrentWorld().setPosition(worldState.getCurrentWorld().position.add(new Vector2D(0,offset)));
 		worldState.getCurrentWorld().initialize();
 	}
 	
