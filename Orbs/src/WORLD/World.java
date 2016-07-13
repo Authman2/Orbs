@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import ENTITIES.ActionEntity;
 import ENTITIES.Entity;
 import ENTITIES.SearchableEntity;
+import ITEMS.Coin;
 import ITEMS.Item;
 import ITEMS.Orb;
 import MAIN.Assets;
@@ -106,6 +107,12 @@ public class World {
 		
 		if(se.position.equals(86 + position.X, 90 + position.Y)) {
 			se.setContainedItem(new Orb());
+		}
+		
+		if(se.position.equals(83 + position.X, 91 + position.Y)) {
+			Coin coin = new Coin();
+			coin.setQuantity(12);
+			se.setContainedItem(coin);
 		}
 	}
 	
@@ -250,20 +257,87 @@ public class World {
 	/** Adds door destinations. */
 	public void addDoorDestinations() {
 		if(name.equals("Main")) {
-			Door d1 = new Door(1, worldState, new Vector2D(13 + position.X, 9 + position.Y));
-				d1.setDestination(worldState.getHouse(0));
-			Door d2 = new Door(1, worldState, new Vector2D(33 + position.X, 74 + position.Y));
-				d2.setDestination(worldState.getHouse(1));
-				
+			/* TOWN 1 */
+			Door d1 = new Door(1, worldState, new Vector2D(13, 9).add(position));
+			Door d2 = new Door(1, worldState, new Vector2D(33, 74).add(position));
+			Door d3 = new Door(1, worldState, new Vector2D(13, 23).add(position));
+			Door d4 = new Door(1, worldState, new Vector2D(18, 56).add(position));
+			Door d5 = new Door(1, worldState, new Vector2D(15, 62).add(position));
+			Door d6 = new Door(1, worldState, new Vector2D(11, 68).add(position));
+			Door d7 = new Door(1, worldState, new Vector2D(19, 74).add(position));
+			Door d8 = new Door(1, worldState, new Vector2D(25, 65).add(position));
+			
+			/* TOWN 2 */
+			Door d9 = new Door(1, worldState, new Vector2D(35,67).add(position));
+			Door d10 = new Door(1, worldState, new Vector2D(59,85).add(position));
+			Door d11 = new Door(1, worldState, new Vector2D(77,87).add(position));
+			Door d12 = new Door(1, worldState, new Vector2D(88,83).add(position));
+			Door d13 = new Door(1, worldState, new Vector2D(81,81).add(position));
+			Door d14 = new Door(1, worldState, new Vector2D(76,76).add(position));
+			Door d15 = new Door(1, worldState, new Vector2D(84,74).add(position));
+			
+			/* TOWN 3 */
+			Door d16 = new Door(1, worldState, new Vector2D(80,56).add(position));
+			Door d17 = new Door(1, worldState, new Vector2D(87,53).add(position));
+			Door d18 = new Door(1, worldState, new Vector2D(84,48).add(position));
+			Door d19 = new Door(1, worldState, new Vector2D(76,49).add(position));
+			
+			/* TOWN 4 */
+			Door d20 = new Door(1, worldState, new Vector2D(51,20).add(position));
+			Door d21 = new Door(1, worldState, new Vector2D(61,21).add(position));
+			Door d22 = new Door(1, worldState, new Vector2D(58,14).add(position));
+			Door d23 = new Door(1, worldState, new Vector2D(49,15).add(position));
+			Door d24 = new Door(1, worldState, new Vector2D(54,10).add(position));
+			Door d25 = new Door(1, worldState, new Vector2D(64,11).add(position));
+			
+			/* TOWN 5 */
+			Door d26 = new Door(1, worldState, new Vector2D(84,16).add(position));
+			Door d27 = new Door(1, worldState, new Vector2D(88,20).add(position));
+			Door d28 = new Door(1, worldState, new Vector2D(86,26).add(position));
+			
+			//Add to the list of doors
+			doors.add(d1);
+			doors.add(d2);
+			doors.add(d3);
+			doors.add(d4);
+			doors.add(d5);
+			doors.add(d6);
+			doors.add(d7);
+			doors.add(d8);
+			doors.add(d9);
+			doors.add(d10);
+			doors.add(d11);
+			doors.add(d12);
+			doors.add(d13);
+			doors.add(d14);
+			doors.add(d15);
+			doors.add(d16);
+			doors.add(d17);
+			doors.add(d18);
+			doors.add(d19);
+			doors.add(d20);
+			doors.add(d21);
+			doors.add(d22);
+			doors.add(d23);
+			doors.add(d24);
+			doors.add(d25);
+			doors.add(d26);
+			doors.add(d27);
+			doors.add(d28);
+			
+			//Set the destinations
+			for(int i = 0; i < 28; i++) {
+				doors.get(i).setDestination(worldState.getHouse(i));
+			}
+			
+		} else {
+			Door d1 = new Door(-1, worldState, new Vector2D(7 + position.X, 9 + position.Y));
+			Door d2 = new Door(-1, worldState, new Vector2D(6 + position.X, 9 + position.Y));
+			d1.setDestination(worldState.getMainWorld());
+			d2.setDestination(worldState.getMainWorld());
 			
 			doors.add(d1);
 			doors.add(d2);
-			
-		} else {
-			Door door = new Door(-1, worldState, new Vector2D(7 + position.X, 9 + position.Y));
-			door.setDestination(worldState.getMainWorld());
-			
-			doors.add(door);
 		}
 	}
 	

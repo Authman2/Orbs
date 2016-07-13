@@ -3,7 +3,10 @@ package MANAGERS;
 import ENTITIES.Person;
 import ITEMS.Coupon;
 import ITEMS.Hatchet;
+import ITEMS.HazmatSuit;
 import ITEMS.Orb;
+import ITEMS.SewingKit;
+import ITEMS.Water;
 import WORLD.World;
 import visualje.Vector2D;
 
@@ -25,6 +28,15 @@ public class NPCManager {
 	//The NPCs in house_1
 	Person player_Relative;
 	
+	//The NPCs in house_2
+	Person giveWaterPerson;
+	Person randomPerson_21;
+	
+	//The NPCs in house_12
+	Person sewingShopOwner;
+	
+	//The NPCs in house_13
+	Person hazmatSuitGiver;
 	
 	
 	////////////// Constructor ///////////////	
@@ -65,6 +77,10 @@ public class NPCManager {
 		chemicalController_3.getTextBox().clear();
 		barrierToLastPart.getTextBox().clear();
 		player_Relative.getTextBox().clear();
+		randomPerson_21.getTextBox().clear();
+		giveWaterPerson.getTextBox().clear();
+		sewingShopOwner.getTextBox().clear();
+		hazmatSuitGiver.getTextBox().clear();
 	}
 	
 	/** Creates all of the NPC objects. */
@@ -108,6 +124,16 @@ public class NPCManager {
 		
 		/* House 1 NPCs */
 		player_Relative = new Person(new Vector2D(9,5).add(world.position));
+		
+		/* House 2 NPCs */
+		giveWaterPerson = new Person(new Vector2D(7,1).add(world.position));
+		randomPerson_21 = new Person(new Vector2D(9,5).add(world.position));
+		
+		/* House 12 NPCs */
+		sewingShopOwner = new Person(new Vector2D(7,2).add(world.position));
+		
+		/* House 13 NPCs */
+		hazmatSuitGiver = new Person(new Vector2D(4,5).add(world.position));
 	}
 	
 	/** Adds to the list of entities in world. */
@@ -145,6 +171,19 @@ public class NPCManager {
 		
 		if(world.getName().equals("House_1")) {
 			world.addEntity(player_Relative);
+		}
+		
+		if(world.getName().equals("House_2")) {
+			world.addEntity(giveWaterPerson);
+			world.addEntity(randomPerson_21);
+		}
+		
+		if(world.getName().equals("House_12")) {
+			world.addEntity(sewingShopOwner);
+		}
+		
+		if(world.getName().equals("House_13")) {
+			world.addEntity(hazmatSuitGiver);
 		}
 	}
 	
@@ -367,7 +406,8 @@ public class NPCManager {
 		if(!world.getWorldState().getPlayer().inventoryContains("Water") && !world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
 			treeCutter.getTextBox().addText("Whew! I've been out here all day chopping wood for the winter.");
 			treeCutter.getTextBox().addText("I could really go for a nice, cold drink right about now!");
-		} else if(world.getWorldState().getPlayer().inventoryContains("Water") && !world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
+		}
+		if(world.getWorldState().getPlayer().inventoryContains("Water") && !world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
 			treeCutter.willGiveItem(true);
 			treeCutter.setItemToGive(new Hatchet());
 			
@@ -379,7 +419,8 @@ public class NPCManager {
 			treeCutter.getTextBox().addText("I'm done chopping wood for today so you can have this.");
 			treeCutter.getTextBox().addText("You were given a(n) " + treeCutter.getItemToGive().getName() + "!");
 			
-		} else if(world.getWorldState().getPlayer().inventoryContains("Hatchet") && !world.getWorldState().getPlayer().inventoryContains("Water")) {
+		}
+		if(world.getWorldState().getPlayer().inventoryContains("Hatchet") && !world.getWorldState().getPlayer().inventoryContains("Water")) {
 			//Talk about the hatchet
 			treeCutter.getTextBox().addText("That hatchet can be used to cut down certain kinds of trees.");
 		}
@@ -391,6 +432,84 @@ public class NPCManager {
 		treeCutterFriend.getTextBox().addText("Well, it's actually not my house. It belongs to a friend.");
 		treeCutterFriend.getTextBox().addText("He asked me to watch it for him while he's out chopping fire-wood.");
 		treeCutterFriend.getTextBox().addText("Can't let that thief steal any of the logs, can we?");
+		
+		
+		//Water giving person
+		if(!world.getWorldState().getPlayer().inventoryContains("Coupon") && !world.getWorldState().getPlayer().inventoryContains("Water")) {
+			giveWaterPerson.getTextBox().addText("Hi there! What would you like to order?");
+			giveWaterPerson.getTextBox().addText("What's that? You don't have any money?");
+			giveWaterPerson.getTextBox().addText("I can't sell you anything if you don't have any money!");
+			giveWaterPerson.getTextBox().addText("Please come back when you have enough money.");
+		}
+		if(!world.getWorldState().getPlayer().inventoryContains("Water") && world.getWorldState().getPlayer().inventoryContains("Coupon")) {
+			giveWaterPerson.willGiveItem(true);
+			giveWaterPerson.setItemToGive(new Water());
+			
+			giveWaterPerson.getTextBox().addText("Hi there! What can I get for you?");
+			giveWaterPerson.getTextBox().addText("Oh, my mom gave you a coupon for a free sparkling water?");
+			giveWaterPerson.getTextBox().addText("That was nice of her! Let me get you that water.");
+			giveWaterPerson.getTextBox().addText("...");
+			giveWaterPerson.getTextBox().addText("...");
+			giveWaterPerson.getTextBox().addText("Here you go! Enjoy!");
+			giveWaterPerson.getTextBox().addText("You received a(n) " + giveWaterPerson.getItemToGive().getName() + "!");
+		} 
+		if(giveWaterPerson.getItemToGive() == null) {
+			if(world.getWorldState().getPlayer().inventoryContains("Water") || world.getWorldState().getPlayer().inventoryContains("Hatchet") || world.getWorldState().getPlayer().inventoryContains("Coupon"))
+				giveWaterPerson.getTextBox().addText("Enjoy your sparkling water!");
+			
+		}
+		
+		
+		//Random person 21
+		randomPerson_21.getTextBox().addText("This is my favorite place to get lunch!");
+		
+		
+		//Sewing shop owner
+		if(!world.getWorldState().getPlayer().inventoryContains("Coin") && !world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
+			sewingShopOwner.getTextBox().addText("Hello there! I'm Gina and I sell sewing kits.");
+			sewingShopOwner.getTextBox().addText("If you would like to buy one you will have to pay $12.");
+			sewingShopOwner.getTextBox().addText("I'm sorry, it looks like you don't have enough money to buy one.");
+			sewingShopOwner.getTextBox().addText("Please come back when you have enough.");
+		} 
+		if(world.getWorldState().getPlayer().inventoryContains("Coin") && !world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
+			sewingShopOwner.willGiveItem(true);
+			sewingShopOwner.setItemToGive(new SewingKit());
+			
+			sewingShopOwner.getTextBox().addText("Hello there! I'm Gina and I sell sewing kits.");
+			sewingShopOwner.getTextBox().addText("If you would like to buy one you will have to pay $12.");
+			sewingShopOwner.getTextBox().addText("Looks like you have just enough!");
+			sewingShopOwner.getTextBox().addText("Here is your sewing kit!");
+			sewingShopOwner.getTextBox().addText("You received a(n) " + sewingShopOwner.getItemToGive().getName() + "!");
+		}
+		if(sewingShopOwner.getItemToGive() == null && world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
+			sewingShopOwner.getTextBox().addText("Have fun sewing!");	
+		}
+		
+		
+		//Hazmat suit giver
+		if(!world.getWorldState().getPlayer().inventoryContains("Sewing Kit") && !world.getWorldState().getPlayer().inventoryContains("Hazmat Suit")) {
+			hazmatSuitGiver.getTextBox().addText("Hi, are you one of the volunteers that are supposed to help with the  radiation issue?");
+			hazmatSuitGiver.getTextBox().addText("You are? Great! You'll need a hazmat suit to be able to walk into town safely, though.");
+			hazmatSuitGiver.getTextBox().addText("I have one here, but unfortunately there is a hole in it...");
+			hazmatSuitGiver.getTextBox().addText("I'll need to borrow a sewing kit to patch it up quickly, but I have no idea where to get one.");
+			hazmatSuitGiver.getTextBox().addText("If you could do me a favor and get me a sewing kit, I can have your   hazmat suit ready in a couple of minutes.");
+			hazmatSuitGiver.getTextBox().addText("Come back when you have one.");
+		}
+		if(!world.getWorldState().getPlayer().inventoryContains("Hazmat Suit") && world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
+			hazmatSuitGiver.willGiveItem(true);
+			hazmatSuitGiver.setItemToGive(new HazmatSuit());
+			
+			hazmatSuitGiver.getTextBox().addText("You have a sewing kit? Perfect! Let me just patch up the suit quickly.");
+			hazmatSuitGiver.getTextBox().addText("...");
+			hazmatSuitGiver.getTextBox().addText("...");
+			hazmatSuitGiver.getTextBox().addText("...");
+			hazmatSuitGiver.getTextBox().addText("Almost done...");
+			hazmatSuitGiver.getTextBox().addText("Finished! Here you go! Good luck taking care of the radio active      material!");
+			hazmatSuitGiver.getTextBox().addText("You received a(n) " + hazmatSuitGiver.getItemToGive().getName() + "!");
+		}
+		if(world.getWorldState().getPlayer().inventoryContains("Sewing Kit") && world.getWorldState().getPlayer().inventoryContains("Hazmat Suit")) {
+			hazmatSuitGiver.getTextBox().addText("Good luck!");
+		}
 		
 	}
 	

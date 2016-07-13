@@ -132,6 +132,20 @@ public class Player extends Entity {
 				worldState.updatePlayersItems();
 			}
 		}
+		//You cannot have water and a coupon in your inventory at the same time
+		if(inventoryContains("Water")) { 
+			if(inventoryContains("Coupon")) {
+				removeFromInventory("Coupon");
+				worldState.updatePlayersItems();
+			}
+		}
+		//You cannot have the coins and a sewing kit in your inventory at the same time
+		if(inventoryContains("Sewing Kit")) { 
+			if(inventoryContains("Coin")) {
+				removeFromInventory("Coin");
+				worldState.updatePlayersItems();
+			}
+		}
 	}
 
 	@Override

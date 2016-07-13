@@ -24,9 +24,6 @@ public class WorldState extends GameState {
 	//The main world map world
 	World mainWorld;
 	
-	//The world that the player will be in after stepping on a door
-	World houseWorld_1, houseWorld_2;
-	
 	//An array of houses
 	World[] houses;
 	
@@ -64,10 +61,6 @@ public class WorldState extends GameState {
 	/** Returns the main game world. */
 	public World getMainWorld() { return mainWorld; }
 
-	
-	/** Returns house 1. */
-	public World getHouseWorld_1() { return houseWorld_1; }
-	
 	
 	/** Returns a particular house. */
 	public World getHouse(int index) { return houses[index]; }
@@ -127,20 +120,19 @@ public class WorldState extends GameState {
 	
 	/** Create the different worlds for the game*/
 	public void createWorlds() {
-		houses = new World[3];
+		houses = new World[28];
 		
 		mainWorld = new World("Main", 100, 100, 0, this);
 			mainWorld.setPosition(new Vector2D(-5,-4));
 			
-		houseWorld_1 = new World("House_1", 14, 11, 1, this);
-			houseWorld_1.setPosition(new Vector2D(1,-3));
+		//Loop through, creating houses (Worlds).
+		for(int i = 0; i < 28; i++) {	
+			World house = new World("House_"+(i+1), 14, 11, 1, this);
+			house.setPosition(new Vector2D(1,-3));
 			
-		houseWorld_2 = new World("House_2", 14, 11, 1, this);
-			houseWorld_2.setPosition(new Vector2D(1,-3));
-			
-		//Add to the array
-		houses[0] = houseWorld_1;
-		houses[1] = houseWorld_2;
+			houses[i] = house;
+		}
+
 
 		//Set the current world
 		currentWorld = mainWorld;
