@@ -4,8 +4,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import ITEMS.Coin;
-import ITEMS.Hatchet;
 import ITEMS.Item;
 import MAIN.Animator;
 import MAIN.Assets;
@@ -28,8 +26,6 @@ public class Player extends Entity {
 		position = new Vector2D(8,6);
 		items = new ArrayList<Item>();
 		worldState = ws;
-		addItemToInventory(new Hatchet());
-		addItemToInventory(new Coin(40));
 		initialize();
 	}
 	

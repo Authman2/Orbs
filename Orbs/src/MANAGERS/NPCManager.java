@@ -35,6 +35,9 @@ public class NPCManager {
 	Person giveWaterPerson;
 	Person randomPerson_21;
 	
+	//The NPCs in house_10
+	Person catNPC;
+	
 	//The NPCs in house_12
 	Person sewingShopOwner;
 	
@@ -94,6 +97,7 @@ public class NPCManager {
 		hazmatSuitGiverWife.getTextBox().clear();
 		retiredMineWorker.getTextBox().clear();
 		containerSeller.getTextBox().clear();
+		catNPC.getTextBox().clear();
 	}
 	
 	/** Creates all of the NPC objects. */
@@ -142,6 +146,11 @@ public class NPCManager {
 		/* House 2 NPCs */
 		giveWaterPerson = new Person(new Vector2D(7,1).add(world.position));
 		randomPerson_21 = new Person(new Vector2D(9,5).add(world.position));
+		
+		/* House 10 NPCs */
+		catNPC = new Person(new Vector2D(7,5).add(world.position));
+			catNPC.willGiveItem(true);
+			catNPC.setItemToGive(new Orb());
 		
 		/* House 12 NPCs */
 		sewingShopOwner = new Person(new Vector2D(7,2).add(world.position));
@@ -197,6 +206,10 @@ public class NPCManager {
 		if(world.getName().equals("House_2")) {
 			world.addEntity(giveWaterPerson);
 			world.addEntity(randomPerson_21);
+		}
+		
+		if(world.getName().equals("House_10")) {
+			world.addEntity(catNPC);
 		}
 		
 		if(world.getName().equals("House_12")) {
@@ -265,7 +278,7 @@ public class NPCManager {
 		
 		
 		//Random person 7
-		if(randomPerson_7.getItemToGive() != null) {
+		if(randomPerson_7.getItemToGive() != null || world.getWorldState().getPlayer().inventoryContains("Water") ||  world.getWorldState().getPlayer().inventoryContains("Coupon")) {
 			randomPerson_7.getTextBox().addText("You should check out my daughter's store on the east side of town.");
 			randomPerson_7.getTextBox().addText("It's a coffee shop, and she sells all different kinds of snacks and   beverages.");
 			randomPerson_7.getTextBox().addText("It's really quite good! Here, I'll give you a coupon!");
@@ -537,7 +550,7 @@ public class NPCManager {
 			hazmatSuitGiver.getTextBox().addText("Almost done...");
 			hazmatSuitGiver.getTextBox().addText("Finished! Here you go!");
 			hazmatSuitGiver.getTextBox().addText("You received a(n) " + hazmatSuitGiver.getItemToGive().getName() + "!");
-			hazmatSuitGiver.getTextBox().addText("Good luck taking care of the radio active      material!");
+			hazmatSuitGiver.getTextBox().addText("Good luck taking care of the radioactive material!");
 		}
 		if(world.getWorldState().getPlayer().inventoryContains("Sewing Kit") && world.getWorldState().getPlayer().inventoryContains("Hazmat Suit")) {
 			hazmatSuitGiver.getTextBox().addText("Good luck!");
@@ -586,11 +599,21 @@ public class NPCManager {
 			retiredMineWorker.getTextBox().addText("Perfect! I was hoping to get rid of some of this old junk anyway.");
 			retiredMineWorker.getTextBox().addText("Hmm... Let's see...");
 			retiredMineWorker.getTextBox().addText("Ah! How about this pickaxe? It's perfect for chipping away at rocks.");
-			retiredMineWorker.getTextBox().addText("How much does it cost? Don't even worry about that. You can have it for free.");
-			retiredMineWorker.getTextBox().addText("But be careful, that pickaxe is very old. Wouldn't want it to break now would we?");
+			retiredMineWorker.getTextBox().addText("How much does it cost? Don't even worry about that. You can have it   for free.");
+			retiredMineWorker.getTextBox().addText("But be careful, that pickaxe is very old. We wouldn't want it to break now would we?");
 			retiredMineWorker.getTextBox().addText("You received a(n) " + retiredMineWorker.getItemToGive().getName() + "!");
 		} else {
 			retiredMineWorker.getTextBox().addText("Take good care of the pickaxe!");
+		}
+		
+		//Cat NPC
+		if(catNPC.getItemToGive() != null) {
+			catNPC.getTextBox().addText("Meeeooow!");
+			catNPC.getTextBox().addText("This cat seems to be playing with a strange looking ball of yarn...");
+			catNPC.getTextBox().addText("You take a closer look and see that the cat is playing with one of the orbs!");
+			catNPC.getTextBox().addText("You received a(n) " + catNPC.getItemToGive().getName() + "!");
+		} else {
+			catNPC.getTextBox().addText("Meeeooow!");
 		}
 	}
 	
