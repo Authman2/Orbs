@@ -369,13 +369,13 @@ public class NPCManager {
 		
 		
 		//Random person 7
-		if(!world.getWorldState().getPlayer().inventoryContains("Coupon") && !world.getWorldState().getPlayer().inventoryContains("Water")) {
+		if(!world.getWorldState().getPlayer().inventoryContains("Coupon")) {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson7_1.txt");
 			lines = reader.numLines();
 			while(i < lines) { randomPerson_7.getTextBox().addText(reader.readThrough("\n")); i++; }
 			randomPerson_7.getTextBox().addText("You received a(n) " + world.getItemManager().getNPCItem(1) + "!");
 			i = 0;
-		} else if(!world.getWorldState().getPlayer().inventoryContains("Coupon") && world.getWorldState().getPlayer().inventoryContains("Water")) {
+		} else if(world.getWorldState().getPlayer().inventoryContains("Coupon") || world.getWorldState().getPlayer().inventoryContains("Water") || world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson7_2.txt");
 			lines = reader.numLines();
 			while(i < lines) { randomPerson_7.getTextBox().addText(reader.readThrough("\n")); i++; }

@@ -139,10 +139,16 @@ public class TextBox {
 					if(slideText.length() >= MAX_LINE_LENGTH) { howFar = MAX_LINE_LENGTH; }
 					else { howFar = slideText.length(); }
 					
-					g.drawString(slideText.substring(0, howFar), 5, y);
+					if(textThrough < howFar) {
+						g.drawString(slideText.substring(0, textThrough), 5, y);
+						textThrough++;
+					} else {
+						g.drawString(slideText.substring(0, howFar), 5, y);
+					}
 					slideText = slideText.substring(howFar);
 					y += 15;
 					
+					if(textThrough >= howFar) { continue; } else { break; }
 				}
 				
 				
