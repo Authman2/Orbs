@@ -48,9 +48,7 @@ public class Door {
 		worldState.getCurrentWorld().initialize();
 		worldState.getCurrentWorld().getNPCManager().createNPCs();
 		worldState.getCurrentWorld().getNPCManager().giveItems();
-		try {
-			worldState.getCurrentWorld().getNPCManager().loadNPCText();
-		} catch(Exception err) { err.printStackTrace(); }
+		try { worldState.getCurrentWorld().getNPCManager().loadNPCText(); } catch(Exception err) { err.printStackTrace(); }
 		worldState.getCurrentWorld().getNPCManager().addToGame();
 	}
 	

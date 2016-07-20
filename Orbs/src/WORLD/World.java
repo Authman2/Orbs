@@ -391,6 +391,11 @@ public class World {
 	
 	/** Handles the creation of NPCs and Items. */
 	public void createNPCsAndItems() {
+		//Initialize the item manager
+		itemManager.createItems();
+		itemManager.initialize();
+		itemManager.addToGame();
+		
 		//Initialize the npc manager
 		npcManager.createNPCs();
 		npcManager.giveItems();
@@ -398,10 +403,6 @@ public class World {
 			npcManager.loadNPCText();
 		}catch(Exception err) { err.printStackTrace(); }
 		npcManager.addToGame();
-		
-		//Initialize the item manager
-		itemManager.initialize();
-		itemManager.addToGame();
 	}
 	
 	
@@ -429,6 +430,10 @@ public class World {
 	
 	/** Returns the NPCManager. */
 	public NPCManager getNPCManager() { return npcManager; }
+	
+	
+	/** Returns the ItemManager. */
+	public ItemManager getItemManager() { return itemManager; }
 	
 	
 	/** Returns a list of all of the entities in the game world. */

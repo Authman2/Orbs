@@ -19,7 +19,10 @@ public class TextBox {
 	boolean open;
 	
 	//The maximum number of characters that can fit on one line in the text box.
-	final int MAX_LINE_LENGTH = 70;
+	int MAX_LINE_LENGTH = 70;
+	
+	//Represents what the text box is showing up to while on a particular text slide.
+	int textThrough = 0;
 	
 	
 	
@@ -36,8 +39,10 @@ public class TextBox {
 		if(currentSlide >= text.size() - 1) {
 			open = false;
 			currentSlide = 0;
+			textThrough = 0;
 		} else {
 			currentSlide++;
+			textThrough = 0;
 		}
 	}
 	
@@ -77,7 +82,11 @@ public class TextBox {
 	public void setOpen(boolean b) { open = b; }
 	
 	
+	/** Sets where the text box should display the letters up to. */
+	public void setTextThrough(int i) { textThrough = i; }
+	
 
+	
 	/////////// Getters /////////////
 	
 	/** Returns whether or not the text box is currently open. */
@@ -109,7 +118,7 @@ public class TextBox {
 		if(open == true && !text.isEmpty()) {
 			//Draw the background of the text box
 			g.setColor(Color.white);
-			g.fillRect(0, Orbs.HEIGHT - 100, Orbs.WIDTH, 100);
+			g.fillRoundRect(0, Orbs.HEIGHT - 100, Orbs.WIDTH, 78, 20, 20);
 		
 			//Set the text attributes
 			g.setColor(Color.black);
@@ -122,32 +131,28 @@ public class TextBox {
 				int y = Orbs.HEIGHT - 80;
 				String slideText = text.get(currentSlide);
 				
-				//Loop through each letter in the text slide
-				for(int letter = 0; letter < slideText.length(); letter++) {
+				//Loop through each character on the text slide
+				for(int i = 0; i < text.get(currentSlide).length(); i++) {
+					int howFar = MAX_LINE_LENGTH;	//A variable for how far it needs to display the text
 					
-					//If the length of the entire text is longer than the amount allowed on one line...
-					if(slideText.length() >= MAX_LINE_LENGTH) {
-						
-						//Draw the string up to the end of the line
-						g.drawString(slideText.substring(0, MAX_LINE_LENGTH), 5, y);
-						
-						//Then shorten the amount of text that still needs to be written, and go to the next line.
-						slideText = slideText.substring(MAX_LINE_LENGTH);
-						y += 15;
+					//Set howFar based on the length of each line.
+					if(slideText.length() >= MAX_LINE_LENGTH) { howFar = MAX_LINE_LENGTH; }
+					else { howFar = slideText.length(); }
 					
-					} else {
-						
-						//If the rest of the string is shorter than the maximum allowed on one line, then just draw up through the end.
-						g.drawString(slideText.substring(0, slideText.length()), 5, y);
-						
-					}
+					g.drawString(slideText.substring(0, howFar), 5, y);
+					slideText = slideText.substring(howFar);
+					y += 15;
 					
 				}
+				
 				
 			} else {
 				
 				//If the entire slide of text is less than the maximum allowed, then just draw it on one line
-				g.drawString(text.get(currentSlide), 5, Orbs.HEIGHT - 80);
+				//g.drawString(text.get(currentSlide), 5, Orbs.HEIGHT - 80);
+				
+				g.drawString(text.get(currentSlide).substring(0,textThrough), 5, Orbs.HEIGHT - 80);
+				if(textThrough < text.get(currentSlide).length()) textThrough++;
 				
 			}
 			

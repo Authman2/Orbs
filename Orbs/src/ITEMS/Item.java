@@ -40,7 +40,6 @@ public abstract class Item extends Entity {
 	public Item(String name) { this.name = name; acquiredTextBox = new TextBox(); }
 	
 	
-	
 	///////////// Setters //////////////
 	
 	/** Sets the quantity of this item to the value of "i". */
@@ -67,6 +66,10 @@ public abstract class Item extends Entity {
 	
 	
 	///////////// Getters //////////////
+	
+	/** ToString method. */
+	public String toString() { return name; }
+	
 	
 	/** Returns the quantity of this item. */
 	public int getQuantity() { return quantity; }

@@ -36,6 +36,10 @@ public class Player extends Entity {
 	public ArrayList<Item> getInventory() { return items; }
 	
 	
+	/** Returns an item at a particular index of the list of items. */
+	public Item getItem(int i) { return items.get(i); }
+	
+	
 	/** Returns the number of orbs that the player currently has. */
 	public int getOrbCount() { 
 		for(Item itm : items) {
