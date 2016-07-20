@@ -46,6 +46,14 @@ public class TextBox {
 	public void addText(String t) { text.add(t); }
 	
 	
+	/** Adds text for the text box at the specified index.*/
+	public void addText(String t, int index) { text.add(index, t); }
+	
+	
+	/** Sets the text at the particular location in the text box. */
+	public void setText(String t, int index) { text.set(index, t); }
+	
+	
 	/** Toggles the text box. If it was open, it will close. If it was closed, it will open. */
 	public void toggle() { open = !open; }
 	

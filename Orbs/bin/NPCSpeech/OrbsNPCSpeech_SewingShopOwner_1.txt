@@ -1,0 +1,4 @@
+Hello there! I'm Gina and this is my sewing shop.
+If you would like to buy a sewing kit you will have to pay $12.
+I'm sorry, it looks like you don't have enough money to buy one.
+Please come back when you have enough.

@@ -44,11 +44,11 @@ public class GameMap {
 		ReadFile reader = new ReadFile();
 		String s = null;
 		try {
-			s = reader.Read("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/WorldMapText.txt");
+			s = reader.read("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/WorldMapText.txt");
 		} catch(Exception e) { e.printStackTrace(); }
 		
 		//Create a single dimensional array for it.
-		worldMapSingle = reader.CreateArrayINT(s, ",");
+		worldMapSingle = reader.createArrayINT(s, ",");
 		
 		//Convert it to a two dimensional array. REMEMBER, WORLD MAP MUST HAVE DIMENSIONS NxN TO WORK.
 		worldMap = ArrayConversion.OneToTwo(worldMapSingle, 100);
@@ -59,11 +59,11 @@ public class GameMap {
 		
 		/* THE HOUSE MAP */
 		try {
-			s = reader.Read("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/HouseMapText.txt");
+			s = reader.read("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/HouseMapText.txt");
 		} catch(Exception e) { e.printStackTrace(); }
 		
 		//Create a single dimensional array for it.
-		houseMapSingle = reader.CreateArrayINT(s, ",");
+		houseMapSingle = reader.createArrayINT(s, ",");
 		
 		//Convert it to a two dimensional array. REMEMBER, WORLD MAP MUST HAVE DIMENSIONS NxN TO WORK.
 		houseMap = ArrayConversion.OneToTwo(houseMapSingle, 14);

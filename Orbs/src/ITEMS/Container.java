@@ -24,6 +24,7 @@ public class Container extends Item {
 	@Override
 	public void initialize() {
 		setName("Container");
+		setID("Container");
 		setAcquiredMessage("You received a " + getName() + "!");
 		if(acquiredTextBox.isOpen()) acquiredTextBox.initialize();
 	}

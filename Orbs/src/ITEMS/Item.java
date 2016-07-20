@@ -14,6 +14,9 @@ public abstract class Item extends Entity {
 	//The name of the item.
 	String name;
 	
+	//A specific ID used to keep track of individual items.
+	String identifier;
+	
 	//The text box for when the player acquires an item.
 	TextBox acquiredTextBox;
 	
@@ -48,6 +51,10 @@ public abstract class Item extends Entity {
 	public void setName(String name) { this.name = name; }
 	
 	
+	/** Sets the ID of this item. */
+	public void setID(String id) { identifier = id; }
+	
+	
 	/** Sets the message to display for when the player acquires this item. */
 	public void setAcquiredMessage(String message) { acquiredMessage = message; acquiredTextBox.addText(acquiredMessage); }
 	
@@ -67,6 +74,10 @@ public abstract class Item extends Entity {
 	
 	/** Returns the name of this item. */
 	public String getName() { return name; }
+	
+	
+	/** Returns the ID of this item. */
+	public String getID() { return identifier; }
 	
 	
 	/** Returns the text box that tells the player that he/she has acquired a new item. */

@@ -11,6 +11,7 @@ import ITEMS.Pickaxe;
 import ITEMS.SewingKit;
 import ITEMS.Water;
 import WORLD.World;
+import filesje.ReadFile;
 import visualje.Vector2D;
 
 /** Handles adding all of the NPCs to the game world. */
@@ -18,6 +19,14 @@ public class NPCManager {
 
 	//The world, used to access many different elements in the game world.
 	World world;
+	
+	//For reading the text for the NPCs
+	ReadFile reader;
+	
+	//The number of lines each npc has
+	int lines;
+	
+	
 	
 	//The NPCs in the main world
 	Person randomPerson_1, randomPerson_2, randomPerson_3, randomPerson_4, randomPerson_5, randomPerson_6, randomPerson_7,
@@ -55,6 +64,7 @@ public class NPCManager {
 	////////////// Constructor ///////////////	
 	public NPCManager(World w) { 
 		world = w;
+		reader = new ReadFile();
 	}
 	
 	
@@ -100,6 +110,70 @@ public class NPCManager {
 		catNPC.getTextBox().clear();
 	}
 	
+	
+	/** Gives items to certain NPCs depending on whether or not they have been interacted with. */
+	public void giveItems() {
+		
+		if(!world.getWorldState().getPlayer().containsID("coin_person4")) {
+			randomPerson_4.willGiveItem(true);
+			Coin coin = new Coin(5);
+			coin.setID("coin_person4");
+			randomPerson_4.setItemToGive(coin);
+		}
+		
+		if(!world.getWorldState().getPlayer().inventoryContains("Coupon")) {
+			randomPerson_7.willGiveItem(true);
+			randomPerson_7.setItemToGive(new Coupon());
+		}
+		
+		if(!world.getWorldState().getPlayer().containsID("bball_Orb")) {
+			randomPerson_17.willGiveItem(true);
+			Orb basketball_Orb = new Orb();
+			basketball_Orb.setID("bball_Orb");
+			randomPerson_17.setItemToGive(basketball_Orb);
+		}
+		
+		if(!world.getWorldState().getPlayer().containsID("Cat_Orb")) {
+			catNPC.willGiveItem(true);
+			Orb catOrb = new Orb();
+			catOrb.setID("Cat_Orb");
+			catNPC.setItemToGive(catOrb);
+		}
+		
+		if(!world.getWorldState().getPlayer().inventoryContains("Container") && (world.getWorldState().getPlayer().inventoryContains("Coin") && world.getWorldState().getPlayer().getQuantity("Coin") >= 40)) {
+			containerSeller.willGiveItem(true);
+			containerSeller.setItemToGive(new Container());	
+		}
+		
+		if(world.getWorldState().getPlayer().inventoryContains("Water") && !world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
+			treeCutter.willGiveItem(true);
+			treeCutter.setItemToGive(new Hatchet());
+		}
+		
+		if(!world.getWorldState().getPlayer().inventoryContains("Water") && world.getWorldState().getPlayer().inventoryContains("Coupon")) {
+			giveWaterPerson.willGiveItem(true);
+			giveWaterPerson.setItemToGive(new Water());
+		}
+		
+		if(world.getWorldState().getPlayer().inventoryContains("Coin") && !world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
+			sewingShopOwner.willGiveItem(true);
+			sewingShopOwner.setItemToGive(new SewingKit());
+		}
+		
+		if(!world.getWorldState().getPlayer().inventoryContains("Hazmat Suit") && world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
+			hazmatSuitGiver.willGiveItem(true);
+			hazmatSuitGiver.setItemToGive(new HazmatSuit());
+		}
+		
+		if(!world.getWorldState().getPlayer().inventoryContains("Pickaxe")) {
+			retiredMineWorker.willGiveItem(true);
+			retiredMineWorker.setItemToGive(new Pickaxe());
+		}
+			
+			
+	}
+
+	
 	/** Creates all of the NPC objects. */
 	public void createNPCs() {
 		//Create the NPCs. The positions have to be added to the world's position to arrange them properly.
@@ -109,14 +183,9 @@ public class NPCManager {
 		randomPerson_2 = new Person(new Vector2D(18,12).add(world.position));
 		randomPerson_3 = new Person(new Vector2D(12,17).add(world.position));
 		randomPerson_4 = new Person(new Vector2D(15,25).add(world.position));
-			randomPerson_4.willGiveItem(true);
-			Coin coin = new Coin(); coin.setQuantity(5);
-			randomPerson_4.setItemToGive(coin);
 		randomPerson_5 = new Person(new Vector2D(24,25).add(world.position));
 		randomPerson_6 = new Person(new Vector2D(22,61).add(world.position));
 		randomPerson_7 = new Person(new Vector2D(18,67).add(world.position));
-			randomPerson_7.willGiveItem(true);
-			randomPerson_7.setItemToGive(new Coupon());
 		randomPerson_8 = new Person(new Vector2D(32, 67).add(world.position));
 		randomPerson_9 = new Person(new Vector2D(9,58).add(world.position));
 		randomPerson_10 = new Person(new Vector2D(32,75).add(world.position));
@@ -127,8 +196,6 @@ public class NPCManager {
 		randomPerson_15 = new Person(new Vector2D(84,86).add(world.position));
 		randomPerson_16 = new Person(new Vector2D(79,77).add(world.position));
 		randomPerson_17 = new Person(new Vector2D(88,75).add(world.position));
-			randomPerson_17.willGiveItem(true);
-			randomPerson_17.setItemToGive(new Orb());
 		randomPerson_18 = new Person(new Vector2D(89,75).add(world.position));
 		randomPerson_19 = new Person(new Vector2D(60,9).add(world.position));
 		randomPerson_20 = new Person(new Vector2D(57,23).add(world.position));
@@ -149,8 +216,6 @@ public class NPCManager {
 		
 		/* House 10 NPCs */
 		catNPC = new Person(new Vector2D(7,5).add(world.position));
-			catNPC.willGiveItem(true);
-			catNPC.setItemToGive(new Orb());
 		
 		/* House 12 NPCs */
 		sewingShopOwner = new Person(new Vector2D(7,2).add(world.position));
@@ -165,9 +230,329 @@ public class NPCManager {
 		/* House 28 NPCs */
 		retiredMineWorker = new Person(new Vector2D(11,2).add(world.position));
 	}
+
+	
+	/** Loads the text for each NPC to say. */
+	public void loadNPCText() throws Exception {
+		clearTextBoxes();
+		int i = 0; //The current line
+		
+		//Barrier NPC
+		reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_BarrierNPC.txt");
+		lines = reader.numLines();
+		while(i < lines) { barrierToLastPart.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Cat NPC
+		if(!world.getWorldState().getPlayer().inventoryContains("Cat_Orb")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_CatNPC_1.txt");
+		} else {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_CatNPC_2.txt");
+		}
+		lines = reader.numLines();
+		while(i < lines) { catNPC.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Chemical Controllers
+		if(!world.getWorldState().getPlayer().inventoryContains("Hazmat_Suit")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_ChemicalControllers_1.txt");
+		} else {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_ChemicalControllers_2.txt");
+		}
+		lines = reader.numLines();
+		while(i < lines) { 
+			chemicalController_1.getTextBox().addText(reader.readThrough("\n")); 
+			chemicalController_2.getTextBox().addText(reader.readThrough("\n")); 
+			chemicalController_3.getTextBox().addText(reader.readThrough("\n")); 
+			i++; 
+		}
+		i = 0;
+		
+		
+		//Container Seller
+		if(!world.getWorldState().getPlayer().inventoryContains("Container") && (world.getWorldState().getPlayer().inventoryContains("Coin") && world.getWorldState().getPlayer().getQuantity("Coin") >= 40)) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_ContainerSeller_1.txt");
+		} else if(!world.getWorldState().getPlayer().inventoryContains("Container") && (!world.getWorldState().getPlayer().inventoryContains("Coin") || world.getWorldState().getPlayer().getQuantity("Coin") < 40)) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_ContainerSeller_2.txt");
+		} else if(world.getWorldState().getPlayer().inventoryContains("Container")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_ContainerSeller_3.txt");
+		}
+		lines = reader.numLines();
+		while(i < lines) { containerSeller.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Hazmat Suit Giver
+		if(!world.getWorldState().getPlayer().inventoryContains("Sewing Kit") && !world.getWorldState().getPlayer().inventoryContains("Hazmat Suit")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_HazmatSuitGiver_1.txt");
+		} else if(!world.getWorldState().getPlayer().inventoryContains("Hazmat Suit") && world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_HazmatSuitGiver_2.txt");
+		} else if(world.getWorldState().getPlayer().inventoryContains("Sewing Kit") && world.getWorldState().getPlayer().inventoryContains("Hazmat Suit")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_HazmatSuitGiver_3.txt");
+		}
+		lines = reader.numLines();
+		while(i < lines) { hazmatSuitGiver.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Hazmat suit giver wife
+		reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_HazmatSuitGiverWife.txt");
+		lines = reader.numLines();
+		while(i < lines) { hazmatSuitGiverWife.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Player's relative
+		reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_PlayersRelative.txt");
+		lines = reader.numLines();
+		while(i < lines) { player_Relative.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Random person 1
+		reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson1.txt");
+		lines = reader.numLines();
+		while(i < lines) { randomPerson_1.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Random person 2
+		reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson2.txt");
+		lines = reader.numLines();
+		while(i < lines) { randomPerson_2.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Random person 3
+		reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson3.txt");
+		lines = reader.numLines();
+		while(i < lines) { randomPerson_3.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Random person 4
+		if(!world.getWorldState().getPlayer().containsID("coin_person4")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson4_1.txt");
+		} else {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson4_2.txt");
+		}
+		lines = reader.numLines();
+		while(i < lines) { randomPerson_4.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Random person 5
+		reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson5.txt");
+		lines = reader.numLines();
+		while(i < lines) { randomPerson_5.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Random person 6
+		reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson6.txt");
+		lines = reader.numLines();
+		while(i < lines) { randomPerson_6.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Random person 7
+		if(!world.getWorldState().getPlayer().inventoryContains("Coupon")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson7_1.txt");
+		} else {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson7_2.txt");
+		}
+		lines = reader.numLines();
+		while(i < lines) { randomPerson_7.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Random person 8
+		reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson8.txt");
+		lines = reader.numLines();
+		while(i < lines) { randomPerson_8.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Random person 9
+		reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson9.txt");
+		lines = reader.numLines();
+		while(i < lines) { randomPerson_9.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Random person 10
+		reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson10.txt");
+		lines = reader.numLines();
+		while(i < lines) { randomPerson_10.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Random person 11
+		reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson11.txt");
+		lines = reader.numLines();
+		while(i < lines) { randomPerson_11.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Random person 12
+		reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson12.txt");
+		lines = reader.numLines();
+		while(i < lines) { randomPerson_12.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Random person 13
+		reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson13.txt");
+		lines = reader.numLines();
+		while(i < lines) { randomPerson_13.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Random person 14
+		reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson14.txt");
+		lines = reader.numLines();
+		while(i < lines) { randomPerson_14.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Random person 15
+		reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson15.txt");
+		lines = reader.numLines();
+		while(i < lines) { randomPerson_15.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Random person 16
+		reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson16.txt");
+		lines = reader.numLines();
+		while(i < lines) { randomPerson_16.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Random person 17
+		if(!world.getWorldState().getPlayer().containsID("bball_Orb")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson17_1.txt");
+		} else {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson17_2.txt");
+		}
+		lines = reader.numLines();
+		while(i < lines) { randomPerson_17.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Random person 18
+		if(!world.getWorldState().getPlayer().containsID("bball_Orb")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson18_1.txt");
+		} else {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson18_2.txt");
+		}
+		lines = reader.numLines();
+		while(i < lines) { randomPerson_18.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Random person 19
+		reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson19.txt");
+		lines = reader.numLines();
+		while(i < lines) { randomPerson_19.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Random person 20
+		reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson20.txt");
+		lines = reader.numLines();
+		while(i < lines) { randomPerson_20.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Random person 21
+		reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson21.txt");
+		lines = reader.numLines();
+		while(i < lines) { randomPerson_21.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Retired Mine Worker
+		if(!world.getWorldState().getPlayer().inventoryContains("Pickaxe")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RetiredMineWorker_1.txt");
+		} else {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RetiredMineWorker_2.txt");
+		}
+		lines = reader.numLines();
+		while(i < lines) { retiredMineWorker.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Scientist
+		if(!world.getWorldState().getPlayer().inventoryContains("Orb")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_Scientist_1.txt");
+			lines = reader.numLines();
+			while(i < lines) { scientist.getTextBox().addText(reader.readThrough("\n")); i++; }
+			i = 0;
+		} else {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_Scientist_2.txt");
+			lines = reader.numLines();
+			while(i < lines) { scientist.getTextBox().addText(reader.readThrough("\n")); i++; }
+			i = 0;
+			scientist.getTextBox().setText("Hmm... Well it looks like you have found " + world.getWorldState().getPlayer().getOrbCount() + " out of 20 orbs.", 3);
+		}
+		
+		
+		
+		//Sewing Shop Owner
+		if(!world.getWorldState().getPlayer().inventoryContains("Coin") && !world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_SewingShopOwner_1.txt");
+		} else if(world.getWorldState().getPlayer().inventoryContains("Coin") && world.getWorldState().getPlayer().getQuantity("Coin") >= 12 && !world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_SewingShopOwner_2.txt");
+		} else if(world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_SewingShopOwner_3.txt");
+		}
+		lines = reader.numLines();
+		while(i < lines) { sewingShopOwner.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Tree Cutter
+		if(!world.getWorldState().getPlayer().inventoryContains("Water") && !world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_TreeCutter_1.txt");
+		} else if(world.getWorldState().getPlayer().inventoryContains("Water") && !world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_TreeCutter_2.txt");
+		} else if(world.getWorldState().getPlayer().inventoryContains("Hatchet") && !world.getWorldState().getPlayer().inventoryContains("Water")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_TreeCutter_3.txt");
+		}
+		lines = reader.numLines();
+		while(i < lines) { treeCutter.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Tree Cutter Friend
+		reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_TreeCutterFriend.txt");
+		lines = reader.numLines();
+		while(i < lines) { treeCutterFriend.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+		
+		
+		//Water Giving Person
+		if(!world.getWorldState().getPlayer().inventoryContains("Coupon") && !world.getWorldState().getPlayer().inventoryContains("Water")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_WaterGivingPerson_1.txt");
+		} else if(!world.getWorldState().getPlayer().inventoryContains("Water") && world.getWorldState().getPlayer().inventoryContains("Coupon")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_WaterGivingPerson_2.txt");
+		} else if(world.getWorldState().getPlayer().inventoryContains("Water") || world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_WaterGivingPerson_3.txt");
+		}
+		lines = reader.numLines();
+		while(i < lines) { giveWaterPerson.getTextBox().addText(reader.readThrough("\n")); i++; }
+		i = 0;
+
+	}
+	
 	
 	/** Adds to the list of entities in world. */
 	public void addToGame() {
+		world.getEntities().clear();
+		
 		if(world.getName().equals("Main")) {
 			//Once you are done setting them up, add them to the list of entities.
 			world.addEntity(randomPerson_1);
@@ -229,393 +614,5 @@ public class NPCManager {
 			world.addEntity(retiredMineWorker);
 		}
 	}
-	
-	
-	////////////// Abstract Methods ///////////////
-	
-	/** This initialize method is responsible for determining the text for each NPC. */
-	public void initialize() {
-		clearTextBoxes();
-		
-		//Random person 1
-		randomPerson_1.getTextBox().addText("Nice weather we're having, right?");
-		randomPerson_1.getTextBox().addText("Not like last week when it was 95 degrees!");
-		
-		
-		//Random person 2
-		randomPerson_2.getTextBox().addText("Have you talked to that wierd scientist guy?");
-		randomPerson_2.getTextBox().addText("He was blabbing about some orbs or something...");
-		randomPerson_2.getTextBox().addText("I couldn't really understand him though. He was talking so fast!");
-		
-		
-		//Random person 3
-		randomPerson_3.getTextBox().addText("Have you heard about the burglary that happened last night?");
-		randomPerson_3.getTextBox().addText("That's why I'm standing guard here. No criminal is going to break into my house!");
-		
-		
-		//Random person 4
-		if(randomPerson_4.getItemToGive() != null) {
-			randomPerson_4.getTextBox().addText("Oh, you're going out of town?");
-			randomPerson_4.getTextBox().addText("Well you should be careful, with that thief on the loose you should   always stay alert in case a dangerous situation comes up.");
-			randomPerson_4.getTextBox().addText("Also, you always carry some change with you in case you need to make  a quick purchase.");
-			randomPerson_4.getTextBox().addText("Here, I'll give you some in case you don't have any.");
-			
-			randomPerson_4.getTextBox().addText("You were given a(n) " + randomPerson_4.getItemToGive().getName() + "!");
-		} else {
-			randomPerson_4.getTextBox().addText("Good luck out there!");
-		}
-		
-			
-		//Random person 5
-		randomPerson_5.getTextBox().addText("Everybody in town is worried about being robbed after what happened   to that scientist last night.");
-		randomPerson_5.getTextBox().addText("I'm not worried though, I set up a bunch of alarms in my house that   will detect any kind of movement!");
-		randomPerson_5.getTextBox().addText("Unfortunately that means that I can't actually go inside my house...");
-		
-		
-		//Random person 6
-		randomPerson_6.getTextBox().addText("I heard there is something hidden in one of these trees.");
-		randomPerson_6.getTextBox().addText("I hope I can find it before anyone else does!");
-		
-		
-		//Random person 7
-		if(randomPerson_7.getItemToGive() != null || world.getWorldState().getPlayer().inventoryContains("Water") ||  world.getWorldState().getPlayer().inventoryContains("Coupon")) {
-			randomPerson_7.getTextBox().addText("You should check out my daughter's store on the east side of town.");
-			randomPerson_7.getTextBox().addText("It's a coffee shop, and she sells all different kinds of snacks and   beverages.");
-			randomPerson_7.getTextBox().addText("It's really quite good! Here, I'll give you a coupon!");
-			randomPerson_7.getTextBox().addText("You were given a(n) " + randomPerson_7.getItemToGive().getName() + "!");
-		} else {
-			randomPerson_7.getTextBox().addText("Please write her a good review. She will definitely appreciate it!");
-		}
-		
-		
-		//Random person 8
-		randomPerson_8.getTextBox().addText("I love living in this town! It's so big and spacious!");
-		randomPerson_8.getTextBox().addText("I have a friend who lives in a town to the north-east, which is much  smaller than this one.");
-		randomPerson_8.getTextBox().addText("*Sigh* I'll never understand why he enjoys living in such a small town, but I guess that's just his style!");
-		
-		
-		//Random person 9
-		randomPerson_9.getTextBox().addText("I'm trying to stay in shape by running 4 miles every day.");
-		randomPerson_9.getTextBox().addText("1 mile down, 3 to go!");
-		
-		
-		//Random person 10
-		randomPerson_10.getTextBox().addText("Have you tried the coffee cake? It's delicious!");
-		
-		//Random person 11
-		randomPerson_11.getTextBox().addText("My favorite drink is the strawberry smoothie.");
-		randomPerson_11.getTextBox().addText("It's just so refreshing!");
-		
-		//Random person 12
-		randomPerson_12.getTextBox().addText("I've never actually tried any of the food here.");
-		randomPerson_12.getTextBox().addText("Is it any good?");
-
-		//Random person 13
-		randomPerson_13.getTextBox().addText("I always have a hard time deciding what to get off the menu...");
-		
-		
-		//Random person 14
-		randomPerson_14.getTextBox().addText("My house is just outside of town.");
-		randomPerson_14.getTextBox().addText("It didn't cost very much either; I guess most people don't like the   idea of living so far away from everything.");
-		randomPerson_14.getTextBox().addText("I love it, though! It's so nice and quiet, I never have to worry about distractions when I'm working.");
-		
-		
-		//Random person 15
-		randomPerson_15.getTextBox().addText("Did you hear what happened in the town just north of here?");
-		randomPerson_15.getTextBox().addText("Apparently there is some sort of orb spilling radio active material   into the air.");
-		randomPerson_15.getTextBox().addText("It's making me very worried! My cousin lives there and he texts me    everyday that he is still stuck inside of his house!");
-		randomPerson_15.getTextBox().addText("I wish someone would go help them...");
-		
-		
-		//Random person 16
-		randomPerson_16.getTextBox().addText("Do you know any place that's hiring right now?");
-		randomPerson_16.getTextBox().addText("I really need a job...");
-		
-		
-		//Random person 17
-		if(randomPerson_17.getItemToGive() != null) {
-			randomPerson_17.getTextBox().addText("Hey, do you want this weird looking basketball?");
-			randomPerson_17.getTextBox().addText("We found it in the bushes earlier, but it looks kind of strange and   doesn't bounce very well..");
-			randomPerson_17.getTextBox().addText("We tried dribbling it a few times and it started glowing bright red!");
-			randomPerson_17.getTextBox().addText("You can have it if you want.");
-			randomPerson_17.getTextBox().addText("You'll take it? Cool! Here you go!");
-			randomPerson_17.getTextBox().addText("You received a(n) " + randomPerson_17.getItemToGive().getName() + "!");
-		} else {
-			randomPerson_17.getTextBox().addText("Good luck trying to get that thing to bounce...");
-		}
-		
-		
-		//Random person 18
-		if(randomPerson_17.getItemToGive() != null) {
-			randomPerson_18.getTextBox().addText("Did my friend tell you about the strange basketball we found?");
-		} else {
-			randomPerson_18.getTextBox().addText("Good luck trying to get that thing to bounce...");
-		}
-		
-		
-		//Random person 19
-		randomPerson_19.getTextBox().addText("It's so cold here up north!");
-		
-		
-		//Random person 20
-		randomPerson_20.getTextBox().addText("Oh, you're planning a vacation to the bahamas?");
-		randomPerson_20.getTextBox().addText("That's so cool! Have fun and bring me back a suvineur!");
-		randomPerson_20.getTextBox().addText("What? Oh, sorry, I was talking to one of my friends over the phone.");
-		randomPerson_20.getTextBox().addText("He's a retired mine worker and lives in the next town over.");
-		randomPerson_20.getTextBox().addText("If you ever need mining equipment you should talk to him. He said he's looking to get rid of some of his old stuff.");
-		
-		
-		//Scientist
-		if(!world.getWorldState().getPlayer().inventoryContains("Orb")) {
-			scientist.getTextBox().addText("Ahh!");
-			scientist.getTextBox().addText("I cannot believe this!");
-			scientist.getTextBox().addText("All of my orbs! They've been stolen!");
-			scientist.getTextBox().addText("Oh no, this is very bad...");
-			scientist.getTextBox().addText("I could lose all of my funding for this!");
-			scientist.getTextBox().addText("I could even go to jail if they end up in the wrong hands!");
-			scientist.getTextBox().addText("Huh? What's that?");
-			scientist.getTextBox().addText("Oh, I'm sorry, I didn't hear you. I was too busy worrying about my    experiement...");
-			scientist.getTextBox().addText("Would you like to hear about it?");
-			scientist.getTextBox().addText("You would? Great! It's very interesting, if I do say so myself!");
-			scientist.getTextBox().addText("To put it simply, I have created 20 multi-colored orbs.");
-			scientist.getTextBox().addText("Each orb holds great power, and is capable of bending reality at will!");
-			scientist.getTextBox().addText("I planned on using them to cure diseases, end world hunger, etc...");
-			scientist.getTextBox().addText("Anything you could think of, these orbs could do it!");
-			scientist.getTextBox().addText("The only problem is that someone has stolen them out of my laboratory!");
-			scientist.getTextBox().addText("I cannot imagine what kind of person would do this...");
-			scientist.getTextBox().addText("I would go look for the culprit myself, but I am afraid he might come back and try to steal more inventions out of my lab.");
-			scientist.getTextBox().addText("Wait a minute!");
-			scientist.getTextBox().addText("You could go look for the criminal, couldn't you? It would surely help a lot.");
-			scientist.getTextBox().addText("What do you say?");
-			scientist.getTextBox().addText("You'll do it? Oh thank you very much! I really appreciate this!");
-			scientist.getTextBox().addText("Now, what you must do is look for all 20 of the orbs.");
-			scientist.getTextBox().addText("I have no idea where they might be, so make sure you look beneath     every rock, behind every tree, and right under your nose!");
-			scientist.getTextBox().addText("Also ask around! Other people might know where they are, too!");
-			scientist.getTextBox().addText("The point is to look everywhere. It is anyone's guess where these orbs may be!");
-			scientist.getTextBox().addText("Now go! Please bring back my most powerful inventions!");
-			scientist.getTextBox().addText("I will be waiting here when you return!");
-		} else {
-			scientist.getTextBox().clear();
-			scientist.getTextBox().addText("Oh, hello! So you've found some of my orbs?");
-			scientist.getTextBox().addText("That's wonderful!");
-			scientist.getTextBox().addText("Let's see how many you've found...");
-			scientist.getTextBox().addText("Hmm... Well it looks like you have found " + world.getWorldState().getPlayer().getOrbCount() + " out of 20 orbs.");
-			scientist.getTextBox().addText("That's good! But there are still more to find.");
-			scientist.getTextBox().addText("Please keep on looking and return to me when you have more orbs!      Good luck!");
-		}
-		
-		
-		//Chemical Controllers
-		if(world.getWorldState().getPlayer().inventoryContains("Hazmat Suit")) {
-			chemicalController_2.position.add(new Vector2D(-1,-1));		//Change the position of the NPCs
-			chemicalController_3.position.add(new Vector2D(1,-2));
-			
-			chemicalController_1.getTextBox().addText("You look very well prepared for this job! Please help save the town!");
-			chemicalController_2.getTextBox().addText("You look very well prepared for this job! Please help save the town!");
-			chemicalController_3.getTextBox().addText("You look very well prepared for this job! Please help save the town!");
-		} else {
-			chemicalController_1.getTextBox().addText("Stop right there!");
-			chemicalController_1.getTextBox().addText("I cannot allow you to enter this town without proper equipment.");
-			chemicalController_1.getTextBox().addText("You see, there is some sort of strange object that is emitting what we think is radioactive material in the middle of town.");
-			chemicalController_1.getTextBox().addText("While we await more professional help, residents are being advised to stay inside of their homes and close all windows and doors.");
-			chemicalController_1.getTextBox().addText("I cannot let you through without a hazmat suit. I apologize for any inconvenience this may cause.");
-			
-			chemicalController_2.getTextBox().addText("Stop right there!");
-			chemicalController_2.getTextBox().addText("I cannot allow you to enter this town without proper equipment.");
-			chemicalController_2.getTextBox().addText("You see, there is some sort of strange object that is emitting what we think is radioactive material in the middle of town.");
-			chemicalController_2.getTextBox().addText("While we await more professional help, residents are being advised to stay inside of their homes and close all windows and doors.");
-			chemicalController_2.getTextBox().addText("I cannot let you through without a hazmat suit. I apologize for any inconvenience this may cause.");
-		
-			chemicalController_3.getTextBox().addText("Stop right there!");
-			chemicalController_3.getTextBox().addText("I cannot allow you to enter this town without proper equipment.");
-			chemicalController_3.getTextBox().addText("You see, there is some sort of strange object that is emitting what we think is radioactive material in the middle of town.");
-			chemicalController_3.getTextBox().addText("While we await more professional help, residents are being advised to stay inside of their homes and close all windows and doors.");
-			chemicalController_3.getTextBox().addText("I cannot let you through without a hazmat suit. I apologize for any inconvenience this may cause.");
-		}
-		
-		
-		//The person who blocks the way to the last part of the game
-		barrierToLastPart.getTextBox().addText("...");
-		
-		
-		//The player's relative
-		player_Relative.getTextBox().addText("Aren't you worried about the robbery that happened last night?");
-		player_Relative.getTextBox().addText("I don't even want to leave the house!");
-		player_Relative.getTextBox().addText("In fact, I can probably do a better job of protecting our stuff if I'm inside!");
-		player_Relative.getTextBox().addText("That settles it! I'll just stay in here until they catch the criminal!");
-		
-		
-		//Tree cutter
-		if(!world.getWorldState().getPlayer().inventoryContains("Water") && !world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
-			treeCutter.getTextBox().addText("Whew! I've been out here all day chopping wood for the winter.");
-			treeCutter.getTextBox().addText("I could really go for a nice, cold drink right about now!");
-		}
-		if(world.getWorldState().getPlayer().inventoryContains("Water") && !world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
-			treeCutter.willGiveItem(true);
-			treeCutter.setItemToGive(new Hatchet());
-			
-			treeCutter.getTextBox().addText("What? A glass of water? For me?");
-			treeCutter.getTextBox().addText("Wow! Thanks so much!");
-			treeCutter.getTextBox().addText("*Gulp* *Gulp* *Gulp*");
-			treeCutter.getTextBox().addText("Ah! That's refreshing!");
-			treeCutter.getTextBox().addText("Here, let me repay you for this.");
-			treeCutter.getTextBox().addText("I'm done chopping wood for today so you can have this.");
-			treeCutter.getTextBox().addText("You were given a(n) " + treeCutter.getItemToGive().getName() + "!");
-			
-		}
-		if(world.getWorldState().getPlayer().inventoryContains("Hatchet") && !world.getWorldState().getPlayer().inventoryContains("Water")) {
-			//Talk about the hatchet
-			treeCutter.getTextBox().addText("That hatchet can be used to cut down certain kinds of trees.");
-		}
-		
-		
-		//Tree cutter's friend
-		treeCutterFriend.getTextBox().addText("Hi there! I'm Jim.");
-		treeCutterFriend.getTextBox().addText("Why am I standing in front of this house, you ask?");
-		treeCutterFriend.getTextBox().addText("Well, it's actually not my house. It belongs to a friend.");
-		treeCutterFriend.getTextBox().addText("He asked me to watch it for him while he's out chopping fire-wood.");
-		treeCutterFriend.getTextBox().addText("Can't let that thief steal any of our logs, now can we?");
-		
-		
-		//Water giving person
-		if(!world.getWorldState().getPlayer().inventoryContains("Coupon") && !world.getWorldState().getPlayer().inventoryContains("Water")) {
-			giveWaterPerson.getTextBox().addText("Hi there! What would you like to order?");
-			giveWaterPerson.getTextBox().addText("What's that? You don't have any money?");
-			giveWaterPerson.getTextBox().addText("I can't sell you anything if you don't have any money!");
-			giveWaterPerson.getTextBox().addText("Please come back when you have enough money.");
-		}
-		if(!world.getWorldState().getPlayer().inventoryContains("Water") && world.getWorldState().getPlayer().inventoryContains("Coupon")) {
-			giveWaterPerson.willGiveItem(true);
-			giveWaterPerson.setItemToGive(new Water());
-			
-			giveWaterPerson.getTextBox().addText("Hi there! What can I get for you?");
-			giveWaterPerson.getTextBox().addText("Oh, my mom gave you a coupon for a free sparkling water?");
-			giveWaterPerson.getTextBox().addText("That was nice of her! Let me get you that water.");
-			giveWaterPerson.getTextBox().addText("...");
-			giveWaterPerson.getTextBox().addText("...");
-			giveWaterPerson.getTextBox().addText("Here you go! Enjoy!");
-			giveWaterPerson.getTextBox().addText("You received a(n) " + giveWaterPerson.getItemToGive().getName() + "!");
-		} 
-		if(giveWaterPerson.getItemToGive() == null) {
-			if(world.getWorldState().getPlayer().inventoryContains("Water") || world.getWorldState().getPlayer().inventoryContains("Hatchet") || world.getWorldState().getPlayer().inventoryContains("Coupon"))
-				giveWaterPerson.getTextBox().addText("Enjoy your sparkling water!");
-			
-		}
-		
-		
-		//Random person 21
-		randomPerson_21.getTextBox().addText("This is my favorite place to get lunch!");
-		
-		
-		//Sewing shop owner
-		if(!world.getWorldState().getPlayer().inventoryContains("Coin") && !world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
-			sewingShopOwner.getTextBox().addText("Hello there! I'm Gina and this is my sewing shop.");
-			sewingShopOwner.getTextBox().addText("If you would like to buy a sewing kit you will have to pay $12.");
-			sewingShopOwner.getTextBox().addText("I'm sorry, it looks like you don't have enough money to buy one.");
-			sewingShopOwner.getTextBox().addText("Please come back when you have enough.");
-		} 
-		if(world.getWorldState().getPlayer().inventoryContains("Coin") && !world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
-			sewingShopOwner.willGiveItem(true);
-			sewingShopOwner.setItemToGive(new SewingKit());
-			
-			sewingShopOwner.getTextBox().addText("Hello there! I'm Gina and this is my sewing shop.");
-			sewingShopOwner.getTextBox().addText("If you would like to buy a sewing kit you will have to pay $12.");
-			sewingShopOwner.getTextBox().addText("Looks like you have just enough!");
-			sewingShopOwner.getTextBox().addText("Here is your sewing kit!");
-			sewingShopOwner.getTextBox().addText("You pay $12 and receive a(n) " + sewingShopOwner.getItemToGive().getName() + "!");
-			world.getWorldState().getPlayer().getInventoryItem("Coin").setQuantity(world.getWorldState().getPlayer().getInventoryItem("Coin").getQuantity() - 12);
-		}
-		if(sewingShopOwner.getItemToGive() == null && world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
-			sewingShopOwner.getTextBox().addText("Have fun sewing!");	
-		}
-		
-		
-		//Hazmat suit giver
-		if(!world.getWorldState().getPlayer().inventoryContains("Sewing Kit") && !world.getWorldState().getPlayer().inventoryContains("Hazmat Suit")) {
-			hazmatSuitGiver.getTextBox().addText("Hi, are you one of the volunteers that are supposed to help with the  radiation issue?");
-			hazmatSuitGiver.getTextBox().addText("You are? Great! You'll need a hazmat suit to be able to walk into town safely, though.");
-			hazmatSuitGiver.getTextBox().addText("I have one here, but unfortunately there is a hole in it...");
-			hazmatSuitGiver.getTextBox().addText("I'll need to borrow a sewing kit to patch it up quickly, but I have no idea where to get one.");
-			hazmatSuitGiver.getTextBox().addText("If you could do me a favor and get me a sewing kit, I can have your   hazmat suit ready in a couple of minutes.");
-			hazmatSuitGiver.getTextBox().addText("Come back when you have one.");
-		}
-		if(!world.getWorldState().getPlayer().inventoryContains("Hazmat Suit") && world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
-			hazmatSuitGiver.willGiveItem(true);
-			hazmatSuitGiver.setItemToGive(new HazmatSuit());
-			
-			hazmatSuitGiver.getTextBox().addText("You have a sewing kit? Perfect! Let me just patch up the suit quickly.");
-			hazmatSuitGiver.getTextBox().addText("...");
-			hazmatSuitGiver.getTextBox().addText("...");
-			hazmatSuitGiver.getTextBox().addText("...");
-			hazmatSuitGiver.getTextBox().addText("Almost done...");
-			hazmatSuitGiver.getTextBox().addText("Finished! Here you go!");
-			hazmatSuitGiver.getTextBox().addText("You received a(n) " + hazmatSuitGiver.getItemToGive().getName() + "!");
-			hazmatSuitGiver.getTextBox().addText("Good luck taking care of the radioactive material!");
-		}
-		if(world.getWorldState().getPlayer().inventoryContains("Sewing Kit") && world.getWorldState().getPlayer().inventoryContains("Hazmat Suit")) {
-			hazmatSuitGiver.getTextBox().addText("Good luck!");
-		}
-		
-		
-		//Hazmat suit giver's wife
-		hazmatSuitGiverWife.getTextBox().addText("My husband works at a company that makes hazmat suits, so he always   has some lying around the house.");
-		hazmatSuitGiverWife.getTextBox().addText("You should talk to him if you need one.");
-		
-		
-		//Container seller
-		if(!world.getWorldState().getPlayer().inventoryContains("Container") && (world.getWorldState().getPlayer().inventoryContains("Coin") && world.getWorldState().getPlayer().getQuantity("Coin") >= 40)) {
-			containerSeller.willGiveItem(true);
-			containerSeller.setItemToGive(new Container());
-			
-			containerSeller.getTextBox().addText("Hi there! I sell all sorts of jars and containers.");
-			containerSeller.getTextBox().addText("Would you like to hear about our item of the day? It is a small, square box used to store potentially dangerous materials.");
-			containerSeller.getTextBox().addText("Nothing will slip out of this container! It can handle anything you put into it, and it's perfect for any type of storage!");
-			containerSeller.getTextBox().addText("If you're interested, I can sell it to you for $40.");
-			containerSeller.getTextBox().addText("You'll take it? Great! Here you go!");
-			containerSeller.getTextBox().addText("You pay $40 receive a(n) " + containerSeller.getItemToGive().getName() + "!");
-			containerSeller.getTextBox().addText("Thank you for shopping with us!");
-			world.getWorldState().getPlayer().getInventoryItem("Coin").setQuantity(world.getWorldState().getPlayer().getInventoryItem("Coin").getQuantity() - 40);
-		} 
-		if(!world.getWorldState().getPlayer().inventoryContains("Container") && (!world.getWorldState().getPlayer().inventoryContains("Coin") || world.getWorldState().getPlayer().getQuantity("Coin") < 40)) {
-			containerSeller.getTextBox().addText("Hi there! I sell all sorts of jars and containers.");
-			containerSeller.getTextBox().addText("Would you like to hear about our item of the day? It's a small, square container used to store potentially dangerous materials.");
-			containerSeller.getTextBox().addText("Nothing will slip out of this container! It can handle anything you   put into it, and it's perfect for any type of storage!");
-			containerSeller.getTextBox().addText("If you're interested, I can sell it to you for $40.");
-			containerSeller.getTextBox().addText("I'm sorry, it looks like you don't have enough money to purchase this product.");
-			containerSeller.getTextBox().addText("Come back when you have enough! I'll hold it for you until you return!");
-		}
-		if(world.getWorldState().getPlayer().inventoryContains("Container")) {
-			containerSeller.getTextBox().addText("Thank you for shopping with us!");
-		}
-		
-		
-		//Retired Mine Worker
-		if(!world.getWorldState().getPlayer().inventoryContains("Pickaxe")) {
-			retiredMineWorker.willGiveItem(true);
-			retiredMineWorker.setItemToGive(new Pickaxe());
-			
-			retiredMineWorker.getTextBox().addText("Hello there!");
-			retiredMineWorker.getTextBox().addText("What's that? You're looking for some mining equipment?");
-			retiredMineWorker.getTextBox().addText("Perfect! I was hoping to get rid of some of this old junk anyway.");
-			retiredMineWorker.getTextBox().addText("Hmm... Let's see...");
-			retiredMineWorker.getTextBox().addText("Ah! How about this pickaxe? It's perfect for chipping away at rocks.");
-			retiredMineWorker.getTextBox().addText("How much does it cost? Don't even worry about that. You can have it   for free.");
-			retiredMineWorker.getTextBox().addText("But be careful, that pickaxe is very old. We wouldn't want it to break now would we?");
-			retiredMineWorker.getTextBox().addText("You received a(n) " + retiredMineWorker.getItemToGive().getName() + "!");
-		} else {
-			retiredMineWorker.getTextBox().addText("Take good care of the pickaxe!");
-		}
-		
-		//Cat NPC
-		if(catNPC.getItemToGive() != null) {
-			catNPC.getTextBox().addText("Meeeooow!");
-			catNPC.getTextBox().addText("This cat seems to be playing with a strange looking ball of yarn...");
-			catNPC.getTextBox().addText("You take a closer look and see that the cat is playing with one of the orbs!");
-			catNPC.getTextBox().addText("You received a(n) " + catNPC.getItemToGive().getName() + "!");
-		} else {
-			catNPC.getTextBox().addText("Meeeooow!");
-		}
-	}
-	
 	
 }

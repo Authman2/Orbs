@@ -24,6 +24,7 @@ public class Coin extends Item {
 	@Override
 	public void initialize() {
 		setName("Coin");
+		setID("Coin");
 		setAcquiredMessage("You received a " + getName() + "!");
 		if(acquiredTextBox.isOpen()) acquiredTextBox.initialize();
 	}

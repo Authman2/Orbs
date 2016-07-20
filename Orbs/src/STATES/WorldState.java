@@ -43,6 +43,7 @@ public class WorldState extends GameState {
 		inventoryTextBox = new TextBox();
 		updatePlayersItems();
 		
+		
 		initialize();
 	}
 	
@@ -175,6 +176,7 @@ public class WorldState extends GameState {
 	public void initialize() {
 		if(currentWorld != null) {
 			currentWorld.initialize();
+			currentWorld.createNPCsAndItems();
 			
 			player.initialize();
 		}

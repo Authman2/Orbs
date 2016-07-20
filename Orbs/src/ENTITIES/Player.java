@@ -58,6 +58,17 @@ public class Player extends Entity {
 	}
 	
 	
+	/** Returns whether or not the player has an item with the particular ID in the inventory. */
+	public boolean containsID(String id) {
+		for(Item itm : items) {
+			if(itm.getID().equals(id)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
 	/** Returns the quantity of a particular item in the player's inventory. */
 	public int getQuantity(String name) {
 		for(Item itm : items) {

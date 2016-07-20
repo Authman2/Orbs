@@ -115,21 +115,15 @@ public class World {
 		}
 		
 		if(se.position.equals(83 + position.X, 91 + position.Y)) {
-			Coin coin = new Coin();
-			coin.setQuantity(12);
-			se.setContainedItem(coin);
+			se.setContainedItem(new Coin(12));
 		}
 		
 		if(se.position.equals(47 + position.X, 20 + position.Y)) {
-			Coin coin = new Coin();
-			coin.setQuantity(26);
-			se.setContainedItem(coin);
+			se.setContainedItem(new Coin(26));
 		}
 		
 		if(se.position.equals(46 + position.X, 46 + position.Y)) {
-			Coin coin = new Coin();
-			coin.setQuantity(14);
-			se.setContainedItem(coin);
+			se.setContainedItem(new Coin(14));
 		}
 	}
 	
@@ -394,6 +388,21 @@ public class World {
 		
 	}
 	
+	
+	/** Handles the creation of NPCs and Items. */
+	public void createNPCsAndItems() {
+		//Initialize the npc manager
+		npcManager.createNPCs();
+		npcManager.giveItems();
+		try {
+			npcManager.loadNPCText();
+		}catch(Exception err) { err.printStackTrace(); }
+		npcManager.addToGame();
+		
+		//Initialize the item manager
+		itemManager.initialize();
+		itemManager.addToGame();
+	}
 	
 	
 	////////////// GETTERS ///////////////
@@ -706,14 +715,14 @@ public class World {
 			ae.initialize();
 		}
 		
-		//Initialize the npc manager
-		npcManager.createNPCs();
-		npcManager.initialize();
-		npcManager.addToGame();
-		
-		//Initialize the item manager
-		itemManager.initialize();
-		itemManager.addToGame();
+//		//Initialize the npc manager
+//		npcManager.createNPCs();
+//		npcManager.initialize();
+//		npcManager.addToGame();
+//		
+//		//Initialize the item manager
+//		itemManager.initialize();
+//		itemManager.addToGame();
 	}
 	
 	

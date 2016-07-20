@@ -30,6 +30,7 @@ public class Hatchet extends Item {
 	@Override
 	public void initialize() {
 		setName("Hatchet");
+		setID("Hatchet");
 		setAcquiredMessage("You received a " + getName() + "!");
 		if(acquiredTextBox.isOpen()) acquiredTextBox.initialize();
 	}

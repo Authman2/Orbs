@@ -23,6 +23,7 @@ public class SewingKit extends Item {
 	@Override
 	public void initialize() {
 		setName("Sewing Kit");
+		setID("Sewing Kit");
 		setAcquiredMessage("You received a " + getName() + "!");
 		if(acquiredTextBox.isOpen()) acquiredTextBox.initialize();
 	}

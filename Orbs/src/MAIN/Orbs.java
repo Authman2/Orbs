@@ -2,7 +2,7 @@ package MAIN;
 
 import java.io.IOException;
 
-import gamedevje.GameWindow;
+import GAMEDEV.GameWindow;
 
 public class Orbs {
 

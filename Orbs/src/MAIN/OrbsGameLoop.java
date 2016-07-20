@@ -3,7 +3,7 @@ package MAIN;
 import java.awt.Graphics2D;
 
 import MANAGERS.GameStateManager;
-import gamedevje.GameLoop;
+import GAMEDEV.GameLoop;
 
 public class OrbsGameLoop extends GameLoop {
 	private static final long serialVersionUID = 4869900297997334871L;

@@ -27,6 +27,7 @@ public class Water extends Item {
 	@Override
 	public void initialize() {
 		setName("Water");
+		setID("Water");
 		setAcquiredMessage("You received " + getName() + "!");
 		if(acquiredTextBox.isOpen()) acquiredTextBox.initialize();
 	}

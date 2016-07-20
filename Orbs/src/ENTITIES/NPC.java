@@ -12,15 +12,18 @@ public class NPC extends Entity {
 	//Each NPC has a text box, which will show when the player interacts with it.
 	TextBox textBox;
 	
+	//Whether or not the player has already interacted with this NPC
+	boolean interactedWith;
+	
 	
 	
 	/////////// Constructors ///////////
 	
-	public NPC() { textBox = new TextBox(); }
+	public NPC() { textBox = new TextBox(); interactedWith = false; }
 
-	public NPC(Vector2D pos) { super(pos); textBox = new TextBox(); }
+	public NPC(Vector2D pos) { super(pos); textBox = new TextBox(); interactedWith = false; }
 
-	public NPC(BufferedImage sprite) { this.sprite = sprite; textBox = new TextBox(); }
+	public NPC(BufferedImage sprite) { this.sprite = sprite; textBox = new TextBox(); interactedWith = false; }
 	
 	
 	
@@ -29,12 +32,19 @@ public class NPC extends Entity {
 	/** Sets the default sprite for this NPC. */
 	public void setSprite(BufferedImage sprite) { this.sprite = sprite; }
 	
+
+	/** Sets whether or not the player has already talked to this NPC. */
+	public void setInteractedWith(boolean b) { interactedWith = b; }
 	
 	
 	/////////// Getters ///////////
 	
 	/** Returns the text box for this NPC. */
 	public TextBox getTextBox() { return textBox; }
+	
+	
+	/** Returns whether or not this NPC has been talked to. */
+	public boolean wasInteractedWith() { return interactedWith; }
 	
 	
 	

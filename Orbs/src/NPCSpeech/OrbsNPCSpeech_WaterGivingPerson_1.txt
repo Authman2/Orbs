@@ -1,0 +1,4 @@
+Hi there! What would you like to order?
+What? You don't have any money?
+I can't sell you anything if you can’t pay!
+Please come back when you have enough money.

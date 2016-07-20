@@ -236,10 +236,15 @@ public class InputManager implements KeyListener {
 					
 					((NPC) ent).getTextBox().nextSlide();
 					
+					//If this NPC has not been interacted with.
+					if(!((NPC)ent).wasInteractedWith()) {
+						((NPC)ent).setInteractedWith(true);
+					}
+					
 					//If it is a person and they have an item, give it to the player.
 					if(((Person)ent).getItemToGive() != null) {
 						
-						//Only add the item if you are on the last text slide.s
+						//Only add the item if you are on the last text slide.
 						if(((Person)ent).getTextBox().onLast()) {
 							worldState.getPlayer().addItemToInventory(((Person)ent).getItemToGive());
 							worldState.updatePlayersItems();
@@ -251,7 +256,10 @@ public class InputManager implements KeyListener {
 						if(((Person)ent).willGiveItem()) {
 							//Re-assign the text boxes of each NPC
 							worldState.getCurrentWorld().getNPCManager().clearTextBoxes();
-							worldState.getCurrentWorld().getNPCManager().initialize();
+							try {
+								worldState.getCurrentWorld().getNPCManager().loadNPCText();
+							} catch(Exception err) { err.printStackTrace(); }
+							//worldState.getCurrentWorld().getNPCManager().initialize();
 						}
 					}
 					

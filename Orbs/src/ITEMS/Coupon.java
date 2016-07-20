@@ -25,6 +25,7 @@ public class Coupon extends Item {
 	@Override
 	public void initialize() {
 		setName("Coupon");
+		setID("Coupon");
 		setAcquiredMessage("You received a " + getName() + "!");
 		if(acquiredTextBox.isOpen()) acquiredTextBox.initialize();
 	}

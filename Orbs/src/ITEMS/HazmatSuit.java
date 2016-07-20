@@ -29,6 +29,7 @@ public class HazmatSuit extends Item {
 	@Override
 	public void initialize() {
 		setName("Hazmat Suit");
+		setID("Hazmat Suit");
 		setAcquiredMessage("You received a " + getName() + "!");
 		if(acquiredTextBox.isOpen()) acquiredTextBox.initialize();
 	}

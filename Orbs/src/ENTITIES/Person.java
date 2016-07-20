@@ -38,6 +38,7 @@ public class Person extends NPC {
 	public void willGiveItem(boolean b) { this.willGiveItem = b; }
 	
 	
+	
 	/////////// Getters ////////////
 	
 	/** Returns the item that this person will give the player. */
@@ -46,5 +47,6 @@ public class Person extends NPC {
 	
 	/** Whether or not the person will give the player an item. */
 	public boolean willGiveItem() { return this.willGiveItem; }
+	
 	
 }

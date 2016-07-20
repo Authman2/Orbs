@@ -1,0 +1,6 @@
+Oh, hello! So you've found some of my orbs?
+That's wonderful!
+Let's see how many you've found...
+Hmm... Well it looks like you have found " + world.getWorldState().getPlayer().getOrbCount() + " out of 20 orbs.
+That's good! But there are still more to find.
+Please keep on looking and return to me when you have more orbs!      Good luck!
