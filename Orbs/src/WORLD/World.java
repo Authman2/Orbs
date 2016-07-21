@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import ENTITIES.ActionEntity;
 import ENTITIES.Entity;
+import ENTITIES.NPC;
 import ENTITIES.SearchableEntity;
 import ITEMS.Coin;
 import ITEMS.Item;
@@ -97,33 +98,46 @@ public class World {
 	
 	
 	/** Adds items to a bunch of the trees in the game world based on their location. */
-	public void addSearchableItems(SearchableEntity se) {
-		if(se.position.equals(75 + position.X, 32 + position.Y)) {
-			se.setContainedItem(new Orb());
-		}
-		
-		if(se.position.equals(90 + position.X, 13 + position.Y)) {
-			se.setContainedItem(new Orb());
-		}
-		
-		if(se.position.equals(11 + position.X, 73 + position.Y)) {
-			se.setContainedItem(new Orb());
-		}
-		
-		if(se.position.equals(86 + position.X, 90 + position.Y)) {
-			se.setContainedItem(new Orb());
-		}
-		
-		if(se.position.equals(83 + position.X, 91 + position.Y)) {
-			se.setContainedItem(new Coin(12));
-		}
-		
-		if(se.position.equals(47 + position.X, 20 + position.Y)) {
-			se.setContainedItem(new Coin(26));
-		}
-		
-		if(se.position.equals(46 + position.X, 46 + position.Y)) {
-			se.setContainedItem(new Coin(14));
+	public void addSearchableItems() {
+		if(name.equals("Main")) {
+			
+			for(SearchableEntity se : searchables) {
+				if(se.position.equals(75 + position.X, 32 + position.Y)) {
+					Orb orb = new Orb();
+					orb.setID("searchOrb_1");
+					se.setContainedItem(orb);
+				}
+				if(se.position.equals(90 + position.X, 13 + position.Y)) {
+					Orb orb = new Orb();
+					orb.setID("searchOrb_2");
+					se.setContainedItem(orb);
+				}
+				if(se.position.equals(11 + position.X, 73 + position.Y)) {
+					Orb orb = new Orb();
+					orb.setID("searchOrb_3");
+					se.setContainedItem(orb);
+				}
+				if(se.position.equals(86 + position.X, 90 + position.Y)) {
+					Orb orb = new Orb();
+					orb.setID("searchOrb_4");
+					se.setContainedItem(orb);
+				}
+				if(se.position.equals(83 + position.X, 91 + position.Y)) {
+					Coin coin = new Coin(12);
+					coin.setID("searchCoin_1");
+					se.setContainedItem(coin);
+				}
+				if(se.position.equals(47 + position.X, 20 + position.Y)) {
+					Coin coin = new Coin(26);
+					coin.setID("searchCoin_2");
+					se.setContainedItem(coin);
+				}
+				if(se.position.equals(46 + position.X, 46 + position.Y)) {
+					Coin coin = new Coin(14);
+					coin.setID("searchCoin_3");
+					se.setContainedItem(coin);
+				}
+			}
 		}
 	}
 	
@@ -393,16 +407,39 @@ public class World {
 	public void createNPCsAndItems() {
 		//Initialize the item manager
 		itemManager.createItems();
-		itemManager.initialize();
 		itemManager.addToGame();
+		
+		//Initialize all of the searchable entities
+		addSearchableItems();
 		
 		//Initialize the npc manager
 		npcManager.createNPCs();
 		npcManager.giveItems();
-		try {
-			npcManager.loadNPCText();
-		}catch(Exception err) { err.printStackTrace(); }
+		try { npcManager.loadNPCText(); }catch(Exception err) { err.printStackTrace(); }
 		npcManager.addToGame();
+	}
+	
+	
+	/** Calls the draw method on each game element's text box if it is open. Can be called from the world state to make sure
+	 * that all text boxes are drawn on top of everything in the game. */
+	public void drawTextBoxes(Graphics2D g) {
+		for(Entity e : getEntities()) {
+			if(e instanceof NPC)
+				if(((NPC) e).getTextBox().isOpen())
+					((NPC) e).getTextBox().draw(g);
+		}
+		for(Item e : getDroppedItems()) {
+			if(e.getTextBox().isOpen())
+				e.getTextBox().draw(g);
+		}
+		for(SearchableEntity e : getSearchables()) {
+			if(e.getTextBox().isOpen())
+				e.getTextBox().draw(g);
+		}
+		for(ActionEntity e : getActionEntities()) {
+			if(e.getTextBox().isOpen())
+				e.getTextBox().draw(g);
+		}
 	}
 	
 	
@@ -652,6 +689,7 @@ public class World {
 					tiles[x][y] = new Tile(TileType.Tree_1, true);
 					SearchableEntity se = new SearchableEntity(new Vector2D(x + position.X, y + position.Y));
 					se.setName("tree");
+					se.setContainedItem(null);
 					searchables.add(se);
 				}
 				if(map.currentMap[y][x] == 4) {
@@ -711,7 +749,6 @@ public class World {
 		
 		//Initialize each searchable entity
 		for(SearchableEntity se : searchables) {
-			addSearchableItems(se);
 			se.initialize();
 		}
 		
@@ -801,7 +838,6 @@ public class World {
 		}
 		
 	}
-	
 	
 
 } //End of class.

@@ -46,10 +46,16 @@ public class Door {
 		worldState.setCurrentWorld(getDestination());
 		worldState.getCurrentWorld().setPosition(worldState.getCurrentWorld().position.add(new Vector2D(0,offset)));
 		worldState.getCurrentWorld().initialize();
+		
 		worldState.getCurrentWorld().getNPCManager().createNPCs();
 		worldState.getCurrentWorld().getNPCManager().giveItems();
 		try { worldState.getCurrentWorld().getNPCManager().loadNPCText(); } catch(Exception err) { err.printStackTrace(); }
 		worldState.getCurrentWorld().getNPCManager().addToGame();
+		
+		worldState.getCurrentWorld().getItemManager().createItems();
+		worldState.getCurrentWorld().getItemManager().addToGame();
+		
+		worldState.getCurrentWorld().addSearchableItems();
 	}
 	
 }

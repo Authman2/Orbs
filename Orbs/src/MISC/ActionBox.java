@@ -61,16 +61,16 @@ public class ActionBox {
 		if(open == true) {
 			//Draw the outline of the box
 			g.setColor(Color.white);
-			g.fillRect(Orbs.WIDTH - 50, Orbs.HEIGHT - 150, 100, 50);
+			g.fillRoundRect(Orbs.WIDTH - 60, Orbs.HEIGHT - 150, 55, 50, 20, 20);
 			
 			//Draw the text options
 			g.setColor(Color.black);
-			g.drawString("YES", Orbs.WIDTH - 35, Orbs.HEIGHT - 130);
-			g.drawString("NO", Orbs.WIDTH - 35, Orbs.HEIGHT - 100);
+			g.drawString("YES", Orbs.WIDTH - 43, Orbs.HEIGHT - 130);
+			g.drawString("NO", Orbs.WIDTH - 43, Orbs.HEIGHT - 110);
 			
 			//Draw the little arrow indicator
-			if(currentOption == 0) { g.fillRect(Orbs.WIDTH - 45, Orbs.HEIGHT - 138, 7, 7); }
-			else { g.fillRect(Orbs.WIDTH - 45, Orbs.HEIGHT - 108, 7, 7); }
+			if(currentOption == 0) { g.fillRect(Orbs.WIDTH - 53, Orbs.HEIGHT - 138, 7, 7); }
+			else { g.fillRect(Orbs.WIDTH - 53, Orbs.HEIGHT - 118, 7, 7); }
 		}
 	}
 }

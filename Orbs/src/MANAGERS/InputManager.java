@@ -289,12 +289,12 @@ public class InputManager implements KeyListener {
 				if(!worldState.textBoxesOpen()) {
 					
 					//Change the text of the S.E interaction based on whether or not it has an item in it.
-					if(se.getContainedItem() == null) {
+					if(se.getContainedItem() == null || worldState.getPlayer().containsID(se.getContainedItem().getID())) {
 						se.getTextBox().clear();
-						se.getTextBox().addText("There are no items in this " + se.getName() + ".");
+						se.getTextBox().addText("There are no items in this " + se.getName() + ". ");
 					} else {
 						se.getTextBox().clear();
-						se.getTextBox().addText("You search the " + se.getName() + " and find a(n) " + se.getContainedItem().getName() + "!");
+						se.getTextBox().addText("You search the " + se.getName() + " and find a(n) " + se.getContainedItem().getName() + "! ");
 					}
 					
 					//Toggle the text box
@@ -306,12 +306,11 @@ public class InputManager implements KeyListener {
 					se.getTextBox().nextSlide();
 					
 					//If there was an item in the S.E, add it to the player's inventory.
-					if(se.getContainedItem() != null) {
+					if(se.getContainedItem() != null && !worldState.getPlayer().containsID(se.getContainedItem().getID())) {
 						worldState.getPlayer().addItemToInventory(se.getContainedItem());
 						worldState.updatePlayersItems();
 						
 						se.removeContainedItem();
-						
 					}
 					
 				}
@@ -353,7 +352,7 @@ public class InputManager implements KeyListener {
 									break;
 								} else {
 									ae.getActionBox().setOpen(false);
-									ae.getTextBox().addText("You do not have the proper item to perform this task.");
+									ae.getTextBox().addText("You do not have the proper item to perform this task. ");
 									ae.getTextBox().nextSlide();
 								}
 								
@@ -379,7 +378,7 @@ public class InputManager implements KeyListener {
 									break;
 								} else {
 									ae.getActionBox().setOpen(false);
-									ae.getTextBox().addText("You do not have the proper item to perform this task.");
+									ae.getTextBox().addText("You do not have the proper item to perform this task. ");
 									ae.getTextBox().nextSlide();
 								}
 								
@@ -429,7 +428,7 @@ public class InputManager implements KeyListener {
 					}
 					if(itm.isSpecial() && !worldState.getPlayer().inventoryContains(itm.getRequiredItem()) ){
 						itm.getTextBox().clear();
-						itm.getTextBox().addText("You need a " + itm.getRequiredItem() + " to acquire this item.");
+						itm.getTextBox().addText("You need a " + itm.getRequiredItem() + " to acquire this item. ");
 						itm.getTextBox().toggle();
 					}
 					

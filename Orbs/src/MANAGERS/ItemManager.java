@@ -30,7 +30,6 @@ public class ItemManager {
 	public ItemManager(World w) {
 		world = w;
 		npcItems = new Item[10];
-		createItems();
 	}
 
 	
@@ -38,6 +37,12 @@ public class ItemManager {
 	
 	/** Create a bunch of items. */
 	public void createItems() {
+		orb_1 = new Orb(new Vector2D(35,90).add(world.position));
+			orb_1.setID("groundOrb");
+		orb_2 = new Orb(new Vector2D(82,52).add(world.position));
+			orb_2.setSpecial(true, "Container");
+			orb_2.setID("specialOrb");
+			
 			Coin coin = new Coin(5);
 			coin.setID("coin_person4");
 		npcItems[0] = coin;
@@ -60,17 +65,14 @@ public class ItemManager {
 	/** Returns the item at the "i"th index. */
 	public Item getNPCItem(int i) { return npcItems[i]; }
 	
-	
-	public void initialize() {
-		orb_1 = new Orb(new Vector2D(35,90).add(world.position));
-		orb_2 = new Orb(new Vector2D(82,52).add(world.position));
-			orb_2.setSpecial(true, "Container");
-	}
-	
 	public void addToGame() {
 		if(world.getName().equals("Main")) {
-			world.getDroppedItems().add(orb_1);
-			world.getDroppedItems().add(orb_2);
+			if(!world.getWorldState().getPlayer().containsID("groundOrb")) {
+				world.getDroppedItems().add(orb_1);
+			}
+			if(!world.getWorldState().getPlayer().containsID("specialOrb")) {
+				world.getDroppedItems().add(orb_2);
+			}			
 		}
 	}
 }

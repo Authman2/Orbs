@@ -234,7 +234,7 @@ public class NPCManager {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_CatNPC_1.txt");
 			lines = reader.numLines();
 			while(i < lines) { catNPC.getTextBox().addText(reader.readThrough("\n")); i++; }
-			catNPC.getTextBox().addText("You received a(n) " + world.getItemManager().getNPCItem(3) + "!");
+			catNPC.getTextBox().addText("You received a(n) " + world.getItemManager().getNPCItem(3) + "! ");
 			i = 0;
 		} else {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_CatNPC_2.txt");
@@ -246,22 +246,55 @@ public class NPCManager {
 		
 		
 		//Chemical Controllers
-		if(!world.getWorldState().getPlayer().inventoryContains("Hazmat_Suit")) {
+		if(!world.getWorldState().getPlayer().inventoryContains("Hazmat Suit")) {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_ChemicalControllers_1.txt");
+			lines = reader.numLines();
+			while(i < lines) { 
+				chemicalController_1.getTextBox().addText(reader.readThrough("\n"));
+				i++; 
+			}
+			i = 0;
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_ChemicalControllers_1.txt");
+			lines = reader.numLines();
+			while(i < lines) { 
+				chemicalController_2.getTextBox().addText(reader.readThrough("\n"));
+				i++; 
+			}
+			i = 0;
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_ChemicalControllers_1.txt");
+			lines = reader.numLines();
+			while(i < lines) { 
+				chemicalController_3.getTextBox().addText(reader.readThrough("\n"));
+				i++; 
+			}
+			i = 0;
 		} else {
-			chemicalController_1.position.add(new Vector2D());
-			chemicalController_2.position.add(new Vector2D());
-			chemicalController_3.position.add(new Vector2D());
+			chemicalController_2.position.X -= 1;
+			chemicalController_2.position.Y -= 1;
+			chemicalController_3.position.X += 1;
+			chemicalController_3.position.Y -= 1;
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_ChemicalControllers_2.txt");
+			lines = reader.numLines();
+			while(i < lines) { 
+				chemicalController_1.getTextBox().addText(reader.readThrough("\n"));
+				i++; 
+			}
+			i = 0;
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_ChemicalControllers_2.txt");
+			lines = reader.numLines();
+			while(i < lines) { 
+				chemicalController_2.getTextBox().addText(reader.readThrough("\n"));
+				i++; 
+			}
+			i = 0;
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_ChemicalControllers_2.txt");
+			lines = reader.numLines();
+			while(i < lines) { 
+				chemicalController_3.getTextBox().addText(reader.readThrough("\n"));
+				i++; 
+			}
+			i = 0;
 		}
-		lines = reader.numLines();
-		while(i < lines) { 
-			chemicalController_1.getTextBox().addText(reader.readThrough("\n")); 
-			chemicalController_2.getTextBox().addText(reader.readThrough("\n")); 
-			chemicalController_3.getTextBox().addText(reader.readThrough("\n")); 
-			i++; 
-		}
-		i = 0;
 		
 		
 		//Container Seller
@@ -269,7 +302,7 @@ public class NPCManager {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_ContainerSeller_1.txt");
 			lines = reader.numLines();
 			while(i < lines) { containerSeller.getTextBox().addText(reader.readThrough("\n")); i++; }
-			containerSeller.getTextBox().addText("You received a(n) " + world.getItemManager().getNPCItem(4) + "!");
+			containerSeller.getTextBox().addText("You received a(n) " + world.getItemManager().getNPCItem(4) + "! ");
 			i = 0;
 		} else if(!world.getWorldState().getPlayer().inventoryContains("Container") && (!world.getWorldState().getPlayer().inventoryContains("Coin") || world.getWorldState().getPlayer().getQuantity("Coin") < 40)) {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_ContainerSeller_2.txt");
@@ -294,7 +327,7 @@ public class NPCManager {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_HazmatSuitGiver_2.txt");
 			lines = reader.numLines();
 			while(i < lines) { hazmatSuitGiver.getTextBox().addText(reader.readThrough("\n")); i++; }
-			hazmatSuitGiver.getTextBox().addText("You received a(n) " + world.getItemManager().getNPCItem(8) + "!");
+			hazmatSuitGiver.getTextBox().addText("You received a(n) " + world.getItemManager().getNPCItem(8) + "! ");
 			i = 0;
 		} else if(world.getWorldState().getPlayer().inventoryContains("Sewing Kit") && world.getWorldState().getPlayer().inventoryContains("Hazmat Suit")) {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_HazmatSuitGiver_3.txt");
@@ -344,7 +377,7 @@ public class NPCManager {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson4_1.txt");
 			lines = reader.numLines();
 			while(i < lines) { randomPerson_4.getTextBox().addText(reader.readThrough("\n")); i++; }
-			randomPerson_4.getTextBox().addText("You received a(n) " +world.getItemManager().getNPCItem(0)  + "!");
+			randomPerson_4.getTextBox().addText("You received a(n) " +world.getItemManager().getNPCItem(0)  + "! ");
 			i = 0;
 		} else {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson4_2.txt");
@@ -373,7 +406,7 @@ public class NPCManager {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson7_1.txt");
 			lines = reader.numLines();
 			while(i < lines) { randomPerson_7.getTextBox().addText(reader.readThrough("\n")); i++; }
-			randomPerson_7.getTextBox().addText("You received a(n) " + world.getItemManager().getNPCItem(1) + "!");
+			randomPerson_7.getTextBox().addText("You received a(n) " + world.getItemManager().getNPCItem(1) + "! ");
 			i = 0;
 		} else if(world.getWorldState().getPlayer().inventoryContains("Coupon") || world.getWorldState().getPlayer().inventoryContains("Water") || world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson7_2.txt");
@@ -451,7 +484,7 @@ public class NPCManager {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson17_1.txt");
 			lines = reader.numLines();
 			while(i < lines) { randomPerson_17.getTextBox().addText(reader.readThrough("\n")); i++; }
-			randomPerson_17.getTextBox().addText("You received a(n) " + world.getItemManager().getNPCItem(2) + "!");
+			randomPerson_17.getTextBox().addText("You received a(n) " + world.getItemManager().getNPCItem(2) + "! ");
 			i = 0;
 		} else {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson17_2.txt");
@@ -464,12 +497,15 @@ public class NPCManager {
 		//Random person 18
 		if(!world.getWorldState().getPlayer().containsID("bball_Orb")) {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson18_1.txt");
+			lines = reader.numLines();
+			while(i < lines) { randomPerson_18.getTextBox().addText(reader.readThrough("\n")); i++; }
+			i = 0;
 		} else {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson18_2.txt");
+			lines = reader.numLines();
+			while(i < lines) { randomPerson_18.getTextBox().addText(reader.readThrough("\n")); i++; }
+			i = 0;
 		}
-		lines = reader.numLines();
-		while(i < lines) { randomPerson_18.getTextBox().addText(reader.readThrough("\n")); i++; }
-		i = 0;
 		
 		
 		//Random person 19
@@ -498,7 +534,7 @@ public class NPCManager {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RetiredMineWorker_1.txt");
 			lines = reader.numLines();
 			while(i < lines) { retiredMineWorker.getTextBox().addText(reader.readThrough("\n")); i++; }
-			retiredMineWorker.getTextBox().addText("You received a(n) " + world.getItemManager().getNPCItem(9) + "!");
+			retiredMineWorker.getTextBox().addText("You received a(n) " + world.getItemManager().getNPCItem(9) + "! ");
 			i = 0;
 		} else {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RetiredMineWorker_2.txt");
@@ -519,7 +555,7 @@ public class NPCManager {
 			lines = reader.numLines();
 			while(i < lines) { scientist.getTextBox().addText(reader.readThrough("\n")); i++; }
 			i = 0;
-			scientist.getTextBox().setText("Hmm... Well it looks like you have found " + world.getWorldState().getPlayer().getOrbCount() + " out of 20 orbs.", 3);
+			scientist.getTextBox().setText("Hmm... Well it looks like you have found " + world.getWorldState().getPlayer().getOrbCount() + " out of 20 orbs. ", 3);
 		}
 		
 		
@@ -534,7 +570,7 @@ public class NPCManager {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_SewingShopOwner_2.txt");
 			lines = reader.numLines();
 			while(i < lines) { sewingShopOwner.getTextBox().addText(reader.readThrough("\n")); i++; }
-			sewingShopOwner.getTextBox().addText("You received a(n) " + world.getItemManager().getNPCItem(7) + "!");
+			sewingShopOwner.getTextBox().addText("You received a(n) " + world.getItemManager().getNPCItem(7) + "! ");
 			i = 0;
 		} else if(world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_SewingShopOwner_3.txt");
@@ -554,7 +590,7 @@ public class NPCManager {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_TreeCutter_2.txt");
 			lines = reader.numLines();
 			while(i < lines) { treeCutter.getTextBox().addText(reader.readThrough("\n")); i++; }
-			treeCutter.getTextBox().addText("You received a(n) " + world.getItemManager().getNPCItem(5) + "!");
+			treeCutter.getTextBox().addText("You received a(n) " + world.getItemManager().getNPCItem(5) + "! ");
 			i = 0;
 		} else if(world.getWorldState().getPlayer().inventoryContains("Hatchet") && !world.getWorldState().getPlayer().inventoryContains("Water")) {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_TreeCutter_3.txt");
@@ -581,7 +617,7 @@ public class NPCManager {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_WaterGivingPerson_2.txt");
 			lines = reader.numLines();
 			while(i < lines) { giveWaterPerson.getTextBox().addText(reader.readThrough("\n")); i++; }
-			giveWaterPerson.getTextBox().addText("You received a(n) " + world.getItemManager().getNPCItem(6) + "!");
+			giveWaterPerson.getTextBox().addText("You received a(n) " + world.getItemManager().getNPCItem(6) + "! ");
 			i = 0;
 		} else if(world.getWorldState().getPlayer().inventoryContains("Water") || world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_WaterGivingPerson_3.txt");

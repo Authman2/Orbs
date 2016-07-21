@@ -147,10 +147,10 @@ public class WorldState extends GameState {
 			
 			//Add descriptions for each item that the player has.
 			for(Item itm : getPlayer().getInventory()) {
-				inventoryTextBox.addText("" + itm.getQuantity() + " " + itm.getName() + "(s)");
+				inventoryTextBox.addText(itm.getQuantity() + " " + itm.getName() + "(s) ");
 			}
 		} else {
-			inventoryTextBox.addText("The player has no items.");
+			inventoryTextBox.addText("The player has no items. ");
 		}
 	}
 
@@ -205,6 +205,9 @@ public class WorldState extends GameState {
 			
 			player.draw(g);
 			if(inventoryTextBox.isOpen()) inventoryTextBox.draw(g);
+			
+			//Draw text boxes on top of everything else
+			currentWorld.drawTextBoxes(g);
 		}
 	}
 	

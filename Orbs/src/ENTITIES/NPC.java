@@ -75,7 +75,7 @@ public class NPC extends Entity {
 		}
 			
 		//Drawing the NPC's text box
-		if(textBox.isOpen()) textBox.draw(g);
+		//if(textBox.isOpen()) textBox.draw(g);
 		
 	}
 
