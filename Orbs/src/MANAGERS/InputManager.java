@@ -225,21 +225,18 @@ public class InputManager implements KeyListener {
 	}
 	
 	
-	/** Deals with interacting with entities. */
+	/** Deals with interacting with entities that happen to be NPCs. */
 	public void entities() {
 		//First check if there is already a text box open
 		for(Entity ent : worldState.getCurrentWorld().getEntities()) {
 			
 			if(ent instanceof NPC && !(ent instanceof SearchableEntity)) {
+				
 				//If a text box IS open, then just go through each slide as you normally would.
 				if( ((NPC) ent).getTextBox().isOpen() ) {
 					
 					((NPC) ent).getTextBox().nextSlide();
 					
-					//If this NPC has not been interacted with.
-					if(!((NPC)ent).wasInteractedWith()) {
-						((NPC)ent).setInteractedWith(true);
-					}
 					
 					//If it is a person and they have an item, give it to the player.
 					if(((Person)ent).getItemToGive() != null) {
@@ -256,9 +253,7 @@ public class InputManager implements KeyListener {
 						if(((Person)ent).willGiveItem()) {
 							//Re-assign the text boxes of each NPC
 							worldState.getCurrentWorld().getNPCManager().clearTextBoxes();
-							try {
-								worldState.getCurrentWorld().getNPCManager().loadNPCText();
-							} catch(Exception err) { err.printStackTrace(); }
+							try { worldState.getCurrentWorld().getNPCManager().loadNPCText(); } catch(Exception err) { err.printStackTrace(); }
 							//worldState.getCurrentWorld().getNPCManager().initialize();
 						}
 					}
@@ -269,6 +264,16 @@ public class InputManager implements KeyListener {
 					if(((NPC) ent).isNextTo(worldState.getPlayer())) {
 						
 						((NPC) ent).getTextBox().toggle();
+						
+						//Change the direction of the NPC
+						if(worldState.getPlayer().getDirection() == 0)
+							((NPC)ent).setDirection(2);
+						else if(worldState.getPlayer().getDirection() == 1)
+							((NPC)ent).setDirection(3);
+						else if(worldState.getPlayer().getDirection() == 2)
+							((NPC)ent).setDirection(0);
+						else if(worldState.getPlayer().getDirection() == 3)
+							((NPC)ent).setDirection(1);
 						
 					}
 				}

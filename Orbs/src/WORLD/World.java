@@ -155,7 +155,7 @@ public class World {
 				/* TREES */
 				if(x == 21 && y == 80) {
 					ActionEntity ae = new ActionEntity(new Vector2D(x + worldX,y + worldY));
-					ae.setSprite(Assets.tree_3);
+					ae.setDefaultSprite(Assets.tree_3);
 					ae.setName("tree_3");
 					ae.setActionQuestion("This tree could be cut down using a hatchet. Would you like to cut    down the tree?");
 					actionEnts.add(ae);
@@ -163,7 +163,7 @@ public class World {
 				
 				if(x == 22 && y == 80) {
 					ActionEntity ae = new ActionEntity(new Vector2D(x + worldX,y + worldY));
-					ae.setSprite(Assets.tree_3);
+					ae.setDefaultSprite(Assets.tree_3);
 					ae.setName("tree_3");
 					ae.setActionQuestion("This tree could be cut down using a hatchet. Would you like to cut    down the tree?");
 					actionEnts.add(ae);
@@ -171,7 +171,7 @@ public class World {
 				
 				if(x == 51 && y == 54) {
 					ActionEntity ae = new ActionEntity(new Vector2D(x + worldX,y + worldY));
-					ae.setSprite(Assets.tree_3);
+					ae.setDefaultSprite(Assets.tree_3);
 					ae.setName("tree_3");
 					ae.setActionQuestion("This tree could be cut down using a hatchet. Would you like to cut    down the tree?");
 					actionEnts.add(ae);
@@ -179,7 +179,7 @@ public class World {
 				
 				if(x == 52 && y == 53) {
 					ActionEntity ae = new ActionEntity(new Vector2D(x + worldX,y + worldY));
-					ae.setSprite(Assets.tree_3);
+					ae.setDefaultSprite(Assets.tree_3);
 					ae.setName("tree_3");
 					ae.setActionQuestion("This tree could be cut down using a hatchet. Would you like to cut    down the tree?");
 					actionEnts.add(ae);
@@ -187,7 +187,7 @@ public class World {
 				
 				if(x == 51 && y == 53) {
 					ActionEntity ae = new ActionEntity(new Vector2D(x + worldX,y + worldY));
-					ae.setSprite(Assets.tree_3);
+					ae.setDefaultSprite(Assets.tree_3);
 					ae.setName("tree_3");
 					ae.setActionQuestion("This tree could be cut down using a hatchet. Would you like to cut    down the tree?");
 					actionEnts.add(ae);
@@ -195,7 +195,7 @@ public class World {
 				
 				if(x == 52 && y == 52) {
 					ActionEntity ae = new ActionEntity(new Vector2D(x + worldX,y + worldY));
-					ae.setSprite(Assets.tree_3);
+					ae.setDefaultSprite(Assets.tree_3);
 					ae.setName("tree_3");
 					ae.setActionQuestion("This tree could be cut down using a hatchet. Would you like to cut    down the tree?");
 					actionEnts.add(ae);
@@ -203,7 +203,7 @@ public class World {
 				
 				if(x == 53 && y == 52) {
 					ActionEntity ae = new ActionEntity(new Vector2D(x + worldX,y + worldY));
-					ae.setSprite(Assets.tree_3);
+					ae.setDefaultSprite(Assets.tree_3);
 					ae.setName("tree_3");
 					ae.setActionQuestion("This tree could be cut down using a hatchet. Would you like to cut    down the tree?");
 					actionEnts.add(ae);
@@ -213,7 +213,7 @@ public class World {
 				/* ROCKS */
 				if(x == 74 && y == 30) {
 					ActionEntity ae = new ActionEntity(new Vector2D(x + worldX,y + worldY));
-					ae.setSprite(Assets.rock);
+					ae.setDefaultSprite(Assets.rock);
 					ae.setName("rock");
 					ae.setActionQuestion("This rock can be broken using a pickaxe. Would you like to break the  rock?");
 					actionEnts.add(ae);
@@ -221,7 +221,7 @@ public class World {
 				
 				if(x == 73 && y == 30) {
 					ActionEntity ae = new ActionEntity(new Vector2D(x + worldX,y + worldY));
-					ae.setSprite(Assets.rock);
+					ae.setDefaultSprite(Assets.rock);
 					ae.setName("rock");
 					ae.setActionQuestion("This rock can be broken using a pickaxe. Would you like to break the  rock?");
 					actionEnts.add(ae);
@@ -229,7 +229,7 @@ public class World {
 				
 				if(x == 73 && y == 31) {
 					ActionEntity ae = new ActionEntity(new Vector2D(x + worldX,y + worldY));
-					ae.setSprite(Assets.rock);
+					ae.setDefaultSprite(Assets.rock);
 					ae.setName("rock");
 					ae.setActionQuestion("This rock can be broken using a pickaxe. Would you like to break the  rock?");
 					actionEnts.add(ae);
@@ -237,7 +237,7 @@ public class World {
 				
 				if(x == 73 && y == 32) {
 					ActionEntity ae = new ActionEntity(new Vector2D(x + worldX,y + worldY));
-					ae.setSprite(Assets.rock);
+					ae.setDefaultSprite(Assets.rock);
 					ae.setName("rock");
 					ae.setActionQuestion("This rock can be broken using a pickaxe. Would you like to break the  rock?");
 					actionEnts.add(ae);
@@ -245,7 +245,7 @@ public class World {
 				
 				if(x == 73 && y == 32) {
 					ActionEntity ae = new ActionEntity(new Vector2D(x + worldX,y + worldY));
-					ae.setSprite(Assets.rock);
+					ae.setDefaultSprite(Assets.rock);
 					ae.setName("rock");
 					ae.setActionQuestion("This rock can be broken using a pickaxe. Would you like to break the  rock?");
 					actionEnts.add(ae);
@@ -253,7 +253,7 @@ public class World {
 				
 				if(x == 73 && y == 33) {
 					ActionEntity ae = new ActionEntity(new Vector2D(x + worldX,y + worldY));
-					ae.setSprite(Assets.rock);
+					ae.setDefaultSprite(Assets.rock);
 					ae.setName("rock");
 					ae.setActionQuestion("This rock can be broken using a pickaxe. Would you like to break the  rock?");
 					actionEnts.add(ae);
@@ -261,7 +261,7 @@ public class World {
 				
 				if(x == 73 && y == 34) {
 					ActionEntity ae = new ActionEntity(new Vector2D(x + worldX,y + worldY));
-					ae.setSprite(Assets.rock);
+					ae.setDefaultSprite(Assets.rock);
 					ae.setName("rock");
 					ae.setActionQuestion("This rock can be broken using a pickaxe. Would you like to break the  rock?");
 					actionEnts.add(ae);
@@ -269,7 +269,7 @@ public class World {
 				
 				if(x == 74 && y == 34) {
 					ActionEntity ae = new ActionEntity(new Vector2D(x + worldX,y + worldY));
-					ae.setSprite(Assets.rock);
+					ae.setDefaultSprite(Assets.rock);
 					ae.setName("rock");
 					ae.setActionQuestion("This rock can be broken using a pickaxe. Would you like to break the  rock?");
 					actionEnts.add(ae);

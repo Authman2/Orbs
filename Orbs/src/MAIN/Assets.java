@@ -7,7 +7,7 @@ import visualje.JEImage;
 public class Assets {
 	
 	//The sprite sheet
-	JEImage spriteSheet;
+	JEImage spritesheet;
 	
 	/* The individual parts of the environment */
 	
@@ -22,6 +22,7 @@ public class Assets {
 	//Black space
 	public static BufferedImage black_space;
 	
+	
 	/* The player sprites */
 	
 	//Stills
@@ -34,43 +35,76 @@ public class Assets {
 								player_right_walk1, player_right_walk2;
 	
 	
+	/* NPCs */
+	public static BufferedImage scientist_down, scientist_up, scientist_left, scientist_right,
+								lumberjack_down, lumberjack_up, lumberjack_left, lumberjack_right,
+								randomMan1_down, randomMan1_up, randomMan1_left, randomMan1_right,
+								randomMan2_down, randomMan2_up, randomMan2_left, randomMan2_right,
+								randomMan3_down, randomMan3_up, randomMan3_left, randomMan3_right,
+								randomWoman1_down, randomWoman1_up, randomWoman1_left, randomWoman1_right,
+								randomWoman2_down, randomWoman2_up, randomWoman2_left, randomWoman2_right,
+								randomWoman3_down, randomWoman3_up, randomWoman3_left, randomWoman3_right;
+	
+	
 	public void initialize() {
 		//Create the sprite sheet image
-		spriteSheet = new JEImage(Orbs.class, "/IMAGES/GameSpriteSheet.png");
+		spritesheet = new JEImage(Orbs.class, "/IMAGES/GameSpriteSheet.png");
+		
+		//NPCs
+		scientist_down = spritesheet.getPart(0, 160, 32, 32);
+		scientist_up = spritesheet.getPart(32, 160, 32, 32);
+		scientist_left = spritesheet.getPart(32, 192, 32, 32);
+		scientist_right = spritesheet.getPart(0, 192, 32, 32);
+		
+		lumberjack_down = spritesheet.getPart(0, 288, 32, 32);
+		lumberjack_up = spritesheet.getPart(32, 288, 32, 32);
+		lumberjack_left = spritesheet.getPart(32, 320, 32, 32);
+		lumberjack_right = spritesheet.getPart(0, 320, 32, 32);
+		
+		randomMan1_down = spritesheet.getPart(0, 224, 32, 32);
+		randomMan1_up = spritesheet.getPart(32, 224, 32, 32);
+		randomMan1_left = spritesheet.getPart(32, 256, 32, 32);
+		randomMan1_right = spritesheet.getPart(0, 256, 32, 32);
+		
+		randomMan2_down = spritesheet.getPart(0, 352, 32, 32);
+		randomMan2_up = spritesheet.getPart(32, 352, 32, 32);
+		randomMan2_left = spritesheet.getPart(32, 384, 32, 32);
+		randomMan2_right = spritesheet.getPart(0, 384, 32, 32);
+		
 		
 		//Idle player positions
-		player_down = spriteSheet.getPart(0, 32, 32, 32);
-		player_up = spriteSheet.getPart(0, 64, 32, 32);
-		player_left = spriteSheet.getPart(0, 96, 32, 32);
-		player_right = spriteSheet.getPart(64, 128, 32, 32);
+		player_down = spritesheet.getPart(0, 32, 32, 32);
+		player_up = spritesheet.getPart(0, 64, 32, 32);
+		player_left = spritesheet.getPart(0, 96, 32, 32);
+		player_right = spritesheet.getPart(64, 128, 32, 32);
 		
 		//Moving player positions
-		player_down_walk1 = spriteSheet.getPart(32, 32, 32, 32);
-		player_down_walk2 = spriteSheet.getPart(64, 32, 32, 32);
-		player_up_walk1 = spriteSheet.getPart(32, 64, 32, 32);
-		player_up_walk2 = spriteSheet.getPart(64, 64, 32, 32);
-		player_left_walk1 = spriteSheet.getPart(32, 96, 32, 32);
-		player_left_walk2 = spriteSheet.getPart(64, 96, 32, 32);
-		player_right_walk1 = spriteSheet.getPart(0, 128, 32, 32);
-		player_right_walk2 = spriteSheet.getPart(32, 128, 32, 32);
+		player_down_walk1 = spritesheet.getPart(32, 32, 32, 32);
+		player_down_walk2 = spritesheet.getPart(64, 32, 32, 32);
+		player_up_walk1 = spritesheet.getPart(32, 64, 32, 32);
+		player_up_walk2 = spritesheet.getPart(64, 64, 32, 32);
+		player_left_walk1 = spritesheet.getPart(32, 96, 32, 32);
+		player_left_walk2 = spritesheet.getPart(64, 96, 32, 32);
+		player_right_walk1 = spritesheet.getPart(0, 128, 32, 32);
+		player_right_walk2 = spritesheet.getPart(32, 128, 32, 32);
 	
 		//Environment
-		grass_1 = spriteSheet.getPart(0, 0, 32, 32);
-		tree_1 = spriteSheet.getPart(96, 0, 32, 32);
-		tree_2 = spriteSheet.getPart(128, 0, 32, 32);
-		house_topLeft = spriteSheet.getPart(160, 0, 32, 32);
-		house_topMiddle = spriteSheet.getPart(192, 0, 32, 32);
-		house_topRight = spriteSheet.getPart(224, 0, 32, 32);
-		house_bottomLeft = spriteSheet.getPart(160, 32, 32, 32);
-		house_bottomMiddle = spriteSheet.getPart(192, 32, 32, 32);
-		house_bottomRight = spriteSheet.getPart(224, 32, 32, 32);
-		house_door = spriteSheet.getPart(192, 64, 32, 32);
-		tree_3 = spriteSheet.getPart(96, 32, 32, 32);
-		rock = spriteSheet.getPart(128, 32, 32, 32);
-		wood_floor = spriteSheet.getPart(96, 64, 32, 32);
-		rug_left = spriteSheet.getPart(128, 64, 32, 32);
-		rug_right = spriteSheet.getPart(160, 96, 32, 32);
-		black_space = spriteSheet.getPart(96, 96, 32, 32);
+		grass_1 = spritesheet.getPart(0, 0, 32, 32);
+		tree_1 = spritesheet.getPart(96, 0, 32, 32);
+		tree_2 = spritesheet.getPart(128, 0, 32, 32);
+		house_topLeft = spritesheet.getPart(160, 0, 32, 32);
+		house_topMiddle = spritesheet.getPart(192, 0, 32, 32);
+		house_topRight = spritesheet.getPart(224, 0, 32, 32);
+		house_bottomLeft = spritesheet.getPart(160, 32, 32, 32);
+		house_bottomMiddle = spritesheet.getPart(192, 32, 32, 32);
+		house_bottomRight = spritesheet.getPart(224, 32, 32, 32);
+		house_door = spritesheet.getPart(192, 64, 32, 32);
+		tree_3 = spritesheet.getPart(96, 32, 32, 32);
+		rock = spritesheet.getPart(128, 32, 32, 32);
+		wood_floor = spritesheet.getPart(96, 64, 32, 32);
+		rug_left = spritesheet.getPart(128, 64, 32, 32);
+		rug_right = spritesheet.getPart(160, 96, 32, 32);
+		black_space = spritesheet.getPart(96, 96, 32, 32);
 	}
 	
 }

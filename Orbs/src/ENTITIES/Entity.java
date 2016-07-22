@@ -28,7 +28,7 @@ public abstract class Entity {
 	 * 2 = up
 	 * 3 = left
 	 */
-	int facing = 0;
+	protected int facing = 0;
 	
 	
 	/////////// Constructors ////////////
@@ -54,11 +54,51 @@ public abstract class Entity {
 	 * 1 = right
 	 * 2 = up
 	 * 3 = left*/
-	public void setDirection(int i) { facing = i; }
+	public void setDirection(int i) { this.facing = i; }
 	
 	
 	
 	/////////// Setters ////////////
+	
+	/** Returns the direction of this entity. */
+	public int getDirection() { return facing; }
+	
+	
+	/** Returns whether or not this entity is to the left of ent. That is that this entity should be looking to the right. */
+	public boolean isLeftOf(Entity ent) {
+		if(position.X == ent.position.X - 1 && position.Y == ent.position.Y) {
+			if(ent.facing == 3) return true;
+		}
+		return false;
+	}
+	
+	
+	/** Returns whether or not this entity is to the right of ent. That is that this entity should be looking to the left. */
+	public boolean isRightOf(Entity ent) {
+		if(position.X == ent.position.X + 1 && position.Y == ent.position.Y) {
+			if(ent.facing == 1) return true;
+		}
+		return false;
+	}
+	
+	
+	/** Returns whether or not this entity is above ent. That is that this entity should be looking down. */
+	public boolean isAbove(Entity ent) {
+		if(position.X == ent.position.X && position.Y == ent.position.Y - 1) {
+			if(ent.facing == 2) return true;
+		}
+		return false;
+	}
+	
+	
+	/** Returns whether or not this entity is below ent. That is that this entity should be looking up. */
+	public boolean isBelow(Entity ent) {
+		if(position.X == ent.position.X && position.Y == ent.position.Y + 1) {
+			if(ent.facing == 0) return true;
+		}
+		return false;
+	}
+	
 	
 	/** Returns whether or not this NPC is next to the entity "ent" (either above, below, to the left, or to the right). The other
 	 * entity must also be facing in the appropriate direction to be considered "next to" this entity. */

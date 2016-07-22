@@ -12,40 +12,39 @@ public class NPC extends Entity {
 	//Each NPC has a text box, which will show when the player interacts with it.
 	TextBox textBox;
 	
-	//Whether or not the player has already interacted with this NPC
-	boolean interactedWith;
+	//The directional sprites (excluding the down position, which is assumed to be the default)
+	BufferedImage up_sprite, left_sprite, right_sprite;
 	
 	
 	
 	/////////// Constructors ///////////
 	
-	public NPC() { textBox = new TextBox(); interactedWith = false; }
+	public NPC() { textBox = new TextBox(); }
 
-	public NPC(Vector2D pos) { super(pos); textBox = new TextBox(); interactedWith = false; }
+	public NPC(Vector2D pos) { super(pos); textBox = new TextBox(); }
 
-	public NPC(BufferedImage sprite) { this.sprite = sprite; textBox = new TextBox(); interactedWith = false; }
+	public NPC(BufferedImage sprite) { this.sprite = sprite; textBox = new TextBox(); }
 	
 	
 	
 	/////////// Setters ///////////
 	
 	/** Sets the default sprite for this NPC. */
-	public void setSprite(BufferedImage sprite) { this.sprite = sprite; }
+	public void setDefaultSprite(BufferedImage sprite) { this.sprite = sprite; }
 	
-
-	/** Sets whether or not the player has already talked to this NPC. */
-	public void setInteractedWith(boolean b) { interactedWith = b; }
+	/** Sets the sprite that this NPC should have for each direction. */
+	public void setDirectionSprites(BufferedImage down, BufferedImage up, BufferedImage left, BufferedImage right) {
+		this.sprite = down;
+		this.up_sprite = up;
+		this.left_sprite = left;
+		this.right_sprite = right;
+	}
 	
 	
 	/////////// Getters ///////////
 	
 	/** Returns the text box for this NPC. */
 	public TextBox getTextBox() { return textBox; }
-	
-	
-	/** Returns whether or not this NPC has been talked to. */
-	public boolean wasInteractedWith() { return interactedWith; }
-	
 	
 	
 	/////////// Abstract Methods ///////////
@@ -70,7 +69,14 @@ public class NPC extends Entity {
 				g.setColor(Color.black);
 				g.fillRect((int)position.X*size, (int)position.Y*size, size, size);
 			} else {
-				g.drawImage(sprite, (int)position.X*size, (int)position.Y*size, size, size, null);
+				if(facing == 0)
+					g.drawImage(sprite, (int)position.X*size, (int)position.Y*size, size, size, null);
+				if(facing == 1)
+					g.drawImage(right_sprite, (int)position.X*size, (int)position.Y*size, size, size, null);
+				if(facing == 2)
+					g.drawImage(up_sprite, (int)position.X*size, (int)position.Y*size, size, size, null);
+				if(facing == 3)
+					g.drawImage(left_sprite, (int)position.X*size, (int)position.Y*size, size, size, null);
 			}
 		}
 			

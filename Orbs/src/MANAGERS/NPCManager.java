@@ -1,6 +1,7 @@
 package MANAGERS;
 
 import ENTITIES.Person;
+import MAIN.Assets;
 import WORLD.World;
 import filesje.ReadFile;
 import visualje.Vector2D;
@@ -165,55 +166,94 @@ public class NPCManager {
 		
 		/* NPCs in Main World*/
 		randomPerson_1 = new Person(new Vector2D(24,19).add(world.position));
+			randomPerson_1.setDirectionSprites(null,null,null,null);
 		randomPerson_2 = new Person(new Vector2D(18,12).add(world.position));
+			randomPerson_2.setDirectionSprites(null,null,null,null);
 		randomPerson_3 = new Person(new Vector2D(12,17).add(world.position));
+			randomPerson_3.setDirectionSprites(null,null,null,null);
 		randomPerson_4 = new Person(new Vector2D(15,25).add(world.position));
+			randomPerson_4.setDirectionSprites(Assets.randomMan1_down,Assets.randomMan1_up,Assets.randomMan1_left,Assets.randomMan1_right);
+			randomPerson_4.setDirection(1);
 		randomPerson_5 = new Person(new Vector2D(24,25).add(world.position));
+			randomPerson_5.setDirectionSprites(null,null,null,null);
 		randomPerson_6 = new Person(new Vector2D(22,61).add(world.position));
+			randomPerson_6.setDirectionSprites(null, null, null, null);
 		randomPerson_7 = new Person(new Vector2D(18,67).add(world.position));
+			randomPerson_7.setDirectionSprites(null,null,null,null);
 		randomPerson_8 = new Person(new Vector2D(32, 67).add(world.position));
+			randomPerson_8.setDirectionSprites(Assets.randomMan2_down, Assets.randomMan2_up, Assets.randomMan2_left, Assets.randomMan2_right);
+			randomPerson_8.setDirection(3);
 		randomPerson_9 = new Person(new Vector2D(9,58).add(world.position));
+			randomPerson_9.setDirectionSprites(null,null,null,null);
 		randomPerson_10 = new Person(new Vector2D(32,75).add(world.position));
+			randomPerson_10.setDirectionSprites(null,null,null,null);
 		randomPerson_11 = new Person(new Vector2D(35,76).add(world.position));
+			randomPerson_11.setDirectionSprites(null,null,null,null);
 		randomPerson_12 = new Person(new Vector2D(34,78).add(world.position));
+			randomPerson_12.setDirectionSprites(null,null,null,null);
 		randomPerson_13 = new Person(new Vector2D(31,77).add(world.position));
+			randomPerson_13.setDirectionSprites(null,null,null,null);	
 		randomPerson_14 = new Person(new Vector2D(57,82).add(world.position));
+			randomPerson_14.setDirectionSprites(null,null,null,null);
 		randomPerson_15 = new Person(new Vector2D(84,86).add(world.position));
+			randomPerson_15.setDirectionSprites(null,null,null,null);
 		randomPerson_16 = new Person(new Vector2D(79,77).add(world.position));
+			randomPerson_16.setDirectionSprites(null,null,null,null);
 		randomPerson_17 = new Person(new Vector2D(88,75).add(world.position));
+			randomPerson_17.setDirectionSprites(null,null,null,null);
 		randomPerson_18 = new Person(new Vector2D(89,75).add(world.position));
+			randomPerson_18.setDirectionSprites(null,null,null,null);
 		randomPerson_19 = new Person(new Vector2D(60,9).add(world.position));
+			randomPerson_19.setDirectionSprites(null,null,null,null);
 		randomPerson_20 = new Person(new Vector2D(57,23).add(world.position));
+			randomPerson_20.setDirectionSprites(null,null,null,null);
 		scientist = new Person(new Vector2D(24, 11).add(world.position));
+			scientist.setDirectionSprites(Assets.scientist_down, Assets.scientist_up, Assets.scientist_left, Assets.scientist_right);
 		chemicalController_1 = new Person(new Vector2D(62,55).add(world.position));
+			chemicalController_1.setDirectionSprites(null,null,null,null);
 		chemicalController_2 = new Person(new Vector2D(62,56).add(world.position));
+			chemicalController_2.setDirectionSprites(null,null,null,null);
 		chemicalController_3 = new Person(new Vector2D(62,57).add(world.position));
+			chemicalController_3.setDirectionSprites(null,null,null,null);
 		barrierToLastPart = new Person(new Vector2D(46,29).add(world.position));
+			barrierToLastPart.setDirectionSprites(null,null,null,null);
 		treeCutter = new Person(new Vector2D(18,38).add(world.position));
+			treeCutter.setDirectionSprites(Assets.lumberjack_down, Assets.lumberjack_up, Assets.lumberjack_left, Assets.lumberjack_right);
+			treeCutter.setDirection(1);
 		treeCutterFriend = new Person(new Vector2D(10, 46).add(world.position));
+			treeCutterFriend.setDirectionSprites(Assets.lumberjack_down, Assets.lumberjack_up, Assets.lumberjack_left, Assets.lumberjack_right);
 		
 		/* House 1 NPCs */
 		player_Relative = new Person(new Vector2D(9,5).add(world.position));
+			player_Relative.setDirectionSprites(null,null,null,null);
 		
 		/* House 2 NPCs */
 		giveWaterPerson = new Person(new Vector2D(7,1).add(world.position));
+			giveWaterPerson.setDirectionSprites(null,null,null,null);
 		randomPerson_21 = new Person(new Vector2D(9,5).add(world.position));
+			randomPerson_21.setDirectionSprites(null,null,null,null);
 		
 		/* House 10 NPCs */
 		catNPC = new Person(new Vector2D(7,5).add(world.position));
+			catNPC.setDirectionSprites(null,null,null,null);
 		
 		/* House 12 NPCs */
 		sewingShopOwner = new Person(new Vector2D(7,2).add(world.position));
+			sewingShopOwner.setDirectionSprites(null,null,null,null);
 		
 		/* House 13 NPCs */
 		hazmatSuitGiver = new Person(new Vector2D(4,5).add(world.position));
+			hazmatSuitGiver.setDirectionSprites(null,null,null,null);
 		hazmatSuitGiverWife = new Person(new Vector2D(9,3).add(world.position));
+			hazmatSuitGiverWife.setDirectionSprites(null,null,null,null);
 		
 		/* House 24 NPCs */
 		containerSeller = new Person(new Vector2D(7,2).add(world.position));
+			containerSeller.setDirectionSprites(null,null,null,null);
 		
 		/* House 28 NPCs */
 		retiredMineWorker = new Person(new Vector2D(11,2).add(world.position));
+			retiredMineWorker.setDirectionSprites(null,null,null,null);
 	}
 
 	
