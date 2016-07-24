@@ -180,6 +180,7 @@ public class Player extends Entity {
 		if(inventoryContains("Coin")) {
 			if(getQuantity("Coin") <= 0) {
 				removeFromInventory("Coin");
+				worldState.updatePlayersItems();
 			}
 		}
 	}
