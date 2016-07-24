@@ -11,6 +11,7 @@ import ENTITIES.SearchableEntity;
 import ITEMS.Item;
 import ITEMS.Orb;
 import MISC.Door;
+import MISC.TextBox;
 import STATES.MenuState;
 import STATES.WorldState;
 
@@ -81,6 +82,15 @@ public class InputManager implements KeyListener {
 		if(!worldState.textBoxesOpen()) {
 			/* MOVING THE MAP*/
 			mapMovement(e);
+		}
+		
+		
+		/* FORCE EXIT TEXT BOX */
+		//Used to force quit any text boxes. This is temporary and only used or debugging.
+		if(e.getKeyCode() == KeyEvent.VK_T) {
+			for(TextBox t : worldState.getTextBoxes()) {
+				t.setOpen(false);
+			}
 		}
 		
 		

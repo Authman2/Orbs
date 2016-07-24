@@ -67,6 +67,7 @@ public class TextBox {
 	public void clear() {
 		text.removeAll(text);
 		currentSlide = 0;
+		textThrough = 0;
 	}
 	
 	
@@ -158,7 +159,7 @@ public class TextBox {
 				//g.drawString(text.get(currentSlide), 5, Orbs.HEIGHT - 80);
 				
 				g.drawString(text.get(currentSlide).substring(0,textThrough), 5, Orbs.HEIGHT - 80);
-				if(textThrough < text.get(currentSlide).length() - 1) textThrough++;
+				if(textThrough < text.get(currentSlide).length()) textThrough++;
 				
 			}
 			

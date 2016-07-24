@@ -41,9 +41,11 @@ public class Assets {
 								randomMan1_down, randomMan1_up, randomMan1_left, randomMan1_right,
 								randomMan2_down, randomMan2_up, randomMan2_left, randomMan2_right,
 								randomMan3_down, randomMan3_up, randomMan3_left, randomMan3_right,
+								randomMan4_down, randomMan4_up, randomMan4_left, randomMan4_right,
 								randomWoman1_down, randomWoman1_up, randomWoman1_left, randomWoman1_right,
 								randomWoman2_down, randomWoman2_up, randomWoman2_left, randomWoman2_right,
-								randomWoman3_down, randomWoman3_up, randomWoman3_left, randomWoman3_right;
+								randomWoman3_down, randomWoman3_up, randomWoman3_left, randomWoman3_right,
+								randomWoman4_down, randomWoman4_up, randomWoman4_left, randomWoman4_right;
 	
 	
 	public void initialize() {
@@ -70,6 +72,36 @@ public class Assets {
 		randomMan2_up = spritesheet.getPart(32, 352, 32, 32);
 		randomMan2_left = spritesheet.getPart(32, 384, 32, 32);
 		randomMan2_right = spritesheet.getPart(0, 384, 32, 32);
+		
+		randomMan3_down = spritesheet.getPart(0, 416, 32, 32);
+		randomMan3_up = spritesheet.getPart(32, 416, 32, 32);
+		randomMan3_left = spritesheet.getPart(32, 448, 32, 32);
+		randomMan3_right = spritesheet.getPart(0, 448, 32, 32);
+		
+		randomMan4_down = spritesheet.getPart(64, 160, 32, 32);
+		randomMan4_up = spritesheet.getPart(64, 192, 32, 32);
+		randomMan4_left = spritesheet.getPart(64, 256, 32, 32);
+		randomMan4_right = spritesheet.getPart(64, 224, 32, 32);
+		
+		randomWoman1_down = spritesheet.getPart(64, 288, 32, 32);
+		randomWoman1_up = spritesheet.getPart(64, 320, 32, 32);
+		randomWoman1_left = spritesheet.getPart(64, 384, 32, 32);
+		randomWoman1_right = spritesheet.getPart(64, 352, 32, 32);
+		
+		randomWoman2_down = spritesheet.getPart(96, 160, 32, 32);
+		randomWoman2_up = spritesheet.getPart(96, 192, 32, 32);
+		randomWoman2_left = spritesheet.getPart(96, 256, 32, 32);
+		randomWoman2_right = spritesheet.getPart(96, 224, 32, 32);
+		
+		randomWoman3_down = spritesheet.getPart(96, 288, 32, 32);
+		randomWoman3_up = spritesheet.getPart(96, 320, 32, 32);
+		randomWoman3_left = spritesheet.getPart(96, 384, 32, 32);
+		randomWoman3_right = spritesheet.getPart(96, 352, 32, 32);
+		
+		randomWoman4_down = spritesheet.getPart(64, 416, 32, 32);
+		randomWoman4_up = spritesheet.getPart(64, 448, 32, 32);
+		randomWoman4_left = spritesheet.getPart(96, 448, 32, 32);
+		randomWoman4_right = spritesheet.getPart(96, 416, 32, 32);
 		
 		
 		//Idle player positions

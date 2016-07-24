@@ -111,7 +111,7 @@ public class NPCManager {
 			randomPerson_4.setItemToGive(world.getItemManager().getNPCItem(0));
 		}
 		
-		if(!world.getWorldState().getPlayer().inventoryContains("Coupon") && !world.getWorldState().getPlayer().inventoryContains("Water")) {
+		if(!world.getWorldState().getPlayer().inventoryContains("Coupon") && !world.getWorldState().getPlayer().inventoryContains("Water") && !world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
 			randomPerson_7.willGiveItem(true);
 			randomPerson_7.setItemToGive(world.getItemManager().getNPCItem(1));
 		}
@@ -136,7 +136,7 @@ public class NPCManager {
 			treeCutter.setItemToGive(world.getItemManager().getNPCItem(5));
 		}
 		
-		if(!world.getWorldState().getPlayer().inventoryContains("Water") && world.getWorldState().getPlayer().inventoryContains("Coupon")) {
+		if(world.getWorldState().getPlayer().inventoryContains("Coupon")) {
 			giveWaterPerson.willGiveItem(true);
 			giveWaterPerson.setItemToGive(world.getItemManager().getNPCItem(6));
 		}
@@ -179,24 +179,27 @@ public class NPCManager {
 		randomPerson_6 = new Person(new Vector2D(22,61).add(world.position));
 			randomPerson_6.setDirectionSprites(null, null, null, null);
 		randomPerson_7 = new Person(new Vector2D(18,67).add(world.position));
-			randomPerson_7.setDirectionSprites(null,null,null,null);
+			randomPerson_7.setDirectionSprites(Assets.randomWoman2_down,Assets.randomWoman2_up,Assets.randomWoman2_left,Assets.randomWoman2_right);
 		randomPerson_8 = new Person(new Vector2D(32, 67).add(world.position));
 			randomPerson_8.setDirectionSprites(Assets.randomMan2_down, Assets.randomMan2_up, Assets.randomMan2_left, Assets.randomMan2_right);
 			randomPerson_8.setDirection(3);
 		randomPerson_9 = new Person(new Vector2D(9,58).add(world.position));
 			randomPerson_9.setDirectionSprites(null,null,null,null);
 		randomPerson_10 = new Person(new Vector2D(32,75).add(world.position));
-			randomPerson_10.setDirectionSprites(null,null,null,null);
+			randomPerson_10.setDirectionSprites(Assets.randomWoman4_down, Assets.randomWoman4_up, Assets.randomWoman4_left, Assets.randomWoman4_right);
+			randomPerson_10.setDirection(1);
 		randomPerson_11 = new Person(new Vector2D(35,76).add(world.position));
-			randomPerson_11.setDirectionSprites(null,null,null,null);
+			randomPerson_11.setDirectionSprites(Assets.randomMan4_down, Assets.randomMan4_up, Assets.randomMan4_left, Assets.randomMan4_right);
+			randomPerson_11.setDirection(3);
 		randomPerson_12 = new Person(new Vector2D(34,78).add(world.position));
-			randomPerson_12.setDirectionSprites(null,null,null,null);
+			randomPerson_12.setDirectionSprites(Assets.randomMan1_down, Assets.randomMan1_up, Assets.randomMan1_left, Assets.randomMan1_right);
+			randomPerson_12.setDirection(1);
 		randomPerson_13 = new Person(new Vector2D(31,77).add(world.position));
-			randomPerson_13.setDirectionSprites(null,null,null,null);	
+			randomPerson_13.setDirectionSprites(Assets.randomMan3_down, Assets.randomMan3_up, Assets.randomMan3_left, Assets.randomMan3_right);	
 		randomPerson_14 = new Person(new Vector2D(57,82).add(world.position));
 			randomPerson_14.setDirectionSprites(null,null,null,null);
 		randomPerson_15 = new Person(new Vector2D(84,86).add(world.position));
-			randomPerson_15.setDirectionSprites(null,null,null,null);
+			randomPerson_15.setDirectionSprites(Assets.randomMan4_down, Assets.randomMan4_up, Assets.randomMan4_left, Assets.randomMan4_right);
 		randomPerson_16 = new Person(new Vector2D(79,77).add(world.position));
 			randomPerson_16.setDirectionSprites(null,null,null,null);
 		randomPerson_17 = new Person(new Vector2D(88,75).add(world.position));
@@ -204,7 +207,7 @@ public class NPCManager {
 		randomPerson_18 = new Person(new Vector2D(89,75).add(world.position));
 			randomPerson_18.setDirectionSprites(null,null,null,null);
 		randomPerson_19 = new Person(new Vector2D(60,9).add(world.position));
-			randomPerson_19.setDirectionSprites(null,null,null,null);
+			randomPerson_19.setDirectionSprites(Assets.randomWoman4_down, Assets.randomWoman4_up, Assets.randomWoman4_left, Assets.randomWoman4_right);
 		randomPerson_20 = new Person(new Vector2D(57,23).add(world.position));
 			randomPerson_20.setDirectionSprites(null,null,null,null);
 		scientist = new Person(new Vector2D(24, 11).add(world.position));
@@ -229,7 +232,7 @@ public class NPCManager {
 		
 		/* House 2 NPCs */
 		giveWaterPerson = new Person(new Vector2D(7,1).add(world.position));
-			giveWaterPerson.setDirectionSprites(null,null,null,null);
+			giveWaterPerson.setDirectionSprites(Assets.randomWoman1_down, Assets.randomWoman1_up, Assets.randomWoman1_left, Assets.randomWoman1_right);
 		randomPerson_21 = new Person(new Vector2D(9,5).add(world.position));
 			randomPerson_21.setDirectionSprites(null,null,null,null);
 		
@@ -239,7 +242,7 @@ public class NPCManager {
 		
 		/* House 12 NPCs */
 		sewingShopOwner = new Person(new Vector2D(7,2).add(world.position));
-			sewingShopOwner.setDirectionSprites(null,null,null,null);
+			sewingShopOwner.setDirectionSprites(Assets.randomWoman3_down, Assets.randomWoman3_up, Assets.randomWoman3_left, Assets.randomWoman3_right);
 		
 		/* House 13 NPCs */
 		hazmatSuitGiver = new Person(new Vector2D(4,5).add(world.position));
@@ -442,13 +445,13 @@ public class NPCManager {
 		
 		
 		//Random person 7
-		if(!world.getWorldState().getPlayer().inventoryContains("Coupon")) {
+		if(!world.getWorldState().getPlayer().inventoryContains("Coupon") && !world.getWorldState().getPlayer().inventoryContains("Water") && !world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson7_1.txt");
 			lines = reader.numLines();
 			while(i < lines) { randomPerson_7.getTextBox().addText(reader.readThrough("\n")); i++; }
 			randomPerson_7.getTextBox().addText("You received a(n) " + world.getItemManager().getNPCItem(1) + "! ");
 			i = 0;
-		} else if(world.getWorldState().getPlayer().inventoryContains("Coupon") || world.getWorldState().getPlayer().inventoryContains("Water") || world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
+		} else {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson7_2.txt");
 			lines = reader.numLines();
 			while(i < lines) { randomPerson_7.getTextBox().addText(reader.readThrough("\n")); i++; }
@@ -648,7 +651,7 @@ public class NPCManager {
 		
 		
 		//Water Giving Person
-		if(!world.getWorldState().getPlayer().inventoryContains("Coupon") && !world.getWorldState().getPlayer().inventoryContains("Water")) {
+		if(!world.getWorldState().getPlayer().inventoryContains("Water") && !world.getWorldState().getPlayer().inventoryContains("Coupon")) {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_WaterGivingPerson_1.txt");
 			lines = reader.numLines();
 			while(i < lines) { giveWaterPerson.getTextBox().addText(reader.readThrough("\n")); i++; }
@@ -657,9 +660,9 @@ public class NPCManager {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_WaterGivingPerson_2.txt");
 			lines = reader.numLines();
 			while(i < lines) { giveWaterPerson.getTextBox().addText(reader.readThrough("\n")); i++; }
-			giveWaterPerson.getTextBox().addText("You received a(n) " + world.getItemManager().getNPCItem(6) + "! ");
+			giveWaterPerson.getTextBox().addText("You received a(n) " + world.getWorldState().getCurrentWorld().getItemManager().getNPCItem(6).getName() + "! ");
 			i = 0;
-		} else if(world.getWorldState().getPlayer().inventoryContains("Water") || world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
+		} else if(world.getWorldState().getPlayer().inventoryContains("Water") || !world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_WaterGivingPerson_3.txt");
 			lines = reader.numLines();
 			while(i < lines) { giveWaterPerson.getTextBox().addText(reader.readThrough("\n")); i++; }

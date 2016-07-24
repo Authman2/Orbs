@@ -1,6 +1,7 @@
 package STATES;
 
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 import ENTITIES.ActionEntity;
 import ENTITIES.Entity;
@@ -106,6 +107,34 @@ public class WorldState extends GameState {
 		return open; 
 	}
 	
+	
+	/** Returns a list of all of the text boxes in the game. */
+	public ArrayList<TextBox> getTextBoxes() {
+		ArrayList<TextBox> textboxes = new ArrayList<TextBox>();
+		//Go through each entity
+		for(Entity ent : currentWorld.getEntities()) { 
+			textboxes.add(((NPC)ent).getTextBox());
+		}
+
+		//Go through each item on the ground
+		for(Item itm : currentWorld.getDroppedItems()) {
+			textboxes.add(itm.getTextBox());
+		}
+		
+		//Go through each searchable entity
+		for(SearchableEntity se : currentWorld.getSearchables()) {
+			textboxes.add(se.getTextBox());
+		}
+		
+		//Go through each action entity
+		for(ActionEntity ae : currentWorld.getActionEntities()) {
+			textboxes.add(ae.getTextBox());
+		}
+		
+		textboxes.add(inventoryTextBox);
+		
+		return textboxes;
+	}
 	
 	/** Returns the text box that displays all of the player's items. */
 	public TextBox getInventoryTextBox() { return inventoryTextBox; }
