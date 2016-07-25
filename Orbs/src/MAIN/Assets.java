@@ -37,15 +37,19 @@ public class Assets {
 	
 	/* NPCs */
 	public static BufferedImage scientist_down, scientist_up, scientist_left, scientist_right,
+								catNPC_down, catNPC_up, catNPC_left, catNPC_right,
 								lumberjack_down, lumberjack_up, lumberjack_left, lumberjack_right,
 								randomMan1_down, randomMan1_up, randomMan1_left, randomMan1_right,
 								randomMan2_down, randomMan2_up, randomMan2_left, randomMan2_right,
 								randomMan3_down, randomMan3_up, randomMan3_left, randomMan3_right,
 								randomMan4_down, randomMan4_up, randomMan4_left, randomMan4_right,
+								randomMan5_down, randomMan5_up, randomMan5_left, randomMan5_right,
 								randomWoman1_down, randomWoman1_up, randomWoman1_left, randomWoman1_right,
 								randomWoman2_down, randomWoman2_up, randomWoman2_left, randomWoman2_right,
 								randomWoman3_down, randomWoman3_up, randomWoman3_left, randomWoman3_right,
-								randomWoman4_down, randomWoman4_up, randomWoman4_left, randomWoman4_right;
+								randomWoman4_down, randomWoman4_up, randomWoman4_left, randomWoman4_right,
+								randomWoman5_down, randomWoman5_up, randomWoman5_left, randomWoman5_right,
+								randomWoman6_down, randomWoman6_up, randomWoman6_left, randomWoman6_right;
 	
 	
 	public void initialize() {
@@ -57,6 +61,11 @@ public class Assets {
 		scientist_up = spritesheet.getPart(32, 160, 32, 32);
 		scientist_left = spritesheet.getPart(32, 192, 32, 32);
 		scientist_right = spritesheet.getPart(0, 192, 32, 32);
+		
+		catNPC_down = spritesheet.getPart(160, 288, 32, 32);
+		catNPC_up = spritesheet.getPart(160, 320, 32, 32);
+		catNPC_left = spritesheet.getPart(160, 384, 32, 32);
+		catNPC_right = spritesheet.getPart(160, 352, 32, 32);
 		
 		lumberjack_down = spritesheet.getPart(0, 288, 32, 32);
 		lumberjack_up = spritesheet.getPart(32, 288, 32, 32);
@@ -83,6 +92,11 @@ public class Assets {
 		randomMan4_left = spritesheet.getPart(64, 256, 32, 32);
 		randomMan4_right = spritesheet.getPart(64, 224, 32, 32);
 		
+		randomMan5_down = spritesheet.getPart(128, 160, 32, 32);
+		randomMan5_up = spritesheet.getPart(128, 192, 32, 32);
+		randomMan5_left = spritesheet.getPart(128, 256, 32, 32);
+		randomMan5_right = spritesheet.getPart(128, 224, 32, 32);
+		
 		randomWoman1_down = spritesheet.getPart(64, 288, 32, 32);
 		randomWoman1_up = spritesheet.getPart(64, 320, 32, 32);
 		randomWoman1_left = spritesheet.getPart(64, 384, 32, 32);
@@ -103,6 +117,15 @@ public class Assets {
 		randomWoman4_left = spritesheet.getPart(96, 448, 32, 32);
 		randomWoman4_right = spritesheet.getPart(96, 416, 32, 32);
 		
+		randomWoman5_down = spritesheet.getPart(128, 288, 32, 32);
+		randomWoman5_up = spritesheet.getPart(128, 320, 32, 32);
+		randomWoman5_left = spritesheet.getPart(128, 384, 32, 32);
+		randomWoman5_right = spritesheet.getPart(128, 352, 32, 32);
+		
+		randomWoman6_down = spritesheet.getPart(128, 416, 32, 32);
+		randomWoman6_up = spritesheet.getPart(160, 416, 32, 32);
+		randomWoman6_left = spritesheet.getPart(160, 448, 32, 32);
+		randomWoman6_right = spritesheet.getPart(128, 448, 32, 32);
 		
 		//Idle player positions
 		player_down = spritesheet.getPart(0, 32, 32, 32);

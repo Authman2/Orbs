@@ -199,25 +199,25 @@ public class NPCManager {
 		
 		/* NPCs in Main World*/
 		randomPerson_1 = new Person(new Vector2D(24,19).add(world.position));
-			randomPerson_1.setDirectionSprites(null,null,null,null);
+			randomPerson_1.setDirectionSprites(Assets.randomMan2_down, Assets.randomMan2_up, Assets.randomMan2_left, Assets.randomMan2_right);
 		randomPerson_2 = new Person(new Vector2D(18,12).add(world.position));
-			randomPerson_2.setDirectionSprites(null,null,null,null);
+			randomPerson_2.setDirectionSprites(Assets.randomMan3_down, Assets.randomMan3_up, Assets.randomMan3_left, Assets.randomMan3_right);
 		randomPerson_3 = new Person(new Vector2D(12,17).add(world.position));
-			randomPerson_3.setDirectionSprites(null,null,null,null);
+			randomPerson_3.setDirectionSprites(Assets.randomMan4_down, Assets.randomMan4_up, Assets.randomMan4_left, Assets.randomMan4_right);
 		randomPerson_4 = new Person(new Vector2D(15,25).add(world.position));
 			randomPerson_4.setDirectionSprites(Assets.randomMan1_down,Assets.randomMan1_up,Assets.randomMan1_left,Assets.randomMan1_right);
 			randomPerson_4.setDirection(1);
 		randomPerson_5 = new Person(new Vector2D(24,25).add(world.position));
-			randomPerson_5.setDirectionSprites(null,null,null,null);
+			randomPerson_5.setDirectionSprites(Assets.randomWoman5_down, Assets.randomWoman5_up, Assets.randomWoman5_left, Assets.randomWoman5_right);
 		randomPerson_6 = new Person(new Vector2D(22,61).add(world.position));
-			randomPerson_6.setDirectionSprites(null, null, null, null);
+			randomPerson_6.setDirectionSprites(Assets.randomMan4_down, Assets.randomMan4_up, Assets.randomMan4_left, Assets.randomMan4_right);
 		randomPerson_7 = new Person(new Vector2D(18,67).add(world.position));
 			randomPerson_7.setDirectionSprites(Assets.randomWoman2_down,Assets.randomWoman2_up,Assets.randomWoman2_left,Assets.randomWoman2_right);
 		randomPerson_8 = new Person(new Vector2D(32, 67).add(world.position));
 			randomPerson_8.setDirectionSprites(Assets.randomMan2_down, Assets.randomMan2_up, Assets.randomMan2_left, Assets.randomMan2_right);
 			randomPerson_8.setDirection(3);
 		randomPerson_9 = new Person(new Vector2D(9,58).add(world.position));
-			randomPerson_9.setDirectionSprites(null,null,null,null);
+			randomPerson_9.setDirectionSprites(Assets.randomWoman6_down, Assets.randomWoman6_up, Assets.randomWoman6_left, Assets.randomWoman6_right);
 		randomPerson_10 = new Person(new Vector2D(32,75).add(world.position));
 			randomPerson_10.setDirectionSprites(Assets.randomWoman4_down, Assets.randomWoman4_up, Assets.randomWoman4_left, Assets.randomWoman4_right);
 			randomPerson_10.setDirection(1);
@@ -230,19 +230,19 @@ public class NPCManager {
 		randomPerson_13 = new Person(new Vector2D(31,77).add(world.position));
 			randomPerson_13.setDirectionSprites(Assets.randomMan3_down, Assets.randomMan3_up, Assets.randomMan3_left, Assets.randomMan3_right);	
 		randomPerson_14 = new Person(new Vector2D(57,82).add(world.position));
-			randomPerson_14.setDirectionSprites(null,null,null,null);
+			randomPerson_14.setDirectionSprites(Assets.randomMan3_down, Assets.randomMan3_up, Assets.randomMan3_left, Assets.randomMan3_right);
 		randomPerson_15 = new Person(new Vector2D(84,86).add(world.position));
 			randomPerson_15.setDirectionSprites(Assets.randomMan4_down, Assets.randomMan4_up, Assets.randomMan4_left, Assets.randomMan4_right);
 		randomPerson_16 = new Person(new Vector2D(79,77).add(world.position));
-			randomPerson_16.setDirectionSprites(null,null,null,null);
+			randomPerson_16.setDirectionSprites(Assets.randomMan5_down, Assets.randomMan5_up, Assets.randomMan5_left, Assets.randomMan5_right);
 		randomPerson_17 = new Person(new Vector2D(88,75).add(world.position));
-			randomPerson_17.setDirectionSprites(null,null,null,null);
+			randomPerson_17.setDirectionSprites(Assets.randomMan4_down, Assets.randomMan4_up, Assets.randomMan4_left, Assets.randomMan4_right);
 		randomPerson_18 = new Person(new Vector2D(89,75).add(world.position));
-			randomPerson_18.setDirectionSprites(null,null,null,null);
+			randomPerson_18.setDirectionSprites(Assets.randomMan1_down, Assets.randomMan1_up, Assets.randomMan1_left, Assets.randomMan1_right);
 		randomPerson_19 = new Person(new Vector2D(60,9).add(world.position));
 			randomPerson_19.setDirectionSprites(Assets.randomWoman4_down, Assets.randomWoman4_up, Assets.randomWoman4_left, Assets.randomWoman4_right);
 		randomPerson_20 = new Person(new Vector2D(57,23).add(world.position));
-			randomPerson_20.setDirectionSprites(null,null,null,null);
+			randomPerson_20.setDirectionSprites(Assets.randomMan2_down, Assets.randomMan2_up, Assets.randomMan2_left, Assets.randomMan2_right);
 		scientist = new Person(new Vector2D(24, 11).add(world.position));
 			scientist.setDirectionSprites(Assets.scientist_down, Assets.scientist_up, Assets.scientist_left, Assets.scientist_right);
 		chemicalController_1 = new Person(new Vector2D(62,55).add(world.position));
@@ -261,17 +261,17 @@ public class NPCManager {
 		
 		/* House 1 NPCs */
 		player_Relative = new Person(new Vector2D(9,5).add(world.position));
-			player_Relative.setDirectionSprites(null,null,null,null);
+			player_Relative.setDirectionSprites(Assets.randomWoman4_down, Assets.randomWoman4_up, Assets.randomWoman4_left, Assets.randomWoman4_right);
 		
 		/* House 2 NPCs */
 		giveWaterPerson = new Person(new Vector2D(7,1).add(world.position));
 			giveWaterPerson.setDirectionSprites(Assets.randomWoman1_down, Assets.randomWoman1_up, Assets.randomWoman1_left, Assets.randomWoman1_right);
 		randomPerson_21 = new Person(new Vector2D(9,5).add(world.position));
-			randomPerson_21.setDirectionSprites(null,null,null,null);
+			randomPerson_21.setDirectionSprites(Assets.randomMan4_down, Assets.randomMan4_up, Assets.randomMan4_left, Assets.randomMan4_right);
 		
 		/* House 10 NPCs */
 		catNPC = new Person(new Vector2D(7,5).add(world.position));
-			catNPC.setDirectionSprites(null,null,null,null);
+			catNPC.setDirectionSprites(Assets.catNPC_down, Assets.catNPC_up, Assets.catNPC_left, Assets.catNPC_right);
 		
 		/* House 12 NPCs */
 		sewingShopOwner = new Person(new Vector2D(7,2).add(world.position));
@@ -279,17 +279,17 @@ public class NPCManager {
 		
 		/* House 13 NPCs */
 		hazmatSuitGiver = new Person(new Vector2D(4,5).add(world.position));
-			hazmatSuitGiver.setDirectionSprites(null,null,null,null);
+			hazmatSuitGiver.setDirectionSprites(Assets.lumberjack_down, Assets.lumberjack_up, Assets.lumberjack_left, Assets.lumberjack_right);
 		hazmatSuitGiverWife = new Person(new Vector2D(9,3).add(world.position));
-			hazmatSuitGiverWife.setDirectionSprites(null,null,null,null);
+			hazmatSuitGiverWife.setDirectionSprites(Assets.randomWoman5_down, Assets.randomWoman5_up, Assets.randomWoman5_left, Assets.randomWoman5_right);
 		
 		/* House 24 NPCs */
 		containerSeller = new Person(new Vector2D(7,2).add(world.position));
-			containerSeller.setDirectionSprites(null,null,null,null);
+			containerSeller.setDirectionSprites(Assets.lumberjack_down, Assets.lumberjack_up, Assets.lumberjack_left, Assets.lumberjack_right);
 		
 		/* House 28 NPCs */
 		retiredMineWorker = new Person(new Vector2D(11,2).add(world.position));
-			retiredMineWorker.setDirectionSprites(null,null,null,null);
+			retiredMineWorker.setDirectionSprites(Assets.lumberjack_down, Assets.lumberjack_up, Assets.lumberjack_left, Assets.lumberjack_right);
 	}
 
 	
