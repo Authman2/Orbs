@@ -38,6 +38,10 @@ public class Assets {
 	/* NPCs */
 	public static BufferedImage scientist_down, scientist_up, scientist_left, scientist_right,
 								catNPC_down, catNPC_up, catNPC_left, catNPC_right,
+								thief_left, thief_right,
+								chemContr1_down, chemContr1_up, chemContr1_left, chemContr1_right,
+								chemContr2_down, chemContr2_up, chemContr2_left, chemContr2_right,
+								chemContr3_down, chemContr3_up, chemContr3_left, chemContr3_right,
 								lumberjack_down, lumberjack_up, lumberjack_left, lumberjack_right,
 								randomMan1_down, randomMan1_up, randomMan1_left, randomMan1_right,
 								randomMan2_down, randomMan2_up, randomMan2_left, randomMan2_right,
@@ -66,6 +70,24 @@ public class Assets {
 		catNPC_up = spritesheet.getPart(160, 320, 32, 32);
 		catNPC_left = spritesheet.getPart(160, 384, 32, 32);
 		catNPC_right = spritesheet.getPart(160, 352, 32, 32);
+		
+		thief_left = spritesheet.getPart(224, 288, 32, 32);
+		thief_right = spritesheet.getPart(192, 288, 32, 32);
+		
+		chemContr1_down = spritesheet.getPart(160, 160, 32, 32);
+		chemContr1_up = spritesheet.getPart(160, 192, 32, 32);
+		chemContr1_left = spritesheet.getPart(160, 256, 32, 32);
+		chemContr1_right = spritesheet.getPart(160, 224, 32, 32);
+		
+		chemContr2_down = spritesheet.getPart(192, 160, 32, 32);
+		chemContr2_up = spritesheet.getPart(192, 192, 32, 32);
+		chemContr2_left = spritesheet.getPart(192, 256, 32, 32);
+		chemContr2_right = spritesheet.getPart(192, 224, 32, 32);
+		
+		chemContr3_down = spritesheet.getPart(224, 160, 32, 32);
+		chemContr3_up = spritesheet.getPart(224, 192, 32, 32);
+		chemContr3_left = spritesheet.getPart(224, 256, 32, 32);
+		chemContr3_right = spritesheet.getPart(224, 224, 32, 32);
 		
 		lumberjack_down = spritesheet.getPart(0, 288, 32, 32);
 		lumberjack_up = spritesheet.getPart(32, 288, 32, 32);

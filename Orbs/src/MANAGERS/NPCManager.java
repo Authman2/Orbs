@@ -1,6 +1,8 @@
 package MANAGERS;
 
 import ENTITIES.Person;
+import ITEMS.BakeryReceipt;
+import ITEMS.Cake;
 import ITEMS.Coin;
 import ITEMS.Container;
 import ITEMS.Coupon;
@@ -40,7 +42,7 @@ public class NPCManager {
 			randomPerson_15, randomPerson_16, randomPerson_17, randomPerson_18, randomPerson_19, randomPerson_20;
 	Person scientist;
 	Person chemicalController_1, chemicalController_2, chemicalController_3;
-	Person barrierToLastPart;
+	Person thiefNPC;
 	Person treeCutter, treeCutterFriend;
 	
 	//The NPCs in house_1
@@ -49,6 +51,11 @@ public class NPCManager {
 	//The NPCs in house_2
 	Person giveWaterPerson;
 	Person randomPerson_21;
+	
+	//The NPCs in house_4
+	Person randomPerson_22;
+	Person randomPerson_23;
+	Person randomPerson_24;
 	
 	//The NPCs in house_10
 	Person catNPC;
@@ -59,6 +66,9 @@ public class NPCManager {
 	//The NPCs in house_13
 	Person hazmatSuitGiver;
 	Person hazmatSuitGiverWife;
+	
+	//The NPCs in house_17
+	Person dessertGiver;
 	
 	//The NPCs in house_24
 	Person containerSeller;
@@ -73,7 +83,7 @@ public class NPCManager {
 		reader = new ReadFile();
 		
 		//Items that the NPCs give to the player
-		npcItems = new Item[10];
+		npcItems = new Item[13];
 			Coin coin = new Coin(5);
 			coin.setID("coin_person4");
 		npcItems[0] = coin;
@@ -90,6 +100,11 @@ public class NPCManager {
 		npcItems[7] = new SewingKit();
 		npcItems[8] = new HazmatSuit();
 		npcItems[9] = new Pickaxe();
+		npcItems[10] = new BakeryReceipt();
+		npcItems[11] = new Cake();
+			Orb cakeOrb = new Orb();
+			cakeOrb.setID("cake_orb");
+		npcItems[12] = cakeOrb;
 	}
 	
 	
@@ -123,7 +138,7 @@ public class NPCManager {
 		chemicalController_1.getTextBox().clear();
 		chemicalController_2.getTextBox().clear();
 		chemicalController_3.getTextBox().clear();
-		barrierToLastPart.getTextBox().clear();
+		thiefNPC.getTextBox().clear();
 		player_Relative.getTextBox().clear();
 		randomPerson_21.getTextBox().clear();
 		giveWaterPerson.getTextBox().clear();
@@ -189,7 +204,19 @@ public class NPCManager {
 			retiredMineWorker.setItemToGive(npcItems[9]);
 		}
 			
-			
+		if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().containsID("cake_orb")) {
+			randomPerson_22.willGiveItem(true);
+			randomPerson_22.setItemToGive(npcItems[10]);
+			randomPerson_23.willGiveItem(true);
+			randomPerson_23.setItemToGive(npcItems[10]);
+		}
+		
+		if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().containsID("cake_orb")) {
+			randomPerson_22.willGiveItem(true);
+			randomPerson_22.setItemToGive(npcItems[12]);
+			randomPerson_23.willGiveItem(true);
+			randomPerson_23.setItemToGive(npcItems[12]);
+		}
 	}
 
 	
@@ -232,7 +259,7 @@ public class NPCManager {
 		randomPerson_14 = new Person(new Vector2D(57,82).add(world.position));
 			randomPerson_14.setDirectionSprites(Assets.randomMan3_down, Assets.randomMan3_up, Assets.randomMan3_left, Assets.randomMan3_right);
 		randomPerson_15 = new Person(new Vector2D(84,86).add(world.position));
-			randomPerson_15.setDirectionSprites(Assets.randomMan4_down, Assets.randomMan4_up, Assets.randomMan4_left, Assets.randomMan4_right);
+			randomPerson_15.setDirectionSprites(Assets.randomMan2_down, Assets.randomMan2_up, Assets.randomMan2_left, Assets.randomMan2_right);
 		randomPerson_16 = new Person(new Vector2D(79,77).add(world.position));
 			randomPerson_16.setDirectionSprites(Assets.randomMan5_down, Assets.randomMan5_up, Assets.randomMan5_left, Assets.randomMan5_right);
 		randomPerson_17 = new Person(new Vector2D(88,75).add(world.position));
@@ -246,47 +273,67 @@ public class NPCManager {
 		scientist = new Person(new Vector2D(24, 11).add(world.position));
 			scientist.setDirectionSprites(Assets.scientist_down, Assets.scientist_up, Assets.scientist_left, Assets.scientist_right);
 		chemicalController_1 = new Person(new Vector2D(62,55).add(world.position));
-			chemicalController_1.setDirectionSprites(null,null,null,null);
+			chemicalController_1.setDirectionSprites(Assets.chemContr1_down, Assets.chemContr1_up, Assets.chemContr1_left, Assets.chemContr1_right);
+			chemicalController_1.setDirection(3);
 		chemicalController_2 = new Person(new Vector2D(62,56).add(world.position));
-			chemicalController_2.setDirectionSprites(null,null,null,null);
+			chemicalController_2.setDirectionSprites(Assets.chemContr2_down, Assets.chemContr2_up, Assets.chemContr2_left, Assets.chemContr2_right);
+			chemicalController_2.setDirection(3);
 		chemicalController_3 = new Person(new Vector2D(62,57).add(world.position));
-			chemicalController_3.setDirectionSprites(null,null,null,null);
-		barrierToLastPart = new Person(new Vector2D(46,29).add(world.position));
-			barrierToLastPart.setDirectionSprites(null,null,null,null);
+			chemicalController_3.setDirectionSprites(Assets.chemContr3_down, Assets.chemContr3_up, Assets.chemContr3_left, Assets.chemContr3_right);
+			chemicalController_3.setDirection(3);
+		thiefNPC = new Person(new Vector2D(46,29).add(world.position));
+			thiefNPC.setDirectionSprites(Assets.randomMan1_down, Assets.randomMan1_up, Assets.thief_left, Assets.thief_right);
+			thiefNPC.setDirection(3);
 		treeCutter = new Person(new Vector2D(18,38).add(world.position));
 			treeCutter.setDirectionSprites(Assets.lumberjack_down, Assets.lumberjack_up, Assets.lumberjack_left, Assets.lumberjack_right);
 			treeCutter.setDirection(1);
 		treeCutterFriend = new Person(new Vector2D(10, 46).add(world.position));
 			treeCutterFriend.setDirectionSprites(Assets.lumberjack_down, Assets.lumberjack_up, Assets.lumberjack_left, Assets.lumberjack_right);
 		
+			
 		/* House 1 NPCs */
 		player_Relative = new Person(new Vector2D(9,5).add(world.position));
 			player_Relative.setDirectionSprites(Assets.randomWoman4_down, Assets.randomWoman4_up, Assets.randomWoman4_left, Assets.randomWoman4_right);
 		
+			
 		/* House 2 NPCs */
 		giveWaterPerson = new Person(new Vector2D(7,1).add(world.position));
 			giveWaterPerson.setDirectionSprites(Assets.randomWoman1_down, Assets.randomWoman1_up, Assets.randomWoman1_left, Assets.randomWoman1_right);
 		randomPerson_21 = new Person(new Vector2D(9,5).add(world.position));
 			randomPerson_21.setDirectionSprites(Assets.randomMan4_down, Assets.randomMan4_up, Assets.randomMan4_left, Assets.randomMan4_right);
 		
+			
+		/* House 4 NPCs */
+		randomPerson_22 = new Person(new Vector2D(9,2).add(world.position));
+			randomPerson_22.setDirectionSprites(Assets.randomWoman6_down, Assets.randomWoman6_up, Assets.randomWoman6_left, Assets.randomWoman6_right);
+		randomPerson_23 = new Person(new Vector2D(9,3).add(world.position));
+			randomPerson_23.setDirectionSprites(Assets.randomMan2_down, Assets.randomMan2_up, Assets.randomMan2_left, Assets.randomMan2_right);
+		randomPerson_24 = new Person(new Vector2D(3,7).add(world.position));
+			randomPerson_24.setDirectionSprites(Assets.randomWoman4_down, Assets.randomWoman4_up, Assets.randomWoman4_left, Assets.randomWoman4_right);
+			
+			
 		/* House 10 NPCs */
 		catNPC = new Person(new Vector2D(7,5).add(world.position));
 			catNPC.setDirectionSprites(Assets.catNPC_down, Assets.catNPC_up, Assets.catNPC_left, Assets.catNPC_right);
 		
+			
 		/* House 12 NPCs */
 		sewingShopOwner = new Person(new Vector2D(7,2).add(world.position));
 			sewingShopOwner.setDirectionSprites(Assets.randomWoman3_down, Assets.randomWoman3_up, Assets.randomWoman3_left, Assets.randomWoman3_right);
 		
+			
 		/* House 13 NPCs */
 		hazmatSuitGiver = new Person(new Vector2D(4,5).add(world.position));
 			hazmatSuitGiver.setDirectionSprites(Assets.lumberjack_down, Assets.lumberjack_up, Assets.lumberjack_left, Assets.lumberjack_right);
 		hazmatSuitGiverWife = new Person(new Vector2D(9,3).add(world.position));
 			hazmatSuitGiverWife.setDirectionSprites(Assets.randomWoman5_down, Assets.randomWoman5_up, Assets.randomWoman5_left, Assets.randomWoman5_right);
 		
+			
 		/* House 24 NPCs */
 		containerSeller = new Person(new Vector2D(7,2).add(world.position));
 			containerSeller.setDirectionSprites(Assets.lumberjack_down, Assets.lumberjack_up, Assets.lumberjack_left, Assets.lumberjack_right);
 		
+			
 		/* House 28 NPCs */
 		retiredMineWorker = new Person(new Vector2D(11,2).add(world.position));
 			retiredMineWorker.setDirectionSprites(Assets.lumberjack_down, Assets.lumberjack_up, Assets.lumberjack_left, Assets.lumberjack_right);
@@ -301,7 +348,7 @@ public class NPCManager {
 		//Barrier NPC
 		reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_BarrierNPC.txt");
 		lines = reader.numLines();
-		while(i < lines) { barrierToLastPart.getTextBox().addText(reader.readThrough("\n")); i++; }
+		while(i < lines) { thiefNPC.getTextBox().addText(reader.readThrough("\n")); i++; }
 		i = 0;
 		
 		
@@ -605,6 +652,55 @@ public class NPCManager {
 		i = 0;
 		
 		
+		//Random person 22
+		if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson22_1.txt");
+			lines = reader.numLines();
+			while(i < lines) { randomPerson_22.getTextBox().addText(reader.readThrough("\n")); i++; }
+			i = 0;
+		} else if(world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson22_2.txt");
+			lines = reader.numLines();
+			while(i < lines) { randomPerson_22.getTextBox().addText(reader.readThrough("\n")); i++; }
+			i = 0;
+		}  else if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().containsID("cake_orb")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson22_3.txt");
+			lines = reader.numLines();
+			while(i < lines) { randomPerson_22.getTextBox().addText(reader.readThrough("\n")); i++; }
+			i = 0;
+		} else if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && world.getWorldState().getPlayer().inventoryContains("Cake") && world.getWorldState().getPlayer().containsID("cake_orb")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson23_3.txt");
+			lines = reader.numLines();
+			while(i < lines) { randomPerson_22.getTextBox().addText(reader.readThrough("\n")); i++; }
+			i = 0;
+		}
+		
+		
+		//Random person 23
+		if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson23_1.txt");
+			lines = reader.numLines();
+			while(i < lines) { randomPerson_23.getTextBox().addText(reader.readThrough("\n")); i++; }
+			i = 0;
+		} else if(world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson23_2.txt");
+			lines = reader.numLines();
+			while(i < lines) { randomPerson_23.getTextBox().addText(reader.readThrough("\n")); i++; }
+			i = 0;
+		} else if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().containsID("cake_orb")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson23_3.txt");
+			lines = reader.numLines();
+			while(i < lines) { randomPerson_23.getTextBox().addText(reader.readThrough("\n")); i++; }
+			i = 0;
+		} else if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && world.getWorldState().getPlayer().inventoryContains("Cake") && world.getWorldState().getPlayer().containsID("cake_orb")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson23_3.txt");
+			lines = reader.numLines();
+			while(i < lines) { randomPerson_23.getTextBox().addText(reader.readThrough("\n")); i++; }
+			i = 0;
+		}
+		
+		
+		
 		//Retired Mine Worker
 		if(!world.getWorldState().getPlayer().inventoryContains("Pickaxe")) {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RetiredMineWorker_1.txt");
@@ -735,7 +831,7 @@ public class NPCManager {
 			world.addEntity(chemicalController_1);
 			world.addEntity(chemicalController_2);
 			world.addEntity(chemicalController_3);
-			world.addEntity(barrierToLastPart);
+			world.addEntity(thiefNPC);
 			world.addEntity(treeCutter);
 			world.addEntity(treeCutterFriend);
 		}
@@ -747,6 +843,12 @@ public class NPCManager {
 		if(world.getName().equals("House_2")) {
 			world.addEntity(giveWaterPerson);
 			world.addEntity(randomPerson_21);
+		}
+		
+		if(world.getName().equals("House_4")) {
+			world.addEntity(randomPerson_22);
+			world.addEntity(randomPerson_23);
+			world.addEntity(randomPerson_24);
 		}
 		
 		if(world.getName().equals("House_10")) {
