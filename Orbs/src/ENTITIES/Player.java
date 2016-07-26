@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import ITEMS.Hatchet;
 import ITEMS.Item;
 import MAIN.Animator;
 import MAIN.Assets;
@@ -27,7 +26,6 @@ public class Player extends Entity {
 		position = new Vector2D(8,6);
 		items = new ArrayList<Item>();
 		worldState = ws;
-		addItemToInventory(new Hatchet());
 		initialize();
 	}
 	
@@ -137,6 +135,26 @@ public class Player extends Entity {
 	}
 	
 	
+	/** Set the quantity of a particular item in the player's inventory. */
+	public void setQuantity(String name, int i) {
+		for(Item itm : items) {
+			if(itm.getName().equals(name)) {
+				itm.setQuantity(i);
+			}
+		}
+	}
+	
+	
+	/** Set the quantity of a particular item in the player's inventory. */
+	public void setQuantity(int i, String id) {
+		for(Item itm : items) {
+			if(itm.getID().equals(id)) {
+				itm.setQuantity(i);
+			}
+		}
+	}
+	
+	
 	//////////// Abstract Methods ///////////////
 	
 	@Override
@@ -185,6 +203,22 @@ public class Player extends Entity {
 				worldState.updatePlayersItems();
 			}
 		}
+		//You cannot have the bakery receipt and the cake at the same time
+		if(inventoryContains("Bakery Receipt")) {
+			if(inventoryContains("Cake")) {
+				removeFromInventory("Bakery Receipt");
+				worldState.updatePlayersItems();
+			}
+		}
+		//You cannot have the cake and the cake orb at the same time
+		if(inventoryContains("Cake")) {
+			if(containsID("cake_orb")) {
+				removeFromInventory("Cake");
+				worldState.updatePlayersItems();
+			}
+		}
+		//Keep certain items' quantities to just 1
+		if(inventoryContains("Bakery Receipt")) { setQuantity("Bakery Receipt", 1); worldState.updatePlayersItems(); }
 	}
 
 	@Override

@@ -68,7 +68,7 @@ public class NPCManager {
 	Person hazmatSuitGiverWife;
 	
 	//The NPCs in house_17
-	Person dessertGiver;
+	Person cakeGiver;
 	
 	//The NPCs in house_24
 	Person containerSeller;
@@ -148,6 +148,10 @@ public class NPCManager {
 		retiredMineWorker.getTextBox().clear();
 		containerSeller.getTextBox().clear();
 		catNPC.getTextBox().clear();
+		randomPerson_22.getTextBox().clear();
+		randomPerson_23.getTextBox().clear();
+		randomPerson_24.getTextBox().clear();
+		cakeGiver.getTextBox().clear();
 	}
 	
 	
@@ -204,18 +208,23 @@ public class NPCManager {
 			retiredMineWorker.setItemToGive(npcItems[9]);
 		}
 			
-		if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().containsID("cake_orb")) {
+		if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().containsID("cake_orb")) {
 			randomPerson_22.willGiveItem(true);
 			randomPerson_22.setItemToGive(npcItems[10]);
 			randomPerson_23.willGiveItem(true);
 			randomPerson_23.setItemToGive(npcItems[10]);
 		}
 		
-		if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().containsID("cake_orb")) {
+		if(!world.getWorldState().getPlayer().containsID("cake_orb") && world.getWorldState().getPlayer().inventoryContains("Cake")) {
 			randomPerson_22.willGiveItem(true);
 			randomPerson_22.setItemToGive(npcItems[12]);
 			randomPerson_23.willGiveItem(true);
 			randomPerson_23.setItemToGive(npcItems[12]);
+		}
+		
+		if(world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().containsID("cake_orb")) {
+			cakeGiver.willGiveItem(true);
+			cakeGiver.setItemToGive(npcItems[11]);
 		}
 	}
 
@@ -306,7 +315,7 @@ public class NPCManager {
 		/* House 4 NPCs */
 		randomPerson_22 = new Person(new Vector2D(9,2).add(world.position));
 			randomPerson_22.setDirectionSprites(Assets.randomWoman6_down, Assets.randomWoman6_up, Assets.randomWoman6_left, Assets.randomWoman6_right);
-		randomPerson_23 = new Person(new Vector2D(9,3).add(world.position));
+		randomPerson_23 = new Person(new Vector2D(10,2).add(world.position));
 			randomPerson_23.setDirectionSprites(Assets.randomMan2_down, Assets.randomMan2_up, Assets.randomMan2_left, Assets.randomMan2_right);
 		randomPerson_24 = new Person(new Vector2D(3,7).add(world.position));
 			randomPerson_24.setDirectionSprites(Assets.randomWoman4_down, Assets.randomWoman4_up, Assets.randomWoman4_left, Assets.randomWoman4_right);
@@ -328,6 +337,11 @@ public class NPCManager {
 		hazmatSuitGiverWife = new Person(new Vector2D(9,3).add(world.position));
 			hazmatSuitGiverWife.setDirectionSprites(Assets.randomWoman5_down, Assets.randomWoman5_up, Assets.randomWoman5_left, Assets.randomWoman5_right);
 		
+			
+		/* House 17 NPCs */
+		cakeGiver = new Person(new Vector2D(7,2).add(world.position));
+			cakeGiver.setDirectionSprites(Assets.lumberjack_down, Assets.lumberjack_up, Assets.lumberjack_left, Assets.lumberjack_right);
+			
 			
 		/* House 24 NPCs */
 		containerSeller = new Person(new Vector2D(7,2).add(world.position));
@@ -395,7 +409,10 @@ public class NPCManager {
 			chemicalController_2.position.X -= 1;
 			chemicalController_2.position.Y -= 1;
 			chemicalController_3.position.X += 1;
-			chemicalController_3.position.Y -= 1;
+			chemicalController_3.position.Y -= 2;
+			chemicalController_1.setDirection(0);
+			chemicalController_2.setDirection(0);
+			chemicalController_3.setDirection(0);
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_ChemicalControllers_2.txt");
 			lines = reader.numLines();
 			while(i < lines) { 
@@ -653,22 +670,26 @@ public class NPCManager {
 		
 		
 		//Random person 22
-		if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt")) {
+		if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().containsID("cake_orb")) {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson22_1.txt");
 			lines = reader.numLines();
 			while(i < lines) { randomPerson_22.getTextBox().addText(reader.readThrough("\n")); i++; }
+			randomPerson_22.getTextBox().addText("You received a(n) " + npcItems[10] + "! ");
+			randomPerson_22.getTextBox().addText("They will give you the cake once you hand them the receipt.");
+			randomPerson_22.getTextBox().addText("Please hurry back! The party starts in a few hours!");
 			i = 0;
-		} else if(world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake")) {
+		} else if(world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().containsID("cake_orb")) {		
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson22_2.txt");
 			lines = reader.numLines();
 			while(i < lines) { randomPerson_22.getTextBox().addText(reader.readThrough("\n")); i++; }
 			i = 0;
-		}  else if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().containsID("cake_orb")) {
+		} else if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().containsID("cake_orb")) {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson22_3.txt");
 			lines = reader.numLines();
 			while(i < lines) { randomPerson_22.getTextBox().addText(reader.readThrough("\n")); i++; }
+			randomPerson_22.getTextBox().addText("You received a(n) " + npcItems[12] + "! ");
 			i = 0;
-		} else if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && world.getWorldState().getPlayer().inventoryContains("Cake") && world.getWorldState().getPlayer().containsID("cake_orb")) {
+		} else if(world.getWorldState().getPlayer().containsID("cake_orb") && !world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake")) {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson23_3.txt");
 			lines = reader.numLines();
 			while(i < lines) { randomPerson_22.getTextBox().addText(reader.readThrough("\n")); i++; }
@@ -677,28 +698,31 @@ public class NPCManager {
 		
 		
 		//Random person 23
-		if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt")) {
-			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson23_1.txt");
+		if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().containsID("cake_orb")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson22_1.txt");
 			lines = reader.numLines();
 			while(i < lines) { randomPerson_23.getTextBox().addText(reader.readThrough("\n")); i++; }
+			randomPerson_23.getTextBox().addText("You received a(n) " + npcItems[10] + "! ");
+			randomPerson_23.getTextBox().addText("They will give you the cake once you hand them the receipt.");
+			randomPerson_23.getTextBox().addText("Please hurry back! The party starts in a few hours!");
 			i = 0;
-		} else if(world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake")) {
-			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson23_2.txt");
+		} else if(world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().containsID("cake_orb")) {		
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson22_2.txt");
 			lines = reader.numLines();
 			while(i < lines) { randomPerson_23.getTextBox().addText(reader.readThrough("\n")); i++; }
 			i = 0;
 		} else if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().containsID("cake_orb")) {
-			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson23_3.txt");
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson22_3.txt");
 			lines = reader.numLines();
 			while(i < lines) { randomPerson_23.getTextBox().addText(reader.readThrough("\n")); i++; }
+			randomPerson_23.getTextBox().addText("You received a(n) " + npcItems[12] + "! ");
 			i = 0;
-		} else if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && world.getWorldState().getPlayer().inventoryContains("Cake") && world.getWorldState().getPlayer().containsID("cake_orb")) {
+		} else if(world.getWorldState().getPlayer().containsID("cake_orb") && !world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake")) {
 			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_RandomPerson23_3.txt");
 			lines = reader.numLines();
 			while(i < lines) { randomPerson_23.getTextBox().addText(reader.readThrough("\n")); i++; }
 			i = 0;
 		}
-		
 		
 		
 		//Retired Mine Worker
@@ -797,6 +821,26 @@ public class NPCManager {
 			while(i < lines) { giveWaterPerson.getTextBox().addText(reader.readThrough("\n")); i++; }
 			i = 0;
 		}
+		
+		
+		//Cake giver
+		if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().containsID("cake_orb")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_CakeGiver_1.txt");
+			lines = reader.numLines();
+			while(i < lines) { cakeGiver.getTextBox().addText(reader.readThrough("\n")); i++; }
+			i = 0;
+		} else if(world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().containsID("cake_orb")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_CakeGiver_2.txt");
+			lines = reader.numLines();
+			while(i < lines) { cakeGiver.getTextBox().addText(reader.readThrough("\n")); i++; }
+			cakeGiver.getTextBox().addText("You received a(n) " + npcItems[11] + "! ");
+			i = 0;
+		} else if(world.getWorldState().getPlayer().inventoryContains("Cake") || world.getWorldState().getPlayer().containsID("cake_orb")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_CakeGiver_3.txt");
+			lines = reader.numLines();
+			while(i < lines) { cakeGiver.getTextBox().addText(reader.readThrough("\n")); i++; }
+			i = 0;
+		}
 
 	}
 	
@@ -862,6 +906,10 @@ public class NPCManager {
 		if(world.getName().equals("House_13")) {
 			world.addEntity(hazmatSuitGiver);
 			world.addEntity(hazmatSuitGiverWife);
+		}
+		
+		if(world.getName().equals("House_17")) {
+			world.addEntity(cakeGiver);
 		}
 		
 		if(world.getName().equals("House_24")) {

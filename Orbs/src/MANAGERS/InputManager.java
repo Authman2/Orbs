@@ -8,6 +8,7 @@ import ENTITIES.Entity;
 import ENTITIES.NPC;
 import ENTITIES.Person;
 import ENTITIES.SearchableEntity;
+import ITEMS.Cake;
 import ITEMS.Item;
 import ITEMS.Orb;
 import MISC.Door;
@@ -91,6 +92,11 @@ public class InputManager implements KeyListener {
 			for(TextBox t : worldState.getTextBoxes()) {
 				t.setOpen(false);
 			}
+		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_U) {
+			worldState.getPlayer().addItemToInventory(new Cake());
+			worldState.updatePlayersItems();
 		}
 		
 		
@@ -264,7 +270,6 @@ public class InputManager implements KeyListener {
 							//Re-assign the text boxes of each NPC
 							worldState.getCurrentWorld().getNPCManager().clearTextBoxes();
 							try { worldState.getCurrentWorld().getNPCManager().loadNPCText(); } catch(Exception err) { err.printStackTrace(); }
-							//worldState.getCurrentWorld().getNPCManager().initialize();
 						}
 					}
 					
