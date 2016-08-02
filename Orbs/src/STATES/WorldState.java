@@ -9,6 +9,7 @@ import ENTITIES.NPC;
 import ENTITIES.Player;
 import ENTITIES.SearchableEntity;
 import ITEMS.Item;
+import ITEMS.Orb;
 import MANAGERS.GameStateManager;
 import MISC.Door;
 import MISC.TextBox;

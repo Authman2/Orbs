@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import ITEMS.Item;
+import ITEMS.Orb;
 import MAIN.Animator;
 import MAIN.Assets;
 import STATES.WorldState;
@@ -21,10 +22,16 @@ public class Player extends Entity {
 	//A list of the items that the player currently has
 	ArrayList<Item> items;
 	
+	//A list of the orbs that the player has
+	ArrayList<Orb> orbs;
+	
+	
+	/////////// Constructor ////////////
 	
 	public Player(WorldState ws) {
 		position = new Vector2D(8,6);
 		items = new ArrayList<Item>();
+		orbs = new ArrayList<Orb>();
 		worldState = ws;
 		initialize();
 	}
@@ -34,6 +41,10 @@ public class Player extends Entity {
 	
 	/** Returns the list of items that the player has (the inventory). */
 	public ArrayList<Item> getInventory() { return items; }
+	
+	
+	/** Returns all of the orbs that the player has. */
+	public ArrayList<Orb> getOrbs() { return orbs; }
 	
 	
 	/** Returns an item at a particular index of the list of items. */
@@ -69,6 +80,21 @@ public class Player extends Entity {
 				return true;
 			}
 		}
+		for(Orb itm : orbs) {
+			if(itm.getID().equals(id)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
+	/** Returns whether or not the player has a particular orb based on its ID. */
+	public boolean hasOrb(String id) {
+		for(Orb o : orbs) {
+			if(o.getID().equals(id))
+				return true;
+		}
 		return false;
 	}
 	
@@ -99,28 +125,35 @@ public class Player extends Entity {
 	
 	/** Returns a list of the items that the player has acquired. */
 	public void addItemToInventory(Item itm) { 
-		
-		//The counter
-		int i = 0;
-		
-		//Loop through and check if there is already an item with the same name in the player's inventory.
-		for(Item it : items) {
+		if(!(itm instanceof Orb)) {
+			//The counter
+			int i = 0;
 			
-			//If there is, update the quantity of that item.
-			if(it.getName().equals(itm.getName())) {
-				it.setQuantity(it.getQuantity() + itm.getQuantity());
-				break;
+			//Loop through and check if there is already an item with the same name in the player's inventory.
+			for(Item it : items) {
+				
+				//If there is, update the quantity of that item.
+				if(it.getName().equals(itm.getName())) {
+					it.setQuantity(it.getQuantity() + itm.getQuantity());
+					break;
+				}
+				
+				//Increment the counter
+				i++;
 			}
 			
-			//Increment the counter
-			i++;
+			/* If you reach the end of the item list (the counter is >= to the size), you know that the item was not already
+			 * in the player's inventory, so it should add it onto the end. */
+			if(i >= items.size()) {
+				items.add(itm);
+			}
+		} else {
+			orbs.add((Orb)itm);
 		}
 		
-		/* If you reach the end of the item list (the counter is >= to the size), you know that the item was not already
-		 * in the player's inventory, so it should add it onto the end. */
-		if(i >= items.size()) {
-			items.add(itm);
-		}
+		//Remove all of the orbs that are already in the inventory, then add a new orb with the particular quantity.
+		removeFromInventory("Orb");
+		items.add(new Orb(orbs.size()));
 	}
 	
 

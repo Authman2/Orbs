@@ -95,8 +95,9 @@ public class InputManager implements KeyListener {
 		}
 		
 		if(e.getKeyCode() == KeyEvent.VK_U) {
-			worldState.getPlayer().addItemToInventory(new Cake());
-			worldState.updatePlayersItems();
+			for(Orb orb : worldState.getPlayer().getOrbs()) {
+				System.out.println(orb.getID());
+			}
 		}
 		
 		
