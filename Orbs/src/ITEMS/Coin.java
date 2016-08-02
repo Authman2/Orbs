@@ -38,5 +38,17 @@ public class Coin extends Item {
 	public void draw(Graphics2D g) {
 		if(acquiredTextBox.isOpen()) acquiredTextBox.draw(g);
 	}
+	
+	@Override
+	public Item clone() {
+		Item itm = new Coin();
+		itm.setName(name);
+		itm.setAcquiredMessage(acquiredMessage);
+		itm.setID(identifier);
+		itm.setQuantity(quantity);
+		itm.setSpecial(isSpecial(), requiredItm);
+		
+		return itm;
+	}
 
 }

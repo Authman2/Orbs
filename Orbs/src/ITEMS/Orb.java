@@ -57,4 +57,15 @@ public class Orb extends Item {
 		if(acquiredTextBox.isOpen()) acquiredTextBox.draw(g);
 	}
 
+	@Override
+	public Item clone() {
+		Item itm = new Orb();
+		itm.setName(name);
+		itm.setAcquiredMessage(acquiredMessage);
+		itm.setID(identifier);
+		itm.setQuantity(quantity);
+		itm.setSpecial(isSpecial(), requiredItm);
+		
+		return itm;
+	}
 }

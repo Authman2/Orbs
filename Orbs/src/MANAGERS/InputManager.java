@@ -8,7 +8,7 @@ import ENTITIES.Entity;
 import ENTITIES.NPC;
 import ENTITIES.Person;
 import ENTITIES.SearchableEntity;
-import ITEMS.Cake;
+import ITEMS.Coin;
 import ITEMS.Item;
 import ITEMS.Orb;
 import MISC.Door;
@@ -94,8 +94,14 @@ public class InputManager implements KeyListener {
 			}
 		}
 		
+		//Print out all of the id's of the orbs.
 		if(e.getKeyCode() == KeyEvent.VK_U) {
 			for(Orb orb : worldState.getPlayer().getOrbs()) {
+				System.out.println(orb.getID());
+			}
+		}
+		if(e.getKeyCode() == KeyEvent.VK_O) {
+			for(Coin orb : worldState.getPlayer().getCoins()) {
 				System.out.println(orb.getID());
 			}
 		}
@@ -310,7 +316,7 @@ public class InputManager implements KeyListener {
 				if(!worldState.textBoxesOpen()) {
 					
 					//Change the text of the S.E interaction based on whether or not it has an item in it.
-					if(se.getContainedItem() == null || worldState.getPlayer().containsID(se.getContainedItem().getID())) {
+					if(se.getContainedItem() == null || worldState.getPlayer().hasOrb(se.getContainedItem().getID()) || worldState.getPlayer().hasCoin(se.getContainedItem().getID())) {
 						se.getTextBox().clear();
 						se.getTextBox().addText("There are no items in this " + se.getName() + ". ");
 					} else {
@@ -327,7 +333,7 @@ public class InputManager implements KeyListener {
 					se.getTextBox().nextSlide();
 					
 					//If there was an item in the S.E, add it to the player's inventory.
-					if(se.getContainedItem() != null && !worldState.getPlayer().containsID(se.getContainedItem().getID())) {
+				if(se.getContainedItem() != null && !worldState.getPlayer().hasOrb(se.getContainedItem().getID()) && !worldState.getPlayer().hasCoin(se.getContainedItem().getID())) {
 						worldState.getPlayer().addItemToInventory(se.getContainedItem());
 						worldState.updatePlayersItems();
 						

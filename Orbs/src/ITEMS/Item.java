@@ -93,4 +93,8 @@ public abstract class Item extends Entity {
 	
 	/** Returns whether or not this item requires the player to have another item to acquire it. */
 	public boolean isSpecial() { return special; }
+	
+	
+	/** Returns a clone of this item. */
+	public abstract Item clone();
 }

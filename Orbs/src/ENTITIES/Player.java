@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import ITEMS.Coin;
 import ITEMS.Item;
 import ITEMS.Orb;
 import MAIN.Animator;
@@ -25,6 +26,9 @@ public class Player extends Entity {
 	//A list of the orbs that the player has
 	ArrayList<Orb> orbs;
 	
+	//All of the coins that the player has
+	ArrayList<Coin> coins;
+	
 	
 	/////////// Constructor ////////////
 	
@@ -32,6 +36,7 @@ public class Player extends Entity {
 		position = new Vector2D(8,6);
 		items = new ArrayList<Item>();
 		orbs = new ArrayList<Orb>();
+		coins = new ArrayList<Coin>();
 		worldState = ws;
 		initialize();
 	}
@@ -45,6 +50,10 @@ public class Player extends Entity {
 	
 	/** Returns all of the orbs that the player has. */
 	public ArrayList<Orb> getOrbs() { return orbs; }
+	
+	
+	/** Returns all of the orbs that the player has. */
+	public ArrayList<Coin> getCoins() { return coins; }
 	
 	
 	/** Returns an item at a particular index of the list of items. */
@@ -85,6 +94,11 @@ public class Player extends Entity {
 				return true;
 			}
 		}
+		for(Coin itm : coins) {
+			if(itm.getID().equals(id)) {
+				return true;
+			}
+		}
 		return false;
 	}
 	
@@ -92,6 +106,16 @@ public class Player extends Entity {
 	/** Returns whether or not the player has a particular orb based on its ID. */
 	public boolean hasOrb(String id) {
 		for(Orb o : orbs) {
+			if(o.getID().equals(id))
+				return true;
+		}
+		return false;
+	}
+	
+	
+	/** Returns whether or not the player has a particular orb based on its ID. */
+	public boolean hasCoin(String id) {
+		for(Coin o : coins) {
 			if(o.getID().equals(id))
 				return true;
 		}
@@ -121,11 +145,21 @@ public class Player extends Entity {
 	}
 	
 	
+	/** Returns the total number of coins. */
+	public int getTotalCoins() {
+		int num = 0;
+		for(Coin c : coins) {
+			num += c.getQuantity();
+		}
+		return num;
+	}
+	
+	
 	///////// Setters //////////
 	
 	/** Returns a list of the items that the player has acquired. */
 	public void addItemToInventory(Item itm) { 
-		if(!(itm instanceof Orb)) {
+		if(!(itm instanceof Orb) && !(itm instanceof Coin)) {
 			//The counter
 			int i = 0;
 			
@@ -147,13 +181,18 @@ public class Player extends Entity {
 			if(i >= items.size()) {
 				items.add(itm);
 			}
-		} else {
+		} else if(!(itm instanceof Orb) && (itm instanceof Coin)){
+			coins.add((Coin)itm);
+			removeFromInventory("Coin");
+			items.add(new Coin(getTotalCoins()));
+		} else if((itm instanceof Orb) && !(itm instanceof Coin)) {
 			orbs.add((Orb)itm);
+			//Remove all of the orbs that are already in the inventory, then add a new orb with the particular quantity.
+			removeFromInventory("Orb");
+			items.add(new Orb(orbs.size()));
+			
 		}
-		
-		//Remove all of the orbs that are already in the inventory, then add a new orb with the particular quantity.
-		removeFromInventory("Orb");
-		items.add(new Orb(orbs.size()));
+
 	}
 	
 
