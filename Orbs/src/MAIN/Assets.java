@@ -180,7 +180,7 @@ public class Assets {
 		rock = spritesheet.getPart(128, 32, 32, 32);
 		wood_floor = spritesheet.getPart(96, 64, 32, 32);
 		rug_left = spritesheet.getPart(128, 64, 32, 32);
-		rug_right = spritesheet.getPart(160, 96, 32, 32);
+		rug_right = spritesheet.getPart(160, 64, 32, 32);
 		black_space = spritesheet.getPart(96, 96, 32, 32);
 	}
 	

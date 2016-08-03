@@ -289,6 +289,20 @@ public class Player extends Entity {
 				worldState.updatePlayersItems();
 			}
 		}
+		//You cannot have a box of text books and a bookstore receipt
+		if(inventoryContains("Box of Textbooks")) {
+			if(inventoryContains("Bookstore Receipt")) {
+				removeFromInventory("Bookstore Receipt");
+				worldState.updatePlayersItems();
+			}
+		}
+		//You cannot have a box of text books and a textbook
+		if(inventoryContains("Box of Textbooks")) {
+			if(inventoryContains("Textbook")) {
+				removeFromInventory("Box of Textbooks");
+				worldState.updatePlayersItems();
+			}
+		}
 		//Keep certain items' quantities to just 1
 		if(inventoryContains("Bakery Receipt")) { setQuantity("Bakery Receipt", 1); worldState.updatePlayersItems(); }
 	}

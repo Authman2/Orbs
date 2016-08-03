@@ -2,6 +2,8 @@ package MANAGERS;
 
 import ENTITIES.Person;
 import ITEMS.BakeryReceipt;
+import ITEMS.BookstoreReceipt;
+import ITEMS.BoxOfTextBooks;
 import ITEMS.Cake;
 import ITEMS.Coin;
 import ITEMS.Container;
@@ -12,6 +14,7 @@ import ITEMS.Item;
 import ITEMS.Orb;
 import ITEMS.Pickaxe;
 import ITEMS.SewingKit;
+import ITEMS.Textbook;
 import ITEMS.Water;
 import MAIN.Assets;
 import WORLD.World;
@@ -70,6 +73,13 @@ public class NPCManager {
 	//The NPCs in house_17
 	Person cakeGiver;
 	
+	//The NPCs in house_18
+	Person student1, student2, student3, student4, student5;
+	Person teacher;
+	
+	//The NPCs in house_22
+	Person bookStoreOwner;
+	
 	//The NPCs in house_24
 	Person containerSeller;
 	
@@ -83,7 +93,7 @@ public class NPCManager {
 		reader = new ReadFile();
 		
 		//Items that the NPCs give to the player
-		npcItems = new Item[13];
+		npcItems = new Item[16];
 			Coin coin = new Coin(5);
 			coin.setID("coin_person4");
 		npcItems[0] = coin;
@@ -105,6 +115,9 @@ public class NPCManager {
 			Orb cakeOrb = new Orb();
 			cakeOrb.setID("cake_orb");
 		npcItems[12] = cakeOrb;
+		npcItems[13] = new BookstoreReceipt();
+		npcItems[14] = new Textbook();
+		npcItems[15] = new BoxOfTextBooks();
 	}
 	
 	
@@ -152,6 +165,13 @@ public class NPCManager {
 		randomPerson_23.getTextBox().clear();
 		randomPerson_24.getTextBox().clear();
 		cakeGiver.getTextBox().clear();
+		student1.getTextBox().clear();
+		student2.getTextBox().clear();
+		student3.getTextBox().clear();
+		student4.getTextBox().clear();
+		student5.getTextBox().clear();
+		teacher.getTextBox().clear();
+		bookStoreOwner.getTextBox().clear();
 	}
 	
 	
@@ -225,6 +245,21 @@ public class NPCManager {
 		if(world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().hasOrb("cake_orb")) {
 			cakeGiver.willGiveItem(true);
 			cakeGiver.setItemToGive(npcItems[11]);
+		}
+		
+		if(!world.getWorldState().getPlayer().inventoryContains("Bookstore Receipt") && !world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && !world.getWorldState().getPlayer().inventoryContains("Textbook")) {
+			teacher.willGiveItem(true);
+			teacher.setItemToGive(npcItems[13]);
+		}
+		
+		if(world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && !world.getWorldState().getPlayer().inventoryContains("Textbook")) {
+			teacher.willGiveItem(true);
+			teacher.setItemToGive(npcItems[14]);
+		}
+		
+		if(!world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && world.getWorldState().getPlayer().inventoryContains("Bookstore Receipt")) {
+			bookStoreOwner.willGiveItem(true);
+			bookStoreOwner.setItemToGive(npcItems[15]);
 		}
 	}
 
@@ -342,6 +377,30 @@ public class NPCManager {
 		cakeGiver = new Person(new Vector2D(7,2).add(world.position));
 			cakeGiver.setDirectionSprites(Assets.lumberjack_down, Assets.lumberjack_up, Assets.lumberjack_left, Assets.lumberjack_right);
 			
+			
+		/* House 18 NPCs */
+		student1 = new Person(new Vector2D(4,3).add(world.position));
+			student1.setDirection(2);
+			student1.setDirectionSprites(Assets.randomMan1_down, Assets.randomMan1_up, Assets.randomMan1_left, Assets.randomMan1_right);
+		student2 = new Person(new Vector2D(7,3).add(world.position));
+			student2.setDirection(2);
+			student2.setDirectionSprites(Assets.randomMan3_down, Assets.randomMan3_up, Assets.randomMan3_left, Assets.randomMan3_right);
+		student3 = new Person(new Vector2D(10,3).add(world.position));
+			student3.setDirection(2);
+			student3.setDirectionSprites(Assets.randomWoman1_down, Assets.randomWoman1_up, Assets.randomWoman1_left, Assets.randomWoman1_right);
+		student4 = new Person(new Vector2D(4,7).add(world.position));
+			student4.setDirection(2);
+			student4.setDirectionSprites(Assets.randomMan2_down, Assets.randomMan2_up, Assets.randomMan2_left, Assets.randomMan2_right);
+		student5 = new Person(new Vector2D(7,7).add(world.position));
+			student5.setDirection(2);
+			student5.setDirectionSprites(Assets.randomWoman4_down, Assets.randomWoman4_up, Assets.randomWoman4_left, Assets.randomWoman4_right);
+		teacher = new Person(new Vector2D(6,1).add(world.position));
+			teacher.setDirectionSprites(Assets.randomWoman3_down, Assets.randomWoman3_up, Assets.randomWoman3_left, Assets.randomWoman3_right);
+			
+			
+		/* House 22 NPCs */
+		bookStoreOwner = new Person(new Vector2D(4,5).add(world.position));
+			bookStoreOwner.setDirectionSprites(Assets.lumberjack_down, Assets.lumberjack_up, Assets.lumberjack_left, Assets.lumberjack_right);
 			
 		/* House 24 NPCs */
 		containerSeller = new Person(new Vector2D(7,2).add(world.position));
@@ -841,7 +900,104 @@ public class NPCManager {
 			while(i < lines) { cakeGiver.getTextBox().addText(reader.readThrough("\n")); i++; }
 			i = 0;
 		}
-
+		
+		
+		//Students
+		if(!world.getWorldState().getPlayer().inventoryContains("Textbook")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_Students_1.txt");
+			lines = reader.numLines();
+			while(i < lines) { 
+				student1.getTextBox().addText(reader.readThrough("\n")); 
+				student2.getTextBox().addText(reader.readThrough("\n")); 
+				student3.getTextBox().addText(reader.readThrough("\n")); 
+				student4.getTextBox().addText(reader.readThrough("\n")); 
+				student5.getTextBox().addText(reader.readThrough("\n")); 
+				i++;
+			}
+			i = 0;
+		} else {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_Students_2.txt");
+			lines = reader.numLines();
+			while(i < lines) { 
+				student1.getTextBox().addText(reader.readThrough("\n")); 
+				student2.getTextBox().addText(reader.readThrough("\n")); 
+				student3.getTextBox().addText(reader.readThrough("\n")); 
+				student4.getTextBox().addText(reader.readThrough("\n")); 
+				student5.getTextBox().addText(reader.readThrough("\n")); 
+				i++;
+			}
+			i = 0;
+		}
+		
+		
+		//Teacher
+		if(!world.getWorldState().getPlayer().hasOrb("specialOrb")) {
+			
+			if(!world.getWorldState().getPlayer().inventoryContains("Bookstore Receipt") && !world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && !world.getWorldState().getPlayer().inventoryContains("Textbook")) {
+				reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_Teacher_1.txt");
+				lines = reader.numLines();
+				while(i < lines) { teacher.getTextBox().addText(reader.readThrough("\n")); i++; }
+				i = 0;
+			} else if(world.getWorldState().getPlayer().inventoryContains("Bookstore Receipt") && !world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && !world.getWorldState().getPlayer().inventoryContains("Textbook")) {
+				reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_Teacher_2.txt");
+				lines = reader.numLines();
+				while(i < lines) { teacher.getTextBox().addText(reader.readThrough("\n")); i++; }
+				i = 0;
+			} else if(world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && !world.getWorldState().getPlayer().inventoryContains("Textbook")) {
+				reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_Teacher_3.txt");
+				lines = reader.numLines();
+				while(i < lines) { teacher.getTextBox().addText(reader.readThrough("\n")); i++; }
+				i = 0;
+			} else if(world.getWorldState().getPlayer().inventoryContains("Textbook") && !world.getWorldState().getPlayer().inventoryContains("Box of Textbooks")) {
+				reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_Teacher_4.txt");
+				lines = reader.numLines();
+				while(i < lines) { teacher.getTextBox().addText(reader.readThrough("\n")); i++; }
+				i = 0;
+			}
+			
+		} else {
+			
+			if(!world.getWorldState().getPlayer().inventoryContains("Bookstore Receipt") && !world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && !world.getWorldState().getPlayer().inventoryContains("Textbook")) {
+				reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_Teacher_1_other.txt");
+				lines = reader.numLines();
+				while(i < lines) { teacher.getTextBox().addText(reader.readThrough("\n")); i++; }
+				i = 0;
+			} else if(world.getWorldState().getPlayer().inventoryContains("Bookstore Receipt") && !world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && !world.getWorldState().getPlayer().inventoryContains("Textbook")) {
+				reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_Teacher_2.txt");
+				lines = reader.numLines();
+				while(i < lines) { teacher.getTextBox().addText(reader.readThrough("\n")); i++; }
+				i = 0;
+			} else if(world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && !world.getWorldState().getPlayer().inventoryContains("Textbook")) {
+				reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_Teacher_3.txt");
+				lines = reader.numLines();
+				while(i < lines) { teacher.getTextBox().addText(reader.readThrough("\n")); i++; }
+				i = 0;
+			} else if(world.getWorldState().getPlayer().inventoryContains("Textbook") && !world.getWorldState().getPlayer().inventoryContains("Box of Textbooks")) {
+				reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_Teacher_4.txt");
+				lines = reader.numLines();
+				while(i < lines) { teacher.getTextBox().addText(reader.readThrough("\n")); i++; }
+				i = 0;
+			}
+		}
+		
+		
+		//Book store owner
+		if(!world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && !world.getWorldState().getPlayer().inventoryContains("Bookstore Receipt")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_BookstoreOwner_1.txt");
+			lines = reader.numLines();
+			while(i < lines) { bookStoreOwner.getTextBox().addText(reader.readThrough("\n")); i++; }
+			i = 0;
+		} else if(!world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && world.getWorldState().getPlayer().inventoryContains("Bookstore Receipt")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_BookstoreOwner_2.txt");
+			lines = reader.numLines();
+			while(i < lines) { bookStoreOwner.getTextBox().addText(reader.readThrough("\n")); i++; }
+			i = 0;
+		} else if(world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") || world.getWorldState().getPlayer().inventoryContains("Textbook")) {
+			reader = new ReadFile("/Users/adeolauthman/Documents/AdeolasCodingStuff/JavaPrograms/Orbs/src/NPCSpeech/OrbsNPCSpeech_BookstoreOwner_3.txt");
+			lines = reader.numLines();
+			while(i < lines) { bookStoreOwner.getTextBox().addText(reader.readThrough("\n")); i++; }
+			i = 0;
+		}
 	}
 	
 	
@@ -910,6 +1066,19 @@ public class NPCManager {
 		
 		if(world.getName().equals("House_17")) {
 			world.addEntity(cakeGiver);
+		}
+		
+		if(world.getName().equals("House_18")) {
+			world.addEntity(student1);
+			world.addEntity(student2);
+			world.addEntity(student3);
+			world.addEntity(student4);
+			world.addEntity(student5);
+			world.addEntity(teacher);
+		}
+		
+		if(world.getName().equals("House_22")) {
+			world.addEntity(bookStoreOwner);
 		}
 		
 		if(world.getName().equals("House_24")) {
