@@ -14,8 +14,7 @@ public class NPC extends Entity {
 	
 	//The directional sprites (excluding the down position, which is assumed to be the default)
 	BufferedImage up_sprite, left_sprite, right_sprite;
-	
-	
+
 	
 	/////////// Constructors ///////////
 	
@@ -32,6 +31,7 @@ public class NPC extends Entity {
 	/** Sets the default sprite for this NPC. */
 	public void setDefaultSprite(BufferedImage sprite) { this.sprite = sprite; }
 	
+	
 	/** Sets the sprite that this NPC should have for each direction. */
 	public void setDirectionSprites(BufferedImage down, BufferedImage up, BufferedImage left, BufferedImage right) {
 		this.sprite = down;
@@ -45,6 +45,8 @@ public class NPC extends Entity {
 	
 	/** Returns the text box for this NPC. */
 	public TextBox getTextBox() { return textBox; }
+	
+	
 	
 	
 	/////////// Abstract Methods ///////////

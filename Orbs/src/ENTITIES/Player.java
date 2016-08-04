@@ -29,6 +29,13 @@ public class Player extends Entity {
 	//All of the coins that the player has
 	ArrayList<Coin> coins;
 	
+	//Step counter for a particular task in the game
+	int steps = -1;
+	
+	//When to start counting steps
+	boolean startCountingSteps;
+	
+	
 	
 	/////////// Constructor ////////////
 	
@@ -54,6 +61,10 @@ public class Player extends Entity {
 	
 	/** Returns all of the orbs that the player has. */
 	public ArrayList<Coin> getCoins() { return coins; }
+	
+	
+	/** Returns the number of steps the player has taken (certain task in game). */
+	public int getSteps() { return steps; }
 	
 	
 	/** Returns an item at a particular index of the list of items. */
@@ -155,6 +166,12 @@ public class Player extends Entity {
 	}
 	
 	
+	/** Returns whether or not the steps are being counted. */
+	public boolean isCountingSteps() { return startCountingSteps; }
+	
+	
+	
+	
 	///////// Setters //////////
 	
 	/** Returns a list of the items that the player has acquired. */
@@ -225,6 +242,15 @@ public class Player extends Entity {
 			}
 		}
 	}
+	
+	
+	/** Sets the number of steps the player has taken (certain task in game). */
+	public void setSteps(int i) { steps = i; }
+	
+	
+	/** Starts counting the steps. */
+	public void startCountingSteps() { startCountingSteps = true; }
+	
 	
 	
 	//////////// Abstract Methods ///////////////

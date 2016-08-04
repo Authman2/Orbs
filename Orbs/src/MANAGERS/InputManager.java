@@ -151,6 +151,11 @@ public class InputManager implements KeyListener {
 				for(ActionEntity ae : worldState.getCurrentWorld().getActionEntities()) ae.position.Y++;
 				for(Door door : worldState.getCurrentWorld().getDoors()) door.position.Y++;
 				worldState.getCurrentWorld().up = true;
+				
+				if(worldState.getPlayer().isCountingSteps()) {
+					worldState.getPlayer().setSteps(worldState.getPlayer().getSteps()+1);
+					try { worldState.getCurrentWorld().getNPCManager().loadNPCText(); } catch(Exception c) { c.printStackTrace(); }
+				}
 			}
 		}
 		
@@ -165,6 +170,11 @@ public class InputManager implements KeyListener {
 				for(ActionEntity ae : worldState.getCurrentWorld().getActionEntities()) ae.position.Y--;
 				for(Door door : worldState.getCurrentWorld().getDoors()) door.position.Y--;
 				worldState.getCurrentWorld().down = true;
+				
+				if(worldState.getPlayer().isCountingSteps()) {
+					worldState.getPlayer().setSteps(worldState.getPlayer().getSteps()+1);
+					try { worldState.getCurrentWorld().getNPCManager().loadNPCText(); } catch(Exception c) { c.printStackTrace(); }
+				}
 			}
 		}
 		
@@ -179,6 +189,11 @@ public class InputManager implements KeyListener {
 				for(ActionEntity ae : worldState.getCurrentWorld().getActionEntities()) ae.position.X--;
 				for(Door door : worldState.getCurrentWorld().getDoors()) door.position.X--;
 				worldState.getCurrentWorld().right = true;
+				
+				if(worldState.getPlayer().isCountingSteps()) {
+					worldState.getPlayer().setSteps(worldState.getPlayer().getSteps()+1);
+					try { worldState.getCurrentWorld().getNPCManager().loadNPCText(); } catch(Exception c) { c.printStackTrace(); }
+				}
 			}
 		}
 		
@@ -193,6 +208,11 @@ public class InputManager implements KeyListener {
 				for(ActionEntity ae : worldState.getCurrentWorld().getActionEntities()) ae.position.X++;
 				for(Door door : worldState.getCurrentWorld().getDoors()) door.position.X++;
 				worldState.getCurrentWorld().left = true;
+				
+				if(worldState.getPlayer().isCountingSteps()) {
+					worldState.getPlayer().setSteps(worldState.getPlayer().getSteps()+1);
+					try { worldState.getCurrentWorld().getNPCManager().loadNPCText(); } catch(Exception c) { c.printStackTrace(); }
+				}
 			}
 		}
 		
@@ -275,6 +295,24 @@ public class InputManager implements KeyListener {
 						
 						if(((Person)ent).willGiveItem()) {
 							//Re-assign the text boxes of each NPC
+							worldState.getCurrentWorld().getNPCManager().clearTextBoxes();
+							try { worldState.getCurrentWorld().getNPCManager().loadNPCText(); } catch(Exception err) { err.printStackTrace(); }
+						}
+					}
+					
+					//If it is a person and they have an item to take, take it away from the player.
+					if(((Person)ent).getItemToTake() != null) {
+						
+						//Only add the item if you are on the last text slide.
+						if(((Person)ent).getTextBox().onLast()) {
+							worldState.getPlayer().removeFromInventory(((Person)ent).getItemToTake());
+							worldState.updatePlayersItems();
+							worldState.getPlayer().setSteps(0);
+							worldState.getPlayer().startCountingSteps();
+							((Person)ent).removeItemToTake();
+						}
+					} else {
+						if(((Person)ent).willTakeItem()) {
 							worldState.getCurrentWorld().getNPCManager().clearTextBoxes();
 							try { worldState.getCurrentWorld().getNPCManager().loadNPCText(); } catch(Exception err) { err.printStackTrace(); }
 						}
