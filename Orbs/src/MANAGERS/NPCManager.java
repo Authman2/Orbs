@@ -650,9 +650,11 @@ public class NPCManager {
 			//Scientist
 			if(!world.getWorldState().getPlayer().inventoryContains("Orb")) {
 				loadText("OrbsNPCSpeech_Scientist_1", scientist);
-			} else {
-				loadText("OrbsNPCSpeech_Scientist_1", scientist);
+			} else if(world.getWorldState().getPlayer().inventoryContains("Orb") && world.getWorldState().getPlayer().getQuantity("Orb") < 10) {
+				loadText("OrbsNPCSpeech_Scientist_2", scientist);
 				scientist.getTextBox().setText("Hmm... Well it looks like you have found " + world.getWorldState().getPlayer().getOrbCount() + " out of 20 orbs. ", 3);
+			} else if(world.getWorldState().getPlayer().inventoryContains("Orb") && world.getWorldState().getPlayer().getQuantity("Orb") < 10) {
+				loadText("OrbsNPCSpeech_Scientist_3", scientist);
 			}
 			
 			

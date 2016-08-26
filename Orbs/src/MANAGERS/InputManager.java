@@ -5,7 +5,6 @@ import java.awt.event.KeyListener;
 
 import ENTITIES.ActionEntity;
 import ENTITIES.Entity;
-import ENTITIES.NPC;
 import ENTITIES.Person;
 import ENTITIES.SearchableEntity;
 import ITEMS.Coin;
@@ -230,22 +229,6 @@ public class InputManager implements KeyListener {
 	}
 	
 	
-	/** Edits the speech of the scientist based on whether or not the player has already collected an orb. */
-	private void editScientistSpeech(Item itm) {
-		if(worldState.getPlayer().inventoryContains("Orb")) {
-			Orb.setFirstCollected();
-		}
-
-		worldState.getCurrentWorld().getNPCManager().scientist.getTextBox().clear();
-		worldState.getCurrentWorld().getNPCManager().scientist.getTextBox().addText("Oh, hello! So you've found some of my orbs?");
-		worldState.getCurrentWorld().getNPCManager().scientist.getTextBox().addText("That's wonderful!");
-		worldState.getCurrentWorld().getNPCManager().scientist.getTextBox().addText("Let's see how many you've found...");
-		worldState.getCurrentWorld().getNPCManager().scientist.getTextBox().addText("Hmm... Well it looks like you have found " + worldState.getPlayer().getOrbCount() + " out of 20 orbs.");
-		worldState.getCurrentWorld().getNPCManager().scientist.getTextBox().addText("That's good! But there are still more to find.");
-		worldState.getCurrentWorld().getNPCManager().scientist.getTextBox().addText("Please keep on looking and return to me when you have more orbs! Good luck!");
-	}
-	
-	
 	/** Deals with interacting with entities that happen to be NPCs. */
 	public void entities() {
 		
@@ -465,7 +448,7 @@ public class InputManager implements KeyListener {
 					
 					//If the item was an orb and a first orb has not been collected already...
 					if(itm instanceof Orb) {
-						editScientistSpeech(itm);
+						worldState.getCurrentWorld().getNPCManager().loadNPCText();
 					}
 					
 				}
@@ -494,13 +477,13 @@ public class InputManager implements KeyListener {
 		//Stop moving in all directions if the keys are not being held down.
 		
 		if(worldState.getCurrentWorld() != null) {
-			if(e.getKeyCode() == KeyEvent.VK_UP) worldState.getCurrentWorld().up = false;
+			if(e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) worldState.getCurrentWorld().up = false;
 			
-			if(e.getKeyCode() == KeyEvent.VK_DOWN) worldState.getCurrentWorld().down = false;
+			if(e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S) worldState.getCurrentWorld().down = false;
 			
-			if(e.getKeyCode() == KeyEvent.VK_RIGHT) worldState.getCurrentWorld().right = false;
+			if(e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) worldState.getCurrentWorld().right = false;
 			
-			if(e.getKeyCode() == KeyEvent.VK_LEFT) worldState.getCurrentWorld().left = false;
+			if(e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) worldState.getCurrentWorld().left = false;
 		}
 	}
 }
