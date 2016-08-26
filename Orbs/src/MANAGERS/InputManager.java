@@ -63,7 +63,7 @@ public class InputManager implements KeyListener {
 		if(e.getKeyCode() == KeyEvent.VK_DOWN) {
 			menuState.selectedOption = 1;
 		}
-		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+		if(e.getKeyCode() == KeyEvent.VK_ENTER || e.getKeyCode() == KeyEvent.VK_C) {
 			if(menuState.selectedOption == 0) {
 				gsm.currentState = gsm.gameStates[1];
 			}
@@ -76,8 +76,6 @@ public class InputManager implements KeyListener {
 	
 	/** Moving about the game world. */
 	private void WorldStateActions(KeyEvent e) {
-		
-		
 		
 		//Check if there is a text box open. The player cannot move if they are already interacting with someone/something.
 		if(!worldState.textBoxesOpen()) {
@@ -139,7 +137,7 @@ public class InputManager implements KeyListener {
 	public void mapMovement(KeyEvent e) {
 		/* MOVING THE GAME MAP */
 		
-		if(e.getKeyCode() == KeyEvent.VK_UP) {
+		if(e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) {
 			worldState.getPlayer().setDirection(2);
 					
 			if(worldState.getCurrentWorld().canMoveUp()) {
@@ -151,15 +149,10 @@ public class InputManager implements KeyListener {
 				for(ActionEntity ae : worldState.getCurrentWorld().getActionEntities()) ae.position.Y++;
 				for(Door door : worldState.getCurrentWorld().getDoors()) door.position.Y++;
 				worldState.getCurrentWorld().up = true;
-				
-				if(worldState.getPlayer().isCountingSteps()) {
-					worldState.getPlayer().setSteps(worldState.getPlayer().getSteps()+1);
-					try { worldState.getCurrentWorld().getNPCManager().loadNPCText(); } catch(Exception c) { c.printStackTrace(); }
-				}
 			}
 		}
 		
-		if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+		if(e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S) {
 			worldState.getPlayer().setDirection(0);
 			
 			if(worldState.getCurrentWorld().canMoveDown()) {
@@ -170,15 +163,10 @@ public class InputManager implements KeyListener {
 				for(ActionEntity ae : worldState.getCurrentWorld().getActionEntities()) ae.position.Y--;
 				for(Door door : worldState.getCurrentWorld().getDoors()) door.position.Y--;
 				worldState.getCurrentWorld().down = true;
-				
-				if(worldState.getPlayer().isCountingSteps()) {
-					worldState.getPlayer().setSteps(worldState.getPlayer().getSteps()+1);
-					try { worldState.getCurrentWorld().getNPCManager().loadNPCText(); } catch(Exception c) { c.printStackTrace(); }
-				}
 			}
 		}
 		
-		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {
 			worldState.getPlayer().setDirection(1);
 			
 			if(worldState.getCurrentWorld().canMoveRight()) {
@@ -189,15 +177,10 @@ public class InputManager implements KeyListener {
 				for(ActionEntity ae : worldState.getCurrentWorld().getActionEntities()) ae.position.X--;
 				for(Door door : worldState.getCurrentWorld().getDoors()) door.position.X--;
 				worldState.getCurrentWorld().right = true;
-				
-				if(worldState.getPlayer().isCountingSteps()) {
-					worldState.getPlayer().setSteps(worldState.getPlayer().getSteps()+1);
-					try { worldState.getCurrentWorld().getNPCManager().loadNPCText(); } catch(Exception c) { c.printStackTrace(); }
-				}
 			}
 		}
 		
-		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+		if(e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) {
 			worldState.getPlayer().setDirection(3);
 			
 			if(worldState.getCurrentWorld().canMoveLeft()) {						
@@ -208,11 +191,6 @@ public class InputManager implements KeyListener {
 				for(ActionEntity ae : worldState.getCurrentWorld().getActionEntities()) ae.position.X++;
 				for(Door door : worldState.getCurrentWorld().getDoors()) door.position.X++;
 				worldState.getCurrentWorld().left = true;
-				
-				if(worldState.getPlayer().isCountingSteps()) {
-					worldState.getPlayer().setSteps(worldState.getPlayer().getSteps()+1);
-					try { worldState.getCurrentWorld().getNPCManager().loadNPCText(); } catch(Exception c) { c.printStackTrace(); }
-				}
 			}
 		}
 		
@@ -270,75 +248,63 @@ public class InputManager implements KeyListener {
 	
 	/** Deals with interacting with entities that happen to be NPCs. */
 	public void entities() {
-		//First check if there is already a text box open
+		
 		for(Entity ent : worldState.getCurrentWorld().getEntities()) {
 			
-			if(ent instanceof NPC && !(ent instanceof SearchableEntity)) {
+			// Cast it to a person object, since that is most likely what this method is looking for.
+			Person person = (Person)ent;
+			
+			// Next to player
+			if(person.isNextTo(worldState.getPlayer())) {
 				
-				//If a text box IS open, then just go through each slide as you normally would.
-				if( ((NPC) ent).getTextBox().isOpen() ) {
+				// Text box is open
+				if(person.getTextBox().isOpen()) {
 					
-					((NPC) ent).getTextBox().nextSlide();
+					person.getTextBox().nextSlide();
 					
-					
-					//If it is a person and they have an item, give it to the player.
-					if(((Person)ent).getItemToGive() != null) {
+					// If you're on the last slide, check for item giving.
+					if(person.getTextBox().onLast()) {
 						
-						//Only add the item if you are on the last text slide.
-						if(((Person)ent).getTextBox().onLast()) {
-							worldState.getPlayer().addItemToInventory(((Person)ent).getItemToGive());
-							worldState.updatePlayersItems();
-							((Person)ent).removeItemToGive();
+						// If the person will take an item
+						if(person.getItemToTake() != null) {
+							
+							// If the player has the item that the npc wants to take (by ID or name).
+							if(worldState.getPlayer().containsID(person.getItemToTake()) 
+								|| worldState.getPlayer().inventoryContains(person.getItemToTake())) {
+								
+								worldState.getPlayer().removeFromInventory(person.getItemToTake());
+								worldState.updatePlayersItems();
+								((Person)ent).removeItemToTake();
+								
+							}
+							
 						}
 						
-					} else {
-						
-						if(((Person)ent).willGiveItem()) {
-							//Re-assign the text boxes of each NPC
-							worldState.getCurrentWorld().getNPCManager().clearTextBoxes();
-							try { worldState.getCurrentWorld().getNPCManager().loadNPCText(); } catch(Exception err) { err.printStackTrace(); }
-						}
-					}
-					
-					//If it is a person and they have an item to take, take it away from the player.
-					if(((Person)ent).getItemToTake() != null) {
-						
-						//Only add the item if you are on the last text slide.
-						if(((Person)ent).getTextBox().onLast()) {
-							worldState.getPlayer().removeFromInventory(((Person)ent).getItemToTake());
-							worldState.updatePlayersItems();
-							worldState.getPlayer().setSteps(0);
-							worldState.getPlayer().startCountingSteps();
-							((Person)ent).removeItemToTake();
-						}
-					} else {
-						if(((Person)ent).willTakeItem()) {
-							worldState.getCurrentWorld().getNPCManager().clearTextBoxes();
-							try { worldState.getCurrentWorld().getNPCManager().loadNPCText(); } catch(Exception err) { err.printStackTrace(); }
+						// If the person is supposed to give an item
+						if(person.getItemToGive() != null) {
+							
+							// If you don't have an item with that name or you don't have that id, add it.
+							if(!worldState.getPlayer().containsID(person.getItemToGive().getID())) {
+								
+								worldState.getPlayer().addItemToInventory(person.getItemToGive());
+								worldState.updatePlayersItems();
+								person.removeItemToGive();
+								
+							}
 						}
 					}
 					
+				// Text box is closed	
 				} else {
 					
-					//If a text box was not already open, then open one up.
-					if(((NPC) ent).isNextTo(worldState.getPlayer())) {
-						
-						((NPC) ent).getTextBox().toggle();
-						
-						//Change the direction of the NPC
-						if(worldState.getPlayer().getDirection() == 0)
-							((NPC)ent).setDirection(2);
-						else if(worldState.getPlayer().getDirection() == 1)
-							((NPC)ent).setDirection(3);
-						else if(worldState.getPlayer().getDirection() == 2)
-							((NPC)ent).setDirection(0);
-						else if(worldState.getPlayer().getDirection() == 3)
-							((NPC)ent).setDirection(1);
-						
-					}
+					person.getTextBox().toggle();
+					worldState.getCurrentWorld().getNPCManager().loadNPCText();
+					
 				}
+				
 			}
 		}
+		
 	}
 
 	

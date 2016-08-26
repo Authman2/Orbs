@@ -5,8 +5,11 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import ITEMS.Coin;
+import ITEMS.Hatchet;
+import ITEMS.HazmatSuit;
 import ITEMS.Item;
 import ITEMS.Orb;
+import ITEMS.Textbook;
 import MAIN.Animator;
 import MAIN.Assets;
 import STATES.WorldState;
@@ -29,11 +32,8 @@ public class Player extends Entity {
 	//All of the coins that the player has
 	ArrayList<Coin> coins;
 	
-	//Step counter for a particular task in the game
-	int steps = -1;
-	
-	//When to start counting steps
-	boolean startCountingSteps;
+	// Whether or not the textbook orb can be received (must leave house).
+	boolean canReceiveTextbookOrb;
 	
 	
 	
@@ -45,6 +45,11 @@ public class Player extends Entity {
 		orbs = new ArrayList<Orb>();
 		coins = new ArrayList<Coin>();
 		worldState = ws;
+		addItemToInventory(new Hatchet());
+		addItemToInventory(new HazmatSuit());
+		Item itm = new Textbook();
+		itm.setID("textbook_Orb");
+		addItemToInventory(itm);
 		initialize();
 	}
 	
@@ -63,12 +68,12 @@ public class Player extends Entity {
 	public ArrayList<Coin> getCoins() { return coins; }
 	
 	
-	/** Returns the number of steps the player has taken (certain task in game). */
-	public int getSteps() { return steps; }
-	
-	
 	/** Returns an item at a particular index of the list of items. */
 	public Item getItem(int i) { return items.get(i); }
+	
+	
+	/** Returns whether or not the player can receive the textbook orb. Must have left the house to get it. */
+	public boolean canReceiveTextbookOrb() { return canReceiveTextbookOrb; }
 	
 	
 	/** Returns the number of orbs that the player currently has. */
@@ -166,12 +171,6 @@ public class Player extends Entity {
 	}
 	
 	
-	/** Returns whether or not the steps are being counted. */
-	public boolean isCountingSteps() { return startCountingSteps; }
-	
-	
-	
-	
 	///////// Setters //////////
 	
 	/** Returns a list of the items that the player has acquired. */
@@ -244,14 +243,6 @@ public class Player extends Entity {
 	}
 	
 	
-	/** Sets the number of steps the player has taken (certain task in game). */
-	public void setSteps(int i) { steps = i; }
-	
-	
-	/** Starts counting the steps. */
-	public void startCountingSteps() { startCountingSteps = true; }
-	
-	
 	
 	//////////// Abstract Methods ///////////////
 	
@@ -280,6 +271,13 @@ public class Player extends Entity {
 
 	@Override
 	public void update(double time) {
+		
+		if(worldState.InHouse()) {
+			canReceiveTextbookOrb = false;
+		} else {
+			 canReceiveTextbookOrb = true;
+		}
+		
 		//You cannot have water and a hatchet in the inventory at the same time since you have to give it to an NPC.
 		if(inventoryContains("Hatchet")) {
 			if(inventoryContains("Water")) {

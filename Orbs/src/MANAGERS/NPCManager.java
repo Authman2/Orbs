@@ -281,19 +281,11 @@ public class NPCManager {
 			bookStoreOwner.setItemToGive(npcItems[15]);
 		}
 		
-		if(world.getWorldState().getPlayer().inventoryContains("Textbook") && !world.getWorldState().getPlayer().hasOrb("textbook_Orb") && world.getWorldState().getPlayer().getSteps() >= 20) {
-			randomPerson_25.willGiveItem(true);
-			randomPerson_25.setItemToGive(npcItems[16]);
-		}
-		
-		if(world.getWorldState().getPlayer().inventoryContains("Textbook") && !world.getWorldState().getPlayer().hasOrb("textbook_Orb") && world.getWorldState().getPlayer().getSteps() == -1) {
+		if(world.getWorldState().getPlayer().inventoryContains("Textbook") && !world.getWorldState().getPlayer().hasOrb("textbook_Orb")) {
 			randomPerson_25.willTakeItem(true);
 			randomPerson_25.setItemToTake("Textbook");
-		}
-		
-		if(!world.getWorldState().getPlayer().inventoryContains("Textbook") && !world.getWorldState().getPlayer().hasOrb("textbook_Orb") && world.getWorldState().getPlayer().getSteps() >= 20) {
 			randomPerson_25.willGiveItem(true);
-			randomPerson_25.setItemToGive(npcItems[14]);
+			randomPerson_25.setItemToGive(npcItems[16]);
 		}
 	}
 
@@ -457,331 +449,328 @@ public class NPCManager {
 
 	
 	/** Loads the text for each NPC to say. */
-	public void loadNPCText() throws Exception {
-		clearTextBoxes();
-		
-		//Barrier NPC
-		loadText("OrbsNPCSpeech_BarrierNPC", thiefNPC);
-		
-		
-		//Cat NPC
-		if(!world.getWorldState().getPlayer().hasOrb("Cat_Orb")) {
-			loadText("OrbsNPCSpeech_CatNPC_1", catNPC);
-			catNPC.getTextBox().addText("You received a(n) " + npcItems[3] + "! ");
-		} else {
-			loadText("OrbsNPCSpeech_CatNPC_2", catNPC);
-		}
-		
-		
-		//Chemical Controllers
-		if(!world.getWorldState().getPlayer().inventoryContains("Hazmat Suit")) {
-			loadText("OrbsNPCSpeech_ChemicalControllers_1", chemicalController_1);
-			loadText("OrbsNPCSpeech_ChemicalControllers_1", chemicalController_2);
-			loadText("OrbsNPCSpeech_ChemicalControllers_1", chemicalController_3);
-		} else {
-			chemicalController_2.position.X -= 1; chemicalController_2.position.Y -= 1; chemicalController_3.position.X += 1; chemicalController_3.position.Y -= 2;
-			chemicalController_1.setDirection(0); chemicalController_2.setDirection(0); chemicalController_3.setDirection(0);
+	public void loadNPCText() {
+		try {
+			clearTextBoxes();
 			
-			loadText("OrbsNPCSpeech_ChemicalControllers_2", chemicalController_1);
-			loadText("OrbsNPCSpeech_ChemicalControllers_2", chemicalController_2);
-			loadText("OrbsNPCSpeech_ChemicalControllers_2", chemicalController_3);
-		}
-		
-		
-		//Container Seller
-		if(!world.getWorldState().getPlayer().inventoryContains("Container") && (world.getWorldState().getPlayer().inventoryContains("Coin") && world.getWorldState().getPlayer().getQuantity("Coin") >= 40)) {
-			loadText("OrbsNPCSpeech_ContainerSeller_1", containerSeller);
-			containerSeller.getTextBox().addText("You received a(n) " + npcItems[4] + "! ");
-		} else if(!world.getWorldState().getPlayer().inventoryContains("Container") && (!world.getWorldState().getPlayer().inventoryContains("Coin") || world.getWorldState().getPlayer().getQuantity("Coin") < 40)) {
-			loadText("OrbsNPCSpeech_ContainerSeller_2", containerSeller);
-		} else if(world.getWorldState().getPlayer().inventoryContains("Container")) {
-			loadText("OrbsNPCSpeech_ContainerSeller_3", containerSeller);
-		}
-		
-		
-		//Hazmat Suit Giver
-		if(!world.getWorldState().getPlayer().inventoryContains("Sewing Kit") && !world.getWorldState().getPlayer().inventoryContains("Hazmat Suit")) {
-			loadText("OrbsNPCSpeech_HazmatSuitGiver_1", hazmatSuitGiver);
-		} else if(!world.getWorldState().getPlayer().inventoryContains("Hazmat Suit") && world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
-			loadText("OrbsNPCSpeech_HazmatSuitGiver_2", hazmatSuitGiver);
-			hazmatSuitGiver.getTextBox().addText("You received a(n) " + npcItems[8] + "! ");
-		} else if(world.getWorldState().getPlayer().inventoryContains("Sewing Kit") && world.getWorldState().getPlayer().inventoryContains("Hazmat Suit")) {
-			loadText("OrbsNPCSpeech_HazmatSuitGiver_3", hazmatSuitGiver);
-		}
-		
-		
-		//Hazmat suit giver wife
-		loadText("OrbsNPCSpeech_HazmatSuitGiverWife", hazmatSuitGiverWife);
-		
-		
-		//Player's relative
-		loadText("OrbsNPCSpeech_PlayersRelative", player_Relative);
-		
-		
-		//Random person 1
-		loadText("OrbsNPCSpeech_RandomPerson1",randomPerson_1);
-		
-		
-		//Random person 2
-		loadText("OrbsNPCSpeech_RandomPerson2",randomPerson_2);
-		
-		
-		//Random person 3
-		loadText("OrbsNPCSpeech_RandomPerson3",randomPerson_3);
-		
-		
-		//Random person 4
-		if(!world.getWorldState().getPlayer().containsID("coin_person4")) {
-			loadText("OrbsNPCSpeech_RandomPerson4_1",randomPerson_4);
-			randomPerson_4.getTextBox().addText("You received a(n) " + npcItems[0]  + "! ");
-		} else {
-			loadText("OrbsNPCSpeech_RandomPerson4_2",randomPerson_4);
-		}
-		
-		
-		//Random person 5
-		loadText("OrbsNPCSpeech_RandomPerson5",randomPerson_5);
-		
-		
-		//Random person 6
-		loadText("OrbsNPCSpeech_RandomPerson6",randomPerson_6);
-		
-		
-		//Random person 7
-		if(!world.getWorldState().getPlayer().inventoryContains("Coupon") && !world.getWorldState().getPlayer().inventoryContains("Water") && !world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
-			loadText("OrbsNPCSpeech_RandomPerson7_1",randomPerson_7);
-			randomPerson_7.getTextBox().addText("You received a(n) " + npcItems[1] + "! ");
-		} else {
-			loadText("OrbsNPCSpeech_RandomPerson7_2",randomPerson_7);
-		}
-		
-		
-		//Random person 8
-		loadText("OrbsNPCSpeech_RandomPerson8",randomPerson_8);
-		
-		//Random person 9
-		loadText("OrbsNPCSpeech_RandomPerson9",randomPerson_9);
-		
-		//Random person 10
-		loadText("OrbsNPCSpeech_RandomPerson10",randomPerson_10);
-		
-		//Random person 11
-		loadText("OrbsNPCSpeech_RandomPerson11",randomPerson_11);
-		
-		//Random person 12
-		loadText("OrbsNPCSpeech_RandomPerson12",randomPerson_12);
-		
-		//Random person 13
-		loadText("OrbsNPCSpeech_RandomPerson13",randomPerson_13);
-		
-		//Random person 14
-		loadText("OrbsNPCSpeech_RandomPerson14",randomPerson_14);
-		
-		//Random person 15
-		loadText("OrbsNPCSpeech_RandomPerson15",randomPerson_15);
-		
-		//Random person 16
-		loadText("OrbsNPCSpeech_RandomPerson16",randomPerson_16);
-		
-		
-		//Random person 17
-		if(!world.getWorldState().getPlayer().hasOrb("bball_Orb")) {
-			loadText("OrbsNPCSpeech_RandomPerson17_1",randomPerson_17);
-			randomPerson_17.getTextBox().addText("You received a(n) " + npcItems[2] + "! ");
-		} else {
-			loadText("OrbsNPCSpeech_RandomPerson17_2",randomPerson_17);
-		}
-		
-		
-		//Random person 18
-		if(!world.getWorldState().getPlayer().hasOrb("bball_Orb")) {
-			loadText("OrbsNPCSpeech_RandomPerson18_1",randomPerson_18);
-		} else {
-			loadText("OrbsNPCSpeech_RandomPerson18_2",randomPerson_18);
-		}
-		
-		
-		//Random person 19
-		loadText("OrbsNPCSpeech_RandomPerson19",randomPerson_19);
-		
-		
-		//Random person 20
-		loadText("OrbsNPCSpeech_RandomPerson19",randomPerson_19);
-		
-		
-		//Random person 21
-		loadText("OrbsNPCSpeech_RandomPerson21",randomPerson_21);
-		
-		
-		//Random person 22
-		if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().hasOrb("cake_orb")) {
-			loadText("OrbsNPCSpeech_RandomPerson22_1",randomPerson_22);
-			randomPerson_22.getTextBox().addText("You received a(n) " + npcItems[10] + "! ");
-			randomPerson_22.getTextBox().addText("They will give you the cake once you hand them the receipt.");
-			randomPerson_22.getTextBox().addText("Please hurry back! The party starts in a few hours!");
-		} else if(world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().hasOrb("cake_orb")) {		
-			loadText("OrbsNPCSpeech_RandomPerson22_2",randomPerson_22);
-		} else if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().hasOrb("cake_orb")) {
-			loadText("OrbsNPCSpeech_RandomPerson22_3",randomPerson_22);
-			randomPerson_22.getTextBox().addText("You received a(n) " + npcItems[12] + "! ");
-		} else if(world.getWorldState().getPlayer().hasOrb("cake_orb") && !world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake")) {
-			loadText("OrbsNPCSpeech_RandomPerson22_3",randomPerson_22);
-		}
-		
-		
-		//Random person 23
-		if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().hasOrb("cake_orb")) {
-			loadText("OrbsNPCSpeech_RandomPerson22_1",randomPerson_23);
-			randomPerson_23.getTextBox().addText("You received a(n) " + npcItems[10] + "! ");
-			randomPerson_23.getTextBox().addText("They will give you the cake once you hand them the receipt.");
-			randomPerson_23.getTextBox().addText("Please hurry back! The party starts in a few hours!");
-		} else if(world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().hasOrb("cake_orb")) {		
-			loadText("OrbsNPCSpeech_RandomPerson22_2",randomPerson_23);
-		} else if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().hasOrb("cake_orb")) {
-			loadText("OrbsNPCSpeech_RandomPerson22_3",randomPerson_23);
-			randomPerson_23.getTextBox().addText("You received a(n) " + npcItems[12] + "! ");
-		} else if(world.getWorldState().getPlayer().hasOrb("cake_orb") && !world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake")) {
-			loadText("OrbsNPCSpeech_RandomPerson22_3",randomPerson_23);
-		}
-		
-		
-		//Retired Mine Worker
-		if(!world.getWorldState().getPlayer().inventoryContains("Pickaxe")) {
-			loadText("OrbsNPCSpeech_RetiredMineWorker_1", retiredMineWorker);
-			retiredMineWorker.getTextBox().addText("You received a(n) " + npcItems[9] + "! ");
-		} else {
-			loadText("OrbsNPCSpeech_RetiredMineWorker_1", retiredMineWorker);
-		}
-		
-		
-		//Scientist
-		if(!world.getWorldState().getPlayer().inventoryContains("Orb")) {
-			loadText("OrbsNPCSpeech_Scientist_1", scientist);
-		} else {
-			loadText("OrbsNPCSpeech_Scientist_1", scientist);
-			scientist.getTextBox().setText("Hmm... Well it looks like you have found " + world.getWorldState().getPlayer().getOrbCount() + " out of 20 orbs. ", 3);
-		}
-		
-		
-		
-		//Sewing Shop Owner
-		if(!world.getWorldState().getPlayer().inventoryContains("Coin") && !world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
-			loadText("OrbsNPCSpeech_SewingShopOwner_1", sewingShopOwner);
-		} else if(world.getWorldState().getPlayer().inventoryContains("Coin") && world.getWorldState().getPlayer().getQuantity("Coin") >= 12 && !world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
-			loadText("OrbsNPCSpeech_SewingShopOwner_2", sewingShopOwner);
-			sewingShopOwner.getTextBox().addText("You received a(n) " + npcItems[7] + "! ");
-		} else if(world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
-			loadText("OrbsNPCSpeech_SewingShopOwner_1", sewingShopOwner);
-		}
-		
-		
-		//Tree Cutter
-		if(!world.getWorldState().getPlayer().inventoryContains("Water") && !world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
-			loadText("OrbsNPCSpeech_TreeCutter_1", treeCutter);
-		} else if(world.getWorldState().getPlayer().inventoryContains("Water") && !world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
-			loadText("OrbsNPCSpeech_TreeCutter_1", treeCutter);
-			treeCutter.getTextBox().addText("You received a(n) " + npcItems[5] + "! ");
-		} else if(world.getWorldState().getPlayer().inventoryContains("Hatchet") && !world.getWorldState().getPlayer().inventoryContains("Water")) {
-			loadText("OrbsNPCSpeech_TreeCutter_1", treeCutter);
-		}
-		
-		
-		//Tree Cutter Friend
-		loadText("OrbsNPCSpeech_TreeCutterFriend", treeCutterFriend);
-		
-		
-		//Water Giving Person
-		if(!world.getWorldState().getPlayer().inventoryContains("Water") && !world.getWorldState().getPlayer().inventoryContains("Coupon")) {
-			loadText("OrbsNPCSpeech_WaterGivingPerson_1", giveWaterPerson);
-		} else if(!world.getWorldState().getPlayer().inventoryContains("Water") && world.getWorldState().getPlayer().inventoryContains("Coupon")) {
-			loadText("OrbsNPCSpeech_WaterGivingPerson_2", giveWaterPerson);
-			giveWaterPerson.getTextBox().addText("You received a(n) " + npcItems[6] + "! ");
-		} else if(world.getWorldState().getPlayer().inventoryContains("Water") || !world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
-			loadText("OrbsNPCSpeech_WaterGivingPerson_1", giveWaterPerson);
-		}
-		
-		
-		//Cake giver
-		if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().containsID("cake_orb")) {
-			loadText("OrbsNPCSpeech_CakeGiver_1", cakeGiver);
-		} else if(world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().containsID("cake_orb")) {
-			loadText("OrbsNPCSpeech_CakeGiver_2", cakeGiver);
-			cakeGiver.getTextBox().addText("You received a(n) " + npcItems[11] + "! ");
-		} else if(world.getWorldState().getPlayer().inventoryContains("Cake") || world.getWorldState().getPlayer().containsID("cake_orb")) {
-			loadText("OrbsNPCSpeech_CakeGiver_3", cakeGiver);
-		}
-		
-		
-		//Students
-		if(!world.getWorldState().getPlayer().inventoryContains("Textbook")) {
-			loadText("OrbsNPCSpeech_Students_1", student1);
-			loadText("OrbsNPCSpeech_Students_1", student2);
-			loadText("OrbsNPCSpeech_Students_1", student3);
-			loadText("OrbsNPCSpeech_Students_1", student4);
-			loadText("OrbsNPCSpeech_Students_1", student5);
-		} else {
-			loadText("OrbsNPCSpeech_Students_2", student1);
-			loadText("OrbsNPCSpeech_Students_2", student2);
-			loadText("OrbsNPCSpeech_Students_2", student3);
-			loadText("OrbsNPCSpeech_Students_2", student4);
-			loadText("OrbsNPCSpeech_Students_2", student5);
-		}
-		
-		
-		//Teacher
-		if(!world.getWorldState().getPlayer().hasOrb("specialOrb")) {
+			//Barrier NPC
+			loadText("OrbsNPCSpeech_BarrierNPC", thiefNPC);
 			
-			if(!world.getWorldState().getPlayer().inventoryContains("Bookstore Receipt") && !world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && !world.getWorldState().getPlayer().inventoryContains("Textbook")) {
-				loadText("OrbsNPCSpeech_Teacher_1", teacher);
-			} else if(world.getWorldState().getPlayer().inventoryContains("Bookstore Receipt") && !world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && !world.getWorldState().getPlayer().inventoryContains("Textbook")) {
-				loadText("OrbsNPCSpeech_Teacher_2", teacher);
-			} else if(world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && !world.getWorldState().getPlayer().inventoryContains("Textbook")) {
-				loadText("OrbsNPCSpeech_Teacher_3", teacher);
-			} else if(world.getWorldState().getPlayer().inventoryContains("Textbook") && !world.getWorldState().getPlayer().inventoryContains("Box of Textbooks")) {
-				loadText("OrbsNPCSpeech_Teacher_4", teacher);
+			
+			//Cat NPC
+			if(!world.getWorldState().getPlayer().hasOrb("Cat_Orb")) {
+				loadText("OrbsNPCSpeech_CatNPC_1", catNPC);
+				catNPC.getTextBox().addText("You received a(n) " + npcItems[3] + "! ");
+			} else {
+				loadText("OrbsNPCSpeech_CatNPC_2", catNPC);
 			}
 			
-		} else {
 			
-			if(!world.getWorldState().getPlayer().inventoryContains("Bookstore Receipt") && !world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && !world.getWorldState().getPlayer().inventoryContains("Textbook")) {
-				loadText("OrbsNPCSpeech_Teacher_1_other", teacher);
-			} else if(world.getWorldState().getPlayer().inventoryContains("Bookstore Receipt") && !world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && !world.getWorldState().getPlayer().inventoryContains("Textbook")) {
-				loadText("OrbsNPCSpeech_Teacher_2", teacher);
-			} else if(world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && !world.getWorldState().getPlayer().inventoryContains("Textbook")) {
-				loadText("OrbsNPCSpeech_Teacher_3", teacher);
-			} else if(world.getWorldState().getPlayer().inventoryContains("Textbook") && !world.getWorldState().getPlayer().inventoryContains("Box of Textbooks")) {
-				loadText("OrbsNPCSpeech_Teacher_4", teacher);
+			//Chemical Controllers
+			if(!world.getWorldState().getPlayer().inventoryContains("Hazmat Suit")) {
+				loadText("OrbsNPCSpeech_ChemicalControllers_1", chemicalController_1);
+				loadText("OrbsNPCSpeech_ChemicalControllers_1", chemicalController_2);
+				loadText("OrbsNPCSpeech_ChemicalControllers_1", chemicalController_3);
+			} else {
+				chemicalController_2.position.X -= 1; chemicalController_2.position.Y -= 1; chemicalController_3.position.X += 1; chemicalController_3.position.Y -= 2;
+				chemicalController_1.setDirection(0); chemicalController_2.setDirection(0); chemicalController_3.setDirection(0);
+				
+				loadText("OrbsNPCSpeech_ChemicalControllers_2", chemicalController_1);
+				loadText("OrbsNPCSpeech_ChemicalControllers_2", chemicalController_2);
+				loadText("OrbsNPCSpeech_ChemicalControllers_2", chemicalController_3);
 			}
-		}
-		
-		
-		//Book store owner
-		if(!world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && !world.getWorldState().getPlayer().inventoryContains("Bookstore Receipt")) {
-			loadText("OrbsNPCSpeech_BookstoreOwner_1", bookStoreOwner);
-		} else if(!world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && world.getWorldState().getPlayer().inventoryContains("Bookstore Receipt")) {
-			loadText("OrbsNPCSpeech_BookstoreOwner_2", bookStoreOwner);
-		} else if(world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") || world.getWorldState().getPlayer().inventoryContains("Textbook")) {
-			loadText("OrbsNPCSpeech_BookstoreOwner_1", bookStoreOwner);
-		}
-		
-		
-		//Textbook child
-		if(!world.getWorldState().getPlayer().inventoryContains("Textbook") && !world.getWorldState().getPlayer().hasOrb("textbook_Orb") && world.getWorldState().getPlayer().getSteps() == -1) {
-			loadText("OrbsNPCSpeech_TextbookChild_1", randomPerson_25);
-		} else if(world.getWorldState().getPlayer().inventoryContains("Textbook") && !world.getWorldState().getPlayer().hasOrb("textbook_Orb") && world.getWorldState().getPlayer().getSteps() == -1) {
-			loadText("OrbsNPCSpeech_TextbookChild_2", randomPerson_25);
-		} else if(!world.getWorldState().getPlayer().inventoryContains("Textbook") && !world.getWorldState().getPlayer().hasOrb("textbook_Orb") && (world.getWorldState().getPlayer().getSteps() >= 0 && world.getWorldState().getPlayer().getSteps() < 200)) {
-			loadText("OrbsNPCSpeech_TextbookChild_3", randomPerson_25);
-		} else if(!world.getWorldState().getPlayer().inventoryContains("Textbook") && !world.getWorldState().getPlayer().hasOrb("textbook_Orb") && world.getWorldState().getPlayer().getSteps() >= 200) {
-			loadText("OrbsNPCSpeech_TextbookChild_4", randomPerson_25);
-		} else if(world.getWorldState().getPlayer().inventoryContains("Textbook") && !world.getWorldState().getPlayer().hasOrb("textbook_Orb") && world.getWorldState().getPlayer().getSteps() >= 200) {
-			loadText("OrbsNPCSpeech_TextbookChild_5", randomPerson_25);
-		} else {
-			loadText("OrbsNPCSpeech_TextbookChild_3", randomPerson_25);
-		}
-		
-		//Textbook parent
-		loadText("OrbsNPCSpeech_TextbookParent", randomPerson_26);
+			
+			
+			//Container Seller
+			if(!world.getWorldState().getPlayer().inventoryContains("Container") && (world.getWorldState().getPlayer().inventoryContains("Coin") && world.getWorldState().getPlayer().getQuantity("Coin") >= 40)) {
+				loadText("OrbsNPCSpeech_ContainerSeller_1", containerSeller);
+				containerSeller.getTextBox().addText("You received a(n) " + npcItems[4] + "! ");
+			} else if(!world.getWorldState().getPlayer().inventoryContains("Container") && (!world.getWorldState().getPlayer().inventoryContains("Coin") || world.getWorldState().getPlayer().getQuantity("Coin") < 40)) {
+				loadText("OrbsNPCSpeech_ContainerSeller_2", containerSeller);
+			} else if(world.getWorldState().getPlayer().inventoryContains("Container")) {
+				loadText("OrbsNPCSpeech_ContainerSeller_3", containerSeller);
+			}
+			
+			
+			//Hazmat Suit Giver
+			if(!world.getWorldState().getPlayer().inventoryContains("Sewing Kit") && !world.getWorldState().getPlayer().inventoryContains("Hazmat Suit")) {
+				loadText("OrbsNPCSpeech_HazmatSuitGiver_1", hazmatSuitGiver);
+			} else if(!world.getWorldState().getPlayer().inventoryContains("Hazmat Suit") && world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
+				loadText("OrbsNPCSpeech_HazmatSuitGiver_2", hazmatSuitGiver);
+				hazmatSuitGiver.getTextBox().addText("You received a(n) " + npcItems[8] + "! ");
+			} else if(world.getWorldState().getPlayer().inventoryContains("Sewing Kit") && world.getWorldState().getPlayer().inventoryContains("Hazmat Suit")) {
+				loadText("OrbsNPCSpeech_HazmatSuitGiver_3", hazmatSuitGiver);
+			}
+			
+			
+			//Hazmat suit giver wife
+			loadText("OrbsNPCSpeech_HazmatSuitGiverWife", hazmatSuitGiverWife);
+			
+			
+			//Player's relative
+			loadText("OrbsNPCSpeech_PlayersRelative", player_Relative);
+			
+			
+			//Random person 1
+			loadText("OrbsNPCSpeech_RandomPerson1",randomPerson_1);
+			
+			
+			//Random person 2
+			loadText("OrbsNPCSpeech_RandomPerson2",randomPerson_2);
+			
+			
+			//Random person 3
+			loadText("OrbsNPCSpeech_RandomPerson3",randomPerson_3);
+			
+			
+			//Random person 4
+			if(!world.getWorldState().getPlayer().containsID("coin_person4")) {
+				loadText("OrbsNPCSpeech_RandomPerson4_1",randomPerson_4);
+				randomPerson_4.getTextBox().addText("You received a(n) " + npcItems[0]  + "! ");
+			} else {
+				loadText("OrbsNPCSpeech_RandomPerson4_2",randomPerson_4);
+			}
+			
+			
+			//Random person 5
+			loadText("OrbsNPCSpeech_RandomPerson5",randomPerson_5);
+			
+			
+			//Random person 6
+			loadText("OrbsNPCSpeech_RandomPerson6",randomPerson_6);
+			
+			
+			//Random person 7
+			if(!world.getWorldState().getPlayer().inventoryContains("Coupon") && !world.getWorldState().getPlayer().inventoryContains("Water") && !world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
+				loadText("OrbsNPCSpeech_RandomPerson7_1",randomPerson_7);
+				randomPerson_7.getTextBox().addText("You received a(n) " + npcItems[1] + "! ");
+			} else {
+				loadText("OrbsNPCSpeech_RandomPerson7_2",randomPerson_7);
+			}
+			
+			
+			//Random person 8
+			loadText("OrbsNPCSpeech_RandomPerson8",randomPerson_8);
+			
+			//Random person 9
+			loadText("OrbsNPCSpeech_RandomPerson9",randomPerson_9);
+			
+			//Random person 10
+			loadText("OrbsNPCSpeech_RandomPerson10",randomPerson_10);
+			
+			//Random person 11
+			loadText("OrbsNPCSpeech_RandomPerson11",randomPerson_11);
+			
+			//Random person 12
+			loadText("OrbsNPCSpeech_RandomPerson12",randomPerson_12);
+			
+			//Random person 13
+			loadText("OrbsNPCSpeech_RandomPerson13",randomPerson_13);
+			
+			//Random person 14
+			loadText("OrbsNPCSpeech_RandomPerson14",randomPerson_14);
+			
+			//Random person 15
+			loadText("OrbsNPCSpeech_RandomPerson15",randomPerson_15);
+			
+			//Random person 16
+			loadText("OrbsNPCSpeech_RandomPerson16",randomPerson_16);
+			
+			
+			//Random person 17
+			if(!world.getWorldState().getPlayer().hasOrb("bball_Orb")) {
+				loadText("OrbsNPCSpeech_RandomPerson17_1",randomPerson_17);
+				randomPerson_17.getTextBox().addText("You received a(n) " + npcItems[2] + "! ");
+			} else {
+				loadText("OrbsNPCSpeech_RandomPerson17_2",randomPerson_17);
+			}
+			
+			
+			//Random person 18
+			if(!world.getWorldState().getPlayer().hasOrb("bball_Orb")) {
+				loadText("OrbsNPCSpeech_RandomPerson18_1",randomPerson_18);
+			} else {
+				loadText("OrbsNPCSpeech_RandomPerson18_2",randomPerson_18);
+			}
+			
+			
+			//Random person 19
+			loadText("OrbsNPCSpeech_RandomPerson19",randomPerson_19);
+			
+			
+			//Random person 20
+			loadText("OrbsNPCSpeech_RandomPerson19",randomPerson_19);
+			
+			
+			//Random person 21
+			loadText("OrbsNPCSpeech_RandomPerson21",randomPerson_21);
+			
+			
+			//Random person 22
+			if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().hasOrb("cake_orb")) {
+				loadText("OrbsNPCSpeech_RandomPerson22_1",randomPerson_22);
+				randomPerson_22.getTextBox().addText("You received a(n) " + npcItems[10] + "! ");
+				randomPerson_22.getTextBox().addText("They will give you the cake once you hand them the receipt.");
+				randomPerson_22.getTextBox().addText("Please hurry back! The party starts in a few hours!");
+			} else if(world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().hasOrb("cake_orb")) {		
+				loadText("OrbsNPCSpeech_RandomPerson22_2",randomPerson_22);
+			} else if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().hasOrb("cake_orb")) {
+				loadText("OrbsNPCSpeech_RandomPerson22_3",randomPerson_22);
+				randomPerson_22.getTextBox().addText("You received a(n) " + npcItems[12] + "! ");
+			} else if(world.getWorldState().getPlayer().hasOrb("cake_orb") && !world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake")) {
+				loadText("OrbsNPCSpeech_RandomPerson22_3",randomPerson_22);
+			}
+			
+			
+			//Random person 23
+			if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().hasOrb("cake_orb")) {
+				loadText("OrbsNPCSpeech_RandomPerson22_1",randomPerson_23);
+				randomPerson_23.getTextBox().addText("You received a(n) " + npcItems[10] + "! ");
+				randomPerson_23.getTextBox().addText("They will give you the cake once you hand them the receipt.");
+				randomPerson_23.getTextBox().addText("Please hurry back! The party starts in a few hours!");
+			} else if(world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().hasOrb("cake_orb")) {		
+				loadText("OrbsNPCSpeech_RandomPerson22_2",randomPerson_23);
+			} else if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().hasOrb("cake_orb")) {
+				loadText("OrbsNPCSpeech_RandomPerson22_3",randomPerson_23);
+				randomPerson_23.getTextBox().addText("You received a(n) " + npcItems[12] + "! ");
+			} else if(world.getWorldState().getPlayer().hasOrb("cake_orb") && !world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake")) {
+				loadText("OrbsNPCSpeech_RandomPerson22_3",randomPerson_23);
+			}
+			
+			
+			//Retired Mine Worker
+			if(!world.getWorldState().getPlayer().inventoryContains("Pickaxe")) {
+				loadText("OrbsNPCSpeech_RetiredMineWorker_1", retiredMineWorker);
+				retiredMineWorker.getTextBox().addText("You received a(n) " + npcItems[9] + "! ");
+			} else {
+				loadText("OrbsNPCSpeech_RetiredMineWorker_1", retiredMineWorker);
+			}
+			
+			
+			//Scientist
+			if(!world.getWorldState().getPlayer().inventoryContains("Orb")) {
+				loadText("OrbsNPCSpeech_Scientist_1", scientist);
+			} else {
+				loadText("OrbsNPCSpeech_Scientist_1", scientist);
+				scientist.getTextBox().setText("Hmm... Well it looks like you have found " + world.getWorldState().getPlayer().getOrbCount() + " out of 20 orbs. ", 3);
+			}
+			
+			
+			
+			//Sewing Shop Owner
+			if(!world.getWorldState().getPlayer().inventoryContains("Coin") && !world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
+				loadText("OrbsNPCSpeech_SewingShopOwner_1", sewingShopOwner);
+			} else if(world.getWorldState().getPlayer().inventoryContains("Coin") && world.getWorldState().getPlayer().getQuantity("Coin") >= 12 && !world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
+				loadText("OrbsNPCSpeech_SewingShopOwner_2", sewingShopOwner);
+				sewingShopOwner.getTextBox().addText("You received a(n) " + npcItems[7] + "! ");
+			} else if(world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
+				loadText("OrbsNPCSpeech_SewingShopOwner_1", sewingShopOwner);
+			}
+			
+			
+			//Tree Cutter
+			if(!world.getWorldState().getPlayer().inventoryContains("Water") && !world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
+				loadText("OrbsNPCSpeech_TreeCutter_1", treeCutter);
+			} else if(world.getWorldState().getPlayer().inventoryContains("Water") && !world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
+				loadText("OrbsNPCSpeech_TreeCutter_2", treeCutter);
+				treeCutter.getTextBox().addText("You received a(n) " + npcItems[5] + "! ");
+			} else if(world.getWorldState().getPlayer().inventoryContains("Hatchet") && !world.getWorldState().getPlayer().inventoryContains("Water")) {
+				loadText("OrbsNPCSpeech_TreeCutter_3", treeCutter);
+			}
+			
+			
+			//Tree Cutter Friend
+			loadText("OrbsNPCSpeech_TreeCutterFriend", treeCutterFriend);
+			
+			
+			//Water Giving Person
+			if(!world.getWorldState().getPlayer().inventoryContains("Water") && !world.getWorldState().getPlayer().inventoryContains("Coupon")) {
+				loadText("OrbsNPCSpeech_WaterGivingPerson_1", giveWaterPerson);
+			} else if(!world.getWorldState().getPlayer().inventoryContains("Water") && world.getWorldState().getPlayer().inventoryContains("Coupon")) {
+				loadText("OrbsNPCSpeech_WaterGivingPerson_2", giveWaterPerson);
+				giveWaterPerson.getTextBox().addText("You received a(n) " + npcItems[6] + "! ");
+			} else if(world.getWorldState().getPlayer().inventoryContains("Water") || !world.getWorldState().getPlayer().inventoryContains("Hatchet")) {
+				loadText("OrbsNPCSpeech_WaterGivingPerson_3", giveWaterPerson);
+			}
+			
+			
+			//Cake giver
+			if(!world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().containsID("cake_orb")) {
+				loadText("OrbsNPCSpeech_CakeGiver_1", cakeGiver);
+			} else if(world.getWorldState().getPlayer().inventoryContains("Bakery Receipt") && !world.getWorldState().getPlayer().inventoryContains("Cake") && !world.getWorldState().getPlayer().containsID("cake_orb")) {
+				loadText("OrbsNPCSpeech_CakeGiver_2", cakeGiver);
+				cakeGiver.getTextBox().addText("You received a(n) " + npcItems[11] + "! ");
+			} else if(world.getWorldState().getPlayer().inventoryContains("Cake") || world.getWorldState().getPlayer().containsID("cake_orb")) {
+				loadText("OrbsNPCSpeech_CakeGiver_3", cakeGiver);
+			}
+			
+			
+			//Students
+			if(!world.getWorldState().getPlayer().inventoryContains("Textbook")) {
+				loadText("OrbsNPCSpeech_Students_1", student1);
+				loadText("OrbsNPCSpeech_Students_1", student2);
+				loadText("OrbsNPCSpeech_Students_1", student3);
+				loadText("OrbsNPCSpeech_Students_1", student4);
+				loadText("OrbsNPCSpeech_Students_1", student5);
+			} else {
+				loadText("OrbsNPCSpeech_Students_2", student1);
+				loadText("OrbsNPCSpeech_Students_2", student2);
+				loadText("OrbsNPCSpeech_Students_2", student3);
+				loadText("OrbsNPCSpeech_Students_2", student4);
+				loadText("OrbsNPCSpeech_Students_2", student5);
+			}
+			
+			
+			//Teacher
+			if(!world.getWorldState().getPlayer().hasOrb("specialOrb")) {
+				
+				if(!world.getWorldState().getPlayer().inventoryContains("Bookstore Receipt") && !world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && !world.getWorldState().getPlayer().inventoryContains("Textbook")) {
+					loadText("OrbsNPCSpeech_Teacher_1", teacher);
+				} else if(world.getWorldState().getPlayer().inventoryContains("Bookstore Receipt") && !world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && !world.getWorldState().getPlayer().inventoryContains("Textbook")) {
+					loadText("OrbsNPCSpeech_Teacher_2", teacher);
+				} else if(world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && !world.getWorldState().getPlayer().inventoryContains("Textbook")) {
+					loadText("OrbsNPCSpeech_Teacher_3", teacher);
+				} else if(world.getWorldState().getPlayer().inventoryContains("Textbook") && !world.getWorldState().getPlayer().inventoryContains("Box of Textbooks")) {
+					loadText("OrbsNPCSpeech_Teacher_4", teacher);
+				}
+				
+			} else {
+				
+				if(!world.getWorldState().getPlayer().inventoryContains("Bookstore Receipt") && !world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && !world.getWorldState().getPlayer().inventoryContains("Textbook")) {
+					loadText("OrbsNPCSpeech_Teacher_1_other", teacher);
+				} else if(world.getWorldState().getPlayer().inventoryContains("Bookstore Receipt") && !world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && !world.getWorldState().getPlayer().inventoryContains("Textbook")) {
+					loadText("OrbsNPCSpeech_Teacher_2", teacher);
+				} else if(world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && !world.getWorldState().getPlayer().inventoryContains("Textbook")) {
+					loadText("OrbsNPCSpeech_Teacher_3", teacher);
+				} else if(world.getWorldState().getPlayer().inventoryContains("Textbook") && !world.getWorldState().getPlayer().inventoryContains("Box of Textbooks")) {
+					loadText("OrbsNPCSpeech_Teacher_4", teacher);
+				}
+			}
+			
+			
+			//Book store owner
+			if(!world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && !world.getWorldState().getPlayer().inventoryContains("Bookstore Receipt")) {
+				loadText("OrbsNPCSpeech_BookstoreOwner_1", bookStoreOwner);
+			} else if(!world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") && world.getWorldState().getPlayer().inventoryContains("Bookstore Receipt")) {
+				loadText("OrbsNPCSpeech_BookstoreOwner_2", bookStoreOwner);
+			} else if(world.getWorldState().getPlayer().inventoryContains("Box of Textbooks") || world.getWorldState().getPlayer().inventoryContains("Textbook")) {
+				loadText("OrbsNPCSpeech_BookstoreOwner_1", bookStoreOwner);
+			}
+			
+			
+			//Textbook child
+			if(!world.getWorldState().getPlayer().inventoryContains("Textbook") && !world.getWorldState().getPlayer().hasOrb("textbook_Orb")) {
+				loadText("OrbsNPCSpeech_TextbookChild_1", randomPerson_25);
+			} else if(world.getWorldState().getPlayer().inventoryContains("Textbook") && !world.getWorldState().getPlayer().hasOrb("textbook_Orb")) {
+				loadText("OrbsNPCSpeech_TextbookChild_2", randomPerson_25);
+			} else if(!world.getWorldState().getPlayer().inventoryContains("Textbook") && world.getWorldState().getPlayer().hasOrb("textbook_Orb")) {
+				loadText("OrbsNPCSpeech_TextbookChild_3", randomPerson_25);
+			}
+			
+			//Textbook parent
+			loadText("OrbsNPCSpeech_TextbookParent", randomPerson_26);
+			
+		} catch(Exception err) { err.printStackTrace(); }
 	}
 	
 	

@@ -140,6 +140,11 @@ public class WorldState extends GameState {
 	public TextBox getInventoryTextBox() { return inventoryTextBox; }
 	
 	
+	/** Returns whether or not the player is currently inside of a house. */
+	public boolean InHouse() {
+		return currentWorld == mainWorld;
+	}
+	
 	
 	////////////// Setters /////////////
 	
