@@ -10,7 +10,7 @@ import MANAGERS.GameStateManager;
 public class MenuState extends GameState  {
 	
 	public int selectedOption = 0;
-	String[] options = {"Play","Quit"};
+	String[] options = {"Play","Controls","Quit"};
 	
 	public MenuState(GameStateManager gsm) {
 		super(gsm);
@@ -40,6 +40,7 @@ public class MenuState extends GameState  {
 		
 		g.drawString(options[0], Orbs.WIDTH / 2 - 40, Orbs.HEIGHT / 2 - 15);
 		g.drawString(options[1], Orbs.WIDTH / 2 - 40, Orbs.HEIGHT / 2 + 35);
+		g.drawString(options[2], Orbs.WIDTH / 2 - 40, Orbs.HEIGHT / 2 + 80);
 		
 		
 		//Draw a square on which option is being selected.
@@ -47,6 +48,8 @@ public class MenuState extends GameState  {
 			g.fillRect(Orbs.WIDTH / 2 - 65, Orbs.HEIGHT / 2 - 35, 20, 20);
 		} else if(selectedOption == 1){
 			g.fillRect(Orbs.WIDTH / 2 - 65, Orbs.HEIGHT / 2 + 10, 20, 20);
+		} else if(selectedOption == 2) {
+			g.fillRect(Orbs.WIDTH / 2 - 65, Orbs.HEIGHT / 2 + 55, 20, 20);
 		}
 		
 	}

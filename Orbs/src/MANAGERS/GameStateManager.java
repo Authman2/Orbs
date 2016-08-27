@@ -2,6 +2,8 @@ package MANAGERS;
 
 import java.awt.Graphics2D;
 
+import STATES.ControlsState;
+import STATES.GameFinishState;
 import STATES.GameState;
 import STATES.MenuState;
 import STATES.WorldState;
@@ -15,9 +17,11 @@ public class GameStateManager {
 	
 	public GameStateManager() {
 		//Set up all of the game states initially.
-		gameStates = new GameState[2];
+		gameStates = new GameState[4];
 		gameStates[0] = new MenuState(this);
 		gameStates[1] = new WorldState(this);
+		gameStates[2] = new GameFinishState(this);
+		gameStates[3] = new ControlsState(this);
 		
 		//Set the current game state to the menu state.
 		currentState = gameStates[0];
@@ -26,6 +30,8 @@ public class GameStateManager {
 		input = new InputManager(this);
 		input.menuState = (MenuState)gameStates[0];
 		input.worldState = (WorldState)gameStates[1];
+		input.gameFinishState = (GameFinishState)gameStates[2];
+		input.controlsState = (ControlsState)gameStates[3];
 		
 		
 		initialize();

@@ -12,6 +12,8 @@ import ITEMS.Item;
 import ITEMS.Orb;
 import MISC.Door;
 import MISC.TextBox;
+import STATES.ControlsState;
+import STATES.GameFinishState;
 import STATES.MenuState;
 import STATES.WorldState;
 
@@ -20,6 +22,8 @@ public class InputManager implements KeyListener {
 	//The game states
 	public MenuState menuState;
 	public WorldState worldState;
+	public GameFinishState gameFinishState;
+	public ControlsState controlsState;
 	
 	//The game state manager
 	public GameStateManager gsm;
@@ -50,6 +54,18 @@ public class InputManager implements KeyListener {
 			WorldStateActions(e);
 			
 		}
+		
+		if(gsm.currentState == gameFinishState) {
+			
+			GameFinishStateActions(e);
+			
+		}
+		
+		if(gsm.currentState == controlsState) {
+			
+			ControlStateActions(e);
+			
+		}
 	}
 	
 	
@@ -57,21 +73,55 @@ public class InputManager implements KeyListener {
 	private void MenuStateActions(KeyEvent e) {
 		
 		if(e.getKeyCode() == KeyEvent.VK_UP) {
-			menuState.selectedOption = 0;
+			if(menuState.selectedOption > 0) {
+				menuState.selectedOption--;
+			}
 		}
 		if(e.getKeyCode() == KeyEvent.VK_DOWN) {
-			menuState.selectedOption = 1;
+			if(menuState.selectedOption < 2) {
+				menuState.selectedOption++;
+			}
 		}
 		if(e.getKeyCode() == KeyEvent.VK_ENTER || e.getKeyCode() == KeyEvent.VK_C) {
 			if(menuState.selectedOption == 0) {
 				gsm.currentState = gsm.gameStates[1];
 			}
 			if(menuState.selectedOption == 1) {
+				gsm.currentState = gsm.gameStates[3];
+			}
+			if(menuState.selectedOption == 2) {
 				System.exit(0);
 			}
 		}
 	}
 	
+	/** Navigating the game finish scene. */
+	private void GameFinishStateActions(KeyEvent e) {
+		
+		if(e.getKeyCode() == KeyEvent.VK_UP) {
+			gameFinishState.selectedOption = 0;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+			gameFinishState.selectedOption = 1;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_ENTER || e.getKeyCode() == KeyEvent.VK_C) {
+			if(gameFinishState.selectedOption == 0) {
+				gsm.currentState = gsm.gameStates[1];
+			}
+			if(gameFinishState.selectedOption == 1) {
+				gsm.currentState = gsm.gameStates[0];
+			}
+		}
+	}
+	
+	/** Controls state actions. */
+	public void ControlStateActions(KeyEvent e) {
+		
+		if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE || e.getKeyCode() == KeyEvent.VK_DELETE) {
+			gsm.currentState = gsm.gameStates[0];
+		}
+		
+	}
 	
 	/** Moving about the game world. */
 	private void WorldStateActions(KeyEvent e) {
@@ -282,6 +332,12 @@ public class InputManager implements KeyListener {
 					
 					person.getTextBox().toggle();
 					worldState.getCurrentWorld().getNPCManager().loadNPCText();
+					
+					if(person == worldState.getCurrentWorld().getNPCManager().scientist) {
+						if(worldState.getPlayer().getQuantity("Orb") >= 10) {
+							
+						}
+					}
 					
 				}
 				
