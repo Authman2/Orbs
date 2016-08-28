@@ -326,7 +326,7 @@ public class Player extends Entity {
 	@Override
 	public void draw(Graphics2D g) {
 		
-		if(facing == 0) {
+		if(direction == Direction.South) {
 			if(worldState.getCurrentWorld().down) {
 				g.drawImage(walk_down.sprite, (int)position.X*size, (int)position.Y*size, size, size, null);
 				walk_down.update(System.currentTimeMillis());
@@ -335,7 +335,7 @@ public class Player extends Entity {
 			}
 		}
 		
-		if(facing == 1) {
+		if(direction == Direction.East) {
 			if(worldState.getCurrentWorld().right) {
 				g.drawImage(walk_right.sprite, (int)position.X*size, (int)position.Y*size, size, size, null);
 				walk_right.update(System.currentTimeMillis());
@@ -344,7 +344,7 @@ public class Player extends Entity {
 			}
 		}
 			
-		if(facing == 2) {
+		if(direction == Direction.North) {
 			if(worldState.getCurrentWorld().up) {
 				g.drawImage(walk_up.sprite, (int)position.X*size, (int)position.Y*size, size, size, null);
 				walk_up.update(System.currentTimeMillis());
@@ -353,7 +353,7 @@ public class Player extends Entity {
 			}
 		}
 		
-		if(facing == 3) {
+		if(direction == Direction.West) {
 			if(worldState.getCurrentWorld().left) {
 				g.drawImage(walk_left.sprite, (int)position.X*size, (int)position.Y*size, size, size, null);
 				walk_left.update(System.currentTimeMillis());

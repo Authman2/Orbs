@@ -4,14 +4,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import ENTITIES.ActionEntity;
+import ENTITIES.Direction;
 import ENTITIES.Entity;
 import ENTITIES.Person;
 import ENTITIES.SearchableEntity;
-import ITEMS.Coin;
 import ITEMS.Item;
 import ITEMS.Orb;
 import MISC.Door;
-import MISC.TextBox;
 import STATES.ControlsState;
 import STATES.GameFinishState;
 import STATES.MenuState;
@@ -133,28 +132,6 @@ public class InputManager implements KeyListener {
 			mapMovement(e);
 		}
 		
-		
-		/* FORCE EXIT TEXT BOX */
-		//Used to force quit any text boxes. This is temporary and only used or debugging.
-		if(e.getKeyCode() == KeyEvent.VK_T) {
-			for(TextBox t : worldState.getTextBoxes()) {
-				t.setOpen(false);
-			}
-		}
-		
-		//Print out all of the id's of the orbs.
-		if(e.getKeyCode() == KeyEvent.VK_U) {
-			for(Orb orb : worldState.getPlayer().getOrbs()) {
-				System.out.println(orb.getID());
-			}
-		}
-		if(e.getKeyCode() == KeyEvent.VK_O) {
-			for(Coin orb : worldState.getPlayer().getCoins()) {
-				System.out.println(orb.getID());
-			}
-		}
-		
-		
 		/* INTERACTION */
 		
 		if(e.getKeyCode() == KeyEvent.VK_ENTER || e.getKeyCode() == KeyEvent.VK_C)
@@ -188,7 +165,7 @@ public class InputManager implements KeyListener {
 		/* MOVING THE GAME MAP */
 		
 		if(e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) {
-			worldState.getPlayer().setDirection(2);
+			worldState.getPlayer().setDirection(Direction.North);
 					
 			if(worldState.getCurrentWorld().canMoveUp()) {
 				
@@ -203,7 +180,7 @@ public class InputManager implements KeyListener {
 		}
 		
 		if(e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S) {
-			worldState.getPlayer().setDirection(0);
+			worldState.getPlayer().setDirection(Direction.South);
 			
 			if(worldState.getCurrentWorld().canMoveDown()) {
 				worldState.getCurrentWorld().position.Y--; 
@@ -217,7 +194,7 @@ public class InputManager implements KeyListener {
 		}
 		
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {
-			worldState.getPlayer().setDirection(1);
+			worldState.getPlayer().setDirection(Direction.East);
 			
 			if(worldState.getCurrentWorld().canMoveRight()) {
 				worldState.getCurrentWorld().position.X--; 
@@ -231,7 +208,7 @@ public class InputManager implements KeyListener {
 		}
 		
 		if(e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) {
-			worldState.getPlayer().setDirection(3);
+			worldState.getPlayer().setDirection(Direction.West);
 			
 			if(worldState.getCurrentWorld().canMoveLeft()) {						
 				worldState.getCurrentWorld().position.X++; 
@@ -291,11 +268,20 @@ public class InputManager implements KeyListener {
 			// Next to player
 			if(person.isNextTo(worldState.getPlayer())) {
 				
+				// Change the direction of the npc
+				if(worldState.getPlayer().getDirection() == Direction.North)
+					person.setDirection(Direction.South);
+				if(worldState.getPlayer().getDirection() == Direction.South)
+					person.setDirection(Direction.North);
+				if(worldState.getPlayer().getDirection() == Direction.East)
+					person.setDirection(Direction.West);
+				if(worldState.getPlayer().getDirection() == Direction.West)
+					person.setDirection(Direction.East);
+				
 				// Text box is open
 				if(person.getTextBox().isOpen()) {
 					
 					person.getTextBox().nextSlide();
-					
 					
 					// If you're on the last slide, check for item giving.
 					if(person.getTextBox().onLast()) {

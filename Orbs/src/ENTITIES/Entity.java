@@ -20,21 +20,15 @@ public abstract class Entity {
 	//Whether or not the sprite should be rendered
 	protected boolean renderSprite = true;
 	
+	//The direction the entity is facing in.
+	public Direction direction;
 	
-	/*
-	 * The direction that the entity is facing.
-	 * 0 = down
-	 * 1 = right
-	 * 2 = up
-	 * 3 = left
-	 */
-	protected int facing = 0;
 	
 	
 	/////////// Constructors ////////////
-	public Entity() { position = new Vector2D(); }
-	public Entity(Vector2D pos) { position = new Vector2D(pos.X, pos.Y); }
-	public Entity(BufferedImage bi) { position = new Vector2D(); this.sprite = bi; }
+	public Entity() { position = new Vector2D(); direction = Direction.South; }
+	public Entity(Vector2D pos) { position = new Vector2D(pos.X, pos.Y);  direction = Direction.South; }
+	public Entity(BufferedImage bi) { position = new Vector2D(); this.sprite = bi;  direction = Direction.South; }
 	
 	
 	
@@ -54,47 +48,47 @@ public abstract class Entity {
 	 * 1 = right
 	 * 2 = up
 	 * 3 = left*/
-	public void setDirection(int i) { this.facing = i; }
+	public void setDirection(Direction d) { this.direction = d; }
 	
 	
 	
 	/////////// Setters ////////////
 	
 	/** Returns the direction of this entity. */
-	public int getDirection() { return facing; }
+	public Direction getDirection() { return direction; }
 	
 	
-	/** Returns whether or not this entity is to the left of ent. That is that this entity should be looking to the right. */
+	/** Returns whether or not this entity is to the left of ent. */
 	public boolean isLeftOf(Entity ent) {
 		if(position.X == ent.position.X - 1 && position.Y == ent.position.Y) {
-			if(ent.facing == 3) return true;
+			if(ent.direction == Direction.West) return true;
 		}
 		return false;
 	}
 	
 	
-	/** Returns whether or not this entity is to the right of ent. That is that this entity should be looking to the left. */
+	/** Returns whether or not this entity is to the right of ent. */
 	public boolean isRightOf(Entity ent) {
 		if(position.X == ent.position.X + 1 && position.Y == ent.position.Y) {
-			if(ent.facing == 1) return true;
+			if(ent.direction == Direction.East) return true;
 		}
 		return false;
 	}
 	
 	
-	/** Returns whether or not this entity is above ent. That is that this entity should be looking down. */
+	/** Returns whether or not this entity is above ent. */
 	public boolean isAbove(Entity ent) {
 		if(position.X == ent.position.X && position.Y == ent.position.Y - 1) {
-			if(ent.facing == 2) return true;
+			if(ent.direction == Direction.North) return true;
 		}
 		return false;
 	}
 	
 	
-	/** Returns whether or not this entity is below ent. That is that this entity should be looking up. */
+	/** Returns whether or not this entity is below ent. */
 	public boolean isBelow(Entity ent) {
 		if(position.X == ent.position.X && position.Y == ent.position.Y + 1) {
-			if(ent.facing == 0) return true;
+			if(ent.direction == Direction.South) return true;
 		}
 		return false;
 	}
@@ -105,31 +99,23 @@ public abstract class Entity {
 	public boolean isNextTo(Entity ent) {
 		
 		//This entity is to the left of the other entity
-		if(position.X == ent.position.X - 1 && position.Y == ent.position.Y) {
-			if(ent.facing == 3) {
-				return true;
-			}
+		if(isLeftOf(ent)) {
+			return true;
 		}
 		
 		//This entity is to the right of the other entity
-		if(position.X == ent.position.X + 1 && position.Y == ent.position.Y) {
-			if(ent.facing == 1) {
-				return true;
-			}
+		if(isRightOf(ent)) {
+			return true;
 		}
 		
 		//This entity is above the other entity
-		if(position.X == ent.position.X && position.Y == ent.position.Y - 1) {
-			if(ent.facing == 2) {
-				return true;
-			}
+		if(isAbove(ent)) {
+			return true;
 		}
 		
 		//This entity is below the other entity
-		if(position.X == ent.position.X && position.Y == ent.position.Y + 1) {
-			if(ent.facing == 0) {
-				return true;
-			}
+		if(isBelow(ent)) {
+			return true;
 		}
 		
 		

@@ -71,13 +71,13 @@ public class NPC extends Entity {
 				g.setColor(Color.black);
 				g.fillRect((int)position.X*size, (int)position.Y*size, size, size);
 			} else {
-				if(facing == 0)
+				if(direction == Direction.South)
 					g.drawImage(sprite, (int)position.X*size, (int)position.Y*size, size, size, null);
-				if(facing == 1)
+				if(direction == Direction.East)
 					g.drawImage(right_sprite, (int)position.X*size, (int)position.Y*size, size, size, null);
-				if(facing == 2)
+				if(direction == Direction.North)
 					g.drawImage(up_sprite, (int)position.X*size, (int)position.Y*size, size, size, null);
-				if(facing == 3)
+				if(direction == Direction.West)
 					g.drawImage(left_sprite, (int)position.X*size, (int)position.Y*size, size, size, null);
 			}
 		}

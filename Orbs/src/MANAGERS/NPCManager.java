@@ -1,5 +1,6 @@
 package MANAGERS;
 
+import ENTITIES.Direction;
 import ENTITIES.Person;
 import ITEMS.BakeryReceipt;
 import ITEMS.BookstoreReceipt;
@@ -303,7 +304,7 @@ public class NPCManager {
 			randomPerson_3.setDirectionSprites(Assets.randomMan4_down, Assets.randomMan4_up, Assets.randomMan4_left, Assets.randomMan4_right);
 		randomPerson_4 = new Person(new Vector2D(15,25).add(world.position));
 			randomPerson_4.setDirectionSprites(Assets.randomMan1_down,Assets.randomMan1_up,Assets.randomMan1_left,Assets.randomMan1_right);
-			randomPerson_4.setDirection(1);
+			randomPerson_4.setDirection(Direction.East);
 		randomPerson_5 = new Person(new Vector2D(24,25).add(world.position));
 			randomPerson_5.setDirectionSprites(Assets.randomWoman5_down, Assets.randomWoman5_up, Assets.randomWoman5_left, Assets.randomWoman5_right);
 		randomPerson_6 = new Person(new Vector2D(22,61).add(world.position));
@@ -312,18 +313,18 @@ public class NPCManager {
 			randomPerson_7.setDirectionSprites(Assets.randomWoman2_down,Assets.randomWoman2_up,Assets.randomWoman2_left,Assets.randomWoman2_right);
 		randomPerson_8 = new Person(new Vector2D(32, 67).add(world.position));
 			randomPerson_8.setDirectionSprites(Assets.randomMan2_down, Assets.randomMan2_up, Assets.randomMan2_left, Assets.randomMan2_right);
-			randomPerson_8.setDirection(3);
+			randomPerson_8.setDirection(Direction.West);
 		randomPerson_9 = new Person(new Vector2D(9,58).add(world.position));
 			randomPerson_9.setDirectionSprites(Assets.randomWoman6_down, Assets.randomWoman6_up, Assets.randomWoman6_left, Assets.randomWoman6_right);
 		randomPerson_10 = new Person(new Vector2D(32,75).add(world.position));
 			randomPerson_10.setDirectionSprites(Assets.randomWoman4_down, Assets.randomWoman4_up, Assets.randomWoman4_left, Assets.randomWoman4_right);
-			randomPerson_10.setDirection(1);
+			randomPerson_10.setDirection(Direction.East);
 		randomPerson_11 = new Person(new Vector2D(35,76).add(world.position));
 			randomPerson_11.setDirectionSprites(Assets.randomMan4_down, Assets.randomMan4_up, Assets.randomMan4_left, Assets.randomMan4_right);
-			randomPerson_11.setDirection(3);
+			randomPerson_11.setDirection(Direction.West);
 		randomPerson_12 = new Person(new Vector2D(34,78).add(world.position));
 			randomPerson_12.setDirectionSprites(Assets.randomMan1_down, Assets.randomMan1_up, Assets.randomMan1_left, Assets.randomMan1_right);
-			randomPerson_12.setDirection(1);
+			randomPerson_12.setDirection(Direction.East);
 		randomPerson_13 = new Person(new Vector2D(31,77).add(world.position));
 			randomPerson_13.setDirectionSprites(Assets.randomMan3_down, Assets.randomMan3_up, Assets.randomMan3_left, Assets.randomMan3_right);	
 		randomPerson_14 = new Person(new Vector2D(57,82).add(world.position));
@@ -344,19 +345,19 @@ public class NPCManager {
 			scientist.setDirectionSprites(Assets.scientist_down, Assets.scientist_up, Assets.scientist_left, Assets.scientist_right);
 		chemicalController_1 = new Person(new Vector2D(62,55).add(world.position));
 			chemicalController_1.setDirectionSprites(Assets.chemContr1_down, Assets.chemContr1_up, Assets.chemContr1_left, Assets.chemContr1_right);
-			chemicalController_1.setDirection(3);
+			chemicalController_1.setDirection(Direction.West);
 		chemicalController_2 = new Person(new Vector2D(62,56).add(world.position));
 			chemicalController_2.setDirectionSprites(Assets.chemContr2_down, Assets.chemContr2_up, Assets.chemContr2_left, Assets.chemContr2_right);
-			chemicalController_2.setDirection(3);
+			chemicalController_2.setDirection(Direction.West);
 		chemicalController_3 = new Person(new Vector2D(62,57).add(world.position));
 			chemicalController_3.setDirectionSprites(Assets.chemContr3_down, Assets.chemContr3_up, Assets.chemContr3_left, Assets.chemContr3_right);
-			chemicalController_3.setDirection(3);
+			chemicalController_3.setDirection(Direction.West);
 		thiefNPC = new Person(new Vector2D(46,29).add(world.position));
 			thiefNPC.setDirectionSprites(Assets.randomMan1_down, Assets.randomMan1_up, Assets.thief_left, Assets.thief_right);
-			thiefNPC.setDirection(3);
+			thiefNPC.setDirection(Direction.West);
 		treeCutter = new Person(new Vector2D(18,38).add(world.position));
 			treeCutter.setDirectionSprites(Assets.lumberjack_down, Assets.lumberjack_up, Assets.lumberjack_left, Assets.lumberjack_right);
-			treeCutter.setDirection(1);
+			treeCutter.setDirection(Direction.East);
 		treeCutterFriend = new Person(new Vector2D(10, 46).add(world.position));
 			treeCutterFriend.setDirectionSprites(Assets.lumberjack_down, Assets.lumberjack_up, Assets.lumberjack_left, Assets.lumberjack_right);
 		
@@ -406,19 +407,19 @@ public class NPCManager {
 			
 		/* House 18 NPCs */
 		student1 = new Person(new Vector2D(4,3).add(world.position));
-			student1.setDirection(2);
+			student1.setDirection(Direction.North);
 			student1.setDirectionSprites(Assets.randomMan1_down, Assets.randomMan1_up, Assets.randomMan1_left, Assets.randomMan1_right);
 		student2 = new Person(new Vector2D(7,3).add(world.position));
-			student2.setDirection(2);
+			student2.setDirection(Direction.North);
 			student2.setDirectionSprites(Assets.randomMan3_down, Assets.randomMan3_up, Assets.randomMan3_left, Assets.randomMan3_right);
 		student3 = new Person(new Vector2D(10,3).add(world.position));
-			student3.setDirection(2);
+			student3.setDirection(Direction.North);
 			student3.setDirectionSprites(Assets.randomWoman1_down, Assets.randomWoman1_up, Assets.randomWoman1_left, Assets.randomWoman1_right);
 		student4 = new Person(new Vector2D(4,7).add(world.position));
-			student4.setDirection(2);
+			student4.setDirection(Direction.North);
 			student4.setDirectionSprites(Assets.randomMan2_down, Assets.randomMan2_up, Assets.randomMan2_left, Assets.randomMan2_right);
 		student5 = new Person(new Vector2D(5,7).add(world.position));
-			student5.setDirection(2);
+			student5.setDirection(Direction.North);
 			student5.setDirectionSprites(Assets.randomWoman4_down, Assets.randomWoman4_up, Assets.randomWoman4_left, Assets.randomWoman4_right);
 		teacher = new Person(new Vector2D(6,1).add(world.position));
 			teacher.setDirectionSprites(Assets.randomWoman3_down, Assets.randomWoman3_up, Assets.randomWoman3_left, Assets.randomWoman3_right);
@@ -436,7 +437,7 @@ public class NPCManager {
 			
 		/* House 26 NPCs */
 		randomPerson_25 = new Person(new Vector2D(7,3).add(world.position));
-			randomPerson_25.setDirection(1);
+			randomPerson_25.setDirection(Direction.East);
 			randomPerson_25.setDirectionSprites(Assets.randomWoman4_down, Assets.randomWoman4_up, Assets.randomWoman4_left, Assets.randomWoman4_right);
 		randomPerson_26 = new Person(new Vector2D(4,5).add(world.position));
 			randomPerson_26.setDirectionSprites(Assets.randomMan1_down, Assets.randomMan1_up, Assets.randomMan1_left, Assets.randomMan1_right);
@@ -473,7 +474,7 @@ public class NPCManager {
 				loadText("OrbsNPCSpeech_ChemicalControllers_1", chemicalController_3);
 			} else {
 				chemicalController_2.position.X -= 1; chemicalController_2.position.Y -= 1; chemicalController_3.position.X += 1; chemicalController_3.position.Y -= 2;
-				chemicalController_1.setDirection(0); chemicalController_2.setDirection(0); chemicalController_3.setDirection(0);
+				chemicalController_1.setDirection(Direction.South); chemicalController_2.setDirection(Direction.South); chemicalController_3.setDirection(Direction.South);
 				
 				loadText("OrbsNPCSpeech_ChemicalControllers_2", chemicalController_1);
 				loadText("OrbsNPCSpeech_ChemicalControllers_2", chemicalController_2);
@@ -662,7 +663,7 @@ public class NPCManager {
 			//Sewing Shop Owner
 			if((!world.getWorldState().getPlayer().inventoryContains("Coin") || world.getWorldState().getPlayer().getQuantity("Coin") < 12) && !world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
 				loadText("OrbsNPCSpeech_SewingShopOwner_1", sewingShopOwner);
-			} else if(world.getWorldState().getPlayer().inventoryContains("Coin") && world.getWorldState().getPlayer().getQuantity("Coin") >= 12 && !world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
+			} else if((world.getWorldState().getPlayer().inventoryContains("Coin") && world.getWorldState().getPlayer().getQuantity("Coin") >= 12) && !world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
 				loadText("OrbsNPCSpeech_SewingShopOwner_2", sewingShopOwner);
 				sewingShopOwner.getTextBox().addText("You received a(n) " + npcItems[7] + "! ");
 			} else if(world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
