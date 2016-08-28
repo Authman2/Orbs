@@ -37,6 +37,13 @@ public class GameStateManager {
 		initialize();
 	}
 	
+	/** Resets the game. Loads up a new world state so the player can start from the beginning. */
+	public void resetGame() {
+		WorldState ws = new WorldState(this);
+		currentState = ws;
+		input.worldState = ws;
+	}
+	
 	
 	public void initialize() {
 		currentState.initialize();

@@ -5,11 +5,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import ITEMS.Coin;
-import ITEMS.Hatchet;
-import ITEMS.HazmatSuit;
 import ITEMS.Item;
 import ITEMS.Orb;
-import ITEMS.Textbook;
 import MAIN.Animator;
 import MAIN.Assets;
 import STATES.WorldState;
@@ -45,11 +42,6 @@ public class Player extends Entity {
 		orbs = new ArrayList<Orb>();
 		coins = new ArrayList<Coin>();
 		worldState = ws;
-		addItemToInventory(new Hatchet());
-		addItemToInventory(new HazmatSuit());
-		Item itm = new Textbook();
-		itm.setID("textbook_Orb");
-		addItemToInventory(itm);
 		initialize();
 	}
 	

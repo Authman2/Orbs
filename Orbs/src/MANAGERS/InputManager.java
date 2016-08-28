@@ -57,8 +57,9 @@ public class InputManager implements KeyListener {
 		
 		if(gsm.currentState == gameFinishState) {
 			
-			GameFinishStateActions(e);
-			
+			if(gameFinishState.timer <= 0) {
+				GameFinishStateActions(e);
+			}
 		}
 		
 		if(gsm.currentState == controlsState) {
@@ -106,7 +107,7 @@ public class InputManager implements KeyListener {
 		}
 		if(e.getKeyCode() == KeyEvent.VK_ENTER || e.getKeyCode() == KeyEvent.VK_C) {
 			if(gameFinishState.selectedOption == 0) {
-				gsm.currentState = gsm.gameStates[1];
+				gsm.resetGame();
 			}
 			if(gameFinishState.selectedOption == 1) {
 				gsm.currentState = gsm.gameStates[0];
@@ -249,7 +250,7 @@ public class InputManager implements KeyListener {
 	
 	/** Interacting with entities and items in the game world. */
 	private void PlayerInteractions(KeyEvent e) {
-		
+
 		/* ENTITIES */
 		entities();
 		
@@ -295,8 +296,15 @@ public class InputManager implements KeyListener {
 					
 					person.getTextBox().nextSlide();
 					
+					
 					// If you're on the last slide, check for item giving.
 					if(person.getTextBox().onLast()) {
+						
+						if(person == worldState.getCurrentWorld().getNPCManager().scientist) {
+							if(worldState.getPlayer().getQuantity("Orb") >= 10) {
+								gsm.currentState = gameFinishState;
+							}
+						}
 						
 						// If the person will take an item
 						if(person.getItemToTake() != null) {
@@ -332,12 +340,6 @@ public class InputManager implements KeyListener {
 					
 					person.getTextBox().toggle();
 					worldState.getCurrentWorld().getNPCManager().loadNPCText();
-					
-					if(person == worldState.getCurrentWorld().getNPCManager().scientist) {
-						if(worldState.getPlayer().getQuantity("Orb") >= 10) {
-							
-						}
-					}
 					
 				}
 				

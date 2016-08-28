@@ -11,6 +11,8 @@ public class GameFinishState extends GameState {
 
 	public int selectedOption = 0;
 	
+	public int timer = 10;
+	
 	
 	public GameFinishState(GameStateManager gsm) {
 		super(gsm);
@@ -26,6 +28,10 @@ public class GameFinishState extends GameState {
 
 	@Override
 	public void update(double time) {
+		
+		if(timer > 0) {
+			timer--;
+		}
 		
 	}
 

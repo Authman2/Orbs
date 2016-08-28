@@ -653,14 +653,14 @@ public class NPCManager {
 			} else if(world.getWorldState().getPlayer().inventoryContains("Orb") && world.getWorldState().getPlayer().getQuantity("Orb") < 10) {
 				loadText("OrbsNPCSpeech_Scientist_2", scientist);
 				scientist.getTextBox().setText("Hmm... Well it looks like you have found " + world.getWorldState().getPlayer().getOrbCount() + " out of 20 orbs. ", 3);
-			} else if(world.getWorldState().getPlayer().inventoryContains("Orb") && world.getWorldState().getPlayer().getQuantity("Orb") < 10) {
+			} else if(world.getWorldState().getPlayer().inventoryContains("Orb") && world.getWorldState().getPlayer().getQuantity("Orb") >= 10) {
 				loadText("OrbsNPCSpeech_Scientist_3", scientist);
 			}
 			
 			
 			
 			//Sewing Shop Owner
-			if(!world.getWorldState().getPlayer().inventoryContains("Coin") && !world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
+			if((!world.getWorldState().getPlayer().inventoryContains("Coin") || world.getWorldState().getPlayer().getQuantity("Coin") < 12) && !world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
 				loadText("OrbsNPCSpeech_SewingShopOwner_1", sewingShopOwner);
 			} else if(world.getWorldState().getPlayer().inventoryContains("Coin") && world.getWorldState().getPlayer().getQuantity("Coin") >= 12 && !world.getWorldState().getPlayer().inventoryContains("Sewing Kit")) {
 				loadText("OrbsNPCSpeech_SewingShopOwner_2", sewingShopOwner);
